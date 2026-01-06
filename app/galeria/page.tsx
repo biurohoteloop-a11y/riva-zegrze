@@ -586,9 +586,8 @@ function GalleryHero() {
 
 
 
-
-
-// GALLERY GRID - ZOPTYMALIZOWANY
+// ============================================
+// GALLERY GRID – BEZ TITLE (TYLKO KATEGORIA)
 // ============================================
 function GalleryGrid() {
   const [filter, setFilter] = useState('Wszystkie');
@@ -598,9 +597,10 @@ function GalleryGrid() {
 
   const categories = ['Wszystkie', 'Apartamenty', 'Siłownia', 'Okolica'];
 
-  const filteredImages = filter === 'Wszystkie' 
-    ? galleryImages 
-    : galleryImages.filter(img => img.category === filter);
+  const filteredImages =
+    filter === 'Wszystkie'
+      ? galleryImages
+      : galleryImages.filter((img) => img.category === filter);
 
   // GSAP Animations
   useEffect(() => {
@@ -609,19 +609,15 @@ function GalleryGrid() {
         try {
           const { gsap } = await import('gsap');
           const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-          
+
           gsap.registerPlugin(ScrollTrigger);
 
           const images = gridRef.current?.querySelectorAll('.gallery-item');
-          
+
           if (images) {
             gsap.fromTo(
               images,
-              {
-                opacity: 0,
-                y: 60,
-                scale: 0.9
-              },
+              { opacity: 0, y: 60, scale: 0.9 },
               {
                 opacity: 1,
                 y: 0,
@@ -633,8 +629,7 @@ function GalleryGrid() {
                   trigger: gridRef.current,
                   start: 'top 80%',
                   end: 'bottom 20%',
-                  toggleActions: 'play none none none',
-                }
+                },
               }
             );
           }
@@ -658,19 +653,18 @@ function GalleryGrid() {
     document.body.style.overflow = 'auto';
   };
 
-  const nextImage = () => {
+  const nextImage = () =>
     setCurrentImage((prev) => (prev + 1) % filteredImages.length);
-  };
 
-  const prevImage = () => {
-    setCurrentImage((prev) => (prev - 1 + filteredImages.length) % filteredImages.length);
-  };
+  const prevImage = () =>
+    setCurrentImage(
+      (prev) => (prev - 1 + filteredImages.length) % filteredImages.length
+    );
 
-  // ✅ KEYBOARD NAVIGATION
+  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!lightboxOpen) return;
-      
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowRight') nextImage();
       if (e.key === 'ArrowLeft') prevImage();
@@ -678,12 +672,11 @@ function GalleryGrid() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxOpen, currentImage]);
+  }, [lightboxOpen]);
 
   return (
     <section className="py-24 lg:py-32 bg-[#f7f6f4]">
       <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
-        
         {/* FILTER BUTTONS */}
         <div className="flex flex-wrap justify-center gap-4 mb-16">
           {categories.map((cat) => (
@@ -701,8 +694,8 @@ function GalleryGrid() {
           ))}
         </div>
 
-        {/* GALLERY GRID - ZOPTYMALIZOWANY */}
-        <div 
+        {/* GALLERY GRID */}
+        <div
           ref={gridRef}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
@@ -712,93 +705,63 @@ function GalleryGrid() {
               className="gallery-item group relative aspect-square overflow-hidden cursor-pointer bg-white border border-[#e8e6e1]"
               onClick={() => openLightbox(idx)}
             >
-              {/* ✅ NEXT.JS IMAGE OPTIMIZATION */}
               <Image
                 src={image.url}
-                alt={image.title}
+                alt={image.category}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
                 quality={85}
                 loading="lazy"
-                placeholder="blur"
-                blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzAwIiBoZWlnaHQ9IjQ3NSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
               />
-              
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-[#0f0e0f]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-4">
-                <Maximize2 size={32} strokeWidth={1.5} className="mb-3" />
-                <h3 className="text-lg font-light mb-1" style={{ fontFamily: 'Playfair Display, serif' }}>
-                  {image.title}
-                </h3>
-                <span className="text-xs tracking-[0.2em] uppercase opacity-80">
+
+              {/* OVERLAY – TYLKO KATEGORIA */}
+              <div className="absolute inset-0 bg-[#0f0e0f]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white">
+                <span className="text-xs tracking-[0.35em] uppercase font-light">
                   {image.category}
                 </span>
               </div>
             </div>
           ))}
         </div>
-
-        {/* Image Count */}
-        <div className="text-center mt-12">
-          <p className="text-sm text-[#6e7a73] font-light">
-            Pokazano {filteredImages.length} {filteredImages.length === 1 ? 'zdjęcie' : 'zdjęć'}
-          </p>
-        </div>
       </div>
 
-      {/* LIGHTBOX MODAL - ZOPTYMALIZOWANY */}
+      {/* LIGHTBOX */}
       {lightboxOpen && (
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-95 backdrop-blur-sm flex items-center justify-center">
-          
-          {/* Close Button */}
+        <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center">
           <button
             onClick={closeLightbox}
-            className="absolute top-6 right-6 w-12 h-12 bg-white bg-opacity-10 hover:bg-opacity-20 border border-white border-opacity-20 flex items-center justify-center transition-all z-10 group"
-            aria-label="Zamknij"
+            className="absolute top-6 right-6 text-white"
           >
-            <XCircle size={24} className="text-white group-hover:text-[#C4A77D] transition-colors" />
+            <XCircle size={32} />
           </button>
 
-          {/* Navigation Arrows */}
           <button
             onClick={prevImage}
-            className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white bg-opacity-10 hover:bg-opacity-20 border border-white border-opacity-20 flex items-center justify-center transition-all z-10"
-            aria-label="Poprzednie zdjęcie"
+            className="absolute left-6 text-white"
           >
-            <ChevronLeft size={24} className="text-white" />
-          </button>
-          
-          <button
-            onClick={nextImage}
-            className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white bg-opacity-10 hover:bg-opacity-20 border border-white border-opacity-20 flex items-center justify-center transition-all z-10"
-            aria-label="Następne zdjęcie"
-          >
-            <ChevronRight size={24} className="text-white" />
+            <ChevronLeft size={32} />
           </button>
 
-          {/* Image - ZOPTYMALIZOWANY */}
-          <div className="relative max-w-7xl max-h-[90vh] w-full h-full px-20 flex items-center justify-center">
-            <div className="relative w-full h-full">
-              <Image
-                src={filteredImages[currentImage]?.url || ''}
-                alt={filteredImages[currentImage]?.title || ''}
-                fill
-                sizes="100vw"
-                className="object-contain"
-                quality={95}
-                priority
-              />
-            </div>
-            
-            {/* Image Info */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white">
-              <h3 className="text-2xl font-light mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>
-                {filteredImages[currentImage]?.title || ''}
-              </h3>
-              <p className="text-xs tracking-[0.2em] uppercase opacity-80">
-                {filteredImages[currentImage]?.category || ''} • {currentImage + 1} / {filteredImages.length}
-              </p>
+          <button
+            onClick={nextImage}
+            className="absolute right-6 text-white"
+          >
+            <ChevronRight size={32} />
+          </button>
+
+          <div className="relative w-full h-full max-w-7xl max-h-[90vh]">
+            <Image
+              src={filteredImages[currentImage]?.url || ''}
+              alt={filteredImages[currentImage]?.category || ''}
+              fill
+              className="object-contain"
+              quality={95}
+              priority
+            />
+            <div className="absolute bottom-0 left-0 right-0 text-center text-white text-xs tracking-[0.3em] uppercase p-6">
+              {filteredImages[currentImage]?.category} • {currentImage + 1} /{' '}
+              {filteredImages.length}
             </div>
           </div>
         </div>
@@ -806,6 +769,7 @@ function GalleryGrid() {
     </section>
   );
 }
+
 
 // ============================================
 // Minimal Footer – Riva Zegrze - Professional Pastel Version
