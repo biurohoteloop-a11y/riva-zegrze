@@ -193,7 +193,7 @@ function RoomsHero() {
           const { jarallax } = await import('jarallax');
           jarallax(heroRef.current, { 
             speed: 0.6,
-            imgSrc: '/images//gallery/baner-pokoje/T3S-RivaZegrze-0446-m.JPG', // ← ZMIENIONE
+            imgSrc: '/images/gallery/baner-pokoje/t3s-riva-zegrze-0446-m.jpg', // ← ZMIENIONE
             imgSize: 'cover',
             imgPosition: 'center 60%', // Dostosowane dla mobile
           });
