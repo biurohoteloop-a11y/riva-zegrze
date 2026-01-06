@@ -792,7 +792,7 @@ function LegacySection() {
 // Split CTA Section - Rezerwuj bezpośrednio
 function SplitCTASection() {
   return (
-    <section className="relative w-full h-screen max-h-[650px] lg:max-h-[700px]">
+    <section className="relative w-full min-h-screen lg:h-screen lg:max-h-[700px]">
       
       <div className="grid lg:grid-cols-2 h-full">
         
@@ -800,12 +800,10 @@ function SplitCTASection() {
         <div className="bg-[#8a9b8e] flex items-center justify-center px-8 lg:px-20 xl:px-24 h-full">
           <div className="max-w-xl space-y-8">
             
-            {/* Small Label - Mały nagłówek */}
             <span className="text-[10px] tracking-[0.35em] uppercase text-white/60 font-light block">
               Rezerwuj bezpośrednio
             </span>
 
-            {/* Main Heading - Duży nagłówek */}
             <h2
               className="text-4xl lg:text-5xl xl:text-6xl font-light leading-[1.15] text-white tracking-tight"
               style={{ fontFamily: 'Playfair Display, serif' }}
@@ -815,20 +813,16 @@ function SplitCTASection() {
               stronie
             </h2>
 
-            {/* Description - Opis */}
             <p className="text-white/80 text-[15px] lg:text-base leading-relaxed font-light max-w-md">
               Zarezerwuj pobyt bezpośrednio u nas i uniknij prowizji pośredników. 
               Ten sam komfort, ta sama dostępność — taniej i równie wygodnie, 
               bez dodatkowych opłat.
             </p>
 
-            {/* Two Info Boxes - Kontakt i Adres */}
             <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-8 pt-6">
               
-              {/* Pionowa kreska rozdzielająca - tylko desktop */}
               <div className="hidden sm:block absolute left-1/2 top-0 bottom-0 w-px bg-white/20 -translate-x-1/2" />
 
-              {/* Box 1 - Kontakt (Telefon) */}
               <div className="space-y-3">
                 <div className="w-14 h-14 border border-white/30 rounded-full flex items-center justify-center backdrop-blur-sm">
                   <svg className="w-6 h-6 text-white/90" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
@@ -848,7 +842,6 @@ function SplitCTASection() {
                 </div>
               </div>
 
-              {/* Box 2 - Adres */}
               <div className="space-y-3">
                 <div className="w-14 h-14 border border-white/30 rounded-full flex items-center justify-center backdrop-blur-sm">
                   <svg className="w-6 h-6 text-white/90" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
@@ -872,24 +865,23 @@ function SplitCTASection() {
           </div>
         </div>
 
-        {/* RIGHT - Profesjonalne zdjęcie wnętrza */}
-        <div className="relative h-full overflow-hidden">
-          {/* Gradient overlay dla głębi */}
+        {/* RIGHT - Zdjęcie (POPRAWIONE NA MOBILE) */}
+        <div className="relative h-[45vh] sm:h-[55vh] lg:h-full overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-black/5 to-transparent z-10 pointer-events-none" />
           
           <img
             src="/images/about/cta/T3S-RivaZegrze-3311-m.jpg"
             alt="Riva Zegrze - Rezerwuj bezpośrednio"
-            className="w-full h-full object-cover scale-105"
+            className="w-full h-full object-cover object-center scale-105"
             loading="lazy"
           />
         </div>
 
       </div>
-
     </section>
   );
 }
+
 
 
 
