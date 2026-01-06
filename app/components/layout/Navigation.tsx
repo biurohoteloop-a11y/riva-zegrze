@@ -17,12 +17,13 @@ export default function Navigation() {
   }, []);
 
   const navItems = [
-    { label: 'Home', href: '/' },
-    { label: 'Rooms', href: '/rooms' },
-    { label: 'Amenities', href: '/about' },
-    { label: 'Gallery', href: '/gallery' },
-    { label: 'Contact', href: '/contact' },
-  ];
+  { label: 'Start', href: '/' },
+  { label: 'Apartamenty', href: '/apartamenty' },
+  { label: 'O nas', href: '/o-nas' },
+  { label: 'Galeria', href: '/galeria' },
+  { label: 'Aktywności', href: '/aktywnosci' },
+  { label: 'Kontakt', href: '/kontakt' },
+];
 
   return (
     <nav
@@ -34,8 +35,8 @@ export default function Navigation() {
     >
       <div className="container-custom">
         <div className="flex justify-between items-center">
-
-          {/* Logo */}
+          
+          {/* LOGO */}
           <Link href="/" className="group flex items-center gap-3">
             <Waves
               className={`w-10 h-10 transition-all duration-300 ${
@@ -47,11 +48,11 @@ export default function Navigation() {
                 isScrolled ? 'text-navy-900' : 'text-white'
               }`}
             >
-              Oceanic Resort
+              Riva Zegrze
             </span>
           </Link>
 
-          {/* Desktop Menu */}
+          {/* DESKTOP MENU */}
           <ul className="hidden lg:flex items-center gap-10">
             {navItems.map((item) => (
               <li key={item.href}>
@@ -68,12 +69,12 @@ export default function Navigation() {
             ))}
           </ul>
 
-          {/* CTA Button */}
-          <Link href="/contact" className="hidden lg:block btn-primary">
-            Book Now
-          </Link>
+          {/* CTA */}
+          <button className="hidden lg:block btn-primary">
+            Rezerwuj
+          </button>
 
-          {/* Mobile Menu Button */}
+          {/* MOBILE BUTTON */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className={`lg:hidden p-2 ${
@@ -85,7 +86,7 @@ export default function Navigation() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* MOBILE MENU */}
       {isMobileMenuOpen && (
         <div className="lg:hidden fixed inset-0 bg-navy-900/98 backdrop-blur-lg pt-24">
           <div className="flex flex-col items-center gap-8">
@@ -99,9 +100,7 @@ export default function Navigation() {
                 {item.label}
               </Link>
             ))}
-            <Link href="/contact" className="btn-primary mt-8">
-              Book Now
-            </Link>
+            <button className="btn-primary mt-8">Rezerwuj</button>
           </div>
         </div>
       )}
