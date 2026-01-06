@@ -10,19 +10,19 @@ import { Waves, Menu, X, ChevronLeft, ChevronRight, Maximize2, XCircle, Instagra
 const galleryImages = [
   {
     id: 1,
-    url: '/images/gallery/apartamenty/D4.JPG',
+    url: '/images/gallery/apartamenty/D4.jpg',
     category: 'Apartamenty',
     title: 'Apartament Deluxe'
   },
   {
     id: 2,
-    url: '/images/gallery/apartamenty/IMG_3614.JPG',
+    url: '/images/gallery/apartamenty/IMG_3614.jpg',
     category: 'Apartamenty',
     title: 'Luksusowy Salon'
   },
   {
     id: 3,
-    url: '/images/gallery/apartamenty/IMG_3615.JPG',
+    url: '/images/gallery/apartamenty/IMG_3615.jpg',
     category: 'Apartamenty',
     title: 'Nowoczesna Sypialnia'
   },
