@@ -307,10 +307,11 @@ function Navigation() {
 // Hero - Clean Centered with GSAP Animations & Polish Calendar
 function HeroSection() {
   const slides = [
-  '/images/hero/T3S-RivaZegrze-0620-m.jpg',  // <- Twoje zdjęcie 1
-  '/images/hero/T3S-RivaZegrze-0760-m.jpg',  // <- Twoje zdjęcie 2
-  '/images/hero/T3S-RivaZegrze-3689-m.jpg',  // <- Twoje zdjęcie 3
-  ];
+  '/images/hero/T3S-RivaZegrze-0760-m.jpg',  // było 2 → teraz 1
+  '/images/hero/T3S-RivaZegrze-0620-m.jpg',  // było 1 → teraz 2
+  '/images/hero/T3S-RivaZegrze-3689-m.jpg',  // bez zmian
+];
+
 
   const [current, setCurrent] = useState(0);
   const [checkIn, setCheckIn] = useState<Date | null>(null);
