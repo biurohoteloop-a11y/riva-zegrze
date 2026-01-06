@@ -678,9 +678,7 @@ function RoomsGrid() {
                       SPRAWDŹ DOSTĘPNOŚĆ
                     </button>
 
-                    <p className="text-xs text-[#6e7a73] text-center mt-4 font-light leading-relaxed">
-                      Najlepsza cena gwarantowana • Darmowa anulacja do 48h
-                    </p>
+                    
                   </div>
 
                   <div className="mt-8 p-4 bg-white border border-[#d4d6ce]">
