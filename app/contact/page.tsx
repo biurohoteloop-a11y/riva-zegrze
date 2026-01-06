@@ -186,50 +186,49 @@ function Navigation() {
 // ============================================
 // CONTACT HERO - Z JARALLAX I RESPONSIVE
 // ============================================
+
 function ContactHero() {
-  const heroRef = useRef(null);
+  const heroRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const initParallax = async () => {
       if (typeof window !== 'undefined' && heroRef.current) {
-        try {
-          const { jarallax } = await import('jarallax');
-          jarallax(heroRef.current, { 
-            speed: 0.6,
-            imgSrc: '/images/gallery/baner-kontakt/zdjecie-kontakt.JPG', // ← NOWA ŚCIEŻKA
-            imgSize: 'cover',
-            imgPosition: 'center 60%', // ← Dostosowane dla mobile (więcej budynku)
-          });
-        } catch (error) {
-          console.error('Jarallax error:', error);
-        }
+        const { jarallax } = await import('jarallax');
+
+        jarallax(heroRef.current, {
+          speed: 0.6,
+          imgSrc: '/images/gallery/baner-kontakt/zdjecie-kontakt.jpg',
+          imgSize: 'cover',
+          imgPosition: 'center 60%',
+        });
       }
     };
+
     initParallax();
   }, []);
 
   return (
-    <section 
-      ref={heroRef} 
-      className="jarallax relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden" // ← Responsive height
-      data-jarallax 
+    <section
+      ref={heroRef}
+      className="jarallax relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden"
+      data-jarallax
       data-speed="0.6"
-      data-jarallax-img="/images/gallery/baner-kontakt/zdjecie-kontakt.JPG" // ← DODANE
+      data-jarallax-img="/images/gallery/baner-kontakt/zdjecie-kontakt.jpg"
     >
-      {/* Overlay */}
       <div className="absolute inset-0 bg-[#0f0e0f]/40 z-10" />
-      
-      {/* Content */}
+
       <div className="relative z-20 text-center text-white px-6 max-w-4xl mx-auto">
         <span className="text-xs tracking-[0.4em] uppercase font-light opacity-80 mb-4 block">
           Skontaktuj się z nami
         </span>
-        <h1 
-          className="text-4xl md:text-7xl font-light mb-4 md:mb-6 tracking-[0.15em] leading-tight" 
+
+        <h1
+          className="text-4xl md:text-7xl font-light mb-4 md:mb-6 tracking-[0.15em] leading-tight"
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
           Kontakt
         </h1>
+
         <p className="text-sm md:text-base font-light opacity-90 max-w-2xl mx-auto leading-relaxed">
           Jesteśmy do Twojej dyspozycji w sprawach rezerwacji, zapytań i specjalnych próśb
         </p>
@@ -237,6 +236,7 @@ function ContactHero() {
     </section>
   );
 }
+
 
 
 // ============================================
