@@ -24,7 +24,6 @@ export default function ActivitiesPage() {
       <Navigation />
       <main className="relative bg-[#f1f1ed]">
         <ActivitiesHero />
-        <ActivitiesIntro />
         <LocationsGrid />
         <ExperiencesCTA />
       </main>
@@ -199,10 +198,14 @@ function Navigation() {
 
 
 // ============================================
-// Hero Section - Z LOKALNYM ZDJĘCIEM
+
+
+// ============================================
+// Hero Section - Z animated scroll arrow
 // ============================================
 function ActivitiesHero() {
   const heroRef = useRef(null);
+  const arrowRef = useRef(null);
 
   useEffect(() => {
     const initParallax = async () => {
@@ -211,7 +214,7 @@ function ActivitiesHero() {
           const { jarallax } = await import('jarallax');
           jarallax(heroRef.current, { 
             speed: 0.6,
-            imgSrc: '/images/gallery/aktywnosci/kajaki.jpeg', // ← ZMIENIONE
+            imgSrc: '/images/gallery/aktywnosci/kajaki.jpeg',
             imgSize: 'cover',
             imgPosition: 'center 60%',
           });
@@ -221,8 +224,37 @@ function ActivitiesHero() {
       }
     };
 
+    // ✨ GSAP Arrow Animation
+    const initArrowAnimation = async () => {
+      if (typeof window !== 'undefined' && arrowRef.current) {
+        try {
+          const { gsap } = await import('gsap');
+          
+          // Bounce animation - infinite loop
+          gsap.to(arrowRef.current, {
+            y: 15,
+            duration: 1.2,
+            ease: 'power1.inOut',
+            repeat: -1,
+            yoyo: true
+          });
+
+          // Fade in on load
+          gsap.fromTo(
+            arrowRef.current,
+            { opacity: 0, y: -20 },
+            { opacity: 1, y: 0, duration: 1, delay: 0.5, ease: 'power3.out' }
+          );
+
+        } catch (error) {
+          console.error('GSAP error:', error);
+        }
+      }
+    };
+
     const timer = setTimeout(() => {
       initParallax();
+      initArrowAnimation();
     }, 100);
 
     return () => {
@@ -237,6 +269,14 @@ function ActivitiesHero() {
       }
     };
   }, []);
+
+  // Smooth scroll function
+  const scrollToContent = () => {
+    const nextSection = document.querySelector('#activities-content');
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   return (
     <section 
@@ -263,152 +303,129 @@ function ActivitiesHero() {
           Wyjątkowe miejsca i doświadczenia w sercu Mazowsza
         </p>
       </div>
-    </section>
-  );
-}
 
-
-// ✅ Intro Section - UKRYTE NA MOBILE, ŁADNIEJSZY KAJAK
-function ActivitiesIntro() {
-  return (
-    <section className="py-20 bg-white relative overflow-hidden">
-      
-      {/* ✨ ROWER - lewy górny róg - UKRYTY NA MOBILE */}
-      <svg className="hidden lg:block absolute top-4 left-4 w-64 h-64 opacity-[0.35] pointer-events-none" viewBox="0 0 200 200" fill="none" stroke="#4a5a52" strokeWidth="2">
-        <circle cx="50" cy="140" r="32" strokeWidth="3" />
-        <circle cx="150" cy="140" r="32" strokeWidth="3" />
-        <circle cx="50" cy="140" r="25" strokeWidth="1.5" opacity="0.7" stroke="#5a6a62" />
-        <circle cx="150" cy="140" r="25" strokeWidth="1.5" opacity="0.7" stroke="#5a6a62" />
-        <path d="M50,140 L100,80 L120,100 L150,140 M100,80 L100,60 M95,60 L105,60" strokeWidth="3" />
-        <path d="M100,100 L70,100 L50,140" strokeWidth="2.5" />
-        {/* Pedały */}
-        <circle cx="100" cy="110" r="6" strokeWidth="2.5" />
-        <line x1="94" y1="110" x2="106" y2="110" strokeWidth="2.5" />
-      </svg>
-
-      {/* ✨ KAJAK - prawy górny róg - ŁADNIEJSZY, UKRYTY NA MOBILE */}
-      <svg className="hidden lg:block absolute top-4 right-4 w-64 h-64 opacity-[0.35] pointer-events-none" viewBox="0 0 200 200" fill="none" stroke="#4a5a52" strokeWidth="2">
-        {/* Korpus kajaka - elegancki kształt */}
-        <ellipse cx="100" cy="100" rx="65" ry="18" strokeWidth="2.5" />
-        <ellipse cx="100" cy="100" rx="55" ry="14" strokeWidth="1.5" opacity="0.6" stroke="#5a6a62" />
-        
-        {/* Linie wewnętrzne kajaka */}
-        <line x1="40" y1="100" x2="160" y2="100" strokeWidth="1.5" opacity="0.5" stroke="#5a6a62" />
-        <ellipse cx="100" cy="100" rx="20" ry="8" strokeWidth="2" opacity="0.7" />
-        
-        {/* Dziób i rufa */}
-        <path d="M35,100 L28,98 L28,102 Z" strokeWidth="2" fill="#4a5a52" opacity="0.6" />
-        <path d="M165,100 L172,98 L172,102 Z" strokeWidth="2" fill="#4a5a52" opacity="0.6" />
-        
-        {/* Wiosło - bardziej szczegółowe */}
-        <line x1="70" y1="70" x2="130" y2="130" strokeWidth="3" strokeLinecap="round" />
-        <ellipse cx="65" cy="65" rx="12" ry="18" transform="rotate(-45 65 65)" strokeWidth="2.5" fill="none" />
-        <ellipse cx="135" cy="135" rx="12" ry="18" transform="rotate(-45 135 135)" strokeWidth="2.5" fill="none" />
-        
-        {/* Fale wokół */}
-        <path d="M20,115 Q30,112 40,115 T60,115 T80,115" opacity="0.7" strokeWidth="2" stroke="#5a6a62" />
-        <path d="M120,115 Q130,112 140,115 T160,115 T180,115" opacity="0.7" strokeWidth="2" stroke="#5a6a62" />
-        <path d="M25,122 Q35,120 45,122 T65,122" opacity="0.5" strokeWidth="1.5" stroke="#5a6a62" />
-        <path d="M135,122 Q145,120 155,122 T175,122" opacity="0.5" strokeWidth="1.5" stroke="#5a6a62" />
-      </svg>
-
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-        <span className="text-xs tracking-[0.4em] uppercase text-[#8a968f] mb-6 block font-light">
-          NIEZAPOMNIANE CHWILE
+      {/* ✨ ANIMATED SCROLL ARROW */}
+      <button
+        ref={arrowRef}
+        onClick={scrollToContent}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-3 cursor-pointer group"
+        aria-label="Przewiń w dół"
+      >
+        {/* Text hint */}
+        <span className="text-white text-[10px] tracking-[0.3em] uppercase font-light opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+          Przewiń w dół
         </span>
-        <h2 
-          className="text-4xl md:text-5xl font-light text-[#4a6b5e] mb-8" 
-          style={{ fontFamily: 'Playfair Display, serif' }}
-        >
-          Poznaj Piękno Okolicy Zegrza
-        </h2>
-        <p className="text-lg text-[#6e7a73] leading-relaxed font-light">
-          Od sportów wodnych po pola golfowe, od rezerwatów przyrody po kulinarną przygodę—odkryj 
-          wyjątkowe miejsca i aktywności tuż obok Riva Zegrze, które uczynią Twój pobyt niezapomnianym.
-        </p>
-      </div>
+        
+        {/* Circle with arrow */}
+        <div className="w-12 h-12 rounded-full border-2 border-white/40 backdrop-blur-sm flex items-center justify-center group-hover:border-white/80 group-hover:bg-white/10 transition-all duration-300">
+          <svg 
+            className="w-5 h-5 text-white" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2.5" 
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+      </button>
     </section>
   );
 }
 
-// ✅ Locations Grid - ŻAGLÓWKA UKRYTA NA MOBILE
+
+// ============================================
+
+// ============================================
+// BENTO GRID - Z GSAP Text Reveal Animation
+// ============================================
 function LocationsGrid() {
   const gridRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
 
-  // ============================================
-// Locations Grid - 2 ZDJĘCIA ZMIENIONE
-// ============================================
-const locations = [
-  {
-    id: 1,
-    category: 'GOLF',
-    title: 'Pole Golfowe Rajszew',
-    distance: '5 km',
-    description: 'Profesjonalne pole golfowe z 18 dołkami, driving range i profesjonalnymi instruktorami.',
-    address: 'Golfowa 44, 05-110 Rajszew',
-    image: 'https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=2070', // ← ZOSTAJE UNSPLASH
-    icon: <Award size={24} strokeWidth={1.5} />,
-    link: 'https://maps.google.com'
-  },
-  {
-    id: 2,
-    category: 'ŻEGLARSTWO',
-    title: 'Akademia Żeglarska Mila',
-    distance: '3 km',
-    description: 'Nauka żeglowania, wypożyczalnia sprzętu wodnego, kursy żeglarskie dla początkujących.',
-    address: 'Jerzego Szaniawskiego 56, Zegrzynek',
-    image: '/images/gallery/aktywnosci/lodka.jpeg', // ← ZMIENIONE
-    icon: <Sailboat size={24} strokeWidth={1.5} />,
-    link: 'https://maps.google.com'
-  },
-  {
-    id: 3,
-    category: 'PRZYRODA',
-    title: 'Wieliszewskie Łęgi',
-    distance: '4 km',
-    description: 'Rezerwat przyrody z unikalną fauną i florą. Idealne miejsce na spacery i obserwację ptaków.',
-    address: 'Rezerwat przyrody',
-    image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2070', // ← ZOSTAJE UNSPLASH
-    icon: <TreePine size={24} strokeWidth={1.5} />,
-    link: 'https://maps.google.com'
-  },
-  {
-    id: 4,
-    category: 'ROWER',
-    title: 'Trasa Rowerowa VM-O',
-    distance: '0 km',
-    description: 'Trasa Obwodowa tuż obok inwestycji. Idealna na poranny jogging lub wieczorny rower.',
-    address: 'Rybaki 11, Zegrze Południowe',
-    image: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?q=80&w=2070', // ← ZOSTAJE UNSPLASH
-    icon: <Bike size={24} strokeWidth={1.5} />,
-    link: 'https://maps.google.com'
-  },
-  {
-    id: 5,
-    category: 'MARINA',
-    title: 'Marina Riva Zegrze',
-    distance: '0 km',
-    description: 'Prywatna przystań dla mieszkańców z dostępem do łodzi, kajaków i sprzętu wodnego.',
-    address: 'Rybaki 11B, Zegrze Południowe',
-    image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=2070', // ← ZOSTAJE UNSPLASH
-    icon: <Anchor size={24} strokeWidth={1.5} />,
-    link: 'https://maps.google.com'
-  },
-  {
-    id: 6,
-    category: 'KULTURA',
-    title: 'Twierdza Modlin',
-    distance: '12 km',
-    description: 'Historyczna twierdza napoleońska z XIX wieku. Wycieczki z przewodnikiem i wydarzenia kulturalne.',
-    address: 'Twierdza Modlin, Nowy Dwór Mazowiecki',
-    image: '/images/gallery/aktywnosci/twierdza.jpeg', // ← ZMIENIONE
-    icon: <MapPin size={24} strokeWidth={1.5} />,
-    link: 'https://maps.google.com'
-  }
-];
+  const activities = [
+    {
+      id: 1,
+      category: 'SPORTY WODNE',
+      title: 'Skutery Wodne',
+      distance: '0.5 km',
+      description: 'Największa wypożyczalnia nad Zalewem. Skutery 90-300 KM dla rodzin i miłośników adrenaliny.',
+      image: '/images/gallery/aktywnosci/skuter.jpeg',
+      icon: <Ship size={24} strokeWidth={1.5} />,
+      mapLink: 'https://maps.app.goo.gl/TWOJ_LINK_SKUTERY',
+      gridClass: 'md:col-span-2 lg:col-span-2'
+    },
+    {
+      id: 2,
+      category: 'GOLF',
+      title: 'Pole Golfowe Rajszew',
+      distance: '5 km',
+      description: '18 dołków, driving range i profesjonalni instruktorzy.',
+      image: 'https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=2070',
+      icon: <Award size={24} strokeWidth={1.5} />,
+      mapLink: 'https://maps.app.goo.gl/TWOJ_LINK_GOLF',
+      gridClass: ''
+    },
+    {
+      id: 3,
+      category: 'ŻEGLARSTWO',
+      title: 'Akademia Żeglarska',
+      distance: '3 km',
+      description: 'Nauka żeglowania, wypożyczalnia sprzętu, kursy dla początkujących.',
+      image: '/images/gallery/aktywnosci/lodka.jpeg',
+      icon: <Sailboat size={24} strokeWidth={1.5} />,
+      mapLink: 'https://maps.app.goo.gl/TWOJ_LINK_ZEGLARSKA',
+      gridClass: ''
+    },
+    {
+      id: 4,
+      category: 'PRZYRODA',
+      title: 'Wieliszewskie Łęgi',
+      distance: '4 km',
+      description: 'Rezerwat z unikalną fauną i florą. Idealne na spacery i obserwację ptaków.',
+      image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2070',
+      icon: <TreePine size={24} strokeWidth={1.5} />,
+      mapLink: 'https://maps.app.goo.gl/TWOJ_LINK_LEGI',
+      gridClass: ''
+    },
+    {
+      id: 5,
+      category: 'ROWER',
+      title: 'Trasa Rowerowa VM-O',
+      distance: '0 km',
+      description: 'Trasa Obwodowa tuż obok. Poranny jogging lub wieczorny rower.',
+      image: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?q=80&w=2070',
+      icon: <Bike size={24} strokeWidth={1.5} />,
+      mapLink: 'https://maps.app.goo.gl/TWOJ_LINK_ROWER',
+      gridClass: ''
+    },
+    {
+      id: 6,
+      category: 'MARINA',
+      title: 'Marina Riva Zegrze',
+      distance: '0 km',
+      description: 'Prywatna przystań z dostępem do łodzi, kajaków i sprzętu wodnego.',
+      image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=2070',
+      icon: <Anchor size={24} strokeWidth={1.5} />,
+      mapLink: 'https://maps.app.goo.gl/TWOJ_LINK_MARINA',
+      gridClass: 'md:col-span-2 lg:col-span-1'
+    },
+    {
+      id: 7,
+      category: 'KULTURA',
+      title: 'Twierdza Modlin',
+      distance: '12 km',
+      description: 'Historyczna twierdza napoleońska z XIX wieku. Wycieczki z przewodnikiem.',
+      image: '/images/gallery/aktywnosci/twierdza.jpeg',
+      icon: <MapPin size={24} strokeWidth={1.5} />,
+      mapLink: 'https://maps.app.goo.gl/TWOJ_LINK_TWIERDZA',
+      gridClass: 'md:col-span-2 lg:col-span-2'
+    }
+  ];
 
-
-  // GSAP Animations
+  // ========================================
+  // GSAP Animations - Nagłówek + Karty
+  // ========================================
   useEffect(() => {
     const initAnimations = async () => {
       if (typeof window !== 'undefined') {
@@ -418,23 +435,49 @@ const locations = [
           
           gsap.registerPlugin(ScrollTrigger);
 
-          const cards = gridRef.current?.querySelectorAll('.location-card');
-          
-          if (cards) {
+          // ✨ ANIMACJA NAGŁÓWKA - Text Reveal
+          if (headerRef.current) {
+            const subtitle = headerRef.current.querySelector('.header-subtitle');
+            const title = headerRef.current.querySelector('.header-title');
+            const description = headerRef.current.querySelector('.header-description');
+
             gsap.fromTo(
-              cards,
-              {
-                opacity: 0,
-                y: 60,
-                scale: 0.95
+              [subtitle, title, description],
+              { 
+                opacity: 0, 
+                y: 50,
+                filter: 'blur(10px)'
               },
               {
                 opacity: 1,
                 y: 0,
-                scale: 1,
-                duration: 0.8,
+                filter: 'blur(0px)',
+                duration: 1.2,
                 ease: 'power3.out',
-                stagger: 0.15,
+                stagger: 0.2,
+                scrollTrigger: {
+                  trigger: headerRef.current,
+                  start: 'top 80%',
+                  toggleActions: 'play none none none',
+                }
+              }
+            );
+          }
+
+          // ✨ ANIMACJA KART
+          const cards = gridRef.current?.querySelectorAll('.activity-card');
+          
+          if (cards) {
+            gsap.fromTo(
+              cards,
+              { opacity: 0, y: 60, scale: 0.95 },
+              {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.9,
+                ease: 'power3.out',
+                stagger: 0.1,
                 scrollTrigger: {
                   trigger: gridRef.current,
                   start: 'top 75%',
@@ -445,7 +488,7 @@ const locations = [
           }
 
         } catch (error) {
-          console.error('GSAP animation error:', error);
+          console.error('GSAP error:', error);
         }
       }
     };
@@ -461,99 +504,288 @@ const locations = [
   }, []);
 
   return (
-    <section className="py-24 lg:py-32 bg-[#f7f6f4] relative overflow-hidden">
+    <section 
+      id="activities-content" // ← ✅ ID DLA SCROLL ARROW
+      className="relative py-24 lg:py-32 overflow-hidden"
+    >
       
-      {/* ✨ ŻAGLÓWKA - prawy dolny róg - UKRYTA NA MOBILE */}
-      <svg className="hidden lg:block absolute bottom-4 right-4 w-72 h-72 opacity-[0.35] pointer-events-none" viewBox="0 0 200 200" fill="none" stroke="#4a5a52" strokeWidth="2">
-        <path d="M100,160 L60,130 L140,130 Z" strokeWidth="3" />
-        <path d="M100,50 L100,130" strokeWidth="3.5" />
-        <path d="M100,50 L70,130 M100,50 L130,130" strokeWidth="2.5" />
-        <path d="M50,140 Q100,135 150,140" strokeWidth="3" />
-        {/* Fale */}
-        <path d="M40,145 Q60,140 80,145 T120,145 T160,145" opacity="0.8" strokeWidth="2.5" stroke="#5a6a62" />
-        <path d="M35,152 Q55,148 75,152 T115,152 T155,152" opacity="0.6" strokeWidth="2" stroke="#5a6a62" />
-        {/* Flaga */}
-        <path d="M100,50 L115,55 L100,60" fill="#4a5a52" opacity="0.7" />
+      {/* ========================================== */}
+      {/* PASTELOWE TŁO Z WZORAMI */}
+      {/* ========================================== */}
+      
+      {/* Gradient base */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#f1f1ed] via-[#e8e9e4] to-[#d4d6ce]" />
+      
+      {/* Subtle geometric patterns */}
+      <div className="absolute inset-0 opacity-30">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+              <circle cx="30" cy="30" r="1.5" fill="#b6b9af" />
+              <circle cx="0" cy="0" r="1" fill="#b6b9af" />
+              <circle cx="60" cy="60" r="1" fill="#b6b9af" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+      </div>
+
+      {/* Soft organic shapes */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        {/* Shape 1 - Top Left */}
+        <div 
+          className="absolute -top-32 -left-32 w-96 h-96 rounded-full opacity-20"
+          style={{ 
+            background: 'radial-gradient(circle, #8a968f 0%, transparent 70%)',
+            filter: 'blur(60px)'
+          }}
+        />
+        
+        {/* Shape 2 - Top Right */}
+        <div 
+          className="absolute -top-20 right-0 w-[500px] h-[500px] rounded-full opacity-15"
+          style={{ 
+            background: 'radial-gradient(circle, #c8cabe 0%, transparent 70%)',
+            filter: 'blur(80px)'
+          }}
+        />
+        
+        {/* Shape 3 - Bottom Left */}
+        <div 
+          className="absolute bottom-0 -left-20 w-[600px] h-[400px] rounded-full opacity-20"
+          style={{ 
+            background: 'radial-gradient(circle, #71847b 0%, transparent 70%)',
+            filter: 'blur(100px)'
+          }}
+        />
+        
+        {/* Shape 4 - Bottom Right */}
+        <div 
+          className="absolute -bottom-32 -right-32 w-[450px] h-[450px] rounded-full opacity-15"
+          style={{ 
+            background: 'radial-gradient(circle, #b6b9af 0%, transparent 70%)',
+            filter: 'blur(90px)'
+          }}
+        />
+      </div>
+
+      {/* Subtle lines decoration */}
+      <svg className="hidden lg:block absolute top-1/4 left-0 w-full h-1/2 opacity-10 pointer-events-none" viewBox="0 0 1000 500" fill="none">
+        <path d="M0,250 Q250,200 500,250 T1000,250" stroke="#6e7a73" strokeWidth="1" />
+        <path d="M0,280 Q250,230 500,280 T1000,280" stroke="#8a968f" strokeWidth="0.8" />
+        <path d="M0,220 Q250,170 500,220 T1000,220" stroke="#71847b" strokeWidth="0.6" />
       </svg>
 
-      <div className="relative z-10 max-w-[1600px] mx-auto px-6 lg:px-12">
+      {/* ========================================== */}
+      {/* PREMIUM OUTLINE ICONS */}
+      {/* ========================================== */}
+      
+      {/* 🚣 KAJAK - Lewy górny */}
+      <svg 
+        className="hidden lg:block absolute top-[280px] left-[8%] w-[280px] h-[280px] opacity-[0.06] pointer-events-none z-10" 
+        viewBox="0 0 200 200" 
+        fill="none" 
+        stroke="#6e7a73" 
+        strokeWidth="1.5"
+      >
+        <ellipse cx="100" cy="100" rx="70" ry="20" strokeWidth="2.5" />
+        <ellipse cx="100" cy="100" rx="60" ry="15" strokeWidth="1.5" opacity="0.6" />
+        <line x1="35" y1="100" x2="165" y2="100" strokeWidth="1.5" opacity="0.5" />
+        <ellipse cx="100" cy="100" rx="22" ry="9" strokeWidth="2" opacity="0.7" />
+        <path d="M30,100 L22,97 L22,103 Z" strokeWidth="2" fill="#6e7a73" opacity="0.5" />
+        <path d="M170,100 L178,97 L178,103 Z" strokeWidth="2" fill="#6e7a73" opacity="0.5" />
+        <line x1="65" y1="65" x2="135" y2="135" strokeWidth="3" strokeLinecap="round" />
+        <ellipse cx="60" cy="60" rx="13" ry="20" transform="rotate(-45 60 60)" strokeWidth="2.5" />
+        <ellipse cx="140" cy="140" rx="13" ry="20" transform="rotate(-45 140 140)" strokeWidth="2.5" />
+        <path d="M15,118 Q25,115 35,118 T55,118 T75,118" opacity="0.6" strokeWidth="2" />
+        <path d="M125,118 Q135,115 145,118 T165,118 T185,118" opacity="0.6" strokeWidth="2" />
+      </svg>
+
+      {/* 🚴 ROWER - Prawy górny */}
+      <svg 
+        className="hidden lg:block absolute top-[220px] right-[5%] w-[320px] h-[320px] opacity-[0.06] pointer-events-none z-10" 
+        viewBox="0 0 200 200" 
+        fill="none" 
+        stroke="#71847b" 
+        strokeWidth="1.8"
+      >
+        <circle cx="50" cy="140" r="35" strokeWidth="3" />
+        <circle cx="150" cy="140" r="35" strokeWidth="3" />
+        <circle cx="50" cy="140" r="28" strokeWidth="1.5" opacity="0.6" />
+        <circle cx="150" cy="140" r="28" strokeWidth="1.5" opacity="0.6" />
+        <path d="M50,140 L100,75 L122,98 L150,140 M100,75 L100,52 M94,52 L106,52" strokeWidth="3.5" />
+        <path d="M100,98 L68,98 L50,140" strokeWidth="3" />
+        <circle cx="100" cy="112" r="7" strokeWidth="3" />
+        <line x1="93" y1="112" x2="107" y2="112" strokeWidth="3" />
+        <path d="M100,52 L95,42 L105,42 Z" fill="#71847b" opacity="0.5" />
+      </svg>
+
+      {/* 🌲 DRZEWO - Lewy dolny */}
+      <svg 
+        className="hidden lg:block absolute bottom-[15%] left-[12%] w-[240px] h-[240px] opacity-[0.06] pointer-events-none z-10" 
+        viewBox="0 0 200 200" 
+        fill="none" 
+        stroke="#8a968f" 
+        strokeWidth="2"
+      >
+        <path d="M100,160 L100,80" strokeWidth="4" strokeLinecap="round" />
+        <path d="M100,80 L70,110 L80,110 L55,135 L68,135 L45,160 L155,160 L132,135 L145,135 L120,110 L130,110 Z" strokeWidth="2.5" opacity="0.7" />
+        <circle cx="75" cy="100" r="3" fill="#8a968f" opacity="0.6" />
+        <circle cx="125" cy="105" r="2.5" fill="#8a968f" opacity="0.5" />
+        <circle cx="95" cy="120" r="2" fill="#8a968f" opacity="0.55" />
+        <path d="M85,160 L85,170 M115,160 L115,170" strokeWidth="2.5" opacity="0.6" />
+      </svg>
+
+      {/* ⛳ GOLF - Prawy środek */}
+      <svg 
+        className="hidden lg:block absolute top-[55%] right-[8%] w-[200px] h-[200px] opacity-[0.06] pointer-events-none z-10" 
+        viewBox="0 0 200 200" 
+        fill="none" 
+        stroke="#6e7a73" 
+        strokeWidth="2"
+      >
+        <circle cx="100" cy="80" r="25" strokeWidth="3" />
+        <circle cx="92" cy="74" r="2" fill="#6e7a73" opacity="0.6" />
+        <circle cx="108" cy="74" r="2" fill="#6e7a73" opacity="0.6" />
+        <circle cx="100" cy="84" r="2" fill="#6e7a73" opacity="0.6" />
+        <circle cx="94" cy="81" r="1.5" fill="#6e7a73" opacity="0.5" />
+        <circle cx="106" cy="81" r="1.5" fill="#6e7a73" opacity="0.5" />
+        <line x1="100" y1="105" x2="100" y2="140" strokeWidth="2.5" strokeLinecap="round" />
+        <path d="M85,140 L115,140" strokeWidth="3" strokeLinecap="round" />
+        <path d="M70,145 Q100,142 130,145" strokeWidth="2" opacity="0.6" />
+      </svg>
+
+      {/* ⚓ KOTWICA - Prawy dolny */}
+      <svg 
+        className="hidden lg:block absolute bottom-[8%] right-[15%] w-[220px] h-[220px] opacity-[0.06] pointer-events-none z-10" 
+        viewBox="0 0 200 200" 
+        fill="none" 
+        stroke="#71847b" 
+        strokeWidth="2.5"
+      >
+        <circle cx="100" cy="45" r="12" strokeWidth="3" />
+        <line x1="100" y1="57" x2="100" y2="140" strokeWidth="4" strokeLinecap="round" />
+        <line x1="85" y1="72" x2="115" y2="72" strokeWidth="3" strokeLinecap="round" />
+        <path d="M65,140 Q65,160 80,165 L100,140" strokeWidth="3.5" />
+        <path d="M135,140 Q135,160 120,165 L100,140" strokeWidth="3.5" />
+        <circle cx="75" cy="162" r="8" strokeWidth="2.5" />
+        <circle cx="125" cy="162" r="8" strokeWidth="2.5" />
+        <path d="M50,120 Q70,125 90,120" strokeWidth="2" opacity="0.6" />
+        <path d="M110,120 Q130,125 150,120" strokeWidth="2" opacity="0.6" />
+      </svg>
+
+      {/* ========================================== */}
+      {/* CONTENT */}
+      {/* ========================================== */}
+
+      <div className="relative z-20 max-w-[1600px] mx-auto px-6 lg:px-12">
         
-        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {locations.map((location) => (
-            <div 
-              key={location.id} 
-              className="location-card group bg-white overflow-hidden hover:shadow-2xl transition-all duration-500"
+        {/* ✨ NAGŁÓWEK Z TEXT REVEAL ANIMATION */}
+        <div ref={headerRef} className="text-center mb-16 lg:mb-24">
+          <span className="header-subtitle text-xs tracking-[0.4em] uppercase text-[#8a968f] mb-4 block font-light">
+            NIEZAPOMNIANE CHWILE
+          </span>
+          <h2 
+            className="header-title text-4xl md:text-5xl lg:text-6xl font-light text-[#6e7a73] mb-6" 
+            style={{ fontFamily: 'Playfair Display, serif' }}
+          >
+            Poznaj Piękno Okolicy Zegrza
+          </h2>
+          <p className="header-description text-lg text-[#6e7a73] leading-relaxed font-light max-w-3xl mx-auto">
+            Od sportów wodnych po pola golfowe, od rezerwatów przyrody po kulinarną przygodę—odkryj 
+            wyjątkowe miejsca i aktywności tuż obok Riva Zegrze, które uczynią Twój pobyt niezapomnianym.
+          </p>
+        </div>
+
+        {/* BENTO GRID Z RAMKAMI */}
+        <div 
+          ref={gridRef}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+        >
+          {activities.map((activity) => (
+            <a
+              key={activity.id}
+              href={activity.mapLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`activity-card group relative overflow-hidden bg-white hover:shadow-2xl transition-all duration-700 cursor-pointer ${activity.gridClass}`}
             >
-              {/* Image with Frame */}
-              <div className="relative">
-                <div className="relative bg-white p-3 shadow-lg">
-                  <div className="relative h-80 overflow-hidden border border-[#e8e6e1]">
-                    <img 
-                      src={location.image}
-                      alt={location.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
+              {/* RAMKA ZEWNĘTRZNA */}
+              <div className="relative bg-white p-3 shadow-lg">
+                
+                {/* RAMKA WEWNĘTRZNA */}
+                <div className="relative h-[450px] overflow-hidden border border-[#d4d6ce]">
+                  
+                  {/* Image */}
+                  <img
+                    src={activity.image}
+                    alt={activity.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f0e0f]/95 via-[#0f0e0f]/60 to-transparent" />
+                  
+                  {/* Content Overlay */}
+                  <div className="absolute inset-0 p-6 lg:p-8 flex flex-col justify-between text-white">
                     
-                    {/* Category Badge */}
-                    <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-4 py-2 border border-[#d4d6ce]">
-                      <span className="text-xs tracking-[0.3em] font-light text-[#0f0e0f]">
-                        {location.category}
-                      </span>
+                    {/* Top Bar */}
+                    <div className="flex items-start justify-between gap-3">
+                      {/* Category + Icon */}
+                      <div className="flex items-center gap-2 lg:gap-3 flex-wrap">
+                        <div className="w-10 h-10 lg:w-12 lg:h-12 bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center group-hover:bg-[#AB8A62] group-hover:border-[#AB8A62] transition-all duration-500 flex-shrink-0">
+                          {activity.icon}
+                        </div>
+                        <span className="text-[10px] lg:text-xs tracking-[0.3em] font-light bg-white/20 backdrop-blur-md px-3 lg:px-4 py-2 border border-white/30 whitespace-nowrap">
+                          {activity.category}
+                        </span>
+                      </div>
+
+                      {/* Distance Badge */}
+                      <div className="text-[10px] lg:text-xs tracking-[0.2em] font-light bg-[#AB8A62] px-3 lg:px-4 py-2 group-hover:bg-white group-hover:text-[#AB8A62] transition-all duration-300 flex-shrink-0">
+                        {activity.distance}
+                      </div>
                     </div>
-                    
-                    {/* Icon */}
-                    <div className="absolute bottom-4 right-4 w-12 h-12 bg-white/90 backdrop-blur-sm flex items-center justify-center text-[#8a968f] border border-[#d4d6ce]">
-                      {location.icon}
+
+                    {/* Bottom Content */}
+                    <div>
+                      {/* Title */}
+                      <h3 
+                        className="text-2xl lg:text-3xl xl:text-4xl font-light mb-2 lg:mb-3 group-hover:text-[#AB8A62] transition-colors duration-300"
+                        style={{ fontFamily: 'Playfair Display, serif' }}
+                      >
+                        {activity.title}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="text-sm lg:text-base font-light leading-relaxed opacity-90 mb-3 lg:mb-4">
+                        {activity.description}
+                      </p>
+
+                      {/* CTA z ikoną */}
+                      <div className="flex items-center gap-2 text-xs lg:text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <span className="tracking-[0.2em] uppercase font-light">Zobacz na mapie</span>
+                        <NavigationIcon size={16} strokeWidth={2} className="group-hover:translate-x-1 transition-transform" />
+                      </div>
+
+                      {/* Animated Line */}
+                      <div className="w-0 h-px bg-white/60 group-hover:w-20 lg:group-hover:w-24 transition-all duration-500 mt-2 lg:mt-3" />
                     </div>
                   </div>
+                  
                 </div>
               </div>
-
-              {/* Content */}
-              <div className="p-8">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 
-                    className="text-2xl font-light text-[#0f0e0f]" 
-                    style={{ fontFamily: 'Playfair Display, serif' }}
-                  >
-                    {location.title}
-                  </h3>
-                  <span className="text-xs text-[#8a968f] font-light">
-                    {location.distance}
-                  </span>
-                </div>
-                
-                <p className="text-[#6e7a73] leading-relaxed mb-4 font-light">
-                  {location.description}
-                </p>
-
-                {/* Address */}
-                <div className="flex items-start gap-2 text-sm text-[#8a968f] mb-6 font-light">
-                  <MapPin size={16} className="mt-1 flex-shrink-0" strokeWidth={1.5} />
-                  <span>{location.address}</span>
-                </div>
-
-                {/* CTA */}
-                <a 
-                  href={location.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 text-xs tracking-[0.25em] py-4 border border-[#8a968f] text-[#8a968f] hover:bg-[#8a968f] hover:text-white transition-all font-light"
-                >
-                  <span>ZOBACZ NA MAPIE</span>
-                  <ExternalLink size={14} strokeWidth={1.5} />
-                </a>
-              </div>
-            </div>
+            </a>
           ))}
         </div>
+
       </div>
     </section>
   );
 }
 
-// ============================================
-// ============================================
+
+
 // CTA Section - ZAKTUALIZOWANE TEKSTY
 // ============================================
 function ExperiencesCTA() {
