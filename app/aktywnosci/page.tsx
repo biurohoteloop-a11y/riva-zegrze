@@ -347,84 +347,85 @@ function LocationsGrid() {
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
   const activities = [
-    {
-      id: 1,
-      category: 'SPORTY WODNE',
-      title: 'Skutery Wodne',
-      distance: '0.5 km',
-      description: 'Największa wypożyczalnia nad Zalewem. Skutery 90-300 KM dla rodzin i miłośników adrenaliny.',
-      image: '/images/gallery/aktywnosci/skuter.jpeg',
-      icon: <Ship size={24} strokeWidth={1.5} />,
-      mapLink: 'https://maps.app.goo.gl/hWZ3vY8pzQD6qK7c9', // Skutery Zegrze, Rybaki 1
-      gridClass: 'md:col-span-2 lg:col-span-2'
-    },
-    {
-      id: 2,
-      category: 'GOLF',
-      title: 'Pole Golfowe Rajszew',
-      distance: '5 km',
-      description: '18 dołków, driving range i profesjonalni instruktorzy.',
-      image: 'https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=2070',
-      icon: <Award size={24} strokeWidth={1.5} />,
-      mapLink: 'https://maps.app.goo.gl/7mK2rY9tXnJ8vK3z6', // First Warsaw Golf, Rajszew
-      gridClass: ''
-    },
-    {
-      id: 3,
-      category: 'ŻEGLARSTWO',
-      title: 'Akademia Żeglarska',
-      distance: '3 km',
-      description: 'Nauka żeglowania, wypożyczalnia sprzętu, kursy dla początkujących.',
-      image: '/images/gallery/aktywnosci/lodka.jpeg',
-      icon: <Sailboat size={24} strokeWidth={1.5} />,
-      mapLink: 'https://maps.app.goo.gl/3pN6uT8hKmL9wJ4e8', // Akademia Żeglarska Mila
-      gridClass: ''
-    },
-    {
-      id: 4,
-      category: 'PRZYRODA',
-      title: 'Wieliszewskie Łęgi',
-      distance: '4 km',
-      description: 'Rezerwat z unikalną fauną i florą. Idealne na spacery i obserwację ptaków.',
-      image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2070',
-      icon: <TreePine size={24} strokeWidth={1.5} />,
-      mapLink: 'https://maps.app.goo.gl/5jD8mR2qLnK7tH9u9', // Rezerwat Wieliszewskie Łęgi
-      gridClass: ''
-    },
-    {
-      id: 5,
-      category: 'ROWER',
-      title: 'Trasa Rowerowa VM-O',
-      distance: '0 km',
-      description: 'Trasa Obwodowa tuż obok. Poranny jogging lub wieczorny rower.',
-      image: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?q=80&w=2070',
-      icon: <Bike size={24} strokeWidth={1.5} />,
-      mapLink: 'https://maps.app.goo.gl/8kM4pQ7sYnR9wL2x7', // Trakt rowerowy Zegrze
-      gridClass: ''
-    },
-    {
-      id: 6,
-      category: 'MARINA',
-      title: 'Marina Riva Zegrze',
-      distance: '0 km',
-      description: 'Prywatna przystań z dostępem do łodzi, kajaków i sprzętu wodnego.',
-      image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=2070',
-      icon: <Anchor size={24} strokeWidth={1.5} />,
-      mapLink: 'https://maps.app.goo.gl/2nT9jK6hRmP8vH3u6', // Riva Zegrze, Rybaki 11
-      gridClass: 'md:col-span-2 lg:col-span-1'
-    },
-    {
-      id: 7,
-      category: 'KULTURA',
-      title: 'Twierdza Modlin',
-      distance: '12 km',
-      description: 'Historyczna twierdza napoleońska z XIX wieku. Wycieczki z przewodnikiem.',
-      image: '/images/gallery/aktywnosci/twierdza.jpeg',
-      icon: <MapPin size={24} strokeWidth={1.5} />,
-      mapLink: 'https://maps.app.goo.gl/4mK7qY8tZnL9wJ5e9', // Twierdza Modlin
-      gridClass: 'md:col-span-2 lg:col-span-2'
-    }
-  ];
+  {
+    id: 1,
+    category: 'SPORTY WODNE',
+    title: 'Skutery Wodne',
+    distance: '0.5 km',
+    description: 'Największa wypożyczalnia nad Zalewem. Skutery 90-300 KM dla rodzin i miłośników adrenaliny.',
+    image: '/images/gallery/aktywnosci/skuter.jpeg',
+    icon: <Ship size={24} strokeWidth={1.5} />,
+    mapLink: 'https://www.google.com/maps/search/SkuteryZegrze.pl+Rybaki+1+Zegrze+Południowe', // Skutery
+    gridClass: 'md:col-span-2 lg:col-span-2'
+  },
+  {
+    id: 2,
+    category: 'GOLF',
+    title: 'Pole Golfowe Rajszew',
+    distance: '5 km',
+    description: '18 dołków, driving range i profesjonalni instruktorzy.',
+    image: 'https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=2070',
+    icon: <Award size={24} strokeWidth={1.5} />,
+    mapLink: 'https://www.google.com/maps/search/First+Warsaw+Golf+Golfowa+44+Rajszew', // Golf
+    gridClass: ''
+  },
+  {
+    id: 3,
+    category: 'ŻEGLARSTWO',
+    title: 'Akademia Żeglarska',
+    distance: '3 km',
+    description: 'Nauka żeglowania, wypożyczalnia sprzętu, kursy dla początkujących.',
+    image: '/images/gallery/aktywnosci/lodka.jpeg',
+    icon: <Sailboat size={24} strokeWidth={1.5} />,
+    mapLink: 'https://www.google.com/maps/search/Akademia+Żeglarska+Klub+Mila+Szaniawskiego+56+Zegrzynek', // Żeglarstwo
+    gridClass: ''
+  },
+  {
+    id: 4,
+    category: 'PRZYRODA',
+    title: 'Wieliszewskie Łęgi',
+    distance: '4 km',
+    description: 'Rezerwat z unikalną fauną i florą. Idealne na spacery i obserwację ptaków.',
+    image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2070',
+    icon: <TreePine size={24} strokeWidth={1.5} />,
+    mapLink: 'https://www.google.com/maps/search/Rezerwat+przyrody+Wieliszewskie+Łęgi+Wieliszew', // Rezerwat
+    gridClass: ''
+  },
+  {
+    id: 5,
+    category: 'ROWER',
+    title: 'Trasa Rowerowa VM-O',
+    distance: '0 km',
+    description: 'Trasa Obwodowa tuż obok. Poranny jogging lub wieczorny rower.',
+    image: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?q=80&w=2070',
+    icon: <Bike size={24} strokeWidth={1.5} />,
+    mapLink: 'https://www.google.com/maps/search/Trakt+pieszo-rowerowy+nad+Zalewem+Zegrze', // Trasa rowerowa
+    gridClass: ''
+  },
+  {
+    id: 6,
+    category: 'MARINA',
+    title: 'Marina Riva Zegrze',
+    distance: '0 km',
+    description: 'Prywatna przystań z dostępem do łodzi, kajaków i sprzętu wodnego.',
+    image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=2070',
+    icon: <Anchor size={24} strokeWidth={1.5} />,
+    mapLink: 'https://www.google.com/maps/search/Apartamenty+Riva+Zegrze+Rybaki+11+Zegrze+Południowe', // Marina
+    gridClass: 'md:col-span-2 lg:col-span-1'
+  },
+  {
+    id: 7,
+    category: 'KULTURA',
+    title: 'Twierdza Modlin',
+    distance: '12 km',
+    description: 'Historyczna twierdza napoleońska z XIX wieku. Wycieczki z przewodnikiem.',
+    image: '/images/gallery/aktywnosci/twierdza.jpeg',
+    icon: <MapPin size={24} strokeWidth={1.5} />,
+    mapLink: 'https://www.google.com/maps/search/Twierdza+Modlin+Generała+Bema+200c+Nowy+Dwór+Mazowiecki', // Twierdza
+    gridClass: 'md:col-span-2 lg:col-span-2'
+  }
+];
+
 
   // ========================================
   // GSAP Animations
