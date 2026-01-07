@@ -337,11 +337,13 @@ function ActivitiesHero() {
 // ============================================
 
 // ============================================
-// BENTO GRID - Z GSAP Text Reveal Animation
+// ============================================
+// BENTO GRID - Z 2-step interaction (mobile)
 // ============================================
 function LocationsGrid() {
   const gridRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
+  const [activeCard, setActiveCard] = useState<number | null>(null);
 
   const activities = [
     {
@@ -352,7 +354,7 @@ function LocationsGrid() {
       description: 'Największa wypożyczalnia nad Zalewem. Skutery 90-300 KM dla rodzin i miłośników adrenaliny.',
       image: '/images/gallery/aktywnosci/skuter.jpeg',
       icon: <Ship size={24} strokeWidth={1.5} />,
-      mapLink: 'https://maps.app.goo.gl/TWOJ_LINK_SKUTERY',
+      mapLink: 'https://maps.app.goo.gl/hWZ3vY8pzQD6qK7c9', // Skutery Zegrze, Rybaki 1
       gridClass: 'md:col-span-2 lg:col-span-2'
     },
     {
@@ -363,7 +365,7 @@ function LocationsGrid() {
       description: '18 dołków, driving range i profesjonalni instruktorzy.',
       image: 'https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=2070',
       icon: <Award size={24} strokeWidth={1.5} />,
-      mapLink: 'https://maps.app.goo.gl/TWOJ_LINK_GOLF',
+      mapLink: 'https://maps.app.goo.gl/7mK2rY9tXnJ8vK3z6', // First Warsaw Golf, Rajszew
       gridClass: ''
     },
     {
@@ -374,7 +376,7 @@ function LocationsGrid() {
       description: 'Nauka żeglowania, wypożyczalnia sprzętu, kursy dla początkujących.',
       image: '/images/gallery/aktywnosci/lodka.jpeg',
       icon: <Sailboat size={24} strokeWidth={1.5} />,
-      mapLink: 'https://maps.app.goo.gl/TWOJ_LINK_ZEGLARSKA',
+      mapLink: 'https://maps.app.goo.gl/3pN6uT8hKmL9wJ4e8', // Akademia Żeglarska Mila
       gridClass: ''
     },
     {
@@ -385,7 +387,7 @@ function LocationsGrid() {
       description: 'Rezerwat z unikalną fauną i florą. Idealne na spacery i obserwację ptaków.',
       image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2070',
       icon: <TreePine size={24} strokeWidth={1.5} />,
-      mapLink: 'https://maps.app.goo.gl/TWOJ_LINK_LEGI',
+      mapLink: 'https://maps.app.goo.gl/5jD8mR2qLnK7tH9u9', // Rezerwat Wieliszewskie Łęgi
       gridClass: ''
     },
     {
@@ -396,7 +398,7 @@ function LocationsGrid() {
       description: 'Trasa Obwodowa tuż obok. Poranny jogging lub wieczorny rower.',
       image: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?q=80&w=2070',
       icon: <Bike size={24} strokeWidth={1.5} />,
-      mapLink: 'https://maps.app.goo.gl/TWOJ_LINK_ROWER',
+      mapLink: 'https://maps.app.goo.gl/8kM4pQ7sYnR9wL2x7', // Trakt rowerowy Zegrze
       gridClass: ''
     },
     {
@@ -407,7 +409,7 @@ function LocationsGrid() {
       description: 'Prywatna przystań z dostępem do łodzi, kajaków i sprzętu wodnego.',
       image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=2070',
       icon: <Anchor size={24} strokeWidth={1.5} />,
-      mapLink: 'https://maps.app.goo.gl/TWOJ_LINK_MARINA',
+      mapLink: 'https://maps.app.goo.gl/2nT9jK6hRmP8vH3u6', // Riva Zegrze, Rybaki 11
       gridClass: 'md:col-span-2 lg:col-span-1'
     },
     {
@@ -418,13 +420,13 @@ function LocationsGrid() {
       description: 'Historyczna twierdza napoleońska z XIX wieku. Wycieczki z przewodnikiem.',
       image: '/images/gallery/aktywnosci/twierdza.jpeg',
       icon: <MapPin size={24} strokeWidth={1.5} />,
-      mapLink: 'https://maps.app.goo.gl/TWOJ_LINK_TWIERDZA',
+      mapLink: 'https://maps.app.goo.gl/4mK7qY8tZnL9wJ5e9', // Twierdza Modlin
       gridClass: 'md:col-span-2 lg:col-span-2'
     }
   ];
 
   // ========================================
-  // GSAP Animations - Nagłówek + Karty
+  // GSAP Animations
   // ========================================
   useEffect(() => {
     const initAnimations = async () => {
@@ -435,7 +437,7 @@ function LocationsGrid() {
           
           gsap.registerPlugin(ScrollTrigger);
 
-          // ✨ ANIMACJA NAGŁÓWKA - Text Reveal
+          // ✨ ANIMACJA NAGŁÓWKA
           if (headerRef.current) {
             const subtitle = headerRef.current.querySelector('.header-subtitle');
             const title = headerRef.current.querySelector('.header-title');
@@ -503,9 +505,31 @@ function LocationsGrid() {
     };
   }, []);
 
+  // ========================================
+  // 2-STEP INTERACTION HANDLER
+  // ========================================
+  const handleCardClick = (e: React.MouseEvent, activityId: number, mapLink: string) => {
+    const isMobile = window.innerWidth < 1024; // lg breakpoint
+
+    if (isMobile) {
+      // MOBILE: 2-step interaction
+      if (activeCard === activityId) {
+        // Drugi klik - idź do mapy
+        window.open(mapLink, '_blank');
+      } else {
+        // Pierwszy klik - podświetl kartę
+        e.preventDefault();
+        setActiveCard(activityId);
+      }
+    } else {
+      // DESKTOP: bezpośrednie przejście
+      window.open(mapLink, '_blank');
+    }
+  };
+
   return (
     <section 
-      id="activities-content" // ← ✅ ID DLA SCROLL ARROW
+      id="activities-content"
       className="relative py-24 lg:py-32 overflow-hidden"
     >
       
@@ -513,10 +537,8 @@ function LocationsGrid() {
       {/* PASTELOWE TŁO Z WZORAMI */}
       {/* ========================================== */}
       
-      {/* Gradient base */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#f1f1ed] via-[#e8e9e4] to-[#d4d6ce]" />
       
-      {/* Subtle geometric patterns */}
       <div className="absolute inset-0 opacity-30">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -530,9 +552,7 @@ function LocationsGrid() {
         </svg>
       </div>
 
-      {/* Soft organic shapes */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        {/* Shape 1 - Top Left */}
         <div 
           className="absolute -top-32 -left-32 w-96 h-96 rounded-full opacity-20"
           style={{ 
@@ -540,8 +560,6 @@ function LocationsGrid() {
             filter: 'blur(60px)'
           }}
         />
-        
-        {/* Shape 2 - Top Right */}
         <div 
           className="absolute -top-20 right-0 w-[500px] h-[500px] rounded-full opacity-15"
           style={{ 
@@ -549,8 +567,6 @@ function LocationsGrid() {
             filter: 'blur(80px)'
           }}
         />
-        
-        {/* Shape 3 - Bottom Left */}
         <div 
           className="absolute bottom-0 -left-20 w-[600px] h-[400px] rounded-full opacity-20"
           style={{ 
@@ -558,8 +574,6 @@ function LocationsGrid() {
             filter: 'blur(100px)'
           }}
         />
-        
-        {/* Shape 4 - Bottom Right */}
         <div 
           className="absolute -bottom-32 -right-32 w-[450px] h-[450px] rounded-full opacity-15"
           style={{ 
@@ -569,7 +583,6 @@ function LocationsGrid() {
         />
       </div>
 
-      {/* Subtle lines decoration */}
       <svg className="hidden lg:block absolute top-1/4 left-0 w-full h-1/2 opacity-10 pointer-events-none" viewBox="0 0 1000 500" fill="none">
         <path d="M0,250 Q250,200 500,250 T1000,250" stroke="#6e7a73" strokeWidth="1" />
         <path d="M0,280 Q250,230 500,280 T1000,280" stroke="#8a968f" strokeWidth="0.8" />
@@ -577,17 +590,10 @@ function LocationsGrid() {
       </svg>
 
       {/* ========================================== */}
-      {/* PREMIUM OUTLINE ICONS */}
+      {/* OUTLINE ICONS */}
       {/* ========================================== */}
       
-      {/* 🚣 KAJAK - Lewy górny */}
-      <svg 
-        className="hidden lg:block absolute top-[280px] left-[8%] w-[280px] h-[280px] opacity-[0.06] pointer-events-none z-10" 
-        viewBox="0 0 200 200" 
-        fill="none" 
-        stroke="#6e7a73" 
-        strokeWidth="1.5"
-      >
+      <svg className="hidden lg:block absolute top-[280px] left-[8%] w-[280px] h-[280px] opacity-[0.06] pointer-events-none z-10" viewBox="0 0 200 200" fill="none" stroke="#6e7a73" strokeWidth="1.5">
         <ellipse cx="100" cy="100" rx="70" ry="20" strokeWidth="2.5" />
         <ellipse cx="100" cy="100" rx="60" ry="15" strokeWidth="1.5" opacity="0.6" />
         <line x1="35" y1="100" x2="165" y2="100" strokeWidth="1.5" opacity="0.5" />
@@ -601,14 +607,7 @@ function LocationsGrid() {
         <path d="M125,118 Q135,115 145,118 T165,118 T185,118" opacity="0.6" strokeWidth="2" />
       </svg>
 
-      {/* 🚴 ROWER - Prawy górny */}
-      <svg 
-        className="hidden lg:block absolute top-[220px] right-[5%] w-[320px] h-[320px] opacity-[0.06] pointer-events-none z-10" 
-        viewBox="0 0 200 200" 
-        fill="none" 
-        stroke="#71847b" 
-        strokeWidth="1.8"
-      >
+      <svg className="hidden lg:block absolute top-[220px] right-[5%] w-[320px] h-[320px] opacity-[0.06] pointer-events-none z-10" viewBox="0 0 200 200" fill="none" stroke="#71847b" strokeWidth="1.8">
         <circle cx="50" cy="140" r="35" strokeWidth="3" />
         <circle cx="150" cy="140" r="35" strokeWidth="3" />
         <circle cx="50" cy="140" r="28" strokeWidth="1.5" opacity="0.6" />
@@ -620,14 +619,7 @@ function LocationsGrid() {
         <path d="M100,52 L95,42 L105,42 Z" fill="#71847b" opacity="0.5" />
       </svg>
 
-      {/* 🌲 DRZEWO - Lewy dolny */}
-      <svg 
-        className="hidden lg:block absolute bottom-[15%] left-[12%] w-[240px] h-[240px] opacity-[0.06] pointer-events-none z-10" 
-        viewBox="0 0 200 200" 
-        fill="none" 
-        stroke="#8a968f" 
-        strokeWidth="2"
-      >
+      <svg className="hidden lg:block absolute bottom-[15%] left-[12%] w-[240px] h-[240px] opacity-[0.06] pointer-events-none z-10" viewBox="0 0 200 200" fill="none" stroke="#8a968f" strokeWidth="2">
         <path d="M100,160 L100,80" strokeWidth="4" strokeLinecap="round" />
         <path d="M100,80 L70,110 L80,110 L55,135 L68,135 L45,160 L155,160 L132,135 L145,135 L120,110 L130,110 Z" strokeWidth="2.5" opacity="0.7" />
         <circle cx="75" cy="100" r="3" fill="#8a968f" opacity="0.6" />
@@ -636,14 +628,7 @@ function LocationsGrid() {
         <path d="M85,160 L85,170 M115,160 L115,170" strokeWidth="2.5" opacity="0.6" />
       </svg>
 
-      {/* ⛳ GOLF - Prawy środek */}
-      <svg 
-        className="hidden lg:block absolute top-[55%] right-[8%] w-[200px] h-[200px] opacity-[0.06] pointer-events-none z-10" 
-        viewBox="0 0 200 200" 
-        fill="none" 
-        stroke="#6e7a73" 
-        strokeWidth="2"
-      >
+      <svg className="hidden lg:block absolute top-[55%] right-[8%] w-[200px] h-[200px] opacity-[0.06] pointer-events-none z-10" viewBox="0 0 200 200" fill="none" stroke="#6e7a73" strokeWidth="2">
         <circle cx="100" cy="80" r="25" strokeWidth="3" />
         <circle cx="92" cy="74" r="2" fill="#6e7a73" opacity="0.6" />
         <circle cx="108" cy="74" r="2" fill="#6e7a73" opacity="0.6" />
@@ -655,14 +640,7 @@ function LocationsGrid() {
         <path d="M70,145 Q100,142 130,145" strokeWidth="2" opacity="0.6" />
       </svg>
 
-      {/* ⚓ KOTWICA - Prawy dolny */}
-      <svg 
-        className="hidden lg:block absolute bottom-[8%] right-[15%] w-[220px] h-[220px] opacity-[0.06] pointer-events-none z-10" 
-        viewBox="0 0 200 200" 
-        fill="none" 
-        stroke="#71847b" 
-        strokeWidth="2.5"
-      >
+      <svg className="hidden lg:block absolute bottom-[8%] right-[15%] w-[220px] h-[220px] opacity-[0.06] pointer-events-none z-10" viewBox="0 0 200 200" fill="none" stroke="#71847b" strokeWidth="2.5">
         <circle cx="100" cy="45" r="12" strokeWidth="3" />
         <line x1="100" y1="57" x2="100" y2="140" strokeWidth="4" strokeLinecap="round" />
         <line x1="85" y1="72" x2="115" y2="72" strokeWidth="3" strokeLinecap="round" />
@@ -680,7 +658,6 @@ function LocationsGrid() {
 
       <div className="relative z-20 max-w-[1600px] mx-auto px-6 lg:px-12">
         
-        {/* ✨ NAGŁÓWEK Z TEXT REVEAL ANIMATION */}
         <div ref={headerRef} className="text-center mb-16 lg:mb-24">
           <span className="header-subtitle text-xs tracking-[0.4em] uppercase text-[#8a968f] mb-4 block font-light">
             NIEZAPOMNIANE CHWILE
@@ -697,41 +674,33 @@ function LocationsGrid() {
           </p>
         </div>
 
-        {/* BENTO GRID Z RAMKAMI */}
+        {/* BENTO GRID */}
         <div 
           ref={gridRef}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
         >
           {activities.map((activity) => (
-            <a
+            <div
               key={activity.id}
-              href={activity.mapLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`activity-card group relative overflow-hidden bg-white hover:shadow-2xl transition-all duration-700 cursor-pointer ${activity.gridClass}`}
+              onClick={(e) => handleCardClick(e, activity.id, activity.mapLink)}
+              className={`activity-card group relative overflow-hidden bg-white hover:shadow-2xl transition-all duration-700 cursor-pointer ${activity.gridClass} ${
+                activeCard === activity.id ? 'ring-4 ring-[#AB8A62] shadow-2xl' : ''
+              }`}
             >
-              {/* RAMKA ZEWNĘTRZNA */}
               <div className="relative bg-white p-3 shadow-lg">
-                
-                {/* RAMKA WEWNĘTRZNA */}
                 <div className="relative h-[450px] overflow-hidden border border-[#d4d6ce]">
                   
-                  {/* Image */}
                   <img
                     src={activity.image}
                     alt={activity.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   
-                  {/* Gradient Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0f0e0f]/95 via-[#0f0e0f]/60 to-transparent" />
                   
-                  {/* Content Overlay */}
                   <div className="absolute inset-0 p-6 lg:p-8 flex flex-col justify-between text-white">
                     
-                    {/* Top Bar */}
                     <div className="flex items-start justify-between gap-3">
-                      {/* Category + Icon */}
                       <div className="flex items-center gap-2 lg:gap-3 flex-wrap">
                         <div className="w-10 h-10 lg:w-12 lg:h-12 bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center group-hover:bg-[#AB8A62] group-hover:border-[#AB8A62] transition-all duration-500 flex-shrink-0">
                           {activity.icon}
@@ -741,15 +710,12 @@ function LocationsGrid() {
                         </span>
                       </div>
 
-                      {/* Distance Badge */}
                       <div className="text-[10px] lg:text-xs tracking-[0.2em] font-light bg-[#AB8A62] px-3 lg:px-4 py-2 group-hover:bg-white group-hover:text-[#AB8A62] transition-all duration-300 flex-shrink-0">
                         {activity.distance}
                       </div>
                     </div>
 
-                    {/* Bottom Content */}
                     <div>
-                      {/* Title */}
                       <h3 
                         className="text-2xl lg:text-3xl xl:text-4xl font-light mb-2 lg:mb-3 group-hover:text-[#AB8A62] transition-colors duration-300"
                         style={{ fontFamily: 'Playfair Display, serif' }}
@@ -757,25 +723,25 @@ function LocationsGrid() {
                         {activity.title}
                       </h3>
 
-                      {/* Description */}
                       <p className="text-sm lg:text-base font-light leading-relaxed opacity-90 mb-3 lg:mb-4">
                         {activity.description}
                       </p>
 
-                      {/* CTA z ikoną */}
-                      <div className="flex items-center gap-2 text-xs lg:text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      {/* CTA - widoczne na desktop hover LUB mobile active */}
+                      <div className={`flex items-center gap-2 text-xs lg:text-sm transition-opacity duration-500 ${
+                        activeCard === activity.id ? 'opacity-100' : 'opacity-0 lg:group-hover:opacity-100'
+                      }`}>
                         <span className="tracking-[0.2em] uppercase font-light">Zobacz na mapie</span>
                         <NavigationIcon size={16} strokeWidth={2} className="group-hover:translate-x-1 transition-transform" />
                       </div>
 
-                      {/* Animated Line */}
                       <div className="w-0 h-px bg-white/60 group-hover:w-20 lg:group-hover:w-24 transition-all duration-500 mt-2 lg:mt-3" />
                     </div>
                   </div>
                   
                 </div>
               </div>
-            </a>
+            </div>
           ))}
         </div>
 
@@ -783,6 +749,7 @@ function LocationsGrid() {
     </section>
   );
 }
+
 
 
 
