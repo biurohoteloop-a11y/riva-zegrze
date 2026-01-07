@@ -153,7 +153,7 @@ function Navigation() {
   const navItems = [
   { label: 'STRONA GŁÓWNA', href: '/' },
   { label: 'O NAS', href: '/about' },
-  { label: 'POKOJE', href: '/rooms' },
+  { label: 'APARTAMENTY', href: '/apartamenty' },
   { label: 'AKTYWNOŚCI', href: '/activities' }, // ✅ Zmieniono z /aktywnosci
   { label: 'GALERIA', href: '/galeria' },
   { label: 'KONTAKT', href: '/contact' },
