@@ -43,13 +43,14 @@ function Navigation() {
   }, []);
 
   const navItems = [
-    { label: 'STRONA GŁÓWNA', href: '/' },
-    { label: 'O NAS', href: '/about' },
-    { label: 'POKOJE', href: '/rooms' },
-    { label: 'AKTYWNOŚCI', href: '/activities' },
-    { label: 'GALERIA', href: '/galeria' },
-    { label: 'KONTAKT', href: '/contact' },
-  ];
+  { label: 'STRONA GŁÓWNA', href: '/' },
+  { label: 'O NAS', href: '/about' },
+  { label: 'APARTAMENTY', href: '/apartamenty' }, // ← ZMIEŃ
+  { label: 'AKTYWNOŚCI', href: '/activities' },
+  { label: 'GALERIA', href: '/galeria' },
+  { label: 'KONTAKT', href: '/contact' },
+];
+
 
   return (
     <>
