@@ -1361,7 +1361,7 @@ function AdditionalHero() {
               <div className="inline-flex items-center justify-center w-36 h-36 border-2 border-[#AB8A62] rounded-full">
                 <div className="text-center">
                   <div className="text-xs tracking-[0.2em] uppercase text-[#AB8A62] mb-1">Since</div>
-                  <div className="text-3xl font-light text-[#6E7A73]" style={{ fontFamily: 'Playfair Display, serif' }}>2022</div>
+                  <div className="text-3xl font-light text-[#6E7A73]" style={{ fontFamily: 'Playfair Display, serif' }}>2025</div>
                 </div>
               </div>
             </div>
