@@ -342,8 +342,8 @@ function RoomsGrid() {
 
   const rooms = [
   {
-    name: 'Apartament 1',
-    slug: 'apartament-1',
+    name: 'Apartament C1',
+    slug: 'apartament-c1',
     image: '/images/rooms/t3s-rivazegrze-3107-m.jpg',
     price: 'od 630 zł / noc',
     size: '38 m²',
@@ -355,8 +355,8 @@ function RoomsGrid() {
       'Nowoczesny apartament z tarasem i prywatnym ogródkiem, położony bezpośrednio nad Jeziorem Zegrzyńskim.',
   },
   {
-    name: 'Apartament 2',
-    slug: 'apartament-2',
+    name: 'Apartament C4',
+    slug: 'apartament-c4',
     image: '/images/rooms/t3s-rivazegrze-3500-m.jpg',
     price: 'od 570 zł / noc',
     size: '38 m²',
@@ -368,8 +368,8 @@ function RoomsGrid() {
       'Nowoczesny apartament z tarasem i bezpośrednim widokiem na Jezioro Zegrzyńskie.',
   },
   {
-    name: 'Apartament 3',
-    slug: 'apartament-3',
+    name: 'Apartament C7',
+    slug: 'apartament-c7',
     image: '/images/rooms/img_3650.jpg',
     price: 'od 600 zł / noc',
     size: '38 m²',
@@ -381,8 +381,8 @@ function RoomsGrid() {
       'Nowoczesny apartament z tarasem i widokiem na Jezioro Zegrzyńskie.',
   },
   {
-    name: 'Apartament 4',
-    slug: 'apartament-4',
+    name: 'Apartament D1',
+    slug: 'apartament-d1',
     image: '/images/rooms/img_3622.jpg',
     price: 'od 480 zł / noc',
     size: '38 m²',
@@ -394,8 +394,8 @@ function RoomsGrid() {
       'Nowoczesny apartament z tarasem, położony na 1 piętrze.',
   },
   {
-    name: 'Apartament 5',
-    slug: 'apartament-5',
+    name: 'Apartament D4',
+    slug: 'apartament-d4',
     image: '/images/rooms/img_3620.jpg',
     price: 'od 510 zł / noc',
     size: '38 m²',
@@ -407,8 +407,8 @@ function RoomsGrid() {
       'Komfortowy apartament z tarasem, położony na 2 piętrze.',
   },
   {
-    name: 'Apartament 6',
-    slug: 'apartament-6',
+    name: 'Apartament D7',
+    slug: 'apartament-d7',
     image: '/images/rooms/d4.jpg',
     price: 'od 540 zł / noc',
     size: '38 m²',
@@ -420,8 +420,8 @@ function RoomsGrid() {
       'Przestronny i funkcjonalny apartament z tarasem.',
   },
   {
-    name: 'Apartament Deluxe 7',
-    slug: 'apartament-deluxe-7',
+    name: 'Apartament Deluxe B10',
+    slug: 'apartament-deluxe-b10',
     image: '/images/rooms/img_4647.jpg',
     price: 'od 900 zł / noc',
     size: '68 m²',
@@ -433,6 +433,7 @@ function RoomsGrid() {
       'Apartament Deluxe z dużym tarasem i panoramicznym widokiem.',
   },
 ];
+
 
   // GSAP Animations
   useEffect(() => {
