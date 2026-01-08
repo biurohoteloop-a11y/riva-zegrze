@@ -881,84 +881,85 @@ function RoomsShowcase() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const apartments = [
-    {
-      image: '/images/rooms/t3s-rivazegrze-3107-m.jpg',
-      title: 'Apartament 1',
-      description:
-        'Nowoczesny apartament z tarasem i prywatnym ogródkiem, położony bezpośrednio nad Jeziorem Zegrzyńskim.',
-      size: '38 m²',
-      guests: '4 Osoby',
-      bedrooms: '1 Sypialnia',
-      bathrooms: '1 Łazienka',
-      price: 'od 630 zł / noc',
-    },
-    {
-      image: '/images/rooms/t3s-rivazegrze-3500-m.jpg',
-      title: 'Apartament 2',
-      description:
-        'Nowoczesny apartament z tarasem i bezpośrednim widokiem na Jezioro Zegrzyńskie.',
-      size: '38 m²',
-      guests: '4 Osoby',
-      bedrooms: '1 Sypialnia',
-      bathrooms: '1 Łazienka',
-      price: 'od 570 zł / noc',
-    },
-    {
-      image: '/images/rooms/img_3650.jpg',
-      title: 'Apartament 3',
-      description:
-        'Nowoczesny apartament z tarasem i widokiem na Jezioro Zegrzyńskie.',
-      size: '38 m²',
-      guests: '4 Osoby',
-      bedrooms: '1 Sypialnia',
-      bathrooms: '1 Łazienka',
-      price: 'od 600 zł / noc',
-    },
-    {
-      image: '/images/rooms/img_3622.jpg',
-      title: 'Apartament 4',
-      description:
-        'Nowoczesny apartament z tarasem, położony na 1 piętrze.',
-      size: '38 m²',
-      guests: '4 Osoby',
-      bedrooms: '1 Sypialnia',
-      bathrooms: '1 Łazienka',
-      price: 'od 480 zł / noc',
-    },
-    {
-      image: '/images/rooms/img_3620.jpg',
-      title: 'Apartament 5',
-      description:
-        'Komfortowy apartament z tarasem, położony na 2 piętrze.',
-      size: '38 m²',
-      guests: '4 Osoby',
-      bedrooms: '1 Sypialnia',
-      bathrooms: '1 Łazienka',
-      price: 'od 510 zł / noc',
-    },
-    {
-      image: '/images/rooms/d4.jpg',
-      title: 'Apartament 6',
-      description:
-        'Przestronny apartament z tarasem, położony na 3 piętrze.',
-      size: '38 m²',
-      guests: '4 Osoby',
-      bedrooms: '1 Sypialnia',
-      bathrooms: '1 Łazienka',
-      price: 'od 540 zł / noc',
-    },
-    {
-      image: '/images/rooms/img_4647.jpg',
-      title: 'Apartament Deluxe 7',
-      description:
-        'Apartament Deluxe z panoramicznym widokiem na Jezioro Zegrzyńskie.',
-      size: '68 m²',
-      guests: '4 Osoby',
-      bedrooms: '1 Sypialnia',
-      bathrooms: '1 Łazienka',
-      price: 'od 900 zł / noc',
-    },
-  ];
+  {
+    image: '/images/rooms/t3s-rivazegrze-3107-m.jpg',
+    title: 'Apartament C1',
+    description:
+      'Nowoczesny apartament z tarasem i prywatnym ogródkiem, położony bezpośrednio nad Jeziorem Zegrzyńskim.',
+    size: '38 m²',
+    guests: '4 Osoby',
+    bedrooms: '1 Sypialnia',
+    bathrooms: '1 Łazienka',
+    price: 'od 630 zł / noc',
+  },
+  {
+    image: '/images/rooms/t3s-rivazegrze-3500-m.jpg',
+    title: 'Apartament C4',
+    description:
+      'Nowoczesny apartament z tarasem i bezpośrednim widokiem na Jezioro Zegrzyńskie.',
+    size: '38 m²',
+    guests: '4 Osoby',
+    bedrooms: '1 Sypialnia',
+    bathrooms: '1 Łazienka',
+    price: 'od 570 zł / noc',
+  },
+  {
+    image: '/images/rooms/img_3650.jpg',
+    title: 'Apartament C7',
+    description:
+      'Nowoczesny apartament z tarasem i widokiem na Jezioro Zegrzyńskie.',
+    size: '38 m²',
+    guests: '4 Osoby',
+    bedrooms: '1 Sypialnia',
+    bathrooms: '1 Łazienka',
+    price: 'od 600 zł / noc',
+  },
+  {
+    image: '/images/rooms/img_3622.jpg',
+    title: 'Apartament D1',
+    description:
+      'Nowoczesny apartament z tarasem, położony na 1 piętrze.',
+    size: '38 m²',
+    guests: '4 Osoby',
+    bedrooms: '1 Sypialnia',
+    bathrooms: '1 Łazienka',
+    price: 'od 480 zł / noc',
+  },
+  {
+    image: '/images/rooms/img_3620.jpg',
+    title: 'Apartament D4',
+    description:
+      'Komfortowy apartament z tarasem, położony na 2 piętrze.',
+    size: '38 m²',
+    guests: '4 Osoby',
+    bedrooms: '1 Sypialnia',
+    bathrooms: '1 Łazienka',
+    price: 'od 510 zł / noc',
+  },
+  {
+    image: '/images/rooms/d4.jpg',
+    title: 'Apartament D7',
+    description:
+      'Przestronny apartament z tarasem, położony na 3 piętrze.',
+    size: '38 m²',
+    guests: '4 Osoby',
+    bedrooms: '1 Sypialnia',
+    bathrooms: '1 Łazienka',
+    price: 'od 540 zł / noc',
+  },
+  {
+    image: '/images/rooms/img_4647.jpg',
+    title: 'Apartament Deluxe B10',
+    description:
+      'Apartament Deluxe z panoramicznym widokiem na Jezioro Zegrzyńskie.',
+    size: '68 m²',
+    guests: '4 Osoby',
+    bedrooms: '1 Sypialnia',
+    bathrooms: '1 Łazienka',
+    price: 'od 900 zł / noc',
+  },
+];
+
 
   useEffect(() => {
     let scrollTriggerInstance: any = null;
