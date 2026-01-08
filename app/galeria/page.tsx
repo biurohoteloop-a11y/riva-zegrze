@@ -178,74 +178,74 @@ const galleryImages = [
   },
 
   // ============================================
-  // SIŁOWNIA - 11 ZDJĘĆ (MUSISZ PODAĆ NAZWY PLIKÓW)
-  // ============================================
-  {
-    id: 29,
-    url: '/images/gallery/silownia/hantle silownia.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Siłownia',
-    title: 'Strefa Cardio'
-  },
-  {
-    id: 30,
-    url: '/images/gallery/silownia/rowerki silownia.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Siłownia',
-    title: 'Strefa Siłowa'
-  },
-  {
-    id: 31,
-    url: '/images/gallery/silownia/T3S-RivaZegrze-3376-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Siłownia',
-    title: 'Sprzęt Fitness'
-  },
-  {
-    id: 32,
-    url: '/images/gallery/silownia/T3S-RivaZegrze-3411-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Siłownia',
-    title: 'Sala Treningowa'
-  },
-  {
-    id: 33,
-    url: '/images/gallery/silownia/T3S-RivaZegrze-3689-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Siłownia',
-    title: 'Nowoczesny Wystrój'
-  },
-  {
-    id: 34,
-    url: '/images/gallery/silownia/T3S-RivaZegrze-3796-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Siłownia',
-    title: 'Strefa Wellness'
-  },
-  {
-    id: 35,
-    url: '/images/gallery/silownia/T3S-RivaZegrze-4404-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Siłownia',
-    title: 'Sprzęt Profesjonalny'
-  },
-  {
-    id: 36,
-    url: '/images/gallery/silownia/T3S-RivaZegrze-RG-3885-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Siłownia',
-    title: 'Strefa Rozciągania'
-  },
-  {
-    id: 37,
-    url: '/images/gallery/silownia/T3S-RivaZegrze-RG-3969-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Siłownia',
-    title: 'Hantle i Ciężary'
-  },
-  {
-    id: 38,
-    url: '/images/gallery/silownia/widok silownia.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Siłownia',
-    title: 'Przestrzeń Fitness'
-  },
-  {
-    id: 39,
-    url: '/images/gallery/silownia/wnetrze silowni.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Siłownia',
-    title: 'Panorama Siłowni'
-  },
+  // SIŁOWNIA I BASEN - 11 ZDJĘĆ
+// ============================================
+{
+  id: 29,
+  url: '/images/gallery/silownia/hantle silownia.jpg',
+  category: 'Siłownia i Basen',
+  title: 'Strefa Cardio'
+},
+{
+  id: 30,
+  url: '/images/gallery/silownia/rowerki silownia.jpg',
+  category: 'Siłownia i Basen',
+  title: 'Strefa Siłowa'
+},
+{
+  id: 31,
+  url: '/images/gallery/silownia/T3S-RivaZegrze-3376-m.jpg',
+  category: 'Siłownia i Basen',
+  title: 'Sprzęt Fitness'
+},
+{
+  id: 32,
+  url: '/images/gallery/silownia/T3S-RivaZegrze-3411-m.jpg',
+  category: 'Siłownia i Basen',
+  title: 'Sala Treningowa'
+},
+{
+  id: 33,
+  url: '/images/gallery/silownia/T3S-RivaZegrze-3689-m.jpg',
+  category: 'Siłownia i Basen',
+  title: 'Nowoczesny Wystrój'
+},
+{
+  id: 34,
+  url: '/images/gallery/silownia/T3S-RivaZegrze-3796-m.jpg',
+  category: 'Siłownia i Basen',
+  title: 'Basen Wewnętrzny'
+},
+{
+  id: 35,
+  url: '/images/gallery/silownia/T3S-RivaZegrze-4404-m.jpg',
+  category: 'Siłownia i Basen',
+  title: 'Sprzęt Profesjonalny'
+},
+{
+  id: 36,
+  url: '/images/gallery/silownia/T3S-RivaZegrze-RG-3885-m.jpg',
+  category: 'Siłownia i Basen',
+  title: 'Strefa Rozciągania'
+},
+{
+  id: 37,
+  url: '/images/gallery/silownia/T3S-RivaZegrze-RG-3969-m.jpg',
+  category: 'Siłownia i Basen',
+  title: 'Hantle i Ciężary'
+},
+{
+  id: 38,
+  url: '/images/gallery/silownia/widok silownia.jpg',
+  category: 'Siłownia i Basen',
+  title: 'Przestrzeń Fitness'
+},
+{
+  id: 39,
+  url: '/images/gallery/silownia/wnetrze silowni.jpg',
+  category: 'Siłownia i Basen',
+  title: 'Panorama Siłowni'
+},
 
   // ============================================
   // OKOLICA - 17 ZDJĘĆ (MUSISZ PODAĆ NAZWY PLIKÓW)
@@ -596,7 +596,8 @@ function GalleryGrid() {
   const [currentImage, setCurrentImage] = useState(0);
   const gridRef = useRef<HTMLDivElement>(null);
 
-  const categories = ['Wszystkie', 'Apartamenty', 'Siłownia', 'Okolica'];
+  const categories = ['Wszystkie', 'Apartamenty', 'Siłownia i Basen', 'Okolica'];
+
 
   const filteredImages =
     filter === 'Wszystkie'
