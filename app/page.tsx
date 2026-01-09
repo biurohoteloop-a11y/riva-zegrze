@@ -881,85 +881,84 @@ function RoomsShowcase() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const apartments = [
-  {
-    image: '/images/rooms/t3s-rivazegrze-3107-m.jpg',
-    title: 'Apartament C1',
-    description:
-      'Nowoczesny apartament z tarasem i prywatnym ogródkiem, położony bezpośrednio nad Jeziorem Zegrzyńskim.',
-    size: '38 m²',
-    guests: '4 Osoby',
-    bedrooms: '1 Sypialnia',
-    bathrooms: '1 Łazienka',
-    price: 'od 630 zł / noc',
-  },
-  {
-    image: '/images/rooms/t3s-rivazegrze-3500-m.jpg',
-    title: 'Apartament C4',
-    description:
-      'Nowoczesny apartament z tarasem i bezpośrednim widokiem na Jezioro Zegrzyńskie.',
-    size: '38 m²',
-    guests: '4 Osoby',
-    bedrooms: '1 Sypialnia',
-    bathrooms: '1 Łazienka',
-    price: 'od 570 zł / noc',
-  },
-  {
-    image: '/images/rooms/img_3650.jpg',
-    title: 'Apartament C7',
-    description:
-      'Nowoczesny apartament z tarasem i widokiem na Jezioro Zegrzyńskie.',
-    size: '38 m²',
-    guests: '4 Osoby',
-    bedrooms: '1 Sypialnia',
-    bathrooms: '1 Łazienka',
-    price: 'od 600 zł / noc',
-  },
-  {
-    image: '/images/rooms/img_3622.jpg',
-    title: 'Apartament D1',
-    description:
-      'Nowoczesny apartament z tarasem, położony na 1 piętrze.',
-    size: '38 m²',
-    guests: '4 Osoby',
-    bedrooms: '1 Sypialnia',
-    bathrooms: '1 Łazienka',
-    price: 'od 480 zł / noc',
-  },
-  {
-    image: '/images/rooms/img_3620.jpg',
-    title: 'Apartament D4',
-    description:
-      'Komfortowy apartament z tarasem, położony na 2 piętrze.',
-    size: '38 m²',
-    guests: '4 Osoby',
-    bedrooms: '1 Sypialnia',
-    bathrooms: '1 Łazienka',
-    price: 'od 510 zł / noc',
-  },
-  {
-    image: '/images/rooms/d4.jpg',
-    title: 'Apartament D7',
-    description:
-      'Przestronny apartament z tarasem, położony na 3 piętrze.',
-    size: '38 m²',
-    guests: '4 Osoby',
-    bedrooms: '1 Sypialnia',
-    bathrooms: '1 Łazienka',
-    price: 'od 540 zł / noc',
-  },
-  {
-    image: '/images/rooms/img_4647.jpg',
-    title: 'Apartament Deluxe B10',
-    description:
-      'Apartament Deluxe z panoramicznym widokiem na Jezioro Zegrzyńskie.',
-    size: '68 m²',
-    guests: '4 Osoby',
-    bedrooms: '1 Sypialnia',
-    bathrooms: '1 Łazienka',
-    price: 'od 900 zł / noc',
-  },
-];
-
+    {
+      image: '/images/rooms/t3s-rivazegrze-3107-m.jpg',
+      title: 'Apartament C1',
+      description:
+        'Nowoczesny apartament z tarasem i prywatnym ogródkiem, położony bezpośrednio nad Jeziorem Zegrzyńskim.',
+      size: '38 m²',
+      guests: '4 Osoby',
+      bedrooms: '1 Sypialnia',
+      bathrooms: '1 Łazienka',
+      price: 'od 630 zł / noc',
+    },
+    {
+      image: '/images/rooms/t3s-rivazegrze-3500-m.jpg',
+      title: 'Apartament C4',
+      description:
+        'Nowoczesny apartament z tarasem i bezpośrednim widokiem na Jezioro Zegrzyńskie.',
+      size: '38 m²',
+      guests: '4 Osoby',
+      bedrooms: '1 Sypialnia',
+      bathrooms: '1 Łazienka',
+      price: 'od 570 zł / noc',
+    },
+    {
+      image: '/images/rooms/img_3650.jpg',
+      title: 'Apartament C7',
+      description:
+        'Nowoczesny apartament z tarasem i widokiem na Jezioro Zegrzyńskie.',
+      size: '38 m²',
+      guests: '4 Osoby',
+      bedrooms: '1 Sypialnia',
+      bathrooms: '1 Łazienka',
+      price: 'od 600 zł / noc',
+    },
+    {
+      image: '/images/rooms/img_3622.jpg',
+      title: 'Apartament D1',
+      description:
+        'Nowoczesny apartament z tarasem, położony na 1 piętrze.',
+      size: '38 m²',
+      guests: '4 Osoby',
+      bedrooms: '1 Sypialnia',
+      bathrooms: '1 Łazienka',
+      price: 'od 480 zł / noc',
+    },
+    {
+      image: '/images/rooms/img_3620.jpg',
+      title: 'Apartament D4',
+      description:
+        'Komfortowy apartament z tarasem, położony na 2 piętrze.',
+      size: '38 m²',
+      guests: '4 Osoby',
+      bedrooms: '1 Sypialnia',
+      bathrooms: '1 Łazienka',
+      price: 'od 510 zł / noc',
+    },
+    {
+      image: '/images/rooms/d4.jpg',
+      title: 'Apartament D7',
+      description:
+        'Przestronny apartament z tarasem, położony na 3 piętrze.',
+      size: '38 m²',
+      guests: '4 Osoby',
+      bedrooms: '1 Sypialnia',
+      bathrooms: '1 Łazienka',
+      price: 'od 540 zł / noc',
+    },
+    {
+      image: '/images/rooms/img_4647.jpg',
+      title: 'Apartament Deluxe B10',
+      description:
+        'Apartament Deluxe z panoramicznym widokiem na Jezioro Zegrzyńskie.',
+      size: '68 m²',
+      guests: '4 Osoby',
+      bedrooms: '1 Sypialnia',
+      bathrooms: '1 Łazienka',
+      price: 'od 900 zł / noc',
+    },
+  ];
 
   useEffect(() => {
     let scrollTriggerInstance: any = null;
@@ -1049,14 +1048,14 @@ function RoomsShowcase() {
           Riva Zegrze
         </span>
         <h2
-  className="text-4xl md:text-6xl font-light"
-  style={{ 
-    fontFamily: 'Playfair Display, serif',
-    color: '#4A6B5E' // ← ZMIENIONE
-  }}
->
-  Nasze Apartamenty
-</h2>
+          className="text-4xl md:text-6xl font-light"
+          style={{ 
+            fontFamily: 'Playfair Display, serif',
+            color: '#4A6B5E'
+          }}
+        >
+          Nasze Apartamenty
+        </h2>
         
         {/* Scroll Hint */}
         <div className="flex items-center justify-center gap-2 text-[#AB8A62] text-xs tracking-[0.2em] uppercase mt-8 animate-bounce">
@@ -1118,10 +1117,15 @@ function RoomsShowcase() {
                 </div>
               </div>
 
-              {/* DESKTOP LAYOUT */}
-              <div className="hidden lg:grid lg:grid-cols-2 bg-white shadow-2xl overflow-hidden">
-                {/* Image Side */}
-                <div className="relative h-[600px] overflow-hidden group">
+              {/* 
+                ============================================
+                🔧 DESKTOP LAYOUT - POPRAWIONY 
+                ============================================
+              */}
+              <div className="hidden lg:grid lg:grid-cols-2 bg-white shadow-2xl overflow-hidden h-[550px] lg:h-[600px]">
+                
+                {/* Image Side - SZTYWNA WYSOKOŚĆ */}
+                <div className="relative h-full overflow-hidden group">
                   <img
                     src={apt.image}
                     alt={apt.title}
@@ -1130,34 +1134,46 @@ function RoomsShowcase() {
                   <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent"></div>
                 </div>
 
-                {/* Info Side */}
-                <div className="bg-[#6e7a73] text-white flex items-center justify-center p-12">
-                  <div className="max-w-xl w-full">
+                {/* Info Side - FLEX + SPACE-BETWEEN */}
+                <div className="bg-[#6e7a73] text-white flex flex-col justify-between p-6 lg:p-8 xl:p-10 h-full overflow-y-auto">
+                  
+                  {/* GÓRNA CZĘŚĆ (Title + Description + Icons) */}
+                  <div>
                     <h3
-                      className="text-5xl font-light mb-6"
+                      className="text-3xl lg:text-4xl xl:text-5xl font-light mb-3 lg:mb-4"
                       style={{ fontFamily: 'Playfair Display, serif' }}
                     >
                       {apt.title}
                     </h3>
 
-                    <p className="text-[#e8e9e4] text-base leading-relaxed mb-10">
+                    <p 
+                      className="text-[#e8e9e4] text-sm lg:text-base leading-relaxed mb-5 lg:mb-6"
+                      style={{
+                        display: '-webkit-box',
+                        WebkitLineClamp: 3,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden'
+                      }}
+                    >
                       {apt.description}
                     </p>
 
-                    <div className="grid grid-cols-2 gap-6 mb-10">
+                    <div className="grid grid-cols-2 gap-3 lg:gap-4">
                       <InfoItem icon={<SizeIcon />} label="Rozmiar" value={apt.size} />
                       <InfoItem icon={<GuestsIcon />} label="Goście" value={apt.guests} />
                       <InfoItem icon={<BedroomsIcon />} label="Sypialnie" value={apt.bedrooms} />
                       <InfoItem icon={<BathroomsIcon />} label="Łazienki" value={apt.bathrooms} />
                     </div>
-
-                    <div className="flex items-center justify-between pt-8 border-t border-white/20">
-                      <span className="text-2xl text-white font-light">{apt.price}</span>
-                      <button className="bg-transparent border-2 border-white text-white px-8 py-3 text-sm tracking-wider uppercase hover:bg-white hover:text-[#6e7a73] transition-all duration-300">
-                        Rezerwuj
-                      </button>
-                    </div>
                   </div>
+
+                  {/* DOLNA CZĘŚĆ (Price + Button) - ZAWSZE NA DOLE */}
+                  <div className="flex items-center justify-between pt-5 lg:pt-6 border-t border-white/20 mt-5 lg:mt-6">
+                    <span className="text-lg lg:text-xl xl:text-2xl text-white font-light">{apt.price}</span>
+                    <button className="bg-transparent border-2 border-white text-white px-5 py-2 lg:px-6 lg:py-2.5 xl:px-8 xl:py-3 text-xs lg:text-sm tracking-wider uppercase hover:bg-white hover:text-[#6e7a73] transition-all duration-300 whitespace-nowrap">
+                      Rezerwuj
+                    </button>
+                  </div>
+
                 </div>
               </div>
 
