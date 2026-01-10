@@ -1559,11 +1559,9 @@ function ExperienceParallax() {
   );
 }
 
-
-
-// Premium Features Section - Elegant Subtle Frame
+// Premium Features Section - Static Image Preview
 function FeaturesSection() {
-  const [activeTab, setActiveTab] = useState('view');
+  const [activeHover, setActiveHover] = useState<string>('view');
 
   // Initialize AOS
   useEffect(() => {
@@ -1578,186 +1576,236 @@ function FeaturesSection() {
     initAOS();
   }, []);
 
-  const tabs = [
+  const features = [
     {
       id: 'view',
       label: 'Widok',
-      icon: (
-        <img src="/icons/ocean.svg" alt="Widok" className="w-10 h-10" />
-      ),
-      title: 'Widok',
-      description: 'Zapierające dech w piersiach widoki na Zalew Zegrzyński i otaczającą przyrodę.',
+      title: 'Zapierające Dech Widoki',
+      description: 'Panoramiczne widoki na Zalew Zegrzyński i otaczającą przyrodę',
       image: '/images/features/widok.jpeg'
     },
     {
       id: 'pool',
       label: 'Basen',
-      icon: (
-        <img src="/icons/swimming-pool.svg" alt="Basen" className="w-10 h-10" />
-      ),
-      title: 'Basen',
-      description: 'Prywatny basen z widokiem na Zalew Zegrzyński. Idealne miejsce na relaks i ochłodę w ciepłe dni.',
+      title: 'Prywatny Basen',
+      description: 'Luksusowy basen z widokiem na Zalew Zegrzyński',
       image: '/images/features/T3S-RivaZegrze-4404-m.jpg'
     },
     {
       id: 'gym',
       label: 'Siłownia',
-      icon: (
-        <img src="/icons/dumbbell.svg" alt="Siłownia" className="w-10 h-10" />
-      ),
-      title: 'Siłownia',
-      description: 'Nowoczesna siłownia wyposażona w profesjonalny sprzęt fitness. Dbaj o formę podczas pobytu.',
+      title: 'Nowoczesna Siłownia',
+      description: 'Profesjonalny sprzęt fitness w eleganckim wnętrzu',
       image: '/images/features/2.jpg'
     },
     {
       id: 'apartments',
-      label: 'Nowoczesne Apartamenty',
-      icon: (
-        <img src="/icons/apartment-building.svg" alt="Apartamenty" className="w-10 h-10" />
-      ),
-      title: 'Nowoczesne Apartamenty',
-      description: 'Przestronne apartamenty z najwyższej jakości wykończeniem i designerskim wystrojem wnętrz.',
+      label: 'Apartamenty',
+      title: 'Designerskie Apartamenty',
+      description: 'Przestronne wnętrza z najwyższej jakości wykończeniem',
       image: '/images/features/IMG_2750.jpg'
     }
   ];
 
-  const activeTabData = tabs.find(tab => tab.id === activeTab);
+  const activeFeature = features.find(f => f.id === activeHover);
 
   return (
-    <section className="relative bg-[#f1f1ed] py-20 lg:py-32">
-      
+    <section className="relative bg-[#f1f1ed] py-32 lg:py-40">
       {/* Simple Vertical Line Divider */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-16 bg-[#d4d6ce]"></div>
 
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+      {/* Desktop Layout */}
+      <div className="hidden lg:grid lg:grid-cols-2 gap-20 px-12 lg:px-24 items-start">
         
-        {/* Header */}
-        <div className="text-center mb-16 pt-4" data-aos="fade-up">
+        {/* LEFT SIDE - Content */}
+        <div>
+          {/* Header */}
+          <div className="mb-20" data-aos="fade-up">
+            <span className="text-xs tracking-[0.4em] uppercase text-[#8a968f] mb-6 block font-light">
+              Odkryj
+            </span>
+            <h2
+              className="text-5xl md:text-6xl lg:text-7xl font-light mb-4 text-[#4A6B5E]"
+              style={{ fontFamily: 'Playfair Display, serif' }}
+            >
+              Zapierające Dech Widoki
+            </h2>
+            <p className="text-[#8a968f] text-base max-w-xl mt-4 leading-relaxed">
+              Najedź kursorem na wybrane udogodnienie
+            </p>
+          </div>
+
+          {/* Features List */}
+          <div className="space-y-0" data-aos="fade-up" data-aos-delay="100">
+            {features.map((feature, index) => (
+              <div
+                key={feature.id}
+                onMouseEnter={() => setActiveHover(feature.id)}
+                className={`group relative py-10 border-b border-[#d4d6ce] transition-all duration-500 cursor-pointer ${
+                  activeHover === feature.id ? 'bg-white/40 -mx-8 px-8' : ''
+                }`}
+              >
+                <div className="flex items-start gap-8">
+                  <span 
+                    className={`text-5xl lg:text-6xl font-light transition-all duration-500 flex-shrink-0 ${
+                      activeHover === feature.id ? 'text-[#AB8A62]' : 'text-[#d4d6ce]'
+                    }`}
+                    style={{ fontFamily: 'Playfair Display, serif' }}
+                  >
+                    0{index + 1}
+                  </span>
+
+                  <div className="flex-1 pt-2">
+                    <span className="text-xs tracking-[0.3em] uppercase text-[#8a968f] font-light block mb-3">
+                      {feature.label}
+                    </span>
+
+                    <h3 
+                      className={`text-3xl lg:text-4xl font-light mb-2 transition-colors duration-300 ${
+                        activeHover === feature.id ? 'text-[#4A6B5E]' : 'text-[#6E7A73]'
+                      }`}
+                      style={{ fontFamily: 'Playfair Display, serif' }}
+                    >
+                      {feature.title}
+                    </h3>
+
+                    <p className={`text-[#8a968f] text-base leading-relaxed transition-all duration-300 ${
+                      activeHover === feature.id ? 'opacity-100' : 'opacity-70'
+                    }`}>
+                      {feature.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA Button - Link do /apartamenty */}
+          <div className="mt-16" data-aos="fade-up" data-aos-delay="300">
+            <a
+              href="/apartamenty"
+              className="inline-block px-10 py-4 border-2 border-[#8a968f] text-[#6e7a73] text-xs tracking-[0.2em] uppercase font-light hover:bg-[#6E7A73] hover:text-white hover:border-[#6E7A73] transition-all duration-500"
+            >
+              Zobacz Apartamenty
+            </a>
+          </div>
+        </div>
+
+        {/* RIGHT SIDE - Static Image */}
+        <div className="sticky top-32" data-aos="fade-left" data-aos-delay="200">
+          <div className="relative">
+            <div className="relative bg-white shadow-2xl p-4">
+              <div className="relative w-full h-[600px] overflow-hidden">
+                {features.map((feature) => (
+                  <img
+                    key={feature.id}
+                    src={feature.image}
+                    alt={feature.title}
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+                      activeHover === feature.id ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  />
+                ))}
+              </div>
+
+              <div className="absolute top-2 left-2 w-10 h-10 border-t-2 border-l-2 border-[#AB8A62]" />
+              <div className="absolute top-2 right-2 w-10 h-10 border-t-2 border-r-2 border-[#AB8A62]" />
+              <div className="absolute bottom-2 left-2 w-10 h-10 border-b-2 border-l-2 border-[#AB8A62]" />
+              <div className="absolute bottom-2 right-2 w-10 h-10 border-b-2 border-r-2 border-[#AB8A62]" />
+            </div>
+
+            {activeFeature && (
+              <div className="absolute bottom-8 left-8 bg-white/95 px-6 py-3 backdrop-blur-sm shadow-lg transition-all duration-500">
+                <span 
+                  className="text-[#4A6B5E] text-sm tracking-[0.2em] uppercase font-light"
+                  style={{ fontFamily: 'Playfair Display, serif' }}
+                >
+                  {activeFeature.label}
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Layout */}
+      <div className="lg:hidden px-6">
+        <div className="mb-12" data-aos="fade-up">
           <span className="text-xs tracking-[0.4em] uppercase text-[#8a968f] mb-4 block font-light">
             Odkryj
           </span>
-         <h2
-  className="text-4xl md:text-5xl lg:text-6xl font-light mb-6"
-  style={{ 
-    fontFamily: 'Playfair Display, serif',
-    color: '#4A6B5E' // ← ZMIENIONE
-  }}
->
-  Nasze Udogodnienia
-</h2>
+          <h2
+            className="text-4xl font-light mb-4 text-[#4A6B5E]"
+            style={{ fontFamily: 'Playfair Display, serif' }}
+          >
+            Zapierające Dech Widoki
+          </h2>
         </div>
 
-        {/* Tabs Navigation */}
-        <div 
-          className="flex flex-wrap justify-center gap-6 lg:gap-12 mb-16"
-          data-aos="fade-up"
-          data-aos-delay="100"
-        >
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex flex-col items-center gap-4 px-8 py-6 transition-all duration-300 ${
-                activeTab === tab.id
-                  ? 'text-[#6E7A73]'
-                  : 'text-[#8a968f] hover:text-[#6e7a73]'
-              }`}
+        <div className="space-y-8">
+          {features.map((feature, index) => (
+            <div
+              key={feature.id}
+              className="border-b border-[#d4d6ce] pb-8"
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
             >
-              {/* Icon */}
-              <div className={`transition-all duration-300 ${
-                activeTab === tab.id ? 'scale-110' : 'scale-100'
-              }`}>
-                {tab.icon}
+              <div className="flex items-start gap-6 mb-4">
+                <span 
+                  className="text-4xl font-light text-[#d4d6ce] flex-shrink-0"
+                  style={{ fontFamily: 'Playfair Display, serif' }}
+                >
+                  0{index + 1}
+                </span>
+
+                <div className="flex-1">
+                  <span className="text-xs tracking-[0.3em] uppercase text-[#8a968f] font-light block mb-2">
+                    {feature.label}
+                  </span>
+
+                  <h3 
+                    className="text-2xl font-light mb-2 text-[#6E7A73]"
+                    style={{ fontFamily: 'Playfair Display, serif' }}
+                  >
+                    {feature.title}
+                  </h3>
+
+                  <p className="text-[#8a968f] text-sm leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
               </div>
-              
-              {/* Label */}
-              <span className="text-sm tracking-[0.2em] uppercase font-light">
-                {tab.label}
-              </span>
-              
-              {/* Active Indicator */}
-              {activeTab === tab.id && (
-                <div className="w-1.5 h-1.5 rounded-full bg-[#AB8A62] mt-1" />
-              )}
-            </button>
+
+              <div className="relative w-full h-48 mt-4">
+                <div className="relative bg-white shadow-lg p-2 h-full">
+                  <img
+                    src={feature.image}
+                    alt={feature.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute top-1 left-1 w-6 h-6 border-t border-l border-[#AB8A62]" />
+                  <div className="absolute top-1 right-1 w-6 h-6 border-t border-r border-[#AB8A62]" />
+                  <div className="absolute bottom-1 left-1 w-6 h-6 border-b border-l border-[#AB8A62]" />
+                  <div className="absolute bottom-1 right-1 w-6 h-6 border-b border-r border-[#AB8A62]" />
+                </div>
+              </div>
+            </div>
           ))}
         </div>
 
-        {/* Tab Content */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          
-          {/* Left - Image with Elegant Subtle Frame */}
-<div 
-  className="relative"
-  data-aos="fade-right"
-  data-aos-delay="200"
->
-  {/* Elegant Premium Frame */}
-<div className="relative p-4 border-4 border-[#d4d6ce] shadow-lg bg-white">
-  {/* Image container */}
-  <div className="relative h-[400px] lg:h-[500px] overflow-hidden">
-    <img
-      src={activeTabData!.image}
-      alt={activeTabData!.title}
-      className="w-full h-full object-cover transition-all duration-700"
-      key={activeTab}
-    />
-  </div>
-
-  {/* Subtle corner accents */}
-  <div className="absolute top-2 left-2 w-8 h-8 border-t border-l border-[#AB8A62]" />
-  <div className="absolute top-2 right-2 w-8 h-8 border-t border-r border-[#AB8A62]" />
-  <div className="absolute bottom-2 left-2 w-8 h-8 border-b border-l border-[#AB8A62]" />
-  <div className="absolute bottom-2 right-2 w-8 h-8 border-b border-r border-[#AB8A62]" />
-</div>
-</div>
-
-{/* Right - Content */}
-<div
-  className="space-y-6"
-  data-aos="fade-left"
-  data-aos-delay="300"
->
-  {/* Icon */}
-  <div className="text-[#AB8A62] w-12 h-12">
-    {activeTabData!.icon}
-  </div>
-
-  {/* Title */}
-  <h3
-    className="text-3xl lg:text-4xl font-light text-[#6E7A73] leading-tight"
-    style={{ fontFamily: 'Playfair Display, serif' }}
-  >
-    {activeTabData!.title}
-  </h3>
-
-  {/* Description */}
-  <p className="text-[#6e7a73] text-base lg:text-lg leading-relaxed max-w-xl">
-    {activeTabData!.description}
-  </p>
-
-  {/* CTA Button */}
-  <div className="pt-4">
-    <a
-      href="/activities"
-      className="inline-block px-8 py-3.5 border border-[#8a968f] text-[#6e7a73] text-xs tracking-[0.2em] uppercase font-light hover:bg-[#8a968f] hover:text-white transition-all duration-300"
-    >
-      Dowiedz się więcej
-    </a>
-  </div>
-</div>
-
-
-
+        {/* CTA Button Mobile - Link do /apartamenty */}
+        <div className="mt-12 text-center">
+          <a
+            href="/apartamenty"
+            className="inline-block px-8 py-3 border-2 border-[#8a968f] text-[#6e7a73] text-xs tracking-[0.2em] uppercase font-light hover:bg-[#6E7A73] hover:text-white hover:border-[#6E7A73] transition-all duration-500"
+          >
+            Zobacz Apartamenty
+          </a>
         </div>
-
       </div>
     </section>
   );
 }
-
-
-
 
 function InstagramGallery() {
   const sectionRef = useRef<HTMLElement>(null);
