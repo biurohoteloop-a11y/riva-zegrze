@@ -341,98 +341,98 @@ function RoomsGrid() {
   const bookingRef = useRef<HTMLDivElement>(null);
 
   const rooms = [
-  {
-    name: 'Apartament C1',
-    slug: 'apartament-c1',
-    image: '/images/rooms/t3s-rivazegrze-3107-m.jpg',
-    price: 'od 630 zł / noc',
-    size: '38 m²',
-    guests: '4 Osoby',
-    beds: '1 Sypialnia',
-    bathrooms: '1 Łazienka',
-    amenities: ['Widok na jezioro', 'Taras', 'Prywatny ogródek', 'WiFi'],
-    description:
-      'Nowoczesny apartament z tarasem i prywatnym ogródkiem, położony bezpośrednio nad Jeziorem Zegrzyńskim.',
-  },
-  {
-    name: 'Apartament C4',
-    slug: 'apartament-c4',
-    image: '/images/rooms/t3s-rivazegrze-3500-m.jpg',
-    price: 'od 570 zł / noc',
-    size: '38 m²',
-    guests: '4 Osoby',
-    beds: '1 Sypialnia',
-    bathrooms: '1 Łazienka',
-    amenities: ['Widok na jezioro', 'Taras', 'WiFi', '2 piętro'],
-    description:
-      'Nowoczesny apartament z tarasem i bezpośrednim widokiem na Jezioro Zegrzyńskie.',
-  },
-  {
-    name: 'Apartament C7',
-    slug: 'apartament-c7',
-    image: '/images/rooms/img_3650.jpg',
-    price: 'od 600 zł / noc',
-    size: '38 m²',
-    guests: '4 Osoby',
-    beds: '1 Sypialnia',
-    bathrooms: '1 Łazienka',
-    amenities: ['Widok na jezioro', 'Taras', 'WiFi', '3 piętro'],
-    description:
-      'Nowoczesny apartament z tarasem i widokiem na Jezioro Zegrzyńskie.',
-  },
-  {
-    name: 'Apartament D1',
-    slug: 'apartament-d1',
-    image: '/images/rooms/img_3622.jpg',
-    price: 'od 480 zł / noc',
-    size: '38 m²',
-    guests: '4 Osoby',
-    beds: '1 Sypialnia',
-    bathrooms: '1 Łazienka',
-    amenities: ['Taras', 'Strefa rekreacyjna', 'WiFi', '1 piętro'],
-    description:
-      'Nowoczesny apartament z tarasem, położony na 1 piętrze.',
-  },
-  {
-    name: 'Apartament D4',
-    slug: 'apartament-d4',
-    image: '/images/rooms/img_3620.jpg',
-    price: 'od 510 zł / noc',
-    size: '38 m²',
-    guests: '4 Osoby',
-    beds: '1 Sypialnia',
-    bathrooms: '1 Łazienka',
-    amenities: ['Taras', 'Strefa rekreacyjna', 'WiFi', '2 piętro'],
-    description:
-      'Komfortowy apartament z tarasem, położony na 2 piętrze.',
-  },
-  {
-    name: 'Apartament D7',
-    slug: 'apartament-d7',
-    image: '/images/rooms/d4.jpg',
-    price: 'od 540 zł / noc',
-    size: '38 m²',
-    guests: '4 Osoby',
-    beds: '1 Sypialnia',
-    bathrooms: '1 Łazienka',
-    amenities: ['Taras', 'Strefa rekreacyjna', 'Tereny zielone', '3 piętro'],
-    description:
-      'Przestronny i funkcjonalny apartament z tarasem.',
-  },
-  {
-    name: 'Apartament Deluxe B10',
-    slug: 'apartament-deluxe-b10',
-    image: '/images/rooms/img_4647.jpg',
-    price: 'od 900 zł / noc',
-    size: '68 m²',
-    guests: '4 Osoby',
-    beds: '1 Sypialnia',
-    bathrooms: '1 Łazienka',
-    amenities: ['Panoramiczny widok', 'Duży taras', 'Premium', '3 piętro'],
-    description:
-      'Apartament Deluxe z dużym tarasem i panoramicznym widokiem.',
-  },
-];
+    {
+      name: 'Apartament C1',
+      slug: 'apartament-c1',
+      image: '/images/rooms/t3s-rivazegrze-3107-m.jpg',
+      price: 'od 630 zł / noc',
+      size: '38 m²',
+      guests: '4 Osoby',
+      beds: '1 Sypialnia',
+      bathrooms: '1 Łazienka',
+      amenities: ['Widok na jezioro', 'Taras', 'Prywatny ogródek', 'WiFi'],
+      description: 'Nowoczesny apartament z tarasem i prywatnym ogródkiem, położony bezpośrednio nad Jeziorem Zegrzyńskim.',
+      link: '/apartamenty/apartament-c1',  // ✅ DODANE
+    },
+    {
+      name: 'Apartament C4',
+      slug: 'apartament-c4',
+      image: '/images/rooms/t3s-rivazegrze-3500-m.jpg',
+      price: 'od 570 zł / noc',
+      size: '38 m²',
+      guests: '4 Osoby',
+      beds: '1 Sypialnia',
+      bathrooms: '1 Łazienka',
+      amenities: ['Widok na jezioro', 'Taras', 'WiFi', '2 piętro'],
+      description: 'Nowoczesny apartament z tarasem i bezpośrednim widokiem na Jezioro Zegrzyńskie.',
+      link: '/apartamenty/apartament-c4',  // ✅ DODANE
+    },
+    {
+      name: 'Apartament C7',
+      slug: 'apartament-c7',
+      image: '/images/rooms/img_3650.jpg',
+      price: 'od 600 zł / noc',
+      size: '38 m²',
+      guests: '4 Osoby',
+      beds: '1 Sypialnia',
+      bathrooms: '1 Łazienka',
+      amenities: ['Widok na jezioro', 'Taras', 'WiFi', '3 piętro'],
+      description: 'Nowoczesny apartament z tarasem i widokiem na Jezioro Zegrzyńskie.',
+      link: '/apartamenty/apartament-c7',  // ✅ DODANE
+    },
+    {
+      name: 'Apartament D1',
+      slug: 'apartament-d1',
+      image: '/images/rooms/img_3622.jpg',
+      price: 'od 480 zł / noc',
+      size: '38 m²',
+      guests: '4 Osoby',
+      beds: '1 Sypialnia',
+      bathrooms: '1 Łazienka',
+      amenities: ['Taras', 'Strefa rekreacyjna', 'WiFi', '1 piętro'],
+      description: 'Nowoczesny apartament z tarasem, położony na 1 piętrze.',
+      link: '/apartamenty/apartament-d1',  // ✅ DODANE
+    },
+    {
+      name: 'Apartament D4',
+      slug: 'apartament-d4',
+      image: '/images/rooms/img_3620.jpg',
+      price: 'od 510 zł / noc',
+      size: '38 m²',
+      guests: '4 Osoby',
+      beds: '1 Sypialnia',
+      bathrooms: '1 Łazienka',
+      amenities: ['Taras', 'Strefa rekreacyjna', 'WiFi', '2 piętro'],
+      description: 'Komfortowy apartament z tarasem, położony na 2 piętrze.',
+      link: '/apartamenty/apartament-d4',  // ✅ DODANE
+    },
+    {
+      name: 'Apartament D7',
+      slug: 'apartament-d7',
+      image: '/images/rooms/d4.jpg',
+      price: 'od 540 zł / noc',
+      size: '38 m²',
+      guests: '4 Osoby',
+      beds: '1 Sypialnia',
+      bathrooms: '1 Łazienka',
+      amenities: ['Taras', 'Strefa rekreacyjna', 'Tereny zielone', '3 piętro'],
+      description: 'Przestronny i funkcjonalny apartament z tarasem.',
+      link: '/apartamenty/apartament-d7',  // ✅ DODANE
+    },
+    {
+      name: 'Apartament Deluxe B10',
+      slug: 'apartament-deluxe-b10',
+      image: '/images/rooms/img_4647.jpg',
+      price: 'od 900 zł / noc',
+      size: '68 m²',
+      guests: '4 Osoby',
+      beds: '1 Sypialnia',
+      bathrooms: '1 Łazienka',
+      amenities: ['Panoramiczny widok', 'Duży taras', 'Premium', '3 piętro'],
+      description: 'Apartament Deluxe z dużym tarasem i panoramicznym widokiem.',
+      link: '/apartamenty/apartament-deluxe-b10',  // ✅ DODANE
+    },
+  ];
 
 
   // GSAP Animations
@@ -603,13 +603,14 @@ function RoomsGrid() {
                     </div>
                   </div>
 
-                  {/* ✅ ANIMATED BUTTON */}
+                  {/* ✅ POPRAWIONE */}
                   <AnimatedButton 
-                    href={`/rooms/${room.slug}`}
+                    href={room.link}  // lub href={`/apartamenty/${room.slug}`}
                     className="w-full"
-                  >
-                    ZOBACZ SZCZEGÓŁY
-                  </AnimatedButton>
+                    >
+        ZOBACZ SZCZEGÓŁY
+  </AnimatedButton>
+
                 </div>
               </div>
             ))}
