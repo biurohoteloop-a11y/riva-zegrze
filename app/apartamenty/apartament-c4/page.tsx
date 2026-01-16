@@ -25,123 +25,90 @@ import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 import 'react-photo-view/dist/react-photo-view.css';
 
-
 // ============================================
-// DANE APARTAMENTU C1
+// DANE APARTAMENTU C4
 // ============================================
 const apartmentData = {
-  name: 'Apartament C1',
-  tagline: 'Nowoczesny apartament z tarasem i prywatnym ogródkiem',
+  name: 'Apartament C4',
+  tagline: 'Nowoczesny apartament z balkonem',
   subtitle: 'Położony bezpośrednio nad Jeziorem Zegrzyńskim',
   price: {
-    from: 630,
+    from: 780,
     currency: 'zł',
     period: 'noc'
   },
   specs: {
-    size: '38 m²',
+    size: '37 m²',
     guests: 4,
     bedrooms: 1,
     bathrooms: 1,
-    floor: 'Parter',
-    terrace: '15 m²',
-    garden: 'Prywatny'
+    floor: '2 piętro',
+    balcony: 'Tak',
+    terrace: 'Z meblami ogrodowymi'
   },
   
-  description: `Nowoczesny apartament z prywatnym tarasem i ogródkiem, położony bezpośrednio 
-    nad brzegiem Jeziora Zegrzyńskiego. Idealny dla par oraz rodzin ceniących komfort, 
-    przestrzeń i bezpośredni kontakt z naturą.`,
+  description: `Nowoczesny apartament z balkonem, położony bezpośrednio nad Jeziorem Zegrzyńskim. 
+    Komfortowy wybór na pobyt rodzinny, weekendowy lub dłuższy wypoczynek nad wodą.`,
   
+  fullDescription: `Apartament o powierzchni 37 m² przeznaczony jest dla maksymalnie czterech osób. Składa się z oddzielnej sypialni z łóżkiem podwójnym, salonu z rozkładaną sofą, funkcjonalnego aneksu kuchennego oraz prywatnej łazienki z prysznicem. Wnętrze zostało zaprojektowane z myślą o wygodzie zarówno krótszych, jak i dłuższych pobytów. Do dyspozycji gości jest balkon oraz taras z meblami ogrodowymi, które pozwalają spędzać czas na świeżym powietrzu.`,
+
   aboutProperty: {
     title: 'O obiekcie',
     paragraphs: [
-      'Apartamenty położone są bezpośrednio nad Jeziorem Zegrzyńskim, w spokojnej części Zegrza Południowego. To miejsce stworzone z myślą o wypoczynku blisko natury, z dala od miejskiego zgiełku. Kameralny charakter obiektu sprzyja relaksowi i spokojnemu pobytowi o każdej porze roku.',
+      'Apartament znajduje się na terenie Riva Zegrze – obiektu stworzonego z myślą o wypoczynku nad wodą przez cały rok. Położenie bezpośrednio przy plaży nad Jeziorem Zegrzyńskim, w otoczeniu zieleni i terenów rekreacyjnych, zapewnia spokojną atmosferę i bliskość natury. Goście mają dostęp do krytego, podgrzewanego basenu, siłowni, a także przestrzeni do spędzania czasu na zewnątrz, w tym prywatnej plaży, mariny, miejsca na ognisko i grilla.',
       
-      'Nowoczesne wnętrza, funkcjonalne układy i dostęp do strefy rekreacyjnej sprawiają, że apartamenty sprawdzą się zarówno na krótszy wyjazd, jak i dłuższy pobyt. Dogodna lokalizacja pozwala łatwo połączyć wypoczynek nad wodą z szybkim dojazdem do Warszawy.'
+      'Apartamenty w Riva Zegrze są w pełni wyposażone i przystosowane do komfortowego pobytu rodzin, par oraz gości podróżujących służbowo. Obiekt jest przyjazny dzieciom, osobom z niepełnosprawnościami oraz gościom podróżującym ze zwierzętami, które są akceptowane bez dodatkowych opłat. Na terenie obiektu dostępna jest winda, pokoje dla niepalących, bezpłatne Wi-Fi oraz monitorowany parking z możliwością rezerwacji miejsca w garażu.',
+
+      'Riva Zegrze oferuje szerokie możliwości aktywnego wypoczynku. W okolicy dostępne są sporty wodne, kajaki, rowerki wodne, liczne trasy spacerowe i rowerowe, a w niedalekiej odległości znajduje się pole golfowe w Rajszewie. Dogodny dojazd z Warszawy sprawia, że apartament jest idealnym wyborem na weekendowy wyjazd lub dłuższy wypoczynek nad wodą.'
     ],
     features: [
       {
         icon: MapPin,
         title: 'Lokalizacja',
-        description: 'Apartamenty położone bezpośrednio nad Jeziorem Zegrzyńskim, w spokojnej części Zegrza Południowego.'
+        description: 'Bezpośrednio przy plaży nad Jeziorem Zegrzyńskim, w otoczeniu zieleni i terenów rekreacyjnych.'
       },
       {
         icon: Droplets,
         title: 'Basen',
-        description: 'Na terenie obiektu dostępna jest strefa rekreacyjna z krytym, podgrzewanym basenem.'
+        description: 'Dostęp do krytego, podgrzewanego basenu przez cały rok.'
       },
       {
         icon: Dumbbell,
         title: 'Siłownia',
-        description: 'Dostęp do w pełni wyposażonej siłowni dla wszystkich gości obiektu.'
+        description: 'W pełni wyposażona siłownia dla wszystkich gości obiektu.'
       }
     ]
   },
   
   highlights: [
-    'Bezpośredni dostęp do jeziora',
-    'Prywatny taras z meblami ogrodowymi',
-    'Nowoczesna zabudowa kuchenna',
-    'Panoramiczne przeszklenia',
+    'Balkon z widokiem',
+    'Taras z meblami ogrodowymi',
+    'Widok na jezioro',
     'Kryty podgrzewany basen',
-    'Dostęp do siłowni'
+    'Prywatna plaża',
+    'Siłownia'
   ],
 
-  amenities: [
-    { icon: Wifi, label: 'WiFi', description: 'Szybki internet światłowodowy' },
-    { icon: Tv, label: 'Smart TV', description: '55" z Netflix i HBO' },
-    { icon: Coffee, label: 'Kuchnia', description: 'W pełni wyposażona' },
-    { icon: Wind, label: 'Klimatyzacja', description: 'Chłodzenie i ogrzewanie' },
-    { icon: Bath, label: 'Łazienka', description: 'Premium kosmetyki' },
-    { icon: Utensils, label: 'Naczynia', description: 'Komplet sztućców i talerzy' },
-    { icon: MapPin, label: 'Taras', description: '15 m² z leżakami' },
-    { icon: Sparkles, label: 'Ogródek', description: 'Prywatna przestrzeń zielona' },
+
+  // WAŻNE INFORMACJE
+  importantInfo: [
+    { icon: Clock, label: 'Zameldowanie', value: '15:00 - 22:00', note: 'Samodzielne zameldowanie - kody dostępu przesyłane w dniu przyjazdu' },
+    { icon: Clock, label: 'Wymeldowanie', value: 'do 11:00', note: '' },
+    { icon: Star, label: 'Cisza nocna', value: '22:00 - 7:00', note: 'Obowiązuje w godzinach nocnych' },
+    { icon: Check, label: 'Zakaz imprez', value: 'Brak imprez', note: 'Zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich' },
+    { icon: CarFront, label: 'Parking', value: 'Bezpłatne miejsca przed budynkiem', note: 'Miejsce w garażu: 75 zł/doba (po wcześniejszej rezerwacji)' },
   ],
 
   gallery: [
-    '/images/rooms/t3s-rivazegrze-3107-m.jpg',
     '/images/rooms/t3s-rivazegrze-3500-m.jpg',
+    '/images/rooms/t3s-rivazegrze-3107-m.jpg',
     '/images/rooms/img_3650.jpg',
     '/images/rooms/img_3622.jpg',
     '/images/rooms/img_3620.jpg',
     '/images/rooms/d4.jpg',
   ],
 
-importantInfo: [
-    { 
-      icon: Clock, 
-      label: 'Zameldowanie', 
-      value: '15:00 - 22:00', 
-      note: 'Samodzielne zameldowanie - kody dostępu przesyłane w dniu przyjazdu' 
-    },
-    { 
-      icon: Clock, 
-      label: 'Wymeldowanie', 
-      value: 'do 11:00', 
-      note: '' 
-    },
-    { 
-      icon: Star, 
-      label: 'Cisza nocna', 
-      value: '22:00 - 7:00', 
-      note: 'Obowiązuje w godzinach nocnych' 
-    },
-    { 
-      icon: Check, 
-      label: 'Zakaz imprez', 
-      value: 'Brak imprez', 
-      note: 'Zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich' 
-    },
-    { 
-      icon: CarFront, 
-      label: 'Parking', 
-      value: 'Bezpłatne miejsca przed budynkiem', 
-      note: 'Miejsce w garażu: 75 zł/doba (po wcześniejszej rezerwacji)' 
-    },
-  ],
-  
-  // ✅ ZAKTUALIZOWANA GALERIA OKOLICY - 6 ZDJĘĆ
-  surroundingsGallery: [
+   surroundingsGallery: [
     '/images/gallery/apartments/c1/T3S-RivaZegrze-0430-m.jpg',
     '/images/gallery/apartments/c1/T3S-RivaZegrze-0610-m.jpg',
     '/images/gallery/apartments/c1/T3S-RivaZegrze-0903-m.jpg',
@@ -152,25 +119,25 @@ importantInfo: [
 
   reviews: [
     {
-      name: 'Anna Kowalska',
-      date: 'Lipiec 2024',
+      name: 'Piotr Kowalczyk',
+      date: 'Sierpień 2024',
       rating: 5,
-      comment: 'Przepiękne miejsce! Apartament był czysty, przestronny i świetnie wyposażony. Widok na jezioro zapiera dech w piersiach. Polecam każdemu!',
-      avatar: 'AK'
+      comment: 'Wspaniały apartament z pięknym widokiem na jezioro! Balkon idealny na poranne kawy. Polecam!',
+      avatar: 'PK'
     },
     {
-      name: 'Marek Nowak',
-      date: 'Czerwiec 2024',
+      name: 'Magdalena Nowak',
+      date: 'Lipiec 2024',
       rating: 5,
-      comment: 'Idealne miejsce na weekend. Cisza, spokój i piękna przyroda. Właściciele bardzo pomocni. Na pewno wrócimy!',
+      comment: 'Bardzo wygodny apartament, wszystko co potrzebne na miejscu. Basen i siłownia to duży plus!',
       avatar: 'MN'
     },
     {
-      name: 'Katarzyna Wiśniewska',
-      date: 'Maj 2024',
+      name: 'Tomasz Wiśniewski',
+      date: 'Czerwiec 2024',
       rating: 5,
-      comment: 'Najlepszy apartament w okolicy! Blisko Warszawy, a czujesz się jak na końcu świata. Wyposażenie na najwyższym poziomie.',
-      avatar: 'KW'
+      comment: 'Idealne miejsce na rodzinny wypoczynek. Blisko Warszawy, a czujesz się jak na wakacjach!',
+      avatar: 'TW'
     }
   ]
 };
@@ -178,21 +145,19 @@ importantInfo: [
 // ============================================
 // MAIN COMPONENT
 // ============================================
-export default function ApartmentC1Page() {
+export default function ApartmentC4Page() {
   return (
     <>
       <Navigation />
       <main className="relative bg-[#f7f6f4]">
         <HeroGallery />
         <ApartmentDetails />
-        
         <ImportantInfoSection />
-        <SurroundingsGallery />
     
+        <SurroundingsGallery />
         <ReviewsSection />
         <CTAWithFooter />
       </main>
-      
     </>
   );
 }
@@ -232,13 +197,13 @@ function Navigation() {
           <a href="/" className="flex items-center gap-3 group">
             <Waves 
               className={`w-8 h-8 transition-colors ${
-                isScrolled ? 'text-[#555e59]' : 'text-white'
+                isScrolled ? 'text-[#4a6b5e]' : 'text-white'
               }`}
               strokeWidth={1}
             />
             <span 
               className={`text-2xl font-light tracking-[0.15em] transition-colors ${
-                isScrolled ? 'text-[#0f0e0f]' : 'text-white'
+                isScrolled ? 'text-[#1a4d2e]' : 'text-white'
               }`}
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
@@ -252,12 +217,12 @@ function Navigation() {
                 <a 
                   href={item.href} 
                   className={`text-xs tracking-[0.2em] font-light transition-colors relative py-2 ${
-                    isScrolled ? 'text-[#6e7a73] hover:text-[#0f0e0f]' : 'text-white/90 hover:text-white'
+                    isScrolled ? 'text-[#6e7a73] hover:text-[#1a4d2e]' : 'text-white/90 hover:text-white'
                   }`}
                 >
                   {item.label}
                   <span className={`absolute bottom-0 left-0 w-0 h-[1px] transition-all duration-300 group-hover:w-full ${
-                    isScrolled ? 'bg-[#555e59]' : 'bg-white'
+                    isScrolled ? 'bg-[#4a6b5e]' : 'bg-white'
                   }`} />
                 </a>
               </li>
@@ -268,7 +233,7 @@ function Navigation() {
             <button 
               className={`flex items-center gap-2 text-xs tracking-[0.2em] px-6 py-3 border transition-all duration-300 ${
                 isScrolled 
-                  ? 'border-[#555e59] text-[#555e59] hover:bg-[#555e59] hover:text-white' 
+                  ? 'border-[#4a6b5e] text-[#4a6b5e] hover:bg-[#4a6b5e] hover:text-white' 
                   : 'border-white/60 text-white hover:bg-white/10 backdrop-blur-sm'
               }`}
             >
@@ -283,7 +248,7 @@ function Navigation() {
 }
 
 // ============================================
-// 1. HERO GALLERY - BEZ SCRAMBLE TEXT
+// 1. HERO GALLERY
 // ============================================
 function HeroGallery() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -298,85 +263,12 @@ function HeroGallery() {
           
           gsap.registerPlugin(ScrollTrigger);
 
-          // Badge animation
-          gsap.fromTo(
-            '.hero-badge',
-            { opacity: 0, scale: 0.8 },
-            { 
-              opacity: 1, 
-              scale: 1, 
-              duration: 0.8, 
-              ease: 'back.out(1.7)',
-              delay: 0.2
-            }
-          );
-
-          // Title animation
-          gsap.fromTo(
-            '.hero-title',
-            { opacity: 0, y: 30 },
-            { 
-              opacity: 1, 
-              y: 0, 
-              duration: 0.8, 
-              ease: 'power2.out',
-              delay: 0.4
-            }
-          );
-
-          // Tagline animation
-          gsap.fromTo(
-            '.hero-tagline',
-            { opacity: 0, y: 20 },
-            { 
-              opacity: 1, 
-              y: 0, 
-              duration: 0.7, 
-              ease: 'power2.out',
-              delay: 0.6
-            }
-          );
-
-          // Subtitle animation
-          gsap.fromTo(
-            '.hero-subtitle',
-            { opacity: 0, y: 20 },
-            { 
-              opacity: 1, 
-              y: 0, 
-              duration: 0.7, 
-              ease: 'power2.out',
-              delay: 0.8
-            }
-          );
-
-          // Specs cards stagger
-          gsap.fromTo(
-            '.spec-card',
-            { opacity: 0, y: 30, scale: 0.95 },
-            { 
-              opacity: 1, 
-              y: 0, 
-              scale: 1,
-              duration: 0.6,
-              stagger: 0.1,
-              ease: 'power2.out',
-              delay: 1.0
-            }
-          );
-
-          // Price box
-          gsap.fromTo(
-            '.price-box',
-            { opacity: 0, x: -30 },
-            { 
-              opacity: 1, 
-              x: 0,
-              duration: 0.8,
-              ease: 'power3.out',
-              delay: 1.4
-            }
-          );
+          gsap.fromTo('.hero-badge', { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)', delay: 0.2 });
+          gsap.fromTo('.hero-title', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 0.4 });
+          gsap.fromTo('.hero-tagline', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: 0.6 });
+          gsap.fromTo('.hero-subtitle', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: 0.8 });
+          gsap.fromTo('.spec-card', { opacity: 0, y: 30, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.1, ease: 'power2.out', delay: 1.0 });
+          gsap.fromTo('.price-box', { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out', delay: 1.4 });
 
         } catch (error) {
           console.error('GSAP error:', error);
@@ -391,18 +283,16 @@ function HeroGallery() {
     <section ref={heroRef} className="relative pt-20 bg-gradient-to-b from-[#f1f1ed] to-[#f7f6f4]">
       <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-16 lg:py-24">
         
-        {/* Breadcrumbs */}
         <div className="flex items-center gap-2 text-xs text-[#8a968f] mb-8">
           <a href="/" className="hover:text-[#4a6b5e] transition-colors">Strona główna</a>
           <span>/</span>
           <a href="/apartamenty" className="hover:text-[#4a6b5e] transition-colors">Apartamenty</a>
           <span>/</span>
-          <span className="text-[#4a6b5e]">Apartament C1</span>
+          <span className="text-[#4a6b5e]">Apartament C4</span>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
-          {/* LEFT SIDE - Content */}
           <div className="order-2 lg:order-1">
             
             <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 bg-white border border-[#d4d6ce] rounded-full mb-6">
@@ -425,7 +315,6 @@ function HeroGallery() {
               {apartmentData.subtitle}
             </p>
 
-            {/* Specs Grid */}
             <div className="grid grid-cols-2 gap-4 mb-8">
               {[
                 { icon: Maximize, label: 'Rozmiar', value: apartmentData.specs.size },
@@ -443,7 +332,6 @@ function HeroGallery() {
               ))}
             </div>
 
-            {/* Price Box */}
             <div className="price-box flex items-baseline gap-3 mb-8 p-6 bg-white border-l-4 border-[#4a6b5e]">
               <span className="text-sm tracking-[0.2em] text-[#8a968f] uppercase">od</span>
               <span className="text-4xl lg:text-5xl font-light text-[#4a6b5e]" style={{ fontFamily: 'Playfair Display, serif' }}>
@@ -454,7 +342,6 @@ function HeroGallery() {
 
           </div>
 
-          {/* RIGHT SIDE - Gallery */}
           <div className="order-1 lg:order-2">
             <PhotoProvider>
               <div className="space-y-4">
@@ -506,7 +393,6 @@ function HeroGallery() {
                   <div className="swiper-pagination-custom absolute bottom-6 left-6 z-10"></div>
                 </Swiper>
 
-                {/* Thumbnails */}
                 <div className="grid grid-cols-4 md:grid-cols-6 gap-3">
                   {apartmentData.gallery.map((img, idx) => (
                     <div 
@@ -534,7 +420,7 @@ function HeroGallery() {
 }
 
 // ============================================
-// 2. APARTMENT DETAILS - BEZ SCRAMBLE TEXT
+// 2. APARTMENT DETAILS
 // ============================================
 function ApartmentDetails() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -548,52 +434,9 @@ function ApartmentDetails() {
           
           gsap.registerPlugin(ScrollTrigger);
 
-          gsap.fromTo(
-            '.section-heading',
-            { opacity: 0, y: 30 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.8,
-              ease: 'power2.out',
-              scrollTrigger: {
-                trigger: sectionRef.current,
-                start: 'top 80%',
-              }
-            }
-          );
-
-          gsap.fromTo(
-            '.highlight-item',
-            { opacity: 0, x: -20 },
-            {
-              opacity: 1,
-              x: 0,
-              duration: 0.5,
-              stagger: 0.1,
-              ease: 'power2.out',
-              scrollTrigger: {
-                trigger: sectionRef.current,
-                start: 'top 70%',
-              }
-            }
-          );
-
-          gsap.fromTo(
-            '.feature-card',
-            { opacity: 0, y: 30 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.6,
-              stagger: 0.15,
-              ease: 'power2.out',
-              scrollTrigger: {
-                trigger: '.features-grid',
-                start: 'top 75%',
-              }
-            }
-          );
+          gsap.fromTo('.section-heading', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' } });
+          gsap.fromTo('.highlight-item', { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out', scrollTrigger: { trigger: sectionRef.current, start: 'top 70%' } });
+          gsap.fromTo('.feature-card', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: 'power2.out', scrollTrigger: { trigger: '.features-grid', start: 'top 75%' } });
 
         } catch (error) {
           console.error('GSAP error:', error);
@@ -610,10 +453,8 @@ function ApartmentDetails() {
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
           
-          {/* LEFT - Description */}
           <div className="lg:col-span-2 space-y-12">
             
-            {/* O apartamencie */}
             <div>
               <h2 
                 className="section-heading text-3xl lg:text-4xl font-light text-[#4a6b5e] mb-6" 
@@ -621,27 +462,28 @@ function ApartmentDetails() {
               >
                 O apartamencie
               </h2>
-              <p className="text-base text-[#6e7a73] leading-relaxed font-light">
+              <p className="text-base text-[#6e7a73] leading-relaxed font-light mb-6">
                 {apartmentData.description}
+              </p>
+              <p className="text-base text-[#6e7a73] leading-relaxed font-light">
+                {apartmentData.fullDescription}
               </p>
             </div>
 
-            {/* Najważniejsze atuty */}
             <div>
               <h3 className="text-xl font-light text-[#0f0e0f] mb-6">
                 Najważniejsze atuty
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {apartmentData.highlights.map((highlight, idx) => (
-                  <div key={idx} className="highlight-item flex items-start gap-3 p-4 bg-[#f7f6f4] border-l-2 border-[#555e59]">
-                    <Check className="w-5 h-5 text-[#555e59] flex-shrink-0 mt-0.5" strokeWidth={2} />
+                  <div key={idx} className="highlight-item flex items-start gap-3 p-4 bg-[#f7f6f4] border-l-2 border-[#4a6b5e]">
+                    <Check className="w-5 h-5 text-[#4a6b5e] flex-shrink-0 mt-0.5" strokeWidth={2} />
                     <span className="text-sm text-[#6e7a73]">{highlight}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* O Obiekcie */}
             <div className="pt-8 border-t border-[#d4d6ce]">
               <h2 
                 className="section-heading text-3xl lg:text-4xl font-light text-[#4a6b5e] mb-6" 
@@ -658,15 +500,14 @@ function ApartmentDetails() {
                 ))}
               </div>
 
-              {/* Features Grid */}
               <div className="features-grid grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
                 {apartmentData.aboutProperty.features.map((feature, idx) => (
                   <div 
                     key={idx} 
-                    className="feature-card group bg-[#f7f6f4] p-6 border border-[#d4d6ce] hover:border-[#555e59] transition-all duration-300"
+                    className="feature-card group bg-[#f7f6f4] p-6 border border-[#d4d6ce] hover:border-[#4a6b5e] transition-all duration-300"
                   >
                     <div className="w-12 h-12 rounded-full bg-white border border-[#d4d6ce] flex items-center justify-center mb-4 group-hover:border-[#AB8A62] group-hover:bg-gradient-to-br group-hover:from-[#f4e4c1] group-hover:to-[#AB8A62] transition-all">
-                      <feature.icon className="w-6 h-6 text-[#555e59] group-hover:text-[#8b6914] transition-colors" strokeWidth={1} />
+                      <feature.icon className="w-6 h-6 text-[#4a6b5e] group-hover:text-[#8b6914] transition-colors" strokeWidth={1} />
                     </div>
                     <h4 className="text-base font-medium text-[#0f0e0f] mb-2">
                       {feature.title}
@@ -676,7 +517,7 @@ function ApartmentDetails() {
                     </p>
                   </div>
                 ))}
-              </div>
+                            </div>
             </div>
 
           </div>
@@ -699,8 +540,8 @@ function ApartmentDetails() {
                   { label: 'Sypialnie', value: apartmentData.specs.bedrooms },
                   { label: 'Łazienki', value: apartmentData.specs.bathrooms },
                   { label: 'Piętro', value: apartmentData.specs.floor },
+                  { label: 'Balkon', value: apartmentData.specs.balcony },
                   { label: 'Taras', value: apartmentData.specs.terrace },
-                  { label: 'Ogródek', value: apartmentData.specs.garden },
                 ].map((item, idx) => (
                   <div key={idx} className="flex justify-between items-center py-3 border-b border-[#d4d6ce] last:border-0">
                     <span className="text-sm text-[#8a968f] uppercase tracking-wide">{item.label}</span>
@@ -718,7 +559,7 @@ function ApartmentDetails() {
   );
 }
 
-// 3. IMPORTANT INFO SECTION - POPRAWIONY GRID DLA 5 ELEMENTÓW
+
 function ImportantInfoSection() {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -854,6 +695,10 @@ function ImportantInfoSection() {
   );
 }
 
+
+
+// ============================================
+// 5. SURROUNDINGS GALLERY
 // ============================================
 function SurroundingsGallery() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -1093,9 +938,6 @@ function SurroundingsGallery() {
 }
 
 // ============================================
-
-
-// ============================================
 // 6. REVIEWS SECTION
 // ============================================
 function ReviewsSection() {
@@ -1146,7 +988,7 @@ function ReviewsSection() {
             Opinie gości
           </span>
           <h2 
-            className="text-4xl lg:text-5xl font-light text-[#0f0e0f] mb-4" 
+            className="text-4xl lg:text-5xl font-light text-[#4a6b5e] mb-4" 
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
             Co mówią nasi goście
@@ -1155,7 +997,7 @@ function ReviewsSection() {
           <div className="flex items-center justify-center gap-4 mt-6">
             <div className="flex items-center gap-1">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 text-[#d4af37] fill-[#d4af37]" strokeWidth={0} />
+                <Star key={i} className="w-6 h-6 text-[#AB8A62] fill-[#AB8A62]" strokeWidth={0} />
               ))}
             </div>
             <span className="text-2xl font-light text-[#0f0e0f]">5.0</span>
@@ -1169,11 +1011,11 @@ function ReviewsSection() {
               key={idx} 
               className="review-card bg-[#f7f6f4] p-8 border border-[#d4d6ce] relative group hover:border-[#8a968f] transition-all duration-300"
             >
-              <Quote className="w-10 h-10 text-[#d4af37] opacity-20 absolute top-6 right-6" strokeWidth={1} />
+              <Quote className="w-10 h-10 text-[#AB8A62] opacity-20 absolute top-6 right-6" strokeWidth={1} />
               
               <div className="relative">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#555e59] to-[#6c7a72] flex items-center justify-center text-white font-medium">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#4a6b5e] to-[#6c7a72] flex items-center justify-center text-white font-medium">
                     {review.avatar}
                   </div>
                   <div>
@@ -1184,7 +1026,7 @@ function ReviewsSection() {
 
                 <div className="flex items-center gap-1 mb-4">
                   {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-[#d4af37] fill-[#d4af37]" strokeWidth={0} />
+                    <Star key={i} className="w-4 h-4 text-[#AB8A62] fill-[#AB8A62]" strokeWidth={0} />
                   ))}
                 </div>
 
@@ -1200,8 +1042,10 @@ function ReviewsSection() {
     </section>
   );
 }
-import Image from 'next/image';
 
+// ============================================
+// 7. CTA + FOOTER
+// ============================================
 function CTAWithFooter() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -1229,143 +1073,56 @@ function CTAWithFooter() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    const initGSAP = async () => {
-      if (typeof window !== 'undefined' && sectionRef.current) {
-        try {
-          const { gsap } = await import('gsap');
-          const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-          
-          gsap.registerPlugin(ScrollTrigger);
-
-          gsap.fromTo(
-            '.cta-content',
-            { opacity: 0, y: 50 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 1,
-              ease: 'power3.out',
-              scrollTrigger: {
-                trigger: sectionRef.current,
-                start: 'top 70%',
-              }
-            }
-          );
-
-          gsap.fromTo(
-            '.footer-content',
-            { opacity: 0, y: 30 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.8,
-              ease: 'power2.out',
-              scrollTrigger: {
-                trigger: '.footer-content',
-                start: 'top 85%',
-              }
-            }
-          );
-
-        } catch (error) {
-          console.error('GSAP error:', error);
-        }
-      }
-    };
-
-    initGSAP();
-  }, []);
-
   return (
     <section ref={sectionRef} className="relative text-white overflow-hidden">
       
-      {/* PREMIUM BACKGROUND IMAGE - Next.js optimized */}
-      <div className="absolute inset-0 z-0">
-        <Image
+      {/* BACKGROUND IMAGE */}
+      <div className="absolute inset-0" style={{ zIndex: 0 }}>
+        <img
           src="/images/gallery/apartments/c1/sunset-hero.jpg"
-          alt="Riva Zegrze - Apartamenty nad Jeziorem Zegrzyńskim"
-          fill
-          priority
-          quality={90}
-          className="object-cover"
-          sizes="100vw"
+          alt="Riva Zegrze"
+          className="w-full h-full object-cover"
           style={{
             transform: `scale(${1 + scrollProgress * 0.1})`,
           }}
         />
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#2a3d35]/70 via-[#2a3d35]/85 to-[#1a2820]/95 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#2a3d35]/70 via-[#2a3d35]/85 to-[#1a2820]/95" style={{ zIndex: 10 }} />
       </div>
 
-      {/* ANIMATED CURVE WAVE TRANSITION */}
+      {/* WAVE */}
       <div 
-        className="absolute top-0 left-0 right-0 pointer-events-none transform -translate-y-full z-20"
-        style={{
-          opacity: 1 - scrollProgress * 0.3
-        }}
+        className="absolute top-0 left-0 right-0 pointer-events-none transform -translate-y-full"
+        style={{ zIndex: 20, opacity: 1 - scrollProgress * 0.3 }}
       >
-        <svg
-          viewBox="0 0 1440 100"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-auto"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M0,50 Q360,80 720,50 T1440,50 L1440,0 L0,0 Z"
-            fill="#f7f6f4"
-          >
-            <animate
-              attributeName="d"
-              dur="8s"
-              repeatCount="indefinite"
-              values="
-                M0,50 Q360,80 720,50 T1440,50 L1440,0 L0,0 Z;
-                M0,60 Q360,30 720,60 T1440,60 L1440,0 L0,0 Z;
-                M0,50 Q360,80 720,50 T1440,50 L1440,0 L0,0 Z
-              "
-            />
+        <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" preserveAspectRatio="none">
+          <path d="M0,50 Q360,80 720,50 T1440,50 L1440,0 L0,0 Z" fill="#d4d5cf">
+            <animate attributeName="d" dur="8s" repeatCount="indefinite" values="M0,50 Q360,80 720,50 T1440,50 L1440,0 L0,0 Z;M0,60 Q360,30 720,60 T1440,60 L1440,0 L0,0 Z;M0,50 Q360,80 720,50 T1440,50 L1440,0 L0,0 Z" />
           </path>
         </svg>
       </div>
 
-      <div className="relative z-20">
+      <div className="relative" style={{ zIndex: 20 }}>
         
-        {/* CTA SECTION */}
+        {/* CTA */}
         <div className="cta-content max-w-[1000px] mx-auto px-6 lg:px-12 text-center py-24 lg:py-32">
           
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
             
-            {/* Badge */}
             <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 backdrop-blur-md rounded-full mb-8 border border-white/20">
               <Sparkles className="w-4 h-4 text-[#AB8A62]" strokeWidth={1} />
-              <span className="text-xs tracking-[0.25em] uppercase text-white/90 font-light">
-                Oferta specjalna
-              </span>
+              <span className="text-xs tracking-[0.25em] uppercase text-white/90 font-light">Oferta specjalna</span>
             </div>
 
-            {/* Heading */}
-            <h2 
-              className="text-4xl md:text-5xl lg:text-6xl font-light mb-6 leading-tight text-white drop-shadow-lg" 
-              style={{ fontFamily: 'Playfair Display, serif' }}
-            >
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-light mb-6 leading-tight text-white drop-shadow-lg" style={{ fontFamily: 'Playfair Display, serif' }}>
               Zarezerwuj min. 3 noce <br />
               <span className="text-[#AB8A62]">i zyskaj 40% rabatu</span>
             </h2>
 
-            {/* Description */}
             <p className="text-base md:text-lg font-light mb-12 max-w-2xl mx-auto text-white/90 leading-relaxed">
               Skorzystaj z naszej limitowanej promocji. Przy rezerwacji minimum 3 nocy otrzymasz 
-              <strong className="font-medium text-white"> aż 40% zniżki</strong> na cały pobyt w Apartamencie C1.
+              <strong className="font-medium text-white"> aż 40% zniżki</strong> na cały pobyt w Apartamencie C4.
             </p>
 
-            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
               
               <button className="flex items-center gap-3 px-10 py-5 bg-white text-[#2a3d35] hover:bg-[#AB8A62] hover:text-white transition-all duration-300 text-sm tracking-[0.15em] uppercase group shadow-2xl font-light">
@@ -1373,24 +1130,15 @@ function CTAWithFooter() {
                 <span>Zarezerwuj apartament</span>
               </button>
 
-              <a 
-                href="tel:+48510038038"
-                className="flex items-center gap-3 px-10 py-5 bg-white/10 backdrop-blur-md border-2 border-white/30 text-white hover:bg-white/20 hover:border-white/50 transition-all duration-300 text-sm tracking-[0.15em] uppercase group font-light"
-              >
+              <a href="tel:+48510038038" className="flex items-center gap-3 px-10 py-5 bg-white/10 backdrop-blur-md border-2 border-white/30 text-white hover:bg-white/20 hover:border-white/50 transition-all duration-300 text-sm tracking-[0.15em] uppercase group font-light">
                 <Phone className="w-5 h-5 group-hover:rotate-12 transition-transform" strokeWidth={1.5} />
                 <span>Zadzwoń: +48 510 038 038</span>
               </a>
 
             </div>
 
-            {/* Trust Badges */}
             <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 text-white/70">
-              {[
-                'Bezpieczna płatność',
-                'Anulowanie do 48h',
-                'Najlepsza cena',
-                'Brak ukrytych kosztów'
-              ].map((badge, idx) => (
+              {['Bezpieczna płatność', 'Anulowanie do 48h', 'Najlepsza cena', 'Brak ukrytych kosztów'].map((badge, idx) => (
                 <div key={idx} className="flex items-center gap-2 text-xs tracking-wide">
                   <Check className="w-4 h-4 text-[#AB8A62]" strokeWidth={2} />
                   <span>{badge}</span>
@@ -1402,18 +1150,12 @@ function CTAWithFooter() {
 
         </div>
 
-        {/* SUBTLE ANIMATED DIVIDER */}
+        {/* DIVIDER */}
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 my-12">
-          <motion.div 
-            className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2, ease: 'easeInOut' }}
-          />
+          <motion.div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 1.2, ease: 'easeInOut' }} />
         </div>
 
-        {/* FOOTER SECTION */}
+        {/* FOOTER */}
         <footer className="footer-content py-16 lg:py-20">
           <div className="max-w-[1800px] mx-auto px-8 lg:px-12">
             
@@ -1423,10 +1165,7 @@ function CTAWithFooter() {
               <div>
                 <div className="flex items-center gap-3 mb-6">
                   <Waves className="w-8 h-8 text-[#AB8A62]" strokeWidth={1} />
-                  <span
-                    className="text-2xl font-light tracking-[0.15em] text-white"
-                    style={{ fontFamily: 'Playfair Display, serif' }}
-                  >
+                  <span className="text-2xl font-light tracking-[0.15em] text-white" style={{ fontFamily: 'Playfair Display, serif' }}>
                     RIVA ZEGRZE
                   </span>
                 </div>
@@ -1459,10 +1198,7 @@ function CTAWithFooter() {
                     { label: 'O Nas', href: '/about' },
                   ].map((item) => (
                     <li key={item.label}>
-                      <a
-                        href={item.href}
-                        className="text-sm text-white/70 hover:text-white transition-colors font-light inline-flex items-center gap-2 group"
-                      >
+                      <a href={item.href} className="text-sm text-white/70 hover:text-white transition-colors font-light inline-flex items-center gap-2 group">
                         <span className="w-0 group-hover:w-4 h-px bg-[#AB8A62] transition-all duration-300"></span>
                         {item.label}
                       </a>
@@ -1516,10 +1252,7 @@ function CTAWithFooter() {
                       placeholder="Twój e-mail"
                       className="flex-1 px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-[#AB8A62] focus:bg-white/15 transition-all font-light"
                     />
-                    <button
-                      type="submit"
-                      className="px-6 py-3 bg-[#AB8A62] text-white hover:bg-[#8b6914] transition-colors"
-                    >
+                    <button type="submit" className="px-6 py-3 bg-[#AB8A62] text-white hover:bg-[#8b6914] transition-colors">
                       <ChevronRight className="w-5 h-5" strokeWidth={2} />
                     </button>
                   </div>
@@ -1559,11 +1292,7 @@ function CTAWithFooter() {
                   { label: 'Regulamin', href: '/terms' },
                   { label: 'Cookies', href: '/cookies' },
                 ].map((item) => (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className="text-xs text-white/50 hover:text-white/80 transition-colors font-light"
-                  >
+                  <a key={item.label} href={item.href} className="text-xs text-white/50 hover:text-white/80 transition-colors font-light">
                     {item.label}
                   </a>
                 ))}
@@ -1576,7 +1305,3 @@ function CTAWithFooter() {
     </section>
   );
 }
-
-
-
-
