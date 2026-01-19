@@ -2731,7 +2731,6 @@ function GallerySection() {
   );
 }
 
-
 // Minimal Footer – Riva Zegrze - Professional Pastel Version
 function MinimalFooter() {
   return (
@@ -2796,7 +2795,7 @@ function MinimalFooter() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> 
 
           {/* CONTACT */}
           <div>
@@ -2888,7 +2887,7 @@ function MinimalFooter() {
           </div>
         </div>
 
-        {/* BOTTOM BAR */}
+        {/* BOTTOM BAR - ✅ ZAKTUALIZOWANE LINKI */}
         <div className="border-t border-[#d4d6ce] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
             <p className="text-xs text-[#8a968f] font-light">
@@ -2908,18 +2907,20 @@ function MinimalFooter() {
               <span className="font-medium">by Hoteler</span>
             </a>
           </div>
-          <div className="flex gap-8">
+          
+          {/* ✅ POPRAWIONE LINKI */}
+          <div className="flex gap-6">
             {[
-              { label: 'Polityka prywatności', href: '/privacy' },
-              { label: 'Regulamin', href: '/terms' },
-              { label: 'Cookies', href: '/cookies' },
+              { label: 'Polityka prywatności', href: '/polityka-prywatnosci' },
+              { label: 'Regulamin', href: '/regulamin' },
             ].map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="text-xs text-[#8a968f] hover:text-[#1a4d2e] transition-colors font-light"
+                className="text-xs text-[#8a968f] hover:text-[#AB8A62] transition-colors font-light relative group"
               >
                 {item.label}
+                <span className="absolute bottom-0 left-0 w-0 h-px bg-[#AB8A62] transition-all duration-300 group-hover:w-full"></span>
               </a>
             ))}
           </div>
@@ -2928,6 +2929,7 @@ function MinimalFooter() {
     </footer>
   );
 }
+
 
 
 
