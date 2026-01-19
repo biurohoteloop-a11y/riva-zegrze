@@ -803,8 +803,6 @@ function ExperiencesCTA() {
     </section>
   );
 }
-
-
 // Minimal Footer – Riva Zegrze - Professional Pastel Version
 function MinimalFooter() {
   return (
@@ -855,7 +853,7 @@ function MinimalFooter() {
                 { label: 'Apartamenty', href: '/rooms' },
                 { label: 'Oferta Specjalna', href: '/offers' },
                 { label: 'Wellness & Spa', href: '/activities' },
-                { label: 'Galeria', href: '/gallery' },
+                { label: 'Galeria', href: '/galeria' },
                 { label: 'O Nas', href: '/about' },
               ].map((item) => (
                 <li key={item.label}>
@@ -869,7 +867,7 @@ function MinimalFooter() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> 
 
           {/* CONTACT */}
           <div>
@@ -897,13 +895,12 @@ function MinimalFooter() {
                 </a>
               </li>
               <li>
-                    <a href="mailto:wynajem@rivazegrze.pl" className="flex items-center gap-3 text-sm text-[#6e7a73] font-light hover:text-[#1a4d2e] transition-colors group">
-                    <svg className="w-5 h-5 text-[#AB8A62]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                <a href="mailto:wynajem@rivazegrze.pl" className="flex items-center gap-3 text-sm text-[#6e7a73] font-light hover:text-[#1a4d2e] transition-colors group">
+                  <svg className="w-5 h-5 text-[#AB8A62]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                    </svg>
-                      <span>wynajem@rivazegrze.pl</span>
-                    </a>
-
+                  </svg>
+                  <span>wynajem@rivazegrze.pl</span>
+                </a>
               </li>
             </ul>
           </div>
@@ -962,23 +959,40 @@ function MinimalFooter() {
           </div>
         </div>
 
-        {/* BOTTOM BAR */}
+        {/* BOTTOM BAR - ✅ ZAKTUALIZOWANE LINKI */}
         <div className="border-t border-[#d4d6ce] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-[#8a968f] font-light">
-            © {new Date().getFullYear()} Riva Zegrze. Wszystkie prawa zastrzeżone.
-          </p>
-          <div className="flex gap-8">
+          <div className="flex items-center gap-2">
+            <p className="text-xs text-[#8a968f] font-light">
+              © {new Date().getFullYear()} Riva Zegrze. Wszystkie prawa zastrzeżone.
+            </p>
+            <span className="text-[#d4d6ce]">•</span>
+            <a 
+              href="https://hoteler.pro" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-xs text-[#8a968f] hover:text-[#AB8A62] transition-colors font-light group"
+            >
+              <span>Made with</span>
+              <svg className="w-3 h-3 text-[#AB8A62] group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+              </svg>
+              <span className="font-medium">by Hoteler</span>
+            </a>
+          </div>
+          
+          {/* ✅ POPRAWIONE LINKI */}
+          <div className="flex gap-6">
             {[
-              { label: 'Polityka prywatności', href: '/privacy' },
-              { label: 'Regulamin', href: '/terms' },
-              { label: 'Cookies', href: '/cookies' },
+              { label: 'Polityka prywatności', href: '/polityka-prywatnosci' },
+              { label: 'Regulamin', href: '/regulamin' },
             ].map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="text-xs text-[#8a968f] hover:text-[#1a4d2e] transition-colors font-light"
+                className="text-xs text-[#8a968f] hover:text-[#AB8A62] transition-colors font-light relative group"
               >
                 {item.label}
+                <span className="absolute bottom-0 left-0 w-0 h-px bg-[#AB8A62] transition-all duration-300 group-hover:w-full"></span>
               </a>
             ))}
           </div>
