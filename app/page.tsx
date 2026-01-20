@@ -4,9 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { pl } from 'date-fns/locale/pl';
 import { Menu, X, Waves, MapPin, Phone, Mail, Instagram, Facebook, Twitter, Calendar, Star, Compass } from 'lucide-react';
 
 
@@ -304,20 +301,14 @@ function Navigation() {
   );
 }
 
-// Hero - Clean Centered with GSAP Animations & Polish Calendar
 function HeroSection() {
   const slides = [
-  '/images/hero/T3S-RivaZegrze-0760-m.jpg',  // było 2 → teraz 1
-  '/images/hero/T3S-RivaZegrze-0620-m.jpg',  // było 1 → teraz 2
-  '/images/hero/T3S-RivaZegrze-3689-m.jpg',  // bez zmian
-];
-
+    '/images/hero/T3S-RivaZegrze-0760-m.jpg',
+    '/images/hero/T3S-RivaZegrze-0620-m.jpg',
+    '/images/hero/T3S-RivaZegrze-3689-m.jpg',
+  ];
 
   const [current, setCurrent] = useState(0);
-  const [checkIn, setCheckIn] = useState<Date | null>(null);
-  const [checkOut, setCheckOut] = useState<Date | null>(null);
-  const [adults, setAdults] = useState(2);
-  const [children, setChildren] = useState(0);
 
   const heroRef = useRef(null);
   const labelRef = useRef(null);
@@ -355,10 +346,6 @@ function HeroSection() {
     }, 6500);
     return () => clearInterval(interval);
   }, []);
-
-  const handleSearch = () => {
-    console.log({ checkIn, checkOut, adults, children });
-  };
 
   return (
     <>
@@ -416,112 +403,19 @@ function HeroSection() {
             Zegrzyńskim — tylko 30 minut od Warszawy.
           </p>
 
-          {/* BOOKING BAR - Desktop */}
+          {/* ✅ HOTRES - DOKŁADNIE JAK W DOKUMENTACJI */}
           <div ref={bookingRef} className="hidden lg:block max-w-5xl mx-auto">
-            <div className="bg-white/98 backdrop-blur-md shadow-2xl rounded-full border border-[#d4d6ce]/30">
-              
-              <div className="flex items-stretch divide-x divide-[#d4d6ce]">
-                
-                {/* Check-in */}
-                <div className="flex-1 px-6 py-4 relative">
-                  <div className="text-[9px] tracking-[0.15em] uppercase text-[#AB8A62] mb-1 font-light">Przyjazd</div>
-                  <DatePicker
-                    selected={checkIn}
-                    onChange={(date: Date | null) => setCheckIn(date)}
-                    selectsStart
-                    startDate={checkIn}
-                    endDate={checkOut}
-                    minDate={new Date()}
-                    dateFormat="dd MMM yyyy"
-                    placeholderText="Wybierz datę"
-                    locale="pl"
-                    className="w-full text-sm text-[#0f0e0f] bg-transparent border-none outline-none font-light cursor-pointer"
-                    calendarClassName="custom-calendar"
-                  />
-                </div>
-
-                {/* Check-out */}
-                <div className="flex-1 px-6 py-4 relative">
-                  <div className="text-[9px] tracking-[0.15em] uppercase text-[#AB8A62] mb-1 font-light">Wyjazd</div>
-                  <DatePicker
-                    selected={checkOut}
-                    onChange={(date: Date | null) => setCheckOut(date)}
-                    selectsEnd
-                    startDate={checkIn}
-                    endDate={checkOut}
-                    minDate={checkIn || new Date()}
-                    dateFormat="dd MMM yyyy"
-                    placeholderText="Wybierz datę"
-                    locale="pl"
-                    className="w-full text-sm text-[#0f0e0f] bg-transparent border-none outline-none font-light cursor-pointer"
-                    calendarClassName="custom-calendar"
-                  />
-                </div>
-
-                {/* Adults */}
-                <div className="flex-1 px-6 py-4">
-                  <div className="text-[9px] tracking-[0.15em] uppercase text-[#AB8A62] mb-1 font-light">Dorośli</div>
-                  <div className="flex items-center gap-3">
-                    <button
-                      onClick={() => setAdults(Math.max(1, adults - 1))}
-                      className="w-6 h-6 flex items-center justify-center text-[#AB8A62] hover:bg-[#AB8A62] hover:text-white rounded-full transition-all border border-[#AB8A62]/30"
-                    >
-                      <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M20 12H4" />
-                      </svg>
-                    </button>
-                    <span className="text-sm text-[#0f0e0f] min-w-[20px] text-center font-light">{adults}</span>
-                    <button
-                      onClick={() => setAdults(adults + 1)}
-                      className="w-6 h-6 flex items-center justify-center text-[#AB8A62] hover:bg-[#AB8A62] hover:text-white rounded-full transition-all border border-[#AB8A62]/30"
-                    >
-                      <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Children */}
-                <div className="flex-1 px-6 py-4">
-                  <div className="text-[9px] tracking-[0.15em] uppercase text-[#AB8A62] mb-1 font-light">Dzieci</div>
-                  <div className="flex items-center gap-3">
-                    <button
-                      onClick={() => setChildren(Math.max(0, children - 1))}
-                      className="w-6 h-6 flex items-center justify-center text-[#AB8A62] hover:bg-[#AB8A62] hover:text-white rounded-full transition-all border border-[#AB8A62]/30"
-                    >
-                      <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M20 12H4" />
-                      </svg>
-                    </button>
-                    <span className="text-sm text-[#0f0e0f] min-w-[20px] text-center font-light">{children}</span>
-                    <button
-                      onClick={() => setChildren(children + 1)}
-                      className="w-6 h-6 flex items-center justify-center text-[#AB8A62] hover:bg-[#AB8A62] hover:text-white rounded-full transition-all border border-[#AB8A62]/30"
-                    >
-                      <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Search Button */}
-                <div className="flex items-center">
-                  <button
-                    onClick={handleSearch}
-                    className="h-full px-12 bg-[#AB8A62] text-white hover:bg-[#967447] transition-all duration-300 text-[11px] tracking-[0.2em] uppercase rounded-r-full flex items-center gap-2 font-light"
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                    </svg>
-                    <span>Szukaj</span>
-                  </button>
-                </div>
-
-              </div>
-
-            </div>
+            <script 
+              src="https://panel.hotres.pl/public/api/hotres_popup.js" 
+              async
+            />
+            <div 
+              className="hotresSearchBar showHotres" 
+              data-button="Sprawdź terminy"  
+              data-oid="5226" 
+              data-lang="pl" 
+              data-action="bookingbar"
+            />
           </div>
 
         </div>
@@ -542,228 +436,327 @@ function HeroSection() {
 
       </section>
 
-      {/* BOOKING BAR - Mobile */}
+      {/* ✅ HOTRES - Mobile */}
       <section className="lg:hidden bg-[#f7f6f4] py-6 px-4">
-        <div className="max-w-sm mx-auto bg-white shadow-xl border border-[#d4d6ce] rounded-2xl overflow-hidden">
-          
-          <div className="p-6 space-y-4">
-            
-            {/* Dates Row */}
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <div className="text-[9px] tracking-[0.12em] uppercase text-[#AB8A62] mb-2 font-light">Przyjazd</div>
-                <DatePicker
-                  selected={checkIn}
-                  onChange={(date: Date | null) => setCheckIn(date)}
-                  selectsStart
-                  startDate={checkIn}
-                  endDate={checkOut}
-                  minDate={new Date()}
-                  dateFormat="dd MMM"
-                  placeholderText="Wybierz"
-                  locale="pl"
-                  className="w-full px-4 py-3 bg-[#f7f6f4] border border-[#d4d6ce] rounded-lg text-sm text-[#0f0e0f] font-light"
-                  calendarClassName="custom-calendar"
-                />
-              </div>
-              <div>
-                <div className="text-[9px] tracking-[0.12em] uppercase text-[#AB8A62] mb-2 font-light">Wyjazd</div>
-                <DatePicker
-                  selected={checkOut}
-                  onChange={(date: Date | null) => setCheckOut(date)}
-                  selectsEnd
-                  startDate={checkIn}
-                  endDate={checkOut}
-                  minDate={checkIn || new Date()}
-                  dateFormat="dd MMM"
-                  placeholderText="Wybierz"
-                  locale="pl"
-                  className="w-full px-4 py-3 bg-[#f7f6f4] border border-[#d4d6ce] rounded-lg text-sm text-[#0f0e0f] font-light"
-                  calendarClassName="custom-calendar"
-                />
-              </div>
-            </div>
-
-            {/* Guests Row */}
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <div className="text-[9px] tracking-[0.12em] uppercase text-[#AB8A62] mb-2 font-light">Dorośli</div>
-                <div className="flex items-center gap-3 bg-[#f7f6f4] border border-[#d4d6ce] rounded-lg px-4 py-3">
-                  <button onClick={() => setAdults(Math.max(1, adults - 1))} className="w-6 h-6 text-[#AB8A62] flex items-center justify-center">
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M20 12H4" />
-                    </svg>
-                  </button>
-                  <span className="text-sm flex-1 text-center font-light">{adults}</span>
-                  <button onClick={() => setAdults(adults + 1)} className="w-6 h-6 text-[#AB8A62] flex items-center justify-center">
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div>
-                <div className="text-[9px] tracking-[0.12em] uppercase text-[#AB8A62] mb-2 font-light">Dzieci</div>
-                <div className="flex items-center gap-3 bg-[#f7f6f4] border border-[#d4d6ce] rounded-lg px-4 py-3">
-                  <button onClick={() => setChildren(Math.max(0, children - 1))} className="w-6 h-6 text-[#AB8A62] flex items-center justify-center">
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M20 12H4" />
-                    </svg>
-                  </button>
-                  <span className="text-sm flex-1 text-center font-light">{children}</span>
-                  <button onClick={() => setChildren(children + 1)} className="w-6 h-6 text-[#AB8A62] flex items-center justify-center">
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Search Button */}
-            <button
-              onClick={handleSearch}
-              className="w-full py-4 bg-[#AB8A62] text-white hover:bg-[#967447] transition-all text-xs tracking-[0.2em] uppercase rounded-lg flex items-center justify-center gap-2 font-light shadow-lg"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-              </svg>
-              <span>Szukaj dostępności</span>
-            </button>
-
-          </div>
-
+        <div className="max-w-sm mx-auto">
+          <div 
+            className="hotresSearchBar showHotres" 
+            data-button="Sprawdź terminy"  
+            data-oid="5226" 
+            data-lang="pl" 
+            data-action="bookingbar"
+          />
         </div>
       </section>
 
-      {/* CUSTOM CALENDAR STYLES */}
-      <style jsx global>{`
-        @keyframes kenBurns {
-          0% { transform: scale(1); }
-          100% { transform: scale(1.1); }
-        }
+<style jsx global>{`
+  @keyframes kenBurns {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+  }
 
-        /* ✅ POLISH CUSTOM CALENDAR */
-        
-        .react-datepicker-popper {
-          z-index: 9999 !important;
-        }
+  /* ========================================
+     PREMIUM GLASSMORPHISM BOOKING BAR
+  ======================================== */
+  
+  .hotresSearchBar {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    cursor: pointer;
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.12),
+      0 2px 8px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    border-radius: 14px;
+    height: 68px;
+    overflow: hidden;
+    min-width: 340px;
+    max-width: 580px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
 
-        .custom-calendar {
-          font-family: inherit;
-          border: 1px solid #d4d6ce;
-          border-radius: 12px;
-          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-          overflow: hidden;
-        }
+  /* Subtelny gradient border */
+  .hotresSearchBar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    padding: 1px;
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.3) 0%, 
+      rgba(255, 255, 255, 0.05) 50%, 
+      rgba(255, 255, 255, 0.15) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
 
-        .react-datepicker__header {
-          background-color: #f7f6f4;
-          border-bottom: 1px solid #d4d6ce;
-          padding: 20px 0 10px;
-        }
+  .hotresSearchBar:hover {
+    background: rgba(255, 255, 255, 0.18);
+    box-shadow: 
+      0 12px 40px rgba(0, 0, 0, 0.15),
+      0 4px 12px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.28);
+  }
 
-        .react-datepicker__current-month {
-          color: #AB8A62;
-          font-size: 16px;
-          font-weight: 300;
-          margin-bottom: 12px;
-          letter-spacing: 0.05em;
-          font-family: 'Playfair Display', serif;
-          text-transform: capitalize;
-        }
+  /* Kontenery dat - równomierne */
+  .hotresSearchBar > div {
+    flex: 1;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    color: #ffffff;
+    transition: background 0.3s ease;
+    height: 100%;
+    position: relative;
+  }
 
-        .react-datepicker__day-names {
-          display: flex;
-          justify-content: space-around;
-          padding: 0 10px;
-        }
+  .hotresSearchBar > div:not(:last-child) {
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+  }
 
-        .react-datepicker__day-name {
-          color: #6e7a73;
-          font-size: 11px;
-          font-weight: 400;
-          width: 40px;
-          line-height: 40px;
-          text-transform: capitalize;
-          letter-spacing: 0.1em;
-        }
+  .hotresSearchBar > div:not(:last-child):hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
 
-        .react-datepicker__month {
-          margin: 0;
-          padding: 10px;
-          background: white;
-        }
+  /* Ostatni element (przycisk) - nie flex */
+  .hotresSearchBar > div:last-child {
+    flex: 0 0 auto;
+    padding: 0;
+    border-right: none;
+  }
 
-        .react-datepicker__week {
-          display: flex;
-          justify-content: space-around;
-        }
+  /* Strzałka między datami */
+  .hotresSearchBar .arrival {
+    position: relative;
+  }
 
-        .react-datepicker__day {
-          width: 40px;
-          height: 40px;
-          line-height: 40px;
-          margin: 2px;
-          color: #0f0e0f;
-          font-size: 14px;
-          font-weight: 300;
-          border-radius: 8px;
-          transition: all 0.2s ease;
-        }
+  .hotresSearchBar .arrival::after,
+  .hotresSearchBar .arrival::before {
+    content: '';
+    position: absolute;
+    right: -11px;
+    width: 6px;
+    height: 6px;
+    border-right: 1.5px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 1.5px solid rgba(255, 255, 255, 0.5);
+  }
 
-        .react-datepicker__day:hover {
-          background-color: #f7f6f4;
-          color: #AB8A62;
-        }
+  .hotresSearchBar .arrival::after {
+    top: calc(50% - 7px);
+    transform: rotate(-45deg);
+  }
 
-        .react-datepicker__day--selected,
-        .react-datepicker__day--in-range,
-        .react-datepicker__day--in-selecting-range {
-          background-color: #AB8A62 !important;
-          color: white !important;
-          font-weight: 400;
-        }
+  .hotresSearchBar .arrival::before {
+    top: calc(50% + 1px);
+    transform: rotate(135deg);
+  }
 
-        .react-datepicker__day--keyboard-selected {
-          background-color: #AB8A62;
-          color: white;
-        }
+  /* Dzień - wyśrodkowany */
+  .hotresSearchBar .day {
+    font-size: 26px;
+    font-weight: 300;
+    color: #ffffff;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
 
-        .react-datepicker__day--range-start,
-        .react-datepicker__day--range-end {
-          background-color: #967447 !important;
-        }
+  /* Miesiąc - wyśrodkowany */
+  .hotresSearchBar .month {
+    font-size: 10px;
+    line-height: 1.2;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+  }
 
-        .react-datepicker__day--disabled {
-          color: #d4d6ce !important;
-          cursor: not-allowed;
-        }
+  .hotresSearchBar .month small {
+    font-size: 9px;
+    color: rgba(255, 255, 255, 0.6);
+    display: block;
+    letter-spacing: 0.08em;
+    margin-top: 1px;
+  }
 
-        .react-datepicker__day--outside-month {
-          color: #d4d6ce;
-        }
+  /* ✅ PERFEKCYJNY PRZYCISK - kompaktowy i elegancki */
+  .hotresSearchBar button {
+    height: 68px;
+    width: 140px;
+    border-radius: 0 13px 13px 0;
+    text-transform: uppercase;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    background: linear-gradient(135deg, 
+      rgba(171, 138, 98, 0.92) 0%, 
+      rgba(150, 116, 71, 0.92) 100%);
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
 
-        .react-datepicker__navigation {
-          top: 20px;
-        }
+  /* Shine effect */
+  .hotresSearchBar button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255, 255, 255, 0.2), 
+      transparent);
+    transition: left 0.6s ease;
+  }
 
-        .react-datepicker__navigation-icon::before {
-          border-color: #AB8A62;
-          border-width: 2px 2px 0 0;
-        }
+  .hotresSearchBar button:hover {
+    background: linear-gradient(135deg, 
+      rgba(150, 116, 71, 0.98) 0%, 
+      rgba(171, 138, 98, 0.98) 100%);
+    box-shadow: 
+      0 3px 12px rgba(171, 138, 98, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateX(1px);
+  }
 
-        .react-datepicker__navigation:hover .react-datepicker__navigation-icon::before {
-          border-color: #967447;
-        }
+  .hotresSearchBar button:hover::before {
+    left: 100%;
+  }
 
-        .react-datepicker__triangle {
-          display: none;
-        }
-      `}</style>
+  .hotresSearchBar button:active {
+    transform: translateX(0) scale(0.98);
+  }
+
+  /* ========================================
+     MOBILE RESPONSIVE
+  ======================================== */
+  
+  @media (max-width: 1024px) {
+    .hotresSearchBar {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(30px);
+      border-radius: 18px;
+      height: auto;
+      flex-direction: column;
+      padding: 24px;
+      gap: 16px;
+      max-width: 100%;
+      border: 1px solid rgba(212, 214, 206, 0.25);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .hotresSearchBar::before {
+      display: none;
+    }
+
+    .hotresSearchBar > div {
+      width: 100%;
+      flex: none;
+      padding: 18px;
+      border-right: none;
+      border-bottom: 1px solid rgba(212, 214, 206, 0.2);
+      color: #0f0e0f;
+    }
+
+    .hotresSearchBar > div:not(:last-child):hover {
+      background: rgba(212, 214, 206, 0.12);
+    }
+
+    .hotresSearchBar > div:last-child {
+      border-bottom: none;
+      padding: 0;
+      width: 100%;
+    }
+
+    .hotresSearchBar .arrival::after,
+    .hotresSearchBar .arrival::before {
+      display: none;
+    }
+
+    .hotresSearchBar .day {
+      font-size: 32px;
+      color: #0f0e0f;
+      text-shadow: none;
+    }
+
+    .hotresSearchBar .month {
+      font-size: 11px;
+      color: #6e7a73;
+    }
+
+    .hotresSearchBar .month small {
+      font-size: 10px;
+      color: #AB8A62;
+    }
+
+    .hotresSearchBar button {
+      width: 100%;
+      height: 52px;
+      border-radius: 12px;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+    }
+  }
+
+  /* ========================================
+     ANIMATIONS
+  ======================================== */
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hotresSearchBar > div {
+    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+  }
+
+  .hotresSearchBar > div:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+
+  .hotresSearchBar > div:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .hotresSearchBar > div:last-child {
+    animation-delay: 0.3s;
+  }
+`}</style>
+
     </>
   );
 }
+
 
 
 function IntroSection() {
