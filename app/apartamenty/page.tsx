@@ -332,13 +332,12 @@ function AnimatedButton({
 
 
 // ============================================
-// Rooms Grid - Z ANIMATED BUTTON
+// Rooms Grid - Z ANIMATED BUTTON + HOTRES INTEGRATION
 // ============================================
 function RoomsGrid() {
-  const [selectedDates, setSelectedDates] = useState({ checkIn: '', checkOut: '' });
-  const [guests, setGuests] = useState(2);
   const roomsRef = useRef<HTMLDivElement>(null);
   const bookingRef = useRef<HTMLDivElement>(null);
+  const hotresInitialized = useRef(false);
 
   const rooms = [
     {
@@ -352,7 +351,7 @@ function RoomsGrid() {
       bathrooms: '1 Łazienka',
       amenities: ['Widok na jezioro', 'Taras', 'Prywatny ogródek', 'WiFi'],
       description: 'Nowoczesny apartament z tarasem i prywatnym ogródkiem, położony bezpośrednio nad Jeziorem Zegrzyńskim.',
-      link: '/apartamenty/apartament-c1',  // ✅ DODANE
+      link: '/apartamenty/apartament-c1',
     },
     {
       name: 'Apartament C4',
@@ -365,7 +364,7 @@ function RoomsGrid() {
       bathrooms: '1 Łazienka',
       amenities: ['Widok na jezioro', 'Taras', 'WiFi', '2 piętro'],
       description: 'Nowoczesny apartament z tarasem i bezpośrednim widokiem na Jezioro Zegrzyńskie.',
-      link: '/apartamenty/apartament-c4',  // ✅ DODANE
+      link: '/apartamenty/apartament-c4',
     },
     {
       name: 'Apartament C7',
@@ -378,7 +377,7 @@ function RoomsGrid() {
       bathrooms: '1 Łazienka',
       amenities: ['Widok na jezioro', 'Taras', 'WiFi', '3 piętro'],
       description: 'Nowoczesny apartament z tarasem i widokiem na Jezioro Zegrzyńskie.',
-      link: '/apartamenty/apartament-c7',  // ✅ DODANE
+      link: '/apartamenty/apartament-c7',
     },
     {
       name: 'Apartament D1',
@@ -391,7 +390,7 @@ function RoomsGrid() {
       bathrooms: '1 Łazienka',
       amenities: ['Taras', 'Strefa rekreacyjna', 'WiFi', '1 piętro'],
       description: 'Nowoczesny apartament z tarasem, położony na 1 piętrze.',
-      link: '/apartamenty/apartament-d1',  // ✅ DODANE
+      link: '/apartamenty/apartament-d1',
     },
     {
       name: 'Apartament D4',
@@ -404,7 +403,7 @@ function RoomsGrid() {
       bathrooms: '1 Łazienka',
       amenities: ['Taras', 'Strefa rekreacyjna', 'WiFi', '2 piętro'],
       description: 'Komfortowy apartament z tarasem, położony na 2 piętrze.',
-      link: '/apartamenty/apartament-d4',  // ✅ DODANE
+      link: '/apartamenty/apartament-d4',
     },
     {
       name: 'Apartament D7',
@@ -417,7 +416,7 @@ function RoomsGrid() {
       bathrooms: '1 Łazienka',
       amenities: ['Taras', 'Strefa rekreacyjna', 'Tereny zielone', '3 piętro'],
       description: 'Przestronny i funkcjonalny apartament z tarasem.',
-      link: '/apartamenty/apartament-d7',  // ✅ DODANE
+      link: '/apartamenty/apartament-d7',
     },
     {
       name: 'Apartament Deluxe B10',
@@ -430,10 +429,70 @@ function RoomsGrid() {
       bathrooms: '1 Łazienka',
       amenities: ['Panoramiczny widok', 'Duży taras', 'Premium', '3 piętro'],
       description: 'Apartament Deluxe z dużym tarasem i panoramicznym widokiem.',
-      link: '/apartamenty/apartament-deluxe-b10',  // ✅ DODANE
+      link: '/apartamenty/apartament-deluxe-b10',
     },
   ];
 
+  // Hotres Plugin Integration
+  useEffect(() => {
+    if (hotresInitialized.current) return;
+
+    const loadScript = (src: string, id: string): Promise<void> => {
+      return new Promise((resolve, reject) => {
+        // Check if script already exists
+        if (document.getElementById(id)) {
+          resolve();
+          return;
+        }
+
+        const script = document.createElement('script');
+        script.id = id;
+        script.src = src;
+        script.async = true;
+        script.onload = () => resolve();
+        script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
+        document.body.appendChild(script);
+      });
+    };
+
+    const initializeHotres = async () => {
+      try {
+        // Load jQuery
+        await loadScript(
+          'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js',
+          'jquery-script'
+        );
+
+        // Load Hotres script
+        await loadScript(
+          'https://panel.hotres.pl/public/api/hotres_v4.js',
+          'hotres-script'
+        );
+
+        // Wait a bit for scripts to be fully ready
+        setTimeout(() => {
+          if (typeof window !== 'undefined' && (window as any).createHotres) {
+            (window as any).createHotres({
+              oid: 5226,
+              lang: 'pl'
+            });
+            hotresInitialized.current = true;
+          }
+        }, 100);
+      } catch (error) {
+        console.error('Error loading Hotres widget:', error);
+      }
+    };
+
+    initializeHotres();
+
+    return () => {
+      const container = document.getElementById('hotresContainer');
+      if (container) {
+        container.innerHTML = '';
+      }
+    };
+  }, []);
 
   // GSAP Animations
   useEffect(() => {
@@ -603,20 +662,18 @@ function RoomsGrid() {
                     </div>
                   </div>
 
-                  {/* ✅ POPRAWIONE */}
                   <AnimatedButton 
-                    href={room.link}  // lub href={`/apartamenty/${room.slug}`}
+                    href={room.link}
                     className="w-full"
-                    >
-        ZOBACZ SZCZEGÓŁY
-  </AnimatedButton>
-
+                  >
+                    ZOBACZ SZCZEGÓŁY
+                  </AnimatedButton>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* RIGHT - Booking Widget (Sticky) */}
+          {/* RIGHT - Booking Widget (Sticky) with Hotres */}
           <div className="lg:col-span-4">
             <div ref={bookingRef} className="sticky top-32">
               
@@ -630,78 +687,21 @@ function RoomsGrid() {
                     Sprawdź Dostępność
                   </h3>
 
-                  <div className="space-y-5">
-                    <div>
-                      <label className="block text-[10px] tracking-[0.2em] uppercase text-[#6e7a73] mb-2 font-light">
-                        Data przyjazdu
-                      </label>
-                      <input
-                        type="date"
-                        value={selectedDates.checkIn}
-                        onChange={(e) => setSelectedDates({...selectedDates, checkIn: e.target.value})}
-                        className="w-full px-4 py-3 bg-white border border-[#d4d6ce] text-[#0f0e0f] font-light focus:outline-none focus:border-[#8a968f] transition-all"
-                      />
-                    </div>
+                  {/* Hotres Plugin Container */}
+                  <div id="hotresContainer" className="hotres-widget"></div>
 
-                    <div>
-                      <label className="block text-[10px] tracking-[0.2em] uppercase text-[#6e7a73] mb-2 font-light">
-                        Data wyjazdu
-                      </label>
-                      <input
-                        type="date"
-                        value={selectedDates.checkOut}
-                        onChange={(e) => setSelectedDates({...selectedDates, checkOut: e.target.value})}
-                        className="w-full px-4 py-3 bg-white border border-[#d4d6ce] text-[#0f0e0f] font-light focus:outline-none focus:border-[#8a968f] transition-all"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-[10px] tracking-[0.2em] uppercase text-[#6e7a73] mb-2 font-light">
-                        Liczba gości
-                      </label>
-                      <select
-                        value={guests}
-                        onChange={(e) => setGuests(Number(e.target.value))}
-                        className="w-full px-4 py-3 bg-white border border-[#d4d6ce] text-[#0f0e0f] font-light focus:outline-none focus:border-[#8a968f] transition-all appearance-none bg-no-repeat bg-right pr-10"
-                        style={{
-                          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%238a968f'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
-                          backgroundSize: '20px',
-                          backgroundPosition: 'right 12px center'
-                        }}
-                      >
-                        {[1, 2, 3, 4, 5, 6].map(num => (
-                          <option key={num} value={num}>
-                            {num} {num === 1 ? 'osoba' : num < 5 ? 'osoby' : 'osób'}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <button className="w-full text-xs tracking-[0.25em] py-4 bg-[#8a968f] text-white hover:bg-[#7d8a83] transition-all mt-6 font-light">
-                      SPRAWDŹ DOSTĘPNOŚĆ
-                    </button>
-
-                    
-                  </div>
-
-                  <div className="mt-8 p-4 bg-white border border-[#d4d6ce]">
-                    <p className="text-xs text-[#6e7a73] font-light leading-relaxed">
-                      <strong className="font-normal">Uwaga:</strong> Tutaj zostanie zintegrowany plugin Hotresa. 
-                      Formularz jest już przygotowany i ostylowany.
-                    </p>
-                  </div>
                 </div>
 
               </div>
 
             </div>
           </div>
+
         </div>
       </div>
     </section>
   );
 }
-
 // Minimal Footer – Riva Zegrze - Professional Pastel Version
 function MinimalFooter() {
   return (
