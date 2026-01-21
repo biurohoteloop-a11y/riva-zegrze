@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Waves, MapPin, Phone, Mail, Instagram, Facebook, Twitter, Menu, X, Users, Bed, Maximize, Wifi, Coffee, Tv, Wind } from 'lucide-react';
+import Script from 'next/script';
+
 
 export default function RoomsPage() {
   return (
@@ -332,12 +334,10 @@ function AnimatedButton({
 
 
 // ============================================
-// Rooms Grid - Z ANIMATED BUTTON + HOTRES INTEGRATION
-// ============================================
 function RoomsGrid() {
   const roomsRef = useRef<HTMLDivElement>(null);
   const bookingRef = useRef<HTMLDivElement>(null);
-  const hotresInitialized = useRef(false);
+  const [hotresLoaded, setHotresLoaded] = useState(false);
 
   const rooms = [
     {
@@ -432,67 +432,6 @@ function RoomsGrid() {
       link: '/apartamenty/apartament-deluxe-b10',
     },
   ];
-
-  // Hotres Plugin Integration
-  useEffect(() => {
-    if (hotresInitialized.current) return;
-
-    const loadScript = (src: string, id: string): Promise<void> => {
-      return new Promise((resolve, reject) => {
-        // Check if script already exists
-        if (document.getElementById(id)) {
-          resolve();
-          return;
-        }
-
-        const script = document.createElement('script');
-        script.id = id;
-        script.src = src;
-        script.async = true;
-        script.onload = () => resolve();
-        script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
-        document.body.appendChild(script);
-      });
-    };
-
-    const initializeHotres = async () => {
-      try {
-        // Load jQuery
-        await loadScript(
-          'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js',
-          'jquery-script'
-        );
-
-        // Load Hotres script
-        await loadScript(
-          'https://panel.hotres.pl/public/api/hotres_v4.js',
-          'hotres-script'
-        );
-
-        // Wait a bit for scripts to be fully ready
-        setTimeout(() => {
-          if (typeof window !== 'undefined' && (window as any).createHotres) {
-            (window as any).createHotres({
-              oid: 5226,
-              lang: 'pl'
-            });
-            hotresInitialized.current = true;
-          }
-        }, 100);
-      } catch (error) {
-        console.error('Error loading Hotres widget:', error);
-      }
-    };
-
-    initializeHotres();
-
-    return () => {
-      const container = document.getElementById('hotresContainer');
-      if (container) {
-        container.innerHTML = '';
-      }
-    };
-  }, []);
 
   // GSAP Animations
   useEffect(() => {
@@ -592,116 +531,151 @@ function RoomsGrid() {
   }, []);
 
   return (
-    <section className="py-24 lg:py-32 bg-[#f7f6f4]">
-      <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
-        
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+    <>
+      {/* Hotres Script */}
+      <Script
+        src="https://panel.hotres.pl/public/api/hotres_popup.js"
+        strategy="afterInteractive"
+        onLoad={() => {
+          console.log('Hotres script loaded');
+          setHotresLoaded(true);
+        }}
+      />
+
+      <section className="py-24 lg:py-32 bg-[#f7f6f4]">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
           
-          {/* LEFT - Rooms List */}
-          <div ref={roomsRef} className="lg:col-span-8 space-y-16">
-            {rooms.map((room, idx) => (
-              <div 
-                key={idx} 
-                className="room-card grid grid-cols-1 md:grid-cols-2 gap-8 pb-16 border-b border-[#d4d6ce] last:border-0"
-              >
-                {/* Image with Frame */}
-                <div className="relative">
-                  <div className="relative bg-white p-3 shadow-lg">
-                    <div className="relative h-[400px] overflow-hidden group border border-[#e8e6e1]">
-                      <img 
-                        src={room.image}
-                        alt={room.name}
-                        className="room-image w-full h-full object-cover transition-transform duration-700"
-                      />
-                      
-                      <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 shadow-md">
-                        <span className="text-xs font-light text-[#0f0e0f]">{room.price}</span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+            
+            {/* LEFT - Rooms List */}
+            <div ref={roomsRef} className="lg:col-span-8 space-y-16">
+              {rooms.map((room, idx) => (
+                <div 
+                  key={idx} 
+                  className="room-card grid grid-cols-1 md:grid-cols-2 gap-8 pb-16 border-b border-[#d4d6ce] last:border-0"
+                >
+                  {/* Image with Frame */}
+                  <div className="relative">
+                    <div className="relative bg-white p-3 shadow-lg">
+                      <div className="relative h-[400px] overflow-hidden group border border-[#e8e6e1]">
+                        <img 
+                          src={room.image}
+                          alt={room.name}
+                          className="room-image w-full h-full object-cover transition-transform duration-700"
+                        />
+                        
+                        <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 shadow-md">
+                          <span className="text-xs font-light text-[#0f0e0f]">{room.price}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Info */}
-                <div className="flex flex-col justify-between">
-                  <div>
-                    <h3 
-                      className="text-3xl lg:text-4xl font-light text-[#0f0e0f] mb-4 leading-tight" 
-                      style={{ fontFamily: 'Playfair Display, serif' }}
-                    >
-                      {room.name}
-                    </h3>
-                    
-                    <div className="flex items-center gap-6 text-sm text-[#6e7a73] mb-6 font-light">
-                      <span className="flex items-center gap-2">
-                        <Maximize size={16} strokeWidth={1.5} />
-                        {room.size}
-                      </span>
-                      <span className="flex items-center gap-2">
-                        <Users size={16} strokeWidth={1.5} />
-                        {room.guests}
-                      </span>
-                      <span className="flex items-center gap-2">
-                        <Bed size={16} strokeWidth={1.5} />
-                        {room.beds}
-                      </span>
-                    </div>
-
-                    <p className="text-[#6e7a73] leading-relaxed mb-6 font-light">
-                      {room.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {room.amenities.map((amenity, i) => (
-                        <span 
-                          key={i} 
-                          className="px-3 py-1 bg-white border border-[#d4d6ce] text-xs text-[#6e7a73] font-light"
-                        >
-                          {amenity}
+                  {/* Info */}
+                  <div className="flex flex-col justify-between">
+                    <div>
+                      <h3 
+                        className="text-3xl lg:text-4xl font-light text-[#0f0e0f] mb-4 leading-tight" 
+                        style={{ fontFamily: 'Playfair Display, serif' }}
+                      >
+                        {room.name}
+                      </h3>
+                      
+                      <div className="flex items-center gap-6 text-sm text-[#6e7a73] mb-6 font-light">
+                        <span className="flex items-center gap-2">
+                          <Maximize size={16} strokeWidth={1.5} />
+                          {room.size}
                         </span>
-                      ))}
+                        <span className="flex items-center gap-2">
+                          <Users size={16} strokeWidth={1.5} />
+                          {room.guests}
+                        </span>
+                        <span className="flex items-center gap-2">
+                          <Bed size={16} strokeWidth={1.5} />
+                          {room.beds}
+                        </span>
+                      </div>
+
+                      <p className="text-[#6e7a73] leading-relaxed mb-6 font-light">
+                        {room.description}
+                      </p>
+
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {room.amenities.map((amenity, i) => (
+                          <span 
+                            key={i} 
+                            className="px-3 py-1 bg-white border border-[#d4d6ce] text-xs text-[#6e7a73] font-light"
+                          >
+                            {amenity}
+                          </span>
+                        ))}
+                      </div>
                     </div>
+
+                    <AnimatedButton 
+                      href={room.link}
+                      className="w-full"
+                    >
+                      ZOBACZ SZCZEGÓŁY
+                    </AnimatedButton>
                   </div>
-
-                  <AnimatedButton 
-                    href={room.link}
-                    className="w-full"
-                  >
-                    ZOBACZ SZCZEGÓŁY
-                  </AnimatedButton>
                 </div>
-              </div>
-            ))}
-          </div>
-
-          {/* RIGHT - Booking Widget (Sticky) with Hotres */}
-          <div className="lg:col-span-4">
-            <div ref={bookingRef} className="sticky top-32">
-              
-              <div className="relative bg-white p-3 shadow-lg">
-                
-                <div className="bg-[#f7f6f4] p-8 border border-[#e8e6e1]">
-                  <h3 
-                    className="text-2xl lg:text-3xl font-light text-[#0f0e0f] mb-6" 
-                    style={{ fontFamily: 'Playfair Display, serif' }}
-                  >
-                    Sprawdź Dostępność
-                  </h3>
-
-                  {/* Hotres Plugin Container */}
-                  <div id="hotresContainer" className="hotres-widget"></div>
-
-                </div>
-
-              </div>
-
+              ))}
             </div>
-          </div>
 
+            {/* RIGHT - Booking Widget (Sticky) */}
+<div className="lg:col-span-4">
+  <div ref={bookingRef} className="sticky top-32">
+    
+    <div className="relative bg-white p-3 shadow-lg">
+      
+      <div className="bg-[#f7f6f4] p-8 border border-[#e8e6e1]">
+        <h3 
+          className="text-2xl lg:text-3xl font-light text-[#0f0e0f] mb-6" 
+          style={{ fontFamily: 'Playfair Display, serif' }}
+        >
+          Rezerwacja
+        </h3>
+
+        <p className="text-sm text-[#6e7a73] font-light leading-relaxed mb-6">
+          Sprawdź dostępność i zarezerwuj swój apartament nad Jeziorem Zegrzyńskim.
+        </p>
+
+        {/* Nasz Custom Przycisk Rezerwacji */}
+        <div 
+          className="showHotres cursor-pointer"  
+          data-oid="5226" 
+          data-lang="pl" 
+          data-rid="31600"
+        >
+          <button className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-[#AB8A62] text-white text-sm tracking-[0.2em] uppercase font-light hover:bg-[#8a6e4d] transition-all duration-300 shadow-md hover:shadow-lg">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+            </svg>
+            <span>REZERWUJ TERAZ</span>
+          </button>
+        </div>
+
+        <div className="mt-8 p-4 bg-white border border-[#d4d6ce]">
+          <p className="text-xs text-[#6e7a73] font-light leading-relaxed">
+            <strong className="font-normal">Kontakt:</strong> W razie pytań skontaktuj się z nami telefonicznie lub mailowo.
+          </p>
         </div>
       </div>
-    </section>
+
+    </div>
+
+  </div>
+</div>
+
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
+  
+
 // Minimal Footer – Riva Zegrze - Professional Pastel Version
 function MinimalFooter() {
   return (
