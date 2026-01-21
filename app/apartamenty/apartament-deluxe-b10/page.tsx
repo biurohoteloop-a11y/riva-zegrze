@@ -431,11 +431,62 @@ function HeroGallery() {
 }
 
 // ============================================
-// 2. APARTMENT DETAILS - Z IKONAMI W HIGHLIGHTS
+// ============================================
+// 2. APARTMENT DETAILS WITH CALENDAR
 // ============================================
 function ApartmentDetails() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [calendarLoaded, setCalendarLoaded] = useState(false);
 
+  // Load Hotres scripts
+  useEffect(() => {
+    const loadHotresScripts = async () => {
+      const win = window as any;
+      
+      // jQuery
+      if (!win.jQuery) {
+        const jqueryScript = document.createElement('script');
+        jqueryScript.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js';
+        jqueryScript.async = true;
+        document.body.appendChild(jqueryScript);
+
+        await new Promise((resolve) => {
+          jqueryScript.onload = resolve;
+        });
+      }
+
+      // Hotres V4
+      const hotresScript = document.createElement('script');
+      hotresScript.src = 'https://panel.hotres.pl/public/api/hotres_v4.js';
+      hotresScript.async = true;
+      document.body.appendChild(hotresScript);
+
+      hotresScript.onload = () => {
+        if (win.createHotres) {
+          win.createHotres({
+            oid: 5226,
+            lang: 'pl',
+            tid: '43220', // ✅ B10 apartment ID
+            action: 'room/calendar'
+          });
+          setCalendarLoaded(true);
+        }
+      };
+    };
+
+    loadHotresScripts();
+
+    return () => {
+      const scripts = document.querySelectorAll('script[src*="hotres"], script[src*="jquery"]');
+      scripts.forEach(script => {
+        if (script.parentNode) {
+          script.parentNode.removeChild(script);
+        }
+      });
+    };
+  }, []);
+
+  // GSAP animations
   useEffect(() => {
     const initGSAP = async () => {
       if (typeof window !== 'undefined' && sectionRef.current) {
@@ -464,6 +515,7 @@ function ApartmentDetails() {
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
           
+          {/* LEFT - Description */}
           <div className="lg:col-span-2 space-y-12">
             
             {/* O apartamencie */}
@@ -547,42 +599,189 @@ function ApartmentDetails() {
 
           </div>
 
-          {/* RIGHT - Details Card */}
+          {/* ✅ RIGHT - KALENDARZ DOSTĘPNOŚCI B10 */}
           <div className="lg:col-span-1">
-            <div className="sticky top-32 bg-[#f7f6f4] p-8 border border-[#d4d6ce]">
+            <div className="sticky top-24 bg-gradient-to-br from-white to-[#f7f6f4] p-8 border border-[#d4d6ce] shadow-xl rounded-lg">
               
-              <h3 
-                className="text-2xl font-light text-[#4a6b5e] mb-6" 
-                style={{ fontFamily: 'Playfair Display, serif' }}
-              >
-                Szczegóły
-              </h3>
-
-              <div className="space-y-4">
-                {[
-                  { label: 'Powierzchnia', value: apartmentData.specs.size },
-                  { label: 'Max gości', value: `${apartmentData.specs.guests} osoby` },
-                  { label: 'Sypialnie', value: apartmentData.specs.bedrooms },
-                  { label: 'Łazienki', value: apartmentData.specs.bathrooms },
-                  { label: 'Piętro', value: apartmentData.specs.floor },
-                  { label: 'Taras', value: apartmentData.specs.terrace },
-                  { label: 'Parking', value: apartmentData.specs.parking },
-                ].map((item, idx) => (
-                  <div key={idx} className="flex justify-between items-center py-3 border-b border-[#d4d6ce] last:border-0">
-                    <span className="text-sm text-[#8a968f] uppercase tracking-wide">{item.label}</span>
-                    <span className="text-sm text-[#0f0e0f] font-medium text-right">{item.value}</span>
-                  </div>
-                ))}
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#4a6b5e] to-[#8a968f] flex items-center justify-center">
+                  <Calendar className="w-5 h-5 text-white" strokeWidth={1.5} />
+                </div>
+                <h3 
+                  className="text-2xl font-light text-[#4a6b5e]" 
+                  style={{ fontFamily: 'Playfair Display, serif' }}
+                >
+                  Dostępność
+                </h3>
               </div>
+
+              {/* Loading State */}
+              {!calendarLoaded && (
+                <div className="calendar-skeleton">
+                  <div className="skeleton-header"></div>
+                  <div className="skeleton-grid">
+                    {[...Array(35)].map((_, i) => (
+                      <div key={i} className="skeleton-day"></div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* ✅ Hotres Calendar Container */}
+              <div 
+                id="hotresContainer" 
+                className="hotres-calendar-wrapper"
+                style={{
+                  opacity: calendarLoaded ? 1 : 0,
+                  transition: 'opacity 0.5s ease'
+                }}
+                suppressHydrationWarning
+              ></div>
 
             </div>
           </div>
 
         </div>
       </div>
+
+      {/* ✅ PREMIUM CALENDAR STYLES */}
+      <style jsx global>{`
+        .hotres-calendar-wrapper {
+          min-height: 400px;
+        }
+
+        .calendar-skeleton {
+          animation: fadeIn 0.3s ease;
+        }
+
+        .skeleton-header {
+          height: 40px;
+          background: linear-gradient(90deg, #e0e0e0 0%, #f0f0f0 50%, #e0e0e0 100%);
+          background-size: 200% 100%;
+          animation: shimmer 1.5s infinite;
+          margin-bottom: 16px;
+          border-radius: 4px;
+        }
+
+        .skeleton-grid {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+          gap: 8px;
+        }
+
+        .skeleton-day {
+          height: 40px;
+          background: linear-gradient(90deg, #e0e0e0 0%, #f0f0f0 50%, #e0e0e0 100%);
+          background-size: 200% 100%;
+          animation: shimmer 1.5s infinite;
+          border-radius: 4px;
+        }
+
+        @keyframes shimmer {
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        #hotresContainer table {
+          width: 100%;
+          border-collapse: separate;
+          border-spacing: 4px;
+        }
+
+        #hotresContainer th {
+          padding: 12px 8px;
+          text-align: center;
+          font-size: 11px;
+          font-weight: 600;
+          color: #4a6b5e;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          background: transparent;
+          border: none;
+        }
+
+        #hotresContainer td {
+          padding: 0;
+          text-align: center;
+          border: none;
+        }
+
+        #hotresContainer td div,
+        #hotresContainer td a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 38px;
+          font-size: 13px;
+          font-weight: 400;
+          color: #0f0e0f;
+          border-radius: 6px;
+          transition: all 0.2s ease;
+          border: 1px solid transparent;
+        }
+
+        #hotresContainer td.available div,
+        #hotresContainer td.available a {
+          background: #e8f5e9;
+          border-color: #c8e6c9;
+          color: #2e7d32;
+        }
+
+        #hotresContainer td.available:hover div,
+        #hotresContainer td.available:hover a {
+          background: #c8e6c9;
+          border-color: #4a6b5e;
+          transform: scale(1.05);
+          box-shadow: 0 2px 8px rgba(74, 107, 94, 0.2);
+        }
+
+        #hotresContainer td.reserved div,
+        #hotresContainer td.reserved a,
+        #hotresContainer td.unavailable div,
+        #hotresContainer td.unavailable a {
+          background: #ffebee;
+          border-color: #ffcdd2;
+          color: #c62828;
+          cursor: not-allowed;
+        }
+
+        #hotresContainer td.checkin div,
+        #hotresContainer td.checkin a,
+        #hotresContainer td.checkout div,
+        #hotresContainer td.checkout a {
+          background: #fff3e0;
+          border-color: #ffe0b2;
+          color: #e65100;
+        }
+
+        #hotresContainer td.today div,
+        #hotresContainer td.today a {
+          border: 2px solid #4a6b5e !important;
+          font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+          #hotresContainer td div,
+          #hotresContainer td a {
+            min-height: 32px;
+            font-size: 12px;
+          }
+
+          #hotresContainer th {
+            font-size: 10px;
+            padding: 8px 4px;
+          }
+        }
+      `}</style>
     </section>
   );
 }
+
 
 // ============================================
 // 3. IMPORTANT INFO SECTION - POPRAWIONY GRID DLA 5 ELEMENTÓW
