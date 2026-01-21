@@ -29,14 +29,13 @@ function Navigation() {
   }, []);
 
   const navItems = [
-  { label: 'STRONA GŁÓWNA', href: '/' },
-  { label: 'O NAS', href: '/about' },
-  { label: 'APARTAMENTY', href: '/apartamenty' }, // ← ZMIEŃ z POKOJE
-  { label: 'AKTYWNOŚCI', href: '/activities' },
-  { label: 'GALERIA', href: '/galeria' },
-  { label: 'KONTAKT', href: '/contact' },
-];
-
+    { label: 'STRONA GŁÓWNA', href: '/' },
+    { label: 'O NAS', href: '/about' },
+    { label: 'APARTAMENTY', href: '/apartamenty' },
+    { label: 'AKTYWNOŚCI', href: '/activities' },
+    { label: 'GALERIA', href: '/galeria' },
+    { label: 'KONTAKT', href: '/contact' },
+  ];
 
   return (
     <>
@@ -50,7 +49,6 @@ function Navigation() {
         <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
           <div className="flex justify-between items-center h-20">
             
-            {/* Logo */}
             <a 
               href="/" 
               className="flex items-center gap-3 group"
@@ -71,7 +69,6 @@ function Navigation() {
               </span>
             </a>
             
-            {/* Desktop Menu */}
             <ul className="hidden lg:flex items-center gap-10">
               {navItems.map((item) => (
                 <li key={item.label} className="relative group">
@@ -82,7 +79,6 @@ function Navigation() {
                     }`}
                   >
                     {item.label}
-                    {/* Animated Underline */}
                     <span className={`absolute bottom-0 left-0 w-0 h-[1px] transition-all duration-300 group-hover:w-full ${
                       isScrolled ? 'bg-[#AB8A62]' : 'bg-white'
                     }`} />
@@ -91,7 +87,6 @@ function Navigation() {
               ))}
             </ul>
             
-            {/* Przycisk REZERWUJ */}
             <div className="hidden lg:flex items-center gap-6">
               <button 
                 className={`flex items-center gap-2 text-xs tracking-[0.2em] px-6 py-3 border transition-all duration-300 group ${
@@ -107,7 +102,6 @@ function Navigation() {
               </button>
             </div>
             
-            {/* Mobile Menu Button */}
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="lg:hidden z-50 relative"
@@ -126,7 +120,6 @@ function Navigation() {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
       <div 
         className={`fixed inset-0 bg-[#f1f1ed]/98 backdrop-blur-lg z-40 lg:hidden transition-all duration-500 ${
           isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
@@ -146,7 +139,6 @@ function Navigation() {
               }}
             >
               {item.label}
-              {/* Mobile Underline */}
               <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-[#AB8A62] transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
@@ -166,7 +158,6 @@ function Navigation() {
         </div>
       </div>
 
-      {/* Animation keyframes */}
       <style jsx global>{`
         @keyframes fadeIn {
           from {
@@ -183,9 +174,6 @@ function Navigation() {
   );
 }
 
-// ============================================
-// Hero Section - Z LOKALNYM ZDJĘCIEM
-// ============================================
 function RoomsHero() {
   const heroRef = useRef(null);
 
@@ -196,9 +184,9 @@ function RoomsHero() {
           const { jarallax } = await import('jarallax');
           jarallax(heroRef.current, { 
             speed: 0.6,
-            imgSrc: '/images/gallery/baner-pokoje/t3s-riva-zegrze-0446-m.jpg', // ← ZMIENIONE
+            imgSrc: '/images/gallery/baner-pokoje/t3s-riva-zegrze-0446-m.jpg',
             imgSize: 'cover',
-            imgPosition: 'center 60%', // Dostosowane dla mobile
+            imgPosition: 'center 60%',
           });
         } catch (error) {
           console.error('Jarallax error:', error);
@@ -230,8 +218,6 @@ function RoomsHero() {
       data-jarallax 
       data-speed="0.6"
     >
-      {/* Jarallax sam doda zdjęcie */}
-      
       <div className="absolute inset-0 bg-[#0f0e0f]/40 z-10" />
       
       <div className="relative z-20 text-center text-white px-6 max-w-4xl mx-auto">
@@ -252,9 +238,6 @@ function RoomsHero() {
   );
 }
 
-// ============================================
-// ANIMATED BUTTON COMPONENT - GSAP SLIDE
-// ============================================
 function AnimatedButton({ 
   children, 
   href, 
@@ -277,7 +260,6 @@ function AnimatedButton({
       try {
         const { gsap } = await import('gsap');
 
-        // Hover in - wypełnienie od lewej do prawej
         const handleMouseEnter = () => {
           gsap.to(fill, {
             scaleX: 1,
@@ -286,7 +268,6 @@ function AnimatedButton({
           });
         };
 
-        // Hover out - znika od prawej do lewej
         const handleMouseLeave = () => {
           gsap.to(fill, {
             scaleX: 0,
@@ -298,7 +279,6 @@ function AnimatedButton({
         button.addEventListener('mouseenter', handleMouseEnter);
         button.addEventListener('mouseleave', handleMouseLeave);
 
-        // Cleanup
         return () => {
           button.removeEventListener('mouseenter', handleMouseEnter);
           button.removeEventListener('mouseleave', handleMouseLeave);
@@ -317,14 +297,12 @@ function AnimatedButton({
       href={href}
       className={`relative overflow-hidden px-10 py-4 border border-[#8a968f] text-[#8a968f] text-xs tracking-[0.2em] uppercase font-light inline-flex items-center justify-center gap-2 group ${className}`}
     >
-      {/* Animated Fill - wypełnia od lewej */}
       <span
         ref={fillRef}
         className="absolute inset-0 bg-[#8a968f] origin-left z-0"
         style={{ transform: 'scaleX(0)' }}
       />
       
-      {/* Text - zawsze na wierzchu */}
       <span className="relative z-10 group-hover:text-white transition-colors duration-300">
         {children}
       </span>
@@ -332,12 +310,9 @@ function AnimatedButton({
   );
 }
 
-
-// ============================================
 function RoomsGrid() {
   const roomsRef = useRef<HTMLDivElement>(null);
   const bookingRef = useRef<HTMLDivElement>(null);
-  const [hotresLoaded, setHotresLoaded] = useState(false);
 
   const rooms = [
     {
@@ -433,7 +408,6 @@ function RoomsGrid() {
     },
   ];
 
-  // GSAP Animations
   useEffect(() => {
     const initAnimations = async () => {
       if (typeof window !== 'undefined') {
@@ -532,14 +506,11 @@ function RoomsGrid() {
 
   return (
     <>
-      {/* Hotres Script */}
+      {/* ✅ HOTRES SCRIPT - ŁADOWANY RAZ */}
       <Script
         src="https://panel.hotres.pl/public/api/hotres_popup.js"
         strategy="afterInteractive"
-        onLoad={() => {
-          console.log('Hotres script loaded');
-          setHotresLoaded(true);
-        }}
+        onLoad={() => console.log('✅ Hotres loaded')}
       />
 
       <section className="py-24 lg:py-32 bg-[#f7f6f4]">
@@ -554,7 +525,6 @@ function RoomsGrid() {
                   key={idx} 
                   className="room-card grid grid-cols-1 md:grid-cols-2 gap-8 pb-16 border-b border-[#d4d6ce] last:border-0"
                 >
-                  {/* Image with Frame */}
                   <div className="relative">
                     <div className="relative bg-white p-3 shadow-lg">
                       <div className="relative h-[400px] overflow-hidden group border border-[#e8e6e1]">
@@ -571,7 +541,6 @@ function RoomsGrid() {
                     </div>
                   </div>
 
-                  {/* Info */}
                   <div className="flex flex-col justify-between">
                     <div>
                       <h3 
@@ -623,50 +592,50 @@ function RoomsGrid() {
               ))}
             </div>
 
-            {/* RIGHT - Booking Widget (Sticky) */}
-<div className="lg:col-span-4">
-  <div ref={bookingRef} className="sticky top-32">
-    
-    <div className="relative bg-white p-3 shadow-lg">
-      
-      <div className="bg-[#f7f6f4] p-8 border border-[#e8e6e1]">
-        <h3 
-          className="text-2xl lg:text-3xl font-light text-[#0f0e0f] mb-6" 
-          style={{ fontFamily: 'Playfair Display, serif' }}
-        >
-          Rezerwacja
-        </h3>
+            {/* ✅ RIGHT - HOTRES BOOKING WIDGET */}
+            <div className="lg:col-span-4">
+              <div ref={bookingRef} className="sticky top-32">
+                
+                <div className="relative bg-white p-3 shadow-lg">
+                  
+                  <div className="bg-[#f7f6f4] p-8 border border-[#e8e6e1]">
+                    <h3 
+                      className="text-2xl lg:text-3xl font-light text-[#0f0e0f] mb-6" 
+                      style={{ fontFamily: 'Playfair Display, serif' }}
+                    >
+                      Rezerwacja
+                    </h3>
 
-        <p className="text-sm text-[#6e7a73] font-light leading-relaxed mb-6">
-          Sprawdź dostępność i zarezerwuj swój apartament nad Jeziorem Zegrzyńskim.
-        </p>
+                    <p className="text-sm text-[#6e7a73] font-light leading-relaxed mb-6">
+                      Sprawdź dostępność i zarezerwuj swój apartament nad Jeziorem Zegrzyńskim.
+                    </p>
 
-        {/* Nasz Custom Przycisk Rezerwacji */}
-        <div 
-          className="showHotres cursor-pointer"  
-          data-oid="5226" 
-          data-lang="pl" 
-          data-rid="31600"
-        >
-          <button className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-[#AB8A62] text-white text-sm tracking-[0.2em] uppercase font-light hover:bg-[#8a6e4d] transition-all duration-300 shadow-md hover:shadow-lg">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
-            </svg>
-            <span>REZERWUJ TERAZ</span>
-          </button>
-        </div>
+                    {/* ✅ HOTRES POPUP TRIGGER */}
+                    <div 
+                      className="showHotres cursor-pointer"  
+                      data-oid="5226" 
+                      data-lang="pl" 
+                      data-rid="31600"
+                    >
+                      <button className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-[#AB8A62] text-white text-sm tracking-[0.2em] uppercase font-light hover:bg-[#8a6e4d] transition-all duration-300 shadow-md hover:shadow-lg">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                        </svg>
+                        <span>REZERWUJ TERAZ</span>
+                      </button>
+                    </div>
 
-        <div className="mt-8 p-4 bg-white border border-[#d4d6ce]">
-          <p className="text-xs text-[#6e7a73] font-light leading-relaxed">
-            <strong className="font-normal">Kontakt:</strong> W razie pytań skontaktuj się z nami telefonicznie lub mailowo.
-          </p>
-        </div>
-      </div>
+                    <div className="mt-8 p-4 bg-white border border-[#d4d6ce]">
+                      <p className="text-xs text-[#6e7a73] font-light leading-relaxed">
+                        <strong className="font-normal">Kontakt:</strong> W razie pytań skontaktuj się z nami telefonicznie lub mailowo.
+                      </p>
+                    </div>
+                  </div>
 
-    </div>
+                </div>
 
-  </div>
-</div>
+              </div>
+            </div>
 
           </div>
         </div>
@@ -674,22 +643,18 @@ function RoomsGrid() {
     </>
   );
 }
-  
 
-// Minimal Footer – Riva Zegrze - Professional Pastel Version
 function MinimalFooter() {
   return (
     <footer className="bg-[#f1f1ed] text-[#1a4d2e] py-20 border-t border-[#d4d6ce]">
       <div className="max-w-[1800px] mx-auto px-8 lg:px-12">
         
-        {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-16">
           
-          {/* BRAND */}
           <div>
             <div className="flex items-center gap-3 mb-8">
               <svg className="w-8 h-8 text-[#AB8A62]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M20.893 13.393l-1.135-1.135a2.252 2.252 0 01-.421-.585l-1.08-2.16a.414.414 0 00-.663-.107.827.827 0 01-.812.21l-1.273-.363a.89.89 0 00-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.212.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 01-1.81 1.025 1.055 1.055 0 01-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.655-.261a2.25 2.25 0 01-1.383-2.46l.007-.042a2.25 2.25 0 01.29-.787l.09-.15a2.25 2.25 0 012.37-1.048l1.178.236a1.125 1.125 0 001.302-.795l.208-.73a1.125 1.125 0 00-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 01-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 01-1.458-1.137l1.411-2.353a2.25 2.25 0 00.286-.76m11.928 9.869A9 9 0 008.965 3.525m11.928 9.868A9 9 0 118.965 3.525" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M20.893 13.393l-1.135-1.135a2.252 2.252 0 01-.421-.585l-1.08-2.16a.414.414 0 00-.663-.107.827.827 0 01-.812.21l-1.273-.363a.89.89 0 00-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.212.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 001-1.81 1.025 1.055 1.055 0 01-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.655-.261a2.25 2.25 0 01-1.383-2.46l.007-.042a2.25 2.25 0 01.29-.787l.09-.15a2.25 2.25 0 012.37-1.048l1.178.236a1.125 1.125 0 001.302-.795l.208-.73a1.125 1.125 0 00-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 01-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 01-1.458-1.137l1.411-2.353a2.25 2.25 0 00.286-.76m11.928 9.869A9 9 0 008.965 3.525m11.928 9.868A9 9 0 118.965 3.525" />
               </svg>
               <span
                 className="text-2xl font-light tracking-[0.15em] text-[#1a4d2e]"
@@ -703,7 +668,6 @@ function MinimalFooter() {
               rezerwacja w wyjątkowej lokalizacji pod Warszawą.
             </p>
             
-            {/* Awards/Certifications */}
             <div className="flex items-center gap-3 pt-4">
               <div className="flex items-center gap-1">
                 {[...Array(5)].map((_, i) => (
@@ -716,14 +680,13 @@ function MinimalFooter() {
             </div>
           </div>
 
-          {/* NAVIGATION */}
           <div>
             <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
               Odkryj
             </h4>
             <ul className="space-y-3">
               {[
-                { label: 'Apartamenty', href: '/rooms' },
+                { label: 'Apartamenty', href: '/apartamenty' },
                 { label: 'Oferta Specjalna', href: '/offers' },
                 { label: 'Wellness & Spa', href: '/activities' },
                 { label: 'Galeria', href: '/galeria' },
@@ -742,7 +705,6 @@ function MinimalFooter() {
             </ul>
           </div> 
 
-          {/* CONTACT */}
           <div>
             <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
               Kontakt
@@ -778,7 +740,6 @@ function MinimalFooter() {
             </ul>
           </div>
 
-          {/* NEWSLETTER & SOCIAL */}
           <div>
             <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
               Newsletter
@@ -787,7 +748,6 @@ function MinimalFooter() {
               Bądź na bieżąco z ofertami specjalnymi
             </p>
             
-            {/* Newsletter Form */}
             <form className="mb-8">
               <div className="flex gap-2">
                 <input
@@ -806,21 +766,21 @@ function MinimalFooter() {
               </div>
             </form>
 
-            {/* Social */}
             <div className="space-y-3">
               <h5 className="text-xs tracking-[0.2em] uppercase font-light text-[#8a968f]">
                 Social Media
               </h5>
               <div className="flex gap-3">
                 {[
-                  { icon: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z', label: 'Instagram' },
-                  { icon: 'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z', label: 'Facebook' }
-                ].map((social, idx) => (
+                  { icon: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z', href: 'https://instagram.com' },
+                  { icon: 'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z', href: 'https://facebook.com' },
+                ].map((social, i) => (
                   <a
-                    key={idx}
-                    href="#"
-                    className="w-10 h-10 border border-[#d4d6ce] hover:border-[#AB8A62] flex items-center justify-center transition-all duration-300 text-[#8a968f] hover:text-[#AB8A62] hover:bg-white group"
-                    aria-label={social.label}
+                    key={i}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 flex items-center justify-center border border-[#d4d6ce] text-[#6e7a73] hover:border-[#AB8A62] hover:text-[#AB8A62] transition-all"
                   >
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d={social.icon} />
@@ -832,7 +792,6 @@ function MinimalFooter() {
           </div>
         </div>
 
-        {/* BOTTOM BAR - ✅ ZAKTUALIZOWANE LINKI */}
         <div className="border-t border-[#d4d6ce] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
             <p className="text-xs text-[#8a968f] font-light">
@@ -853,7 +812,6 @@ function MinimalFooter() {
             </a>
           </div>
           
-          {/* ✅ POPRAWIONE LINKI */}
           <div className="flex gap-6">
             {[
               { label: 'Polityka prywatności', href: '/polityka-prywatnosci' },
