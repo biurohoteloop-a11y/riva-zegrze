@@ -2773,7 +2773,7 @@ function MinimalFooter() {
             <ul className="space-y-3">
               {[
                 { label: 'Apartamenty', href: '/rooms' },
-                { label: 'Oferta Specjalna', href: '/offers' },
+                { label: 'Informacje o rezerwacji', href: '/informacje-o-rezerwacji' },
                 { label: 'Wellness & Spa', href: '/activities' },
                 { label: 'Galeria', href: '/galeria' },
                 { label: 'O Nas', href: '/about' },
@@ -2881,7 +2881,7 @@ function MinimalFooter() {
           </div>
         </div>
 
-        {/* BOTTOM BAR - ✅ ZAKTUALIZOWANE LINKI */}
+        {/* BOTTOM BAR - ✅ Z NIP */}
         <div className="border-t border-[#d4d6ce] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
             <p className="text-xs text-[#8a968f] font-light">
@@ -2902,11 +2902,12 @@ function MinimalFooter() {
             </a>
           </div>
           
-          {/* ✅ POPRAWIONE LINKI */}
-          <div className="flex gap-6">
+          {/* ✅ LINKI Z NIP */}
+          <div className="flex items-center gap-6">
             {[
               { label: 'Polityka prywatności', href: '/polityka-prywatnosci' },
               { label: 'Regulamin', href: '/regulamin' },
+              { label: 'Informacje o rezerwacji', href: '/informacje-o-rezerwacji' },
             ].map((item) => (
               <a
                 key={item.label}
@@ -2917,6 +2918,10 @@ function MinimalFooter() {
                 <span className="absolute bottom-0 left-0 w-0 h-px bg-[#AB8A62] transition-all duration-300 group-hover:w-full"></span>
               </a>
             ))}
+            <span className="text-[#d4d6ce]">•</span>
+            <span className="text-xs text-[#8a968f] font-light">
+              <span className="font-medium text-[#6e7a73]">NIP:</span> 5242877732
+            </span>
           </div>
         </div>
       </div>
