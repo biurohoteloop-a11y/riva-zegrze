@@ -74,8 +74,6 @@ export default function PolitykaPrywatnosciPage() {
             >
               <p className="mb-4">Administratorem danych osobowych jest:</p>
               <div className="bg-[#f1f1ed] p-6 rounded-lg border border-[#d4d6ce]">
-                <p className="font-medium text-[#1a4d2e] mb-2">Dominika Sworowska-Lis</p>
-                <p className="text-sm text-[#6e7a73] mb-1">działająca w ramach</p>
                 <p className="font-medium text-[#1a4d2e] mb-3">Open One Sp. z o.o. S.k.</p>
                 <div className="space-y-1 text-sm text-[#6e7a73]">
                   <p>ul. Odkryta 6/8</p>
@@ -218,7 +216,6 @@ export default function PolitykaPrywatnosciPage() {
   );
 }
 
-// ============================================
 // HELPER COMPONENTS
 // ============================================
 
