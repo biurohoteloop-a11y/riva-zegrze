@@ -19,6 +19,7 @@ export default function Navigation() {
   const navItems = [
   { label: 'Start', href: '/' },
   { label: 'Apartamenty', href: '/apartamenty' },
+  { label: 'Rezerwacja', href: '/rezerwacja' }, // ✅ NOWY LINK
   { label: 'O nas', href: '/o-nas' },
   { label: 'Galeria', href: '/galeria' },
   { label: 'Aktywności', href: '/aktywnosci' },

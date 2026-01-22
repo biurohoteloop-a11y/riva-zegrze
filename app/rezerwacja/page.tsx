@@ -1,376 +1,32 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image'; // ← DODANE
-import { Waves, Menu, X, ChevronLeft, ChevronRight, Maximize2, XCircle, Instagram, Facebook } from 'lucide-react';
+import { Waves, Menu, X } from 'lucide-react';
+import Script from 'next/script';
 
-// ============================================
-// 🎯 DANE GALERII - WSZYSTKIE 56 ZDJĘĆ
-// ============================================
-const galleryImages = [
-  {
-    id: 1,
-    url: '/images/gallery/apartamenty/D4.jpg',
-    category: 'Apartamenty',
-    title: 'Apartament Deluxe'
-  },
-  {
-    id: 2,
-    url: '/images/gallery/apartamenty/IMG_3614.jpg',
-    category: 'Apartamenty',
-    title: 'Luksusowy Salon'
-  },
-  {
-    id: 3,
-    url: '/images/gallery/apartamenty/IMG_3615.jpg',
-    category: 'Apartamenty',
-    title: 'Nowoczesna Sypialnia'
-  },
-  {
-    id: 4,
-    url: '/images/gallery/apartamenty/IMG_3616.jpg',
-    category: 'Apartamenty',
-    title: 'Elegancka Łazienka'
-  },
-  {
-    id: 5,
-    url: '/images/gallery/apartamenty/IMG_3617.jpg',
-    category: 'Apartamenty',
-    title: 'Przestronny Pokój'
-  },
-  {
-    id: 6,
-    url: '/images/gallery/apartamenty/IMG_3620.jpg',
-    category: 'Apartamenty',
-    title: 'Apartament Premium'
-  },
-  {
-    id: 7,
-    url: '/images/gallery/apartamenty/IMG_3621.jpg',
-    category: 'Apartamenty',
-    title: 'Komfortowa Przestrzeń'
-  },
-  {
-    id: 8,
-    url: '/images/gallery/apartamenty/IMG_3622.jpg',
-    category: 'Apartamenty',
-    title: 'Salon z Aneksem'
-  },
-  {
-    id: 9,
-    url: '/images/gallery/apartamenty/IMG_3648.jpg',
-    category: 'Apartamenty',
-    title: 'Strefa Dzienna'
-  },
-  {
-    id: 10,
-    url: '/images/gallery/apartamenty/IMG_3649.jpg',
-    category: 'Apartamenty',
-    title: 'Sypialnia Standard'
-  },
-  {
-    id: 11,
-    url: '/images/gallery/apartamenty/IMG_3650.jpg',
-    category: 'Apartamenty',
-    title: 'Wykończenie Premium'
-  },
-  {
-    id: 12,
-    url: '/images/gallery/apartamenty/IMG_3651.jpg',
-    category: 'Apartamenty',
-    title: 'Apartament Rodzinny'
-  },
-  {
-    id: 13,
-    url: '/images/gallery/apartamenty/IMG_3653.jpg',
-    category: 'Apartamenty',
-    title: 'Przestrzeń Relaksu'
-  },
-  {
-    id: 14,
-    url: '/images/gallery/apartamenty/IMG_4644.jpg',
-    category: 'Apartamenty',
-    title: 'Nowoczesny Design'
-  },
-  {
-    id: 15,
-    url: '/images/gallery/apartamenty/IMG_4647.jpg',
-    category: 'Apartamenty',
-    title: 'Apartament Widokowy'
-  },
-  {
-    id: 16,
-    url: '/images/gallery/apartamenty/IMG_4649.jpg',
-    category: 'Apartamenty',
-    title: 'Strefa Nocna'
-  },
-  {
-    id: 17,
-    url: '/images/gallery/apartamenty/IMG_4650.jpg',
-    category: 'Apartamenty',
-    title: 'Elegancki Wystrój'
-  },
-  {
-    id: 18,
-    url: '/images/gallery/apartamenty/IMG_4651.jpg',
-    category: 'Apartamenty',
-    title: 'Apartament Komfortowy'
-  },
-  {
-    id: 19,
-    url: '/images/gallery/apartamenty/IMG_4658.jpg',
-    category: 'Apartamenty',
-    title: 'Studio Apartment'
-  },
-  {
-    id: 20,
-    url: '/images/gallery/apartamenty/IMG_4659.jpg',
-    category: 'Apartamenty',
-    title: 'Jasna Przestrzeń'
-  },
-  {
-    id: 21,
-    url: '/images/gallery/apartamenty/IMG_4661.jpg',
-    category: 'Apartamenty',
-    title: 'Apartament Loftowy'
-  },
-  {
-    id: 22,
-    url: '/images/gallery/apartamenty/IMG_4665.jpg',
-    category: 'Apartamenty',
-    title: 'Przytulna Sypialnia'
-  },
-  {
-    id: 23,
-    url: '/images/gallery/apartamenty/IMG_4666.jpg',
-    category: 'Apartamenty',
-    title: 'Minimalistyczny Styl'
-  },
-  {
-    id: 24,
-    url: '/images/gallery/apartamenty/T3S-RivaZegrze-3107-m.jpg',
-    category: 'Apartamenty',
-    title: 'Penthouse Suite'
-  },
-  {
-    id: 25,
-    url: '/images/gallery/apartamenty/T3S-RivaZegrze-3296-m.jpg',
-    category: 'Apartamenty',
-    title: 'Ekskluzywny Apartament'
-  },
-  {
-    id: 26,
-    url: '/images/gallery/apartamenty/T3S-RivaZegrze-3311-m.jpg',
-    category: 'Apartamenty',
-    title: 'Wnętrze Premium'
-  },
-  {
-    id: 27,
-    url: '/images/gallery/apartamenty/T3S-RivaZegrze-3334-m.jpg',
-    category: 'Apartamenty',
-    title: 'Apartament z Widokiem'
-  },
-  {
-    id: 28,
-    url: '/images/gallery/apartamenty/T3S-RivaZegrze-3500-m.jpg',
-    category: 'Apartamenty',
-    title: 'Luksusowe Wnętrze'
-  },
-
-  // ============================================
-  // SIŁOWNIA I BASEN - 11 ZDJĘĆ
-// ============================================
-{
-  id: 29,
-  url: '/images/gallery/silownia/hantle silownia.jpg',
-  category: 'Siłownia i Basen',
-  title: 'Strefa Cardio'
-},
-{
-  id: 30,
-  url: '/images/gallery/silownia/rowerki silownia.jpg',
-  category: 'Siłownia i Basen',
-  title: 'Strefa Siłowa'
-},
-{
-  id: 31,
-  url: '/images/gallery/silownia/T3S-RivaZegrze-3376-m.jpg',
-  category: 'Siłownia i Basen',
-  title: 'Sprzęt Fitness'
-},
-{
-  id: 32,
-  url: '/images/gallery/silownia/T3S-RivaZegrze-3411-m.jpg',
-  category: 'Siłownia i Basen',
-  title: 'Sala Treningowa'
-},
-{
-  id: 33,
-  url: '/images/gallery/silownia/T3S-RivaZegrze-3689-m.jpg',
-  category: 'Siłownia i Basen',
-  title: 'Nowoczesny Wystrój'
-},
-{
-  id: 34,
-  url: '/images/gallery/silownia/T3S-RivaZegrze-3796-m.jpg',
-  category: 'Siłownia i Basen',
-  title: 'Basen Wewnętrzny'
-},
-{
-  id: 35,
-  url: '/images/gallery/silownia/T3S-RivaZegrze-4404-m.jpg',
-  category: 'Siłownia i Basen',
-  title: 'Sprzęt Profesjonalny'
-},
-{
-  id: 36,
-  url: '/images/gallery/silownia/T3S-RivaZegrze-RG-3885-m.jpg',
-  category: 'Siłownia i Basen',
-  title: 'Strefa Rozciągania'
-},
-{
-  id: 37,
-  url: '/images/gallery/silownia/T3S-RivaZegrze-RG-3969-m.jpg',
-  category: 'Siłownia i Basen',
-  title: 'Hantle i Ciężary'
-},
-{
-  id: 38,
-  url: '/images/gallery/silownia/widok silownia.jpg',
-  category: 'Siłownia i Basen',
-  title: 'Przestrzeń Fitness'
-},
-{
-  id: 39,
-  url: '/images/gallery/silownia/wnetrze silowni.jpg',
-  category: 'Siłownia i Basen',
-  title: 'Panorama Siłowni'
-},
-
-  // ============================================
-  // OKOLICA - 17 ZDJĘĆ (MUSISZ PODAĆ NAZWY PLIKÓW)
-  // ============================================
-  {
-    id: 40,
-    url: '/images/gallery/okolica/T3S-RivaZegrze-0412-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Okolica',
-    title: 'Widok na Zalew'
-  },
-  {
-    id: 41,
-    url: '/images/gallery/okolica/T3S-RivaZegrze-0430-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Okolica',
-    title: 'Panorama Jeziora'
-  },
-  {
-    id: 42,
-    url: '/images/gallery/okolica/T3S-RivaZegrze-0440-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Okolica',
-    title: 'Zachód Słońca'
-  },
-  {
-    id: 43,
-    url: '/images/gallery/okolica/T3S-RivaZegrze-0446-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Okolica',
-    title: 'Marina Zegrze'
-  },
-  {
-    id: 44,
-    url: '/images/gallery/okolica/T3S-RivaZegrze-0610-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Okolica',
-    title: 'Jezioro o Wschodzie'
-  },
-  {
-    id: 45,
-    url: '/images/gallery/okolica/T3S-RivaZegrze-0620-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Okolica',
-    title: 'Ogród z Tarasem'
-  },
-  {
-    id: 46,
-    url: '/images/gallery/okolica/T3S-RivaZegrze-0760-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Okolica',
-    title: 'Taras z Widokiem'
-  },
-  {
-    id: 47,
-    url: '/images/gallery/okolica/T3S-RivaZegrze-0903-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Okolica',
-    title: 'Basen Outdoor'
-  },
-  {
-    id: 48,
-    url: '/images/gallery/okolica/T3S-RivaZegrze-0940-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Okolica',
-    title: 'Plaża Prywatna'
-  },
-  {
-    id: 49,
-    url: '/images/gallery/okolica/T3S-RivaZegrze-2957-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Okolica',
-    title: 'Przystań Jachtowa'
-  },
-  {
-    id: 50,
-    url: '/images/gallery/okolica/T3S-RivaZegrze-3941-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Okolica',
-    title: 'Ścieżki Spacerowe'
-  },
-  {
-    id: 51,
-    url: '/images/gallery/okolica/T3S-RivaZegrze-3992-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Okolica',
-    title: 'Widok Wieczorny'
-  },
-  {
-    id: 52,
-    url: '/images/gallery/okolica/T3S-RivaZegrze-4158-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Okolica',
-    title: 'Natura Dookoła'
-  },
-  {
-    id: 53,
-    url: '/images/gallery/okolica/T3S-RivaZegrze-4168-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Okolica',
-    title: 'Elewacja Hotelu'
-  },
-  {
-    id: 54,
-    url: '/images/gallery/okolica/T3S-RivaZegrze-4175-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Okolica',
-    title: 'Wejście Główne'
-  },
-  {
-    id: 55,
-    url: '/images/gallery/okolica/T3S-RivaZegrze-4183-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Okolica',
-    title: 'Otoczenie Zielone'
-  },
-  {
-    id: 56,
-    url: '/images/gallery/okolica/T3S-RivaZegrze-RG-3669-m.jpg', // ← ZMIEŃ NA RZECZYWISTĄ NAZWĘ
-    category: 'Okolica',
-    title: 'Krajobraz nad Zalewem'
-  },
-];
-
-
-export default function GaleriaPage() {
+export default function RezerwacjaPage() {
   return (
     <>
+      {/* HotRes Scripts */}
+      <Script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+        strategy="beforeInteractive"
+      />
+      <Script
+        src="https://panel.hotres.pl/public/api/hotres_v4.js"
+        strategy="afterInteractive"
+      />
+
       <Navigation />
       <main className="relative bg-[#f1f1ed]">
-        <GalleryHero />
-        <GalleryGrid />
+        <ReservationHero />
+        <ReservationContent />
       </main>
       <MinimalFooter />
     </>
   );
 }
 
-// ============================================
-// NAVIGATION
-// ============================================
 function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -382,16 +38,13 @@ function Navigation() {
   }, []);
 
   const navItems = [
-  { label: 'STRONA GŁÓWNA', href: '/' },
-  { label: 'O NAS', href: '/about' },
-  { label: 'APARTAMENTY', href: '/apartamenty' },
-  { label: 'REZERWACJA', href: '/rezerwacja' }, // ✅ NOWY LINK
-  { label: 'AKTYWNOŚCI', href: '/activities' },
-  { label: 'GALERIA', href: '/galeria' },
-  { label: 'KONTAKT', href: '/contact' },
-];
-
-
+    { label: 'STRONA GŁÓWNA', href: '/' },
+    { label: 'O NAS', href: '/about' },
+    { label: 'APARTAMENTY', href: '/apartamenty' },
+    { label: 'AKTYWNOŚCI', href: '/activities' },
+    { label: 'GALERIA', href: '/galeria' },
+    { label: 'KONTAKT', href: '/contact' },
+  ];
 
   return (
     <>
@@ -405,7 +58,6 @@ function Navigation() {
         <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
           <div className="flex justify-between items-center h-20">
             
-            {/* Logo */}
             <a 
               href="/" 
               className="flex items-center gap-3 group"
@@ -426,7 +78,6 @@ function Navigation() {
               </span>
             </a>
             
-            {/* Desktop Menu */}
             <ul className="hidden lg:flex items-center gap-10">
               {navItems.map((item) => (
                 <li key={item.label} className="relative group">
@@ -445,7 +96,6 @@ function Navigation() {
               ))}
             </ul>
             
-            {/* Przycisk REZERWUJ */}
             <div className="hidden lg:flex items-center gap-6">
               <button 
                 className={`flex items-center gap-2 text-xs tracking-[0.2em] px-6 py-3 border transition-all duration-300 group ${
@@ -461,7 +111,6 @@ function Navigation() {
               </button>
             </div>
             
-            {/* Mobile Menu Button */}
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="lg:hidden z-50 relative"
@@ -480,7 +129,6 @@ function Navigation() {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
       <div 
         className={`fixed inset-0 bg-[#f1f1ed]/98 backdrop-blur-lg z-40 lg:hidden transition-all duration-500 ${
           isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
@@ -503,19 +151,6 @@ function Navigation() {
               <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-[#AB8A62] transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
-          <button 
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="mt-8 flex items-center gap-2 text-xs tracking-[0.2em] px-10 py-4 border border-[#AB8A62] text-[#AB8A62] hover:bg-[#AB8A62] hover:text-white backdrop-blur-sm transition-all"
-            style={{
-              animation: isMobileMenuOpen ? 'fadeIn 0.5s ease-out 0.6s forwards' : 'none',
-              opacity: 0
-            }}
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
-            </svg>
-            <span>REZERWUJ</span>
-          </button>
         </div>
       </div>
 
@@ -535,52 +170,69 @@ function Navigation() {
   );
 }
 
-// ============================================
-// ============================================
-function GalleryHero() {
-  const heroRef = useRef<HTMLElement | null>(null);
+function ReservationHero() {
+  const heroRef = useRef(null);
 
   useEffect(() => {
     const initParallax = async () => {
       if (typeof window !== 'undefined' && heroRef.current) {
-        const { jarallax } = await import('jarallax');
-
-        jarallax(heroRef.current, {
-          speed: 0.6,
-          imgSrc: '/images/gallery/baner-galeria/zdjecie-na-baner.jpg',
-          imgSize: 'cover',
-          imgPosition: 'center center',
-        });
+        try {
+          const { jarallax } = await import('jarallax');
+          jarallax(heroRef.current, { 
+            speed: 0.6,
+            imgSrc: '/images/gallery/okolica/T3S-RivaZegrze-4183-m.jpg',
+            imgSize: 'cover',
+            imgPosition: 'center center',
+          });
+        } catch (error) {
+          console.error('Jarallax error:', error);
+        }
       }
     };
 
-    initParallax();
+    const timer = setTimeout(() => {
+      initParallax();
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+      if (heroRef.current && typeof window !== 'undefined') {
+        try {
+          const { jarallax } = require('jarallax');
+          jarallax(heroRef.current, 'destroy');
+        } catch (e) {
+          // ignore
+        }
+      }
+    };
   }, []);
 
   return (
-    <section
-      ref={heroRef}
-      className="jarallax relative h-[70vh] flex items-center justify-center overflow-hidden"
-      data-jarallax
+    <section 
+      ref={heroRef} 
+      className="jarallax relative h-[50vh] md:h-[60vh] flex items-center justify-center overflow-hidden" 
+      data-jarallax 
       data-speed="0.6"
-      data-jarallax-img="/images/gallery/baner-galeria/zdjecie-na-baner.jpg"
+      style={{
+        backgroundImage: 'url(/images/gallery/okolica/T3S-RivaZegrze-4183-m.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center center',
+      }}
     >
-      <div className="absolute inset-0 bg-[#0f0e0f]/50 z-10" />
-
+      <div className="absolute inset-0 bg-[#0f0e0f]/40 z-10" />
+      
       <div className="relative z-20 text-center text-white px-6 max-w-4xl mx-auto">
         <span className="text-xs tracking-[0.4em] uppercase font-light opacity-80 mb-4 block">
           Riva Zegrze
         </span>
-
-        <h1
-          className="text-5xl md:text-7xl font-light mb-6 tracking-[0.15em] leading-tight"
+        <h1 
+          className="text-4xl md:text-6xl lg:text-7xl font-light mb-4 tracking-[0.15em] leading-tight" 
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
-          Galeria
+          Rezerwacja
         </h1>
-
-        <p className="text-base font-light opacity-90 max-w-2xl mx-auto leading-relaxed">
-          Odkryj piękno naszego obiektu • Wyselekcjonowane zdjęcia
+        <p className="text-sm md:text-base font-light opacity-90 max-w-2xl mx-auto leading-relaxed">
+          Zarezerwuj swój pobyt nad Jeziorem Zegrzyńskim
         </p>
       </div>
     </section>
@@ -588,55 +240,51 @@ function GalleryHero() {
 }
 
 
+function ReservationContent() {
+  const containerRef = useRef<HTMLDivElement>(null);
 
-// ============================================
-// GALLERY GRID – BEZ TITLE (TYLKO KATEGORIA)
-// ============================================
-function GalleryGrid() {
-  const [filter, setFilter] = useState('Wszystkie');
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [currentImage, setCurrentImage] = useState(0);
-  const gridRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    // HotRes initialization
+    if (typeof window !== 'undefined') {
+      const initHotRes = () => {
+        if ((window as any).createHotres) {
+          (window as any).createHotres({
+            oid: 5226,
+            lang: "pl"
+          });
+        }
+      };
 
-  const categories = ['Wszystkie', 'Apartamenty', 'Siłownia i Basen', 'Okolica'];
+      // Delay to ensure scripts are loaded
+      const timer = setTimeout(initHotRes, 500);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
-
-  const filteredImages =
-    filter === 'Wszystkie'
-      ? galleryImages
-      : galleryImages.filter((img) => img.category === filter);
-
-  // GSAP Animations
   useEffect(() => {
     const initAnimations = async () => {
-      if (typeof window !== 'undefined') {
+      if (typeof window !== 'undefined' && containerRef.current) {
         try {
           const { gsap } = await import('gsap');
           const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-
+          
           gsap.registerPlugin(ScrollTrigger);
 
-          const images = gridRef.current?.querySelectorAll('.gallery-item');
-
-          if (images) {
-            gsap.fromTo(
-              images,
-              { opacity: 0, y: 60, scale: 0.9 },
-              {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                duration: 0.8,
-                ease: 'power3.out',
-                stagger: 0.1,
-                scrollTrigger: {
-                  trigger: gridRef.current,
-                  start: 'top 80%',
-                  end: 'bottom 20%',
-                },
+          gsap.fromTo(
+            containerRef.current,
+            { opacity: 0, y: 40 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 1,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: containerRef.current,
+                start: 'top 80%',
+                toggleActions: 'play none none none',
               }
-            );
-          }
+            }
+          );
         } catch (error) {
           console.error('GSAP animation error:', error);
         }
@@ -644,136 +292,116 @@ function GalleryGrid() {
     };
 
     initAnimations();
-  }, [filter]);
 
-  const openLightbox = (index: number) => {
-    setCurrentImage(index);
-    setLightboxOpen(true);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeLightbox = () => {
-    setLightboxOpen(false);
-    document.body.style.overflow = 'auto';
-  };
-
-  const nextImage = () =>
-    setCurrentImage((prev) => (prev + 1) % filteredImages.length);
-
-  const prevImage = () =>
-    setCurrentImage(
-      (prev) => (prev - 1 + filteredImages.length) % filteredImages.length
-    );
-
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!lightboxOpen) return;
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowRight') nextImage();
-      if (e.key === 'ArrowLeft') prevImage();
+    return () => {
+      if (typeof window !== 'undefined') {
+        const ScrollTrigger = require('gsap/ScrollTrigger').ScrollTrigger;
+        ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill());
+      }
     };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxOpen]);
+  }, []);
 
   return (
-    <section className="py-24 lg:py-32 bg-[#f7f6f4]">
-      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
-        {/* FILTER BUTTONS */}
-        <div className="flex flex-wrap justify-center gap-4 mb-16">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setFilter(cat)}
-              className={`text-xs tracking-[0.2em] px-6 py-3 border transition-all font-light ${
-                filter === cat
-                  ? 'bg-[#8a968f] text-white border-[#8a968f]'
-                  : 'border-[#d4d6ce] text-[#6e7a73] hover:border-[#8a968f] hover:text-[#8a968f]'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+    <section className="py-16 lg:py-24 bg-[#f7f6f4]">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+        
+        {/* Info Section */}
+        <div ref={containerRef} className="text-center mb-12 max-w-3xl mx-auto">
+          <h2 
+            className="text-3xl lg:text-4xl font-light text-[#0f0e0f] mb-4"
+            style={{ fontFamily: 'Playfair Display, serif' }}
+          >
+            Zarezerwuj Bezpośrednio
+          </h2>
+          <p className="text-[#6e7a73] text-sm lg:text-base font-light leading-relaxed">
+            Wybierz termin swojego pobytu i zarezerwuj apartament nad Jeziorem Zegrzyńskim. 
+            Rezerwacja bezpośrednia gwarantuje najlepszą cenę i elastyczne warunki.
+          </p>
         </div>
 
-        {/* GALLERY GRID */}
-        <div
-          ref={gridRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-        >
-          {filteredImages.map((image, idx) => (
-            <div
-              key={image.id}
-              className="gallery-item group relative aspect-square overflow-hidden cursor-pointer bg-white border border-[#e8e6e1]"
-              onClick={() => openLightbox(idx)}
-            >
-              <Image
-                src={image.url}
-                alt={image.category}
-                fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
-                quality={85}
-                loading="lazy"
-              />
-
-              {/* OVERLAY – TYLKO KATEGORIA */}
-              <div className="absolute inset-0 bg-[#0f0e0f]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white">
-                <span className="text-xs tracking-[0.35em] uppercase font-light">
-                  {image.category}
-                </span>
-              </div>
-            </div>
-          ))}
+        {/* HotRes Plugin Container */}
+        <div className="bg-white border border-[#d4d6ce] shadow-lg p-4 lg:p-8">
+          <div id="hotresContainer"></div>
         </div>
-      </div>
 
-      {/* LIGHTBOX */}
-      {lightboxOpen && (
-        <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center">
-          <button
-            onClick={closeLightbox}
-            className="absolute top-6 right-6 text-white"
-          >
-            <XCircle size={32} />
-          </button>
-
-          <button
-            onClick={prevImage}
-            className="absolute left-6 text-white"
-          >
-            <ChevronLeft size={32} />
-          </button>
-
-          <button
-            onClick={nextImage}
-            className="absolute right-6 text-white"
-          >
-            <ChevronRight size={32} />
-          </button>
-
-          <div className="relative w-full h-full max-w-7xl max-h-[90vh]">
-            <Image
-              src={filteredImages[currentImage]?.url || ''}
-              alt={filteredImages[currentImage]?.category || ''}
-              fill
-              className="object-contain"
-              quality={95}
-              priority
-            />
-            <div className="absolute bottom-0 left-0 right-0 text-center text-white text-xs tracking-[0.3em] uppercase p-6">
-              {filteredImages[currentImage]?.category} • {currentImage + 1} /{' '}
-              {filteredImages.length}
+        {/* Additional Info */}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          
+          <div className="text-center">
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-[#8a968f]/10 rounded-full mb-4">
+              <svg className="w-6 h-6 text-[#8a968f]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
             </div>
+            <h3 className="text-lg font-light text-[#0f0e0f] mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>
+              Najlepsza Cena
+            </h3>
+            <p className="text-sm text-[#6e7a73] font-light leading-relaxed">
+              Gwarantujemy najniższą cenę przy rezerwacji bezpośredniej
+            </p>
+          </div>
+
+          <div className="text-center">
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-[#8a968f]/10 rounded-full mb-4">
+              <svg className="w-6 h-6 text-[#8a968f]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-light text-[#0f0e0f] mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>
+              Elastyczne Warunki
+            </h3>
+            <p className="text-sm text-[#6e7a73] font-light leading-relaxed">
+              Możliwość zmiany lub anulowania rezerwacji zgodnie z regulaminem
+            </p>
+          </div>
+
+          <div className="text-center">
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-[#8a968f]/10 rounded-full mb-4">
+              <svg className="w-6 h-6 text-[#8a968f]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-light text-[#0f0e0f] mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>
+              Wsparcie 24/7
+            </h3>
+            <p className="text-sm text-[#6e7a73] font-light leading-relaxed">
+              Bezpośredni kontakt z nami w każdej sprawie dotyczącej pobytu
+            </p>
+          </div>
+
+        </div>
+
+        {/* Contact Info */}
+        <div className="mt-12 text-center">
+          <p className="text-sm text-[#6e7a73] font-light mb-4">
+            Potrzebujesz pomocy z rezerwacją? Skontaktuj się z nami:
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-6">
+            <a 
+              href="tel:+48510038038" 
+              className="flex items-center gap-2 text-sm text-[#6e7a73] hover:text-[#0f0e0f] transition-colors"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+              </svg>
+              <span>+48 510 038 038</span>
+            </a>
+            <a 
+              href="mailto:wynajem@rivazegrze.pl" 
+              className="flex items-center gap-2 text-sm text-[#6e7a73] hover:text-[#0f0e0f] transition-colors"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+              </svg>
+              <span>wynajem@rivazegrze.pl</span>
+            </a>
           </div>
         </div>
-      )}
+
+      </div>
     </section>
   );
 }
-
 // Minimal Footer – Riva Zegrze - Professional Pastel Version
 function MinimalFooter() {
   return (

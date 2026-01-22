@@ -148,13 +148,14 @@ function Navigation() {
   }, []);
 
   const navItems = [
-  { label: 'STRONA GŁÓWNA', href: '/' },
-  { label: 'O NAS', href: '/about' },
-  { label: 'APARTAMENTY', href: '/apartamenty' },
-  { label: 'AKTYWNOŚCI', href: '/activities' }, // ✅ Zmieniono z /aktywnosci
-  { label: 'GALERIA', href: '/galeria' },
-  { label: 'KONTAKT', href: '/contact' },
-];
+    { label: 'STRONA GŁÓWNA', href: '/' },
+    { label: 'O NAS', href: '/about' },
+    { label: 'APARTAMENTY', href: '/apartamenty' },
+    { label: 'REZERWACJA', href: '/rezerwacja' }, // ✅ NOWY LINK
+    { label: 'AKTYWNOŚCI', href: '/activities' },
+    { label: 'GALERIA', href: '/galeria' },
+    { label: 'KONTAKT', href: '/contact' },
+  ];
 
   return (
     <>

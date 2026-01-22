@@ -2,8 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Waves, MapPin, Phone, Mail, Instagram, Facebook, Twitter, Menu, X, Users, Bed, Maximize, Wifi, Coffee, Tv, Wind } from 'lucide-react';
-import Script from 'next/script';
-
 
 export default function RoomsPage() {
   return (
@@ -29,13 +27,14 @@ function Navigation() {
   }, []);
 
   const navItems = [
-    { label: 'STRONA GŁÓWNA', href: '/' },
-    { label: 'O NAS', href: '/about' },
-    { label: 'APARTAMENTY', href: '/apartamenty' },
-    { label: 'AKTYWNOŚCI', href: '/activities' },
-    { label: 'GALERIA', href: '/galeria' },
-    { label: 'KONTAKT', href: '/contact' },
-  ];
+  { label: 'STRONA GŁÓWNA', href: '/' },
+  { label: 'O NAS', href: '/about' },
+  { label: 'APARTAMENTY', href: '/apartamenty' },
+  { label: 'REZERWACJA', href: '/rezerwacja' }, // ✅ NOWY LINK
+  { label: 'AKTYWNOŚCI', href: '/activities' },
+  { label: 'GALERIA', href: '/galeria' },
+  { label: 'KONTAKT', href: '/contact' },
+];
 
   return (
     <>
@@ -312,7 +311,7 @@ function AnimatedButton({
 
 function RoomsGrid() {
   const roomsRef = useRef<HTMLDivElement>(null);
-  const bookingRef = useRef<HTMLDivElement>(null);
+  const bannerRef = useRef<HTMLDivElement>(null);
 
   const rooms = [
     {
@@ -417,76 +416,79 @@ function RoomsGrid() {
           
           gsap.registerPlugin(ScrollTrigger);
 
+          // Room cards animation
           const roomCards = roomsRef.current?.querySelectorAll('.room-card');
           
           if (roomCards) {
             gsap.fromTo(
               roomCards,
-              {
-                opacity: 0,
-                y: 80,
-                scale: 0.95
-              },
+              { opacity: 0, y: 60, scale: 0.98 },
               {
                 opacity: 1,
                 y: 0,
                 scale: 1,
-                duration: 1,
+                duration: 0.8,
                 ease: 'power3.out',
-                stagger: 0.2,
+                stagger: 0.15,
                 scrollTrigger: {
                   trigger: roomsRef.current,
                   start: 'top 80%',
-                  end: 'bottom 20%',
                   toggleActions: 'play none none none',
                 }
               }
             );
+
+            roomCards?.forEach((card) => {
+              const img = card.querySelector('.room-image');
+              if (img) {
+                card.addEventListener('mouseenter', () => {
+                  gsap.to(img, { scale: 1.08, duration: 0.6, ease: 'power2.out' });
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                  gsap.to(img, { scale: 1, duration: 0.6, ease: 'power2.out' });
+                });
+              }
+            });
           }
 
-          if (bookingRef.current) {
+          // Banner animations
+          if (bannerRef.current) {
             gsap.fromTo(
-              bookingRef.current,
-              {
-                opacity: 0,
-                x: 50,
-                scale: 0.95
-              },
+              bannerRef.current,
+              { opacity: 0, y: 40 },
               {
                 opacity: 1,
-                x: 0,
-                scale: 1,
+                y: 0,
                 duration: 1,
                 ease: 'power3.out',
                 scrollTrigger: {
-                  trigger: bookingRef.current,
-                  start: 'top 80%',
+                  trigger: bannerRef.current,
+                  start: 'top 75%',
+                  toggleActions: 'play none none none',
+                }
+              }
+            );
+
+            // Benefit items stagger
+            const benefits = bannerRef.current.querySelectorAll('.benefit-item');
+            gsap.fromTo(
+              benefits,
+              { opacity: 0, x: -15 },
+              {
+                opacity: 1,
+                x: 0,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                  trigger: bannerRef.current,
+                  start: 'top 70%',
                   toggleActions: 'play none none none',
                 }
               }
             );
           }
-
-          roomCards?.forEach((card) => {
-            const img = card.querySelector('.room-image');
-            if (img) {
-              card.addEventListener('mouseenter', () => {
-                gsap.to(img, {
-                  scale: 1.1,
-                  duration: 0.6,
-                  ease: 'power2.out'
-                });
-              });
-              
-              card.addEventListener('mouseleave', () => {
-                gsap.to(img, {
-                  scale: 1,
-                  duration: 0.6,
-                  ease: 'power2.out'
-                });
-              });
-            }
-          });
 
         } catch (error) {
           console.error('GSAP animation error:', error);
@@ -505,144 +507,192 @@ function RoomsGrid() {
   }, []);
 
   return (
-    <>
-      {/* ✅ HOTRES SCRIPT - ŁADOWANY RAZ */}
-      <Script
-        src="https://panel.hotres.pl/public/api/hotres_popup.js"
-        strategy="afterInteractive"
-        onLoad={() => console.log('✅ Hotres loaded')}
-      />
-
-      <section className="py-24 lg:py-32 bg-[#f7f6f4]">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
+    <section className="py-24 lg:py-32 bg-[#f7f6f4]">
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-            
-            {/* LEFT - Rooms List */}
-            <div ref={roomsRef} className="lg:col-span-8 space-y-16">
-              {rooms.map((room, idx) => (
-                <div 
-                  key={idx} 
-                  className="room-card grid grid-cols-1 md:grid-cols-2 gap-8 pb-16 border-b border-[#d4d6ce] last:border-0"
-                >
-                  <div className="relative">
-                    <div className="relative bg-white p-3 shadow-lg">
-                      <div className="relative h-[400px] overflow-hidden group border border-[#e8e6e1]">
-                        <img 
-                          src={room.image}
-                          alt={room.name}
-                          className="room-image w-full h-full object-cover transition-transform duration-700"
-                        />
-                        
-                        <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 shadow-md">
-                          <span className="text-xs font-light text-[#0f0e0f]">{room.price}</span>
-                        </div>
+          {/* LEFT - Rooms List */}
+          <div ref={roomsRef} className="lg:col-span-8 space-y-16">
+            {rooms.map((room, idx) => (
+              <div
+                key={idx}
+                className="room-card grid grid-cols-1 md:grid-cols-2 gap-8 pb-16 border-b border-[#d4d6ce] last:border-0"
+              >
+                <div className="relative">
+                  <div className="relative bg-white p-3 shadow-lg">
+                    <div className="relative h-[400px] overflow-hidden group border border-[#e8e6e1]">
+                      <img
+                        src={room.image}
+                        alt={room.name}
+                        className="room-image w-full h-full object-cover transition-transform duration-700"
+                      />
+                      <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 shadow-md">
+                        <span className="text-xs font-light text-[#0f0e0f]">{room.price}</span>
                       </div>
                     </div>
-                  </div>
-
-                  <div className="flex flex-col justify-between">
-                    <div>
-                      <h3 
-                        className="text-3xl lg:text-4xl font-light text-[#0f0e0f] mb-4 leading-tight" 
-                        style={{ fontFamily: 'Playfair Display, serif' }}
-                      >
-                        {room.name}
-                      </h3>
-                      
-                      <div className="flex items-center gap-6 text-sm text-[#6e7a73] mb-6 font-light">
-                        <span className="flex items-center gap-2">
-                          <Maximize size={16} strokeWidth={1.5} />
-                          {room.size}
-                        </span>
-                        <span className="flex items-center gap-2">
-                          <Users size={16} strokeWidth={1.5} />
-                          {room.guests}
-                        </span>
-                        <span className="flex items-center gap-2">
-                          <Bed size={16} strokeWidth={1.5} />
-                          {room.beds}
-                        </span>
-                      </div>
-
-                      <p className="text-[#6e7a73] leading-relaxed mb-6 font-light">
-                        {room.description}
-                      </p>
-
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {room.amenities.map((amenity, i) => (
-                          <span 
-                            key={i} 
-                            className="px-3 py-1 bg-white border border-[#d4d6ce] text-xs text-[#6e7a73] font-light"
-                          >
-                            {amenity}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <AnimatedButton 
-                      href={room.link}
-                      className="w-full"
-                    >
-                      ZOBACZ SZCZEGÓŁY
-                    </AnimatedButton>
                   </div>
                 </div>
-              ))}
-            </div>
 
-            {/* ✅ RIGHT - HOTRES BOOKING WIDGET */}
-            <div className="lg:col-span-4">
-              <div ref={bookingRef} className="sticky top-32">
-                
-                <div className="relative bg-white p-3 shadow-lg">
-                  
-                  <div className="bg-[#f7f6f4] p-8 border border-[#e8e6e1]">
-                    <h3 
-                      className="text-2xl lg:text-3xl font-light text-[#0f0e0f] mb-6" 
-                      style={{ fontFamily: 'Playfair Display, serif' }}
+                <div className="flex flex-col justify-between">
+                  <div>
+                    <h3
+                      className="text-3xl lg:text-4xl font-light text-[#0f0e0f] mb-4 leading-tight"
+                      style={{ fontFamily: "Playfair Display, serif" }}
                     >
-                      Rezerwacja
+                      {room.name}
                     </h3>
 
-                    <p className="text-sm text-[#6e7a73] font-light leading-relaxed mb-6">
-                      Sprawdź dostępność i zarezerwuj swój apartament nad Jeziorem Zegrzyńskim.
-                    </p>
-
-                    {/* ✅ HOTRES POPUP TRIGGER */}
-                    <div 
-                      className="showHotres cursor-pointer"  
-                      data-oid="5226" 
-                      data-lang="pl" 
-                      data-rid="31600"
-                    >
-                      <button className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-[#AB8A62] text-white text-sm tracking-[0.2em] uppercase font-light hover:bg-[#8a6e4d] transition-all duration-300 shadow-md hover:shadow-lg">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
-                        </svg>
-                        <span>REZERWUJ TERAZ</span>
-                      </button>
+                    <div className="flex items-center gap-6 text-sm text-[#6e7a73] mb-6 font-light">
+                      <span className="flex items-center gap-2">
+                        <Maximize size={16} strokeWidth={1.5} />
+                        {room.size}
+                      </span>
+                      <span className="flex items-center gap-2">
+                        <Users size={16} strokeWidth={1.5} />
+                        {room.guests}
+                      </span>
+                      <span className="flex items-center gap-2">
+                        <Bed size={16} strokeWidth={1.5} />
+                        {room.beds}
+                      </span>
                     </div>
 
-                    <div className="mt-8 p-4 bg-white border border-[#d4d6ce]">
-                      <p className="text-xs text-[#6e7a73] font-light leading-relaxed">
-                        <strong className="font-normal">Kontakt:</strong> W razie pytań skontaktuj się z nami telefonicznie lub mailowo.
-                      </p>
+                    <p className="text-[#6e7a73] leading-relaxed mb-6 font-light">
+                      {room.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {room.amenities.map((amenity, i) => (
+                        <span
+                          key={i}
+                          className="px-3 py-1 bg-white border border-[#d4d6ce] text-xs text-[#6e7a73] font-light"
+                        >
+                          {amenity}
+                        </span>
+                      ))}
                     </div>
                   </div>
 
+                  <AnimatedButton href={room.link} className="w-full">
+                    ZOBACZ SZCZEGÓŁY
+                  </AnimatedButton>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* 🎯 RIGHT - MINIMALIST PROMO BANNER */}
+          <div className="lg:col-span-4">
+            <div ref={bannerRef} className="sticky top-32">
+              <div className="bg-white border border-[#d4d6ce] shadow-sm">
+                
+                {/* Image Header */}
+                <div className="relative h-[240px] overflow-hidden">
+                  <img
+                    src="/images/gallery/baner-kontakt/zdjecie-kontakt.jpg"
+                    alt="Riva Zegrze - Rezerwuj Bezpośrednio"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f0e0f]/50 via-[#0f0e0f]/20 to-transparent" />
+                  
+                  {/* Marketing Badge */}
+                  <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-5 py-3 shadow-md">
+                    <p className="text-xs text-[#6e7a73] font-light tracking-wide leading-tight text-center">
+                      Rezerwuj<br/>
+                      <span className="text-[#0f0e0f] font-normal">Bezpośrednio</span>
+                    </p>
+                  </div>
                 </div>
 
+                {/* Content */}
+                <div className="p-8">
+                  
+                  {/* Headline */}
+                  <h3 
+                    className="text-2xl lg:text-3xl font-light text-[#0f0e0f] mb-2 leading-tight"
+                    style={{ fontFamily: 'Playfair Display, serif' }}
+                  >
+                    Najlepsza Cena<br/>Gwarantowana
+                  </h3>
+
+                  <p className="text-[#6e7a73] text-sm font-light mb-6 leading-relaxed">
+                    Rezerwując przez naszą stronę, zawsze otrzymujesz najlepszą dostępną cenę
+                  </p>
+
+                  {/* Benefits List */}
+                  <div className="space-y-3 mb-8">
+                    {[
+                      { icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z', text: 'Najlepsza cena na rynku' },
+                      { icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z', text: 'Gwarancja najniższej stawki' },
+                      { icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z', text: 'Elastyczne warunki rezerwacji' },
+                      { icon: 'M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z', text: 'Bezpośredni kontakt z nami' },
+                      { icon: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z', text: 'Specjalne oferty dla stałych gości' },
+                    ].map((benefit, i) => (
+                      <div key={i} className="benefit-item flex items-start gap-3">
+                        <svg className="w-5 h-5 text-[#8a968f] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d={benefit.icon} />
+                        </svg>
+                        <span className="text-sm text-[#6e7a73] font-light leading-relaxed">
+                          {benefit.text}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Info Box */}
+                  <div className="bg-[#f7f6f4] border border-[#d4d6ce] p-4 mb-6">
+                    <p className="text-xs text-[#6e7a73] font-light leading-relaxed">
+                      <strong className="font-normal text-[#0f0e0f]">Dlaczego warto?</strong> Rezerwując bezpośrednio przez naszą stronę, omijasz prowizje portali rezerwacyjnych i płacisz mniej.
+                    </p>
+                  </div>
+
+                  {/* Contact Info */}
+                  <div className="pt-6 border-t border-[#d4d6ce] space-y-3">
+                    <a 
+                      href="tel:+48510038038" 
+                      className="flex items-center gap-3 text-sm text-[#6e7a73] font-light hover:text-[#0f0e0f] transition-colors group"
+                    >
+                      <svg className="w-5 h-5 text-[#8a968f] group-hover:text-[#0f0e0f] transition-colors" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                      </svg>
+                      <span>+48 510 038 038</span>
+                    </a>
+                    <a 
+                      href="mailto:wynajem@rivazegrze.pl" 
+                      className="flex items-center gap-3 text-sm text-[#6e7a73] font-light hover:text-[#0f0e0f] transition-colors group"
+                    >
+                      <svg className="w-5 h-5 text-[#8a968f] group-hover:text-[#0f0e0f] transition-colors" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                      </svg>
+                      <span>wynajem@rivazegrze.pl</span>
+                    </a>
+                  </div>
+
+                  {/* Trust Badge */}
+                  <div className="mt-6 pt-6 border-t border-[#d4d6ce] text-center">
+                    <div className="flex items-center justify-center gap-1 mb-2">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-4 h-4 text-[#8a968f]" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
+                    <p className="text-xs text-[#6e7a73] font-light">
+                      Zaufało nam ponad <strong className="font-normal text-[#0f0e0f]">500+ gości</strong>
+                    </p>
+                  </div>
+
+                </div>
               </div>
             </div>
-
           </div>
+
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
+
 
 function MinimalFooter() {
   return (
@@ -703,7 +753,7 @@ function MinimalFooter() {
                 </li>
               ))}
             </ul>
-          </div> 
+          </div>
 
           <div>
             <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
