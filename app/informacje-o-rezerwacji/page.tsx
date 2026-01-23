@@ -127,6 +127,38 @@ export default function InformacjeORezerwacjiPage() {
                     Rezerwacja jest wiążąca i gwarantuje dostępność apartamentu w wybranym terminie.
                   </p>
                 </div>
+
+                {/* Anulowanie rezerwacji */}
+                <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 sm:p-5 rounded">
+                  <h4 className="font-medium text-yellow-900 mb-3 text-sm sm:text-base">
+                    🔄 Anulowanie rezerwacji
+                  </h4>
+                  <div className="space-y-3 text-xs sm:text-sm text-yellow-800">
+                    <div className="flex items-start gap-2">
+                      <span className="flex-shrink-0">✅</span>
+                      <p>
+                        <strong>Co najmniej 14 dni przed planowanym przyjazdem</strong> → zwrot 100% wpłaconej kwoty
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="flex-shrink-0">❌</span>
+                      <p>
+                        <strong>Krócej niż 14 dni przed planowanym przyjazdem</strong> → brak możliwości zwrotu
+                      </p>
+                    </div>
+                    <div className="mt-3 pt-3 border-t border-yellow-300">
+                      <p className="text-xs text-yellow-700">
+                        <strong>💡 Przykład:</strong> Rezerwacja na 15 czerwca → anulowanie do 1 czerwca (włącznie) daje pełny zwrot, anulowanie 2 czerwca lub później → brak zwrotu.
+                      </p>
+                    </div>
+                  </div>
+                  <a 
+                    href="/regulamin"
+                    className="inline-flex items-center gap-1 text-xs sm:text-sm text-yellow-700 hover:text-yellow-900 mt-3 font-medium"
+                  >
+                    Szczegóły w regulaminie →
+                  </a>
+                </div>
               </div>
             </Section>
 
