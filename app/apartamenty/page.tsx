@@ -230,7 +230,7 @@ function RoomsHero() {
           Nasze Apartamenty
         </h1>
         <p className="text-sm md:text-base font-light opacity-90 max-w-2xl mx-auto leading-relaxed">
-          Odkryj komfort nad jeziorem Zegrzyńskim
+          Odkryj komfort nad Jeziorem Zegrzyńskim
         </p>
       </div>
     </section>
@@ -692,19 +692,20 @@ function RoomsGrid() {
     </section>
   );
 }
-
-
+// Minimal Footer – Riva Zegrze - Professional Pastel Version - MOBILE OPTIMIZED
 function MinimalFooter() {
   return (
     <footer className="bg-[#f1f1ed] text-[#1a4d2e] py-20 border-t border-[#d4d6ce]">
       <div className="max-w-[1800px] mx-auto px-8 lg:px-12">
         
+        {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-16">
           
+          {/* BRAND */}
           <div>
             <div className="flex items-center gap-3 mb-8">
               <svg className="w-8 h-8 text-[#AB8A62]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M20.893 13.393l-1.135-1.135a2.252 2.252 0 01-.421-.585l-1.08-2.16a.414.414 0 00-.663-.107.827.827 0 01-.812.21l-1.273-.363a.89.89 0 00-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.212.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 001-1.81 1.025 1.055 1.055 0 01-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.655-.261a2.25 2.25 0 01-1.383-2.46l.007-.042a2.25 2.25 0 01.29-.787l.09-.15a2.25 2.25 0 012.37-1.048l1.178.236a1.125 1.125 0 001.302-.795l.208-.73a1.125 1.125 0 00-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 01-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 01-1.458-1.137l1.411-2.353a2.25 2.25 0 00.286-.76m11.928 9.869A9 9 0 008.965 3.525m11.928 9.868A9 9 0 118.965 3.525" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M20.893 13.393l-1.135-1.135a2.252 2.252 0 01-.421-.585l-1.08-2.16a.414.414 0 00-.663-.107.827.827 0 01-.812.21l-1.273-.363a.89.89 0 00-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.212.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 01-1.81 1.025 1.055 1.055 0 01-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.655-.261a2.25 2.25 0 01-1.383-2.46l.007-.042a2.25 2.25 0 01.29-.787l.09-.15a2.25 2.25 0 012.37-1.048l1.178.236a1.125 1.125 0 001.302-.795l.208-.73a1.125 1.125 0 00-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 01-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 01-1.458-1.137l1.411-2.353a2.25 2.25 0 00.286-.76m11.928 9.869A9 9 0 008.965 3.525m11.928 9.868A9 9 0 118.965 3.525" />
               </svg>
               <span
                 className="text-2xl font-light tracking-[0.15em] text-[#1a4d2e]"
@@ -718,6 +719,7 @@ function MinimalFooter() {
               rezerwacja w wyjątkowej lokalizacji pod Warszawą.
             </p>
             
+            {/* Awards/Certifications */}
             <div className="flex items-center gap-3 pt-4">
               <div className="flex items-center gap-1">
                 {[...Array(5)].map((_, i) => (
@@ -730,14 +732,15 @@ function MinimalFooter() {
             </div>
           </div>
 
+          {/* NAVIGATION */}
           <div>
             <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
               Odkryj
             </h4>
             <ul className="space-y-3">
               {[
-                { label: 'Apartamenty', href: '/apartamenty' },
-                { label: 'Oferta Specjalna', href: '/offers' },
+                { label: 'Apartamenty', href: '/rooms' },
+                { label: 'Informacje o rezerwacji', href: '/informacje-o-rezerwacji' },
                 { label: 'Wellness & Spa', href: '/activities' },
                 { label: 'Galeria', href: '/galeria' },
                 { label: 'O Nas', href: '/about' },
@@ -753,8 +756,9 @@ function MinimalFooter() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> 
 
+          {/* CONTACT */}
           <div>
             <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
               Kontakt
@@ -790,6 +794,7 @@ function MinimalFooter() {
             </ul>
           </div>
 
+          {/* NEWSLETTER & SOCIAL */}
           <div>
             <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
               Newsletter
@@ -798,6 +803,7 @@ function MinimalFooter() {
               Bądź na bieżąco z ofertami specjalnymi
             </p>
             
+            {/* Newsletter Form */}
             <form className="mb-8">
               <div className="flex gap-2">
                 <input
@@ -816,21 +822,21 @@ function MinimalFooter() {
               </div>
             </form>
 
+            {/* Social */}
             <div className="space-y-3">
               <h5 className="text-xs tracking-[0.2em] uppercase font-light text-[#8a968f]">
                 Social Media
               </h5>
               <div className="flex gap-3">
                 {[
-                  { icon: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z', href: 'https://instagram.com' },
-                  { icon: 'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z', href: 'https://facebook.com' },
-                ].map((social, i) => (
+                  { icon: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z', label: 'Instagram' },
+                  { icon: 'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z', label: 'Facebook' }
+                ].map((social, idx) => (
                   <a
-                    key={i}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 flex items-center justify-center border border-[#d4d6ce] text-[#6e7a73] hover:border-[#AB8A62] hover:text-[#AB8A62] transition-all"
+                    key={idx}
+                    href="#"
+                    className="w-10 h-10 border border-[#d4d6ce] hover:border-[#AB8A62] flex items-center justify-center transition-all duration-300 text-[#8a968f] hover:text-[#AB8A62] hover:bg-white group"
+                    aria-label={social.label}
                   >
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d={social.icon} />
@@ -842,12 +848,14 @@ function MinimalFooter() {
           </div>
         </div>
 
-        <div className="border-t border-[#d4d6ce] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2">
-            <p className="text-xs text-[#8a968f] font-light">
+        {/* BOTTOM BAR - ✅ MOBILE OPTIMIZED */}
+        <div className="border-t border-[#d4d6ce] pt-8">
+          
+          {/* Copyright i Made by - zawsze na górze */}
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mb-6">
+            <p className="text-xs text-[#8a968f] font-light text-center sm:text-left">
               © {new Date().getFullYear()} Riva Zegrze. Wszystkie prawa zastrzeżone.
             </p>
-            <span className="text-[#d4d6ce]">•</span>
             <a 
               href="https://hoteler.pro" 
               target="_blank" 
@@ -861,11 +869,13 @@ function MinimalFooter() {
               <span className="font-medium">by Hoteler</span>
             </a>
           </div>
-          
-          <div className="flex gap-6">
+
+          {/* Linki prawne - stack na mobile, row na desktop */}
+          <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-4 sm:gap-6 mb-6">
             {[
               { label: 'Polityka prywatności', href: '/polityka-prywatnosci' },
               { label: 'Regulamin', href: '/regulamin' },
+              { label: 'Informacje o rezerwacji', href: '/informacje-o-rezerwacji' },
             ].map((item) => (
               <a
                 key={item.label}
@@ -877,6 +887,18 @@ function MinimalFooter() {
               </a>
             ))}
           </div>
+
+          {/* NIP - osobna linia na dole, wyśrodkowana */}
+          <div className="text-center pt-4 border-t border-[#d4d6ce]/50">
+            <p className="text-xs text-[#8a968f] font-light">
+              <span className="font-medium text-[#6e7a73]">Open One Sp. z o.o. S.k.</span>
+              <span className="hidden sm:inline mx-2">•</span>
+              <span className="block sm:inline mt-1 sm:mt-0">
+                <span className="font-medium text-[#6e7a73]">NIP:</span> 5242877732
+              </span>
+            </p>
+          </div>
+
         </div>
       </div>
     </footer>

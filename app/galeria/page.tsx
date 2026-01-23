@@ -773,8 +773,7 @@ function GalleryGrid() {
     </section>
   );
 }
-
-// Minimal Footer – Riva Zegrze - Professional Pastel Version
+// Minimal Footer – Riva Zegrze - Professional Pastel Version - MOBILE OPTIMIZED
 function MinimalFooter() {
   return (
     <footer className="bg-[#f1f1ed] text-[#1a4d2e] py-20 border-t border-[#d4d6ce]">
@@ -822,7 +821,7 @@ function MinimalFooter() {
             <ul className="space-y-3">
               {[
                 { label: 'Apartamenty', href: '/rooms' },
-                { label: 'Oferta Specjalna', href: '/offers' },
+                { label: 'Informacje o rezerwacji', href: '/informacje-o-rezerwacji' },
                 { label: 'Wellness & Spa', href: '/activities' },
                 { label: 'Galeria', href: '/galeria' },
                 { label: 'O Nas', href: '/about' },
@@ -930,13 +929,14 @@ function MinimalFooter() {
           </div>
         </div>
 
-        {/* BOTTOM BAR - ✅ ZAKTUALIZOWANE LINKI */}
-        <div className="border-t border-[#d4d6ce] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2">
-            <p className="text-xs text-[#8a968f] font-light">
+        {/* BOTTOM BAR - ✅ MOBILE OPTIMIZED */}
+        <div className="border-t border-[#d4d6ce] pt-8">
+          
+          {/* Copyright i Made by - zawsze na górze */}
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mb-6">
+            <p className="text-xs text-[#8a968f] font-light text-center sm:text-left">
               © {new Date().getFullYear()} Riva Zegrze. Wszystkie prawa zastrzeżone.
             </p>
-            <span className="text-[#d4d6ce]">•</span>
             <a 
               href="https://hoteler.pro" 
               target="_blank" 
@@ -950,12 +950,13 @@ function MinimalFooter() {
               <span className="font-medium">by Hoteler</span>
             </a>
           </div>
-          
-          {/* ✅ POPRAWIONE LINKI */}
-          <div className="flex gap-6">
+
+          {/* Linki prawne - stack na mobile, row na desktop */}
+          <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-4 sm:gap-6 mb-6">
             {[
               { label: 'Polityka prywatności', href: '/polityka-prywatnosci' },
               { label: 'Regulamin', href: '/regulamin' },
+              { label: 'Informacje o rezerwacji', href: '/informacje-o-rezerwacji' },
             ].map((item) => (
               <a
                 key={item.label}
@@ -967,6 +968,18 @@ function MinimalFooter() {
               </a>
             ))}
           </div>
+
+          {/* NIP - osobna linia na dole, wyśrodkowana */}
+          <div className="text-center pt-4 border-t border-[#d4d6ce]/50">
+            <p className="text-xs text-[#8a968f] font-light">
+              <span className="font-medium text-[#6e7a73]">Open One Sp. z o.o. S.k.</span>
+              <span className="hidden sm:inline mx-2">•</span>
+              <span className="block sm:inline mt-1 sm:mt-0">
+                <span className="font-medium text-[#6e7a73]">NIP:</span> 5242877732
+              </span>
+            </p>
+          </div>
+
         </div>
       </div>
     </footer>
