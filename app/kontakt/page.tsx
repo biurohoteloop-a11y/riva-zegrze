@@ -240,50 +240,43 @@ function ContactHero() {
   );
 }
 
-
-
-// ============================================
-// Contact Info Cards - Z KOLOREM #4A6B5E
-// ============================================
-// ============================================
 // Contact Info Cards - WYRÓWNANE WYSOKOŚCI
 // ============================================
 function ContactInfo() {
   const contactMethods = [
-    {
-      icon: <Phone size={28} strokeWidth={1.5} />,
-      title: 'Telefon',
-      details: ['+48 510 038 038'],
-      action: 'Zadzwoń',
-      description: 'Dostępni 24/7 dla rezerwacji',
-      link: 'tel:+48510038038'
-    },
-    {
-      icon: <Mail size={28} strokeWidth={1.5} />,
-      title: 'Email',
-      details: ['wynajem@rivazegrze.pl'],
-      action: 'Wyślij email',
-      description: 'Odpowiadamy w ciągu 24h',
-      link: 'mailto:wynajem@rivazegrze.pl'
-    },
-
-    {
-      icon: <MapPin size={28} strokeWidth={1.5} />,
-      title: 'Lokalizacja',
-      details: ['Rybaki 11', '05-130 Zegrze Południowe'],
-      action: 'Dojazd',
-      description: 'Nad Zalewem Zegrzyńskim',
-      link: 'https://maps.google.com/?q=Rybaki+11,+05-130+Zegrze+Południowe'
-    },
-    {
-      icon: <Clock size={28} strokeWidth={1.5} />,
-      title: 'Godziny',
-      details: ['Recepcja 24/7', 'Zameldowanie: 15:00', 'Wymeldowanie: 11:00'],
-      action: 'Szczegóły',
-      description: 'Zawsze gotowi Cię powitać',
-      link: '#'
-    }
-  ];
+  {
+    icon: <Phone size={28} strokeWidth={1.5} />,
+    title: 'Telefon',
+    details: ['+48 510 038 038'],
+    action: 'Zadzwoń',
+    description: 'Dostępni 24/7 dla rezerwacji',
+    link: 'tel:+48510038038'
+  },
+  {
+    icon: <Mail size={28} strokeWidth={1.5} />,
+    title: 'Email',
+    details: ['wynajem@rivazegrze.pl'],
+    action: 'Wyślij email',
+    description: 'Odpowiadamy w ciągu 24h',
+    link: 'mailto:wynajem@rivazegrze.pl'
+  },
+  {
+    icon: <MapPin size={28} strokeWidth={1.5} />,
+    title: 'Lokalizacja',
+    details: ['Rybaki 11', '05-130 Zegrze Południowe'],
+    action: 'Dojazd',
+    description: 'Nad Zalewem Zegrzyńskim',
+    link: 'https://maps.google.com/?q=Rybaki+11,+05-130+Zegrze+Południowe'
+  },
+  {
+    icon: <Clock size={28} strokeWidth={1.5} />,
+    title: 'Godziny',
+    details: ['Wirtualna recepcja', 'Zameldowanie: 15:00', 'Wymeldowanie: 11:00'],
+    action: 'Szczegóły',
+    description: 'Samodzielne zameldowanie 24/7',
+    link: '/informacje-o-rezerwacji'
+  }
+];
 
   return (
     <section className="py-24 bg-white">
