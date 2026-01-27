@@ -155,6 +155,7 @@ function Navigation() {
     { label: 'AKTYWNOŚCI', href: '/activities' },
     { label: 'GALERIA', href: '/galeria' },
     { label: 'KONTAKT', href: '/contact' },
+    { label: 'DANE FIRMY', href: '/dane-firmy' },
   ];
 
   return (
