@@ -1,7 +1,27 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Waves, MapPin, Phone, Mail, Instagram, Facebook, Twitter, Menu, X, Users, Bed, Maximize, Wifi, Coffee, Tv, Wind } from 'lucide-react';
+import gsap from 'gsap'; // ← KLUCZOWY IMPORT
+import { 
+  Compass, 
+  Calendar, 
+  Waves, 
+  MapPin, 
+  Phone, 
+  Mail, 
+  Instagram, 
+  Facebook, 
+  Twitter, 
+  Menu, 
+  X, 
+  Users, 
+  Bed, 
+  Maximize, 
+  Wifi, 
+  Coffee, 
+  Tv, 
+  Wind 
+} from 'lucide-react';
 
 export default function RoomsPage() {
   return (
@@ -16,9 +36,17 @@ export default function RoomsPage() {
   );
 }
 
+// NAVIGATION COMPONENT
+// ========================================
+// Navigation (identyczna)
 function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
+  const [hoveredItem, setHoveredItem] = useState<string | null>('O NAS'); // ← AUTO-OPEN "O NAS"
+  
+  const menuRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const linksRef = useRef<(HTMLButtonElement | null)[]>([]);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -26,18 +54,96 @@ function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Auto-open "O NAS" po otwarciu menu
+  useEffect(() => {
+    if (isMegaMenuOpen) {
+      setHoveredItem('O NAS');
+    }
+  }, [isMegaMenuOpen]);
+
+  // GSAP Smooth Curtain
+  useEffect(() => {
+    if (typeof window !== 'undefined' && menuRef.current && contentRef.current) {
+      if (isMegaMenuOpen) {
+        const ctx = gsap.context(() => {
+          gsap.fromTo(
+            menuRef.current,
+            { clipPath: 'inset(0% 0% 100% 0%)', opacity: 0 },
+            { clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, duration: 0.7, ease: 'power2.inOut' }
+          );
+
+          gsap.fromTo(
+            contentRef.current,
+            { y: 30, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.6, delay: 0.3, ease: 'power1.out' }
+          );
+
+          gsap.fromTo(
+            linksRef.current.filter(Boolean),
+            { x: -30, opacity: 0 },
+            { x: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: 'power1.out', delay: 0.5 }
+          );
+        }, menuRef);
+
+        return () => ctx.revert();
+      } else if (menuRef.current) {
+        gsap.to(menuRef.current, {
+          clipPath: 'inset(0% 0% 100% 0%)',
+          opacity: 0,
+          duration: 0.5,
+          ease: 'power2.in'
+        });
+      }
+    }
+  }, [isMegaMenuOpen]);
+
+  // Mapowanie obrazków do zakładek
+  const sectionImages: Record<string, string> = {
+    'O NAS': '/images/about/hero/T3S-RivaZegrze-0620-m.jpg',
+    'APARTAMENTY': '/images/gallery/baner-pokoje/t3s-riva-zegrze-0446-m.jpg',
+    'REZERWACJA': '/images/gallery/okolica/T3S-RivaZegrze-4183-m.jpg',
+    'AKTYWNOŚCI': '/images/gallery/aktywnosci/kajaki.jpeg',
+    'GALERIA': '/images/gallery/okolica/T3S-RivaZegrze-4168-m.jpg',
+    'KONTAKT': '/images/gallery/okolica/T3S-RivaZegrze-0940-m.jpg',
+  };
+
   const navItems = [
-  { label: 'STRONA GŁÓWNA', href: '/' },
-  { label: 'O NAS', href: '/about' },
-  { label: 'APARTAMENTY', href: '/apartamenty' },
-  { label: 'REZERWACJA', href: '/rezerwacja' }, // ✅ NOWY LINK
-  { label: 'AKTYWNOŚCI', href: '/activities' },
-  { label: 'GALERIA', href: '/galeria' },
-  { label: 'KONTAKT', href: '/contact' },
-];
+    { label: 'O NAS', href: '/about', hasImage: true },
+    { label: 'APARTAMENTY', href: '/apartamenty', hasImage: true },
+    { label: 'REZERWACJA', href: '/rezerwacja', hasImage: true },
+    { label: 'AKTYWNOŚCI', href: '/activities', hasImage: true },
+    { label: 'GALERIA', href: '/galeria', hasImage: true },
+    { label: 'KONTAKT', href: '/contact', hasImage: true },
+    { label: 'DANE FIRMY', href: '/dane-firmy', hasImage: false },
+  ];
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsMegaMenuOpen(false);
+    };
+    if (isMegaMenuOpen) {
+      window.addEventListener('keydown', handleEsc);
+      return () => window.removeEventListener('keydown', handleEsc);
+    }
+  }, [isMegaMenuOpen]);
+
+  useEffect(() => {
+    document.body.style.overflow = isMegaMenuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMegaMenuOpen]);
+
+  const handleNavClick = (href: string) => {
+    setIsMegaMenuOpen(false);
+    setTimeout(() => {
+      window.location.href = href;
+    }, 150);
+  };
 
   return (
     <>
+      {/* TOP NAV BAR */}
       <nav 
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled 
@@ -45,21 +151,22 @@ function Navigation() {
             : 'bg-white/10 backdrop-blur-sm'
         }`}
       >
-        <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
-          <div className="flex justify-between items-center h-20">
+        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="flex justify-between items-center h-16 sm:h-20">
             
+            {/* Logo */}
             <a 
               href="/" 
-              className="flex items-center gap-3 group"
+              className="flex items-center gap-2 sm:gap-3 group z-50"
             >
               <Waves 
-                className={`w-8 h-8 transition-colors ${
+                className={`w-6 h-6 sm:w-8 sm:h-8 transition-colors ${
                   isScrolled ? 'text-[#AB8A62]' : 'text-white'
                 }`}
                 strokeWidth={1}
               />
               <span 
-                className={`text-2xl font-light tracking-[0.15em] transition-colors ${
+                className={`text-lg sm:text-2xl font-light tracking-[0.15em] transition-colors ${
                   isScrolled ? 'text-[#1a4d2e]' : 'text-white'
                 }`}
                 style={{ fontFamily: 'Playfair Display, serif' }}
@@ -68,105 +175,287 @@ function Navigation() {
               </span>
             </a>
             
-            <ul className="hidden lg:flex items-center gap-10">
-              {navItems.map((item) => (
-                <li key={item.label} className="relative group">
-                  <a 
-                    href={item.href} 
-                    className={`text-xs tracking-[0.2em] font-light transition-colors relative py-2 ${
-                      isScrolled ? 'text-[#6e7a73] hover:text-[#1a4d2e]' : 'text-white/90 hover:text-white'
-                    }`}
-                  >
-                    {item.label}
-                    <span className={`absolute bottom-0 left-0 w-0 h-[1px] transition-all duration-300 group-hover:w-full ${
-                      isScrolled ? 'bg-[#AB8A62]' : 'bg-white'
-                    }`} />
-                  </a>
-                </li>
-              ))}
-            </ul>
-            
-            <div className="hidden lg:flex items-center gap-6">
-              <button 
-                className={`flex items-center gap-2 text-xs tracking-[0.2em] px-6 py-3 border transition-all duration-300 group ${
-                  isScrolled 
-                    ? 'border-[#AB8A62] text-[#AB8A62] hover:bg-[#AB8A62] hover:text-white' 
-                    : 'border-white/60 text-white hover:bg-white/10 backdrop-blur-sm'
+            {/* Desktop: MENU + CTA */}
+            <div className="hidden lg:flex items-center gap-4 xl:gap-6">
+              <button
+                onClick={() => setIsMegaMenuOpen(!isMegaMenuOpen)}
+                className={`flex items-center gap-2 xl:gap-3 text-[10px] xl:text-xs tracking-[0.25em] px-4 xl:px-6 py-2.5 xl:py-3 border transition-all duration-300 ${
+                  isMegaMenuOpen
+                    ? 'border-[#AB8A62] bg-[#AB8A62] text-white'
+                    : isScrolled 
+                      ? 'border-[#AB8A62] text-[#AB8A62] hover:bg-[#AB8A62] hover:text-white' 
+                      : 'border-white/60 text-white hover:bg-white/10'
                 }`}
               >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
-                </svg>
-                <span>REZERWUJ</span>
+                {isMegaMenuOpen ? (
+                  <>
+                    <X className="w-3.5 h-3.5 xl:w-4 xl:h-4" strokeWidth={1.5} />
+                    <span>ZAMKNIJ</span>
+                  </>
+                ) : (
+                  <>
+                    <Menu className="w-3.5 h-3.5 xl:w-4 xl:h-4" strokeWidth={1.5} />
+                    <span>MENU</span>
+                  </>
+                )}
               </button>
+              
+              <a
+                href="/rezerwacja"
+                className={`flex items-center gap-2 text-[10px] xl:text-xs tracking-[0.2em] px-4 xl:px-6 py-2.5 xl:py-3 transition-all duration-300 ${
+                  isScrolled 
+                    ? 'bg-[#AB8A62] text-white hover:bg-[#967447]' 
+                    : 'bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm'
+                }`}
+              >
+                <Calendar className="w-3.5 h-3.5 xl:w-4 xl:h-4" strokeWidth={1.5} />
+                <span>REZERWUJ</span>
+              </a>
             </div>
-            
+
+            {/* Mobile: Hamburger */}
             <button 
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden z-50 relative"
+              onClick={() => setIsMegaMenuOpen(!isMegaMenuOpen)}
+              className="lg:hidden z-50 relative w-10 h-10 flex items-center justify-center"
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? (
-                <X className="w-7 h-7 text-[#0f0e0f]" strokeWidth={2} />
-              ) : (
-                <Menu 
-                  className={`w-7 h-7 ${isScrolled ? 'text-[#6e7a73]' : 'text-white'}`}
-                  strokeWidth={2}
+              <div className="relative w-6 h-6">
+                <span 
+                  className={`absolute left-0 right-0 h-0.5 transition-all duration-300 ${
+                    isMegaMenuOpen 
+                      ? 'top-1/2 -translate-y-1/2 rotate-45 bg-[#AB8A62]'
+                      : isScrolled 
+                        ? 'top-1 bg-[#6e7a73]' 
+                        : 'top-1 bg-white'
+                  }`}
                 />
-              )}
+                <span 
+                  className={`absolute left-0 right-0 top-1/2 -translate-y-1/2 h-0.5 transition-all duration-300 ${
+                    isMegaMenuOpen 
+                      ? 'opacity-0 scale-0' 
+                      : isScrolled 
+                        ? 'opacity-100 bg-[#6e7a73]' 
+                        : 'opacity-100 bg-white'
+                  }`}
+                />
+                <span 
+                  className={`absolute left-0 right-0 h-0.5 transition-all duration-300 ${
+                    isMegaMenuOpen 
+                      ? 'top-1/2 -translate-y-1/2 -rotate-45 bg-[#AB8A62]'
+                      : isScrolled 
+                        ? 'bottom-1 bg-[#6e7a73]' 
+                        : 'bottom-1 bg-white'
+                  }`}
+                />
+              </div>
             </button>
           </div>
         </div>
       </nav>
 
-      <div 
-        className={`fixed inset-0 bg-[#f1f1ed]/98 backdrop-blur-lg z-40 lg:hidden transition-all duration-500 ${
-          isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-        }`}
-      >
-        <div className="flex flex-col items-center justify-center h-full gap-8 px-6">
-          {navItems.map((item, idx) => (
-            <a
-              key={item.label}
-              href={item.href}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-[#0f0e0f] text-3xl font-light hover:text-[#AB8A62] transition-colors relative group"
-              style={{ 
-                fontFamily: 'Playfair Display, serif',
-                animation: isMobileMenuOpen ? `fadeIn 0.5s ease-out ${idx * 0.1}s forwards` : 'none',
-                opacity: 0
+      {/* ============================================ */}
+      {/* FULLSCREEN MEGA MENU - PASTEL VERSION */}
+      {/* ============================================ */}
+      {isMegaMenuOpen && (
+        <div
+          ref={menuRef}
+          className="fixed inset-0 z-40"
+          style={{ clipPath: 'inset(0% 0% 100% 0%)' }}
+        >
+          {/* Background Split - PASTEL */}
+          <div className="absolute inset-0 flex">
+            {/* Left Background - Pastel Gradient */}
+            <div 
+              className="w-full lg:w-1/2 relative"
+              style={{
+                background: 'linear-gradient(135deg, #f1f1ed 0%, #e8e9e4 50%, #d4d6ce 100%)'
               }}
             >
-              {item.label}
-              <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-[#AB8A62] transition-all duration-300 group-hover:w-full" />
-            </a>
-          ))}
-          <button 
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="mt-8 flex items-center gap-2 text-xs tracking-[0.2em] px-10 py-4 border border-[#AB8A62] text-[#AB8A62] hover:bg-[#AB8A62] hover:text-white backdrop-blur-sm transition-all"
-            style={{
-              animation: isMobileMenuOpen ? 'fadeIn 0.5s ease-out 0.6s forwards' : 'none',
-              opacity: 0
-            }}
+              <div 
+                className="absolute inset-0 opacity-[0.02]"
+                style={{
+                  backgroundImage: `
+                    linear-gradient(to right, #6e7a73 1px, transparent 1px),
+                    linear-gradient(to bottom, #6e7a73 1px, transparent 1px)
+                  `,
+                  backgroundSize: '40px 40px'
+                }}
+              />
+            </div>
+            {/* Right Background - Image Container */}
+            <div className="hidden lg:block lg:w-1/2 bg-[#8a968f]" />
+          </div>
+
+          {/* Content Container */}
+          <div 
+            ref={contentRef}
+            className="relative h-full flex items-center"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
-            </svg>
-            <span>REZERWUJ</span>
+            <div className="w-full h-full flex flex-col lg:flex-row">
+              
+              {/* LEFT SIDE - Navigation Links */}
+              <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 sm:px-8 lg:px-16 xl:px-24 py-20 lg:py-0">
+                
+                {/* Header - USUNIĘTY "Odkryj Riva Zegrze" */}
+                <div className="mb-12 lg:mb-16">
+                  <span className="text-[9px] tracking-[0.4em] uppercase text-[#8a968f] font-light block">
+                    Menu
+                  </span>
+                </div>
+
+                {/* Navigation Links */}
+                <nav className="space-y-1 mb-auto">
+                  {navItems.map((item, idx) => (
+                    <button
+                      key={item.label}
+                      ref={(el) => { linksRef.current[idx] = el; }}
+                      onClick={() => handleNavClick(item.href)}
+                      onMouseEnter={() => setHoveredItem(item.label)}
+                      onMouseLeave={() => setHoveredItem('O NAS')} // ← Wraca do "O NAS"
+                      className="group w-full flex items-center gap-4 lg:gap-6 py-4 lg:py-5 border-b border-[#e8e9e4] hover:border-[#AB8A62] transition-all duration-300"
+                    >
+                      {/* Elegant Bullet */}
+                      <div className="relative">
+                        <div className="w-2 h-2 rounded-full bg-[#d4d6ce] group-hover:bg-[#AB8A62] transition-all duration-300" />
+                        <div className="absolute inset-0 w-2 h-2 rounded-full bg-[#AB8A62] opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-300" />
+                      </div>
+                      
+                      {/* Divider Line */}
+                      <div className="w-8 lg:w-12 h-px bg-[#d4d6ce] group-hover:w-16 lg:group-hover:w-20 group-hover:bg-[#AB8A62] transition-all duration-300" />
+                      
+                      {/* Label */}
+                      <span 
+                        className="flex-1 text-left text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-light text-[#1a4d2e] group-hover:text-[#AB8A62] transition-colors duration-300"
+                        style={{ fontFamily: 'Playfair Display, serif' }}
+                      >
+                        {item.label}
+                      </span>
+                      
+                      {/* Arrow */}
+                      {item.hasImage && (
+                        <svg 
+                          className="w-5 h-5 lg:w-6 lg:h-6 text-[#8a968f] group-hover:text-[#AB8A62] group-hover:translate-x-2 transition-all duration-300" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="1.5" 
+                          viewBox="0 0 24 24"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                      )}
+                    </button>
+                  ))}
+                </nav>
+
+                {/* Bottom CTA */}
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 mt-12 lg:mt-16 pt-8 border-t border-[#e8e9e4]">
+                  <a
+                    href="/rezerwacja"
+                    onClick={() => setIsMegaMenuOpen(false)}
+                    className="flex items-center gap-3 text-xs tracking-[0.25em] px-8 py-4 bg-[#AB8A62] text-white hover:bg-[#967447] transition-all"
+                  >
+                    <Calendar className="w-4 h-4" strokeWidth={1.5} />
+                    <span>REZERWUJ POBYT</span>
+                  </a>
+                  
+                  <a 
+                    href="tel:+48510038038"
+                    className="flex items-center gap-2 text-sm text-[#6e7a73] hover:text-[#AB8A62] transition-colors"
+                  >
+                    <Phone className="w-4 h-4" strokeWidth={1.5} />
+                    <span>+48 510 038 038</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* RIGHT SIDE - PRAWDZIWE OBRAZKI */}
+              <div className="hidden lg:block lg:w-1/2 relative overflow-hidden">
+                {hoveredItem && sectionImages[hoveredItem] ? (
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center animate-fadeIn"
+                    style={{
+                      backgroundImage: `url(${sectionImages[hoveredItem]})`,
+                      backgroundPosition: 'center',
+                    }}
+                  >
+                    {/* Dark Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#0f0e0f]/40 via-[#0f0e0f]/20 to-transparent" />
+                    
+                    {/* Content Overlay */}
+                    <div className="absolute inset-0 flex flex-col items-center justify-center text-white px-12">
+                      <div className="text-center">
+                        <p className="text-[10px] tracking-[0.4em] uppercase mb-6 opacity-70">
+                          Podgląd
+                        </p>
+                        <h3 
+                          className="text-5xl xl:text-6xl font-light mb-8 leading-tight drop-shadow-lg"
+                          style={{ fontFamily: 'Playfair Display, serif' }}
+                        >
+                          {hoveredItem}
+                        </h3>
+                        <div className="flex items-center justify-center gap-4">
+                          <div className="w-16 h-px bg-white/40" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-white/60" />
+                          <div className="w-16 h-px bg-white/40" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Decorative Corners */}
+                    <div className="absolute top-8 left-8 w-20 h-20 border-t-2 border-l-2 border-white/30" />
+                    <div className="absolute bottom-8 right-8 w-20 h-20 border-b-2 border-r-2 border-white/30" />
+                  </div>
+                ) : (
+                  // Default dla "DANE FIRMY"
+                  <div 
+                    className="absolute inset-0"
+                    style={{
+                      background: 'linear-gradient(135deg, #d4d6ce 0%, #b6b9af 100%)'
+                    }}
+                  >
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-center text-[#6e7a73]">
+                        <Compass className="w-24 h-24 mx-auto mb-8 opacity-20" strokeWidth={0.5} />
+                        <p className="text-sm tracking-[0.3em] uppercase opacity-40">
+                          {hoveredItem || 'Menu'}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+            </div>
+          </div>
+
+          {/* Close Button - Floating */}
+          <button
+            onClick={() => setIsMegaMenuOpen(false)}
+            className="hidden lg:flex fixed top-8 right-8 items-center justify-center w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:border-white/40 group transition-all duration-300 z-50"
+            aria-label="Zamknij menu"
+          >
+            <X 
+              className="w-6 h-6 text-white/60 group-hover:text-white group-hover:rotate-90 transition-all duration-300" 
+              strokeWidth={1.5} 
+            />
           </button>
         </div>
-      </div>
+      )}
 
+      {/* Animations */}
       <style jsx global>{`
         @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(-10px);
+          from { 
+            opacity: 0; 
+            transform: scale(1.05); 
           }
-          to {
-            opacity: 1;
-            transform: translateY(0);
+          to { 
+            opacity: 1; 
+            transform: scale(1); 
           }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.6s ease-out;
         }
       `}</style>
     </>
