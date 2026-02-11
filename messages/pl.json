@@ -1,0 +1,337 @@
+{
+  "nav": {
+    "menu": "MENU",
+    "close": "ZAMKNIJ",
+    "book": "REZERWUJ",
+    "bookStay": "ZAREZERWUJ POBYT",
+    "preview": "Podgląd",
+    "menuLabel": "Menu"
+  },
+  "navItems": {
+    "about": "O NAS",
+    "apartments": "APARTAMENTY",
+    "reservation": "REZERWACJA",
+    "activities": "ATRAKCJE",
+    "gallery": "GALERIA",
+    "contact": "KONTAKT",
+    "companyInfo": "DANE FIRMY"
+  },
+  "hero": {
+    "label": "Apartamenty tuż nad wodą",
+    "title": "RIVA ZEGRZE",
+    "description": "Spokój, natura i komfort. Prywatna plaża i basen nad Jeziorem Zegrzyńskim — zaledwie 30 minut od Warszawy.",
+    "checkDates": "Sprawdź dostępność"
+  },
+  "intro": {
+    "label": "Riva Zegrze",
+    "title": "Apartamenty nad",
+    "titleBreak": "Jeziorem Zegrzyńskim",
+    "desc1": "Apartamenty położone są bezpośrednio nad Jeziorem Zegrzyńskim, w spokojnej części Zegrza Południowego. To miejsce stworzone z myślą o wypoczynku blisko natury, z dala od miejskiego zgiełku. Kameralny charakter obiektu sprzyja relaksowi i spokojnemu pobytowi o każdej porze roku.",
+    "desc2": "Nowoczesne wnętrza, funkcjonalne układy i dostęp do strefy rekreacyjnej sprawiają, że apartamenty sprawdzą się zarówno na krótszy wyjazd, jak i dłuższy pobyt. Dogodna lokalizacja pozwala łatwo połączyć wypoczynek nad wodą z szybkim dojazdem do Warszawy.",
+    "location": "Lokalizacja",
+    "locationDesc": "Apartamenty położone bezpośrednio nad Jeziorem Zegrzyńskim, w spokojnej części Zegrza Południowego.",
+    "recreation": "Rekreacja",
+    "recreationDesc": "Na terenie obiektu dostępna jest strefa rekreacyjna z krytym, podgrzewanym basenem oraz siłownią.",
+    "standard": "Standard",
+    "standardDesc": "Nowe, starannie wykończone apartamenty zapewniają komfortowy pobyt o każdej porze roku."
+  },
+  "rooms": {
+    "label": "Riva Zegrze",
+    "title": "Nasze Apartamenty",
+    "scrollHint": "Przewiń aby zobaczyć",
+    "book": "Rezerwuj",
+    "size": "Rozmiar",
+    "guests": "Goście",
+    "bedrooms": "Sypialnie",
+    "bathrooms": "Łazienki",
+    "c1": {
+      "title": "Apartament C1",
+      "description": "Nowoczesny apartament z tarasem i prywatnym ogródkiem, położony bezpośrednio nad Jeziorem Zegrzyńskim.",
+      "size": "38 m²",
+      "guests": "4 Osoby",
+      "bedrooms": "1 Sypialnia",
+      "bathrooms": "1 Łazienka",
+      "price": "od 630 zł / noc"
+    },
+    "c4": {
+      "title": "Apartament C4",
+      "description": "Nowoczesny apartament z tarasem i bezpośrednim widokiem na Jezioro Zegrzyńskie.",
+      "size": "38 m²",
+      "guests": "4 Osoby",
+      "bedrooms": "1 Sypialnia",
+      "bathrooms": "1 Łazienka",
+      "price": "od 570 zł / noc"
+    },
+    "c7": {
+      "title": "Apartament C7",
+      "description": "Nowoczesny apartament z tarasem i widokiem na Jezioro Zegrzyńskie.",
+      "size": "38 m²",
+      "guests": "4 Osoby",
+      "bedrooms": "1 Sypialnia",
+      "bathrooms": "1 Łazienka",
+      "price": "od 600 zł / noc"
+    },
+    "d1": {
+      "title": "Apartament D1",
+      "description": "Nowoczesny apartament z tarasem, położony na 1 piętrze.",
+      "size": "38 m²",
+      "guests": "4 Osoby",
+      "bedrooms": "1 Sypialnia",
+      "bathrooms": "1 Łazienka",
+      "price": "od 480 zł / noc"
+    },
+    "d4": {
+      "title": "Apartament D4",
+      "description": "Komfortowy apartament z tarasem, położony na 2 piętrze.",
+      "size": "38 m²",
+      "guests": "4 Osoby",
+      "bedrooms": "1 Sypialnia",
+      "bathrooms": "1 Łazienka",
+      "price": "od 510 zł / noc"
+    },
+    "d7": {
+      "title": "Apartament D7",
+      "description": "Przestronny apartament z tarasem, położony na 3 piętrze.",
+      "size": "38 m²",
+      "guests": "4 Osoby",
+      "bedrooms": "1 Sypialnia",
+      "bathrooms": "1 Łazienka",
+      "price": "od 540 zł / noc"
+    },
+    "b10": {
+      "title": "Apartament Deluxe B10",
+      "description": "Apartament Deluxe z panoramicznym widokiem na Jezioro Zegrzyńskie.",
+      "size": "68 m²",
+      "guests": "4 Osoby",
+      "bedrooms": "1 Sypialnia",
+      "bathrooms": "1 Łazienka",
+      "price": "od 900 zł / noc"
+    }
+  },
+  "additional": {
+    "label": "RIVA ZEGRZE",
+    "title": "Wiemy, że potrzebujesz",
+    "titleBreak": "wakacji",
+    "since": "Od",
+    "sinceYear": "2025",
+    "descMobile": "Zanurz się w luksusie nad brzegiem Zalewu Zegrzyńskiego. Nasze apartamenty łączą nowoczesny design z naturalnym pięknem.",
+    "descDesktop": "Zanurz się w luksusie nad brzegiem Zalewu Zegrzyńskiego. Nasze apartamenty łączą nowoczesny design z naturalnym pięknem, tworząc idealne miejsce na wypoczynek z dala od codziennego zgiełku.",
+    "stat1Value": "7",
+    "stat1Label": "Luksusowych Apartamentów",
+    "stat2Value": "100%",
+    "stat2Label": "Zadowolonych Gości",
+    "stat3Value": "9.1★",
+    "stat3Label": "Średnia Ocena",
+    "imgApartAlt": "Apartament Riva Zegrze",
+    "imgRivaAlt": "Riva Zegrze"
+  },
+  "experience": {
+    "label": "Rezerwacja Bezpośrednia",
+    "title": "Twój spokój",
+    "titleItalic": "zaczyna się tutaj",
+    "description": "Gwarantujemy najlepszą cenę i elastyczne warunki anulacji przy rezerwacji bezpośrednio przez naszą stronę.",
+    "bookDirect": "Zarezerwuj bezpośrednio",
+    "viewPackages": "Zobacz pakiety"
+  },
+  "features": {
+    "label": "Odkryj",
+    "title": "Zapierające Dech Widoki",
+    "hoverHint": "Najedź kursorem na wybrane udogodnienie",
+    "viewApartments": "Zobacz Apartamenty",
+    "view": {
+      "label": "Widok",
+      "title": "Zapierające Dech Widoki",
+      "description": "Panoramiczne widoki na Zalew Zegrzyński i otaczającą przyrodę"
+    },
+    "pool": {
+      "label": "Basen",
+      "title": "Prywatny Basen",
+      "description": "Luksusowy basen z widokiem na Zalew Zegrzyński"
+    },
+    "gym": {
+      "label": "Siłownia",
+      "title": "Nowoczesna Siłownia",
+      "description": "Profesjonalny sprzęt fitness w eleganckim wnętrzu"
+    },
+    "apartments": {
+      "label": "Apartamenty",
+      "title": "Designerskie Apartamenty",
+      "description": "Przestronne wnętrza z najwyższej jakości wykończeniem"
+    }
+  },
+  "gallery": {
+    "label": "Riva Zegrze Life",
+    "title": "Natura",
+    "titleItalic": "w obiektywie",
+    "items": {
+      "item1": {
+        "title": "Poranne wyciszenie nad Jeziorem"
+      },
+      "item2": {
+        "title": "Odpoczynek",
+        "content": "Riva Zegrze to miejsce, gdzie natura spotyka się z dyskretną elegancją."
+      },
+      "item3": {
+        "title": "Aktywny wypoczynek"
+      },
+      "item4": {
+        "title": "Kajaki na jeziorze"
+      },
+      "item5": {
+        "title": "Styl Życia",
+        "content": "Aktywny wypoczynek w sercu natury – odnajdź swój własny rytm."
+      },
+      "item6": {
+        "title": "Kajaki na jeziorze"
+      }
+    },
+    "cta": {
+      "label": "Odkryj więcej na Instagramie",
+      "handle": "@rivazegrze"
+    }
+  },
+  "wellness": {
+    "label": "Wellness & Równowaga",
+    "title": "Odnajdź swój",
+    "titleItalic": "wewnętrzny rytm",
+    "description": "Ekskluzywna strefa regeneracji Riva Zegrze. Połączenie kojącej bliskości jeziora z nowoczesnym podejściem do zdrowia i sprawności fizycznej.",
+    "pool": {
+      "label": "Strefa Wody",
+      "title": "Basen & Regeneracja",
+      "description": "Kryty, podgrzewany basen dostępny przez cały rok pozwala cieszyć się relaksem niezależnie od pogody i pory roku. To idealna przestrzeń do spokojnego wypoczynku po dniu spędzonym nad jeziorem lub aktywnie w okolicy.",
+      "imgAlt": "Basen z widokiem",
+      "tags": {
+        "tag1": "Kryty basen podgrzewany",
+        "tag2": "Relaks przez cały rok",
+        "tag3": "Strefa cardio i siłowa",
+        "tag4": "Kameralna siłownia"
+      }
+    },
+    "gym": {
+      "label": "Siłownia",
+      "title": "Aktywność & Siła",
+      "imgAlt": "Nowoczesna Siłownia"
+    },
+    "gymCard": {
+      "title": "Siłownia",
+      "description": "Nowoczesna, kameralna siłownia dostępna dla gości przez cały rok to idealne miejsce na trening i aktywny wypoczynek. Przemyślana przestrzeń oraz profesjonalny sprzęt pozwalają zadbać o formę bez wychodzenia z obiektu.",
+      "cta": "Sprawdź dostępność",
+      "features": {
+        "feature1": "sprzęt do treningu siłowego i cardio",
+        "feature2": "komfortowa, spokojna przestrzeń",
+        "feature3": "dostępna przez cały rok"
+      }
+    },
+    "stats": {
+      "stat1Value": "300m²",
+      "stat1Label": "Przestrzeń Wellness",
+      "stat2Value": "15m",
+      "stat2Label": "Basen sportowy",
+      "stat3Value": "Basen",
+      "stat3Label": "Podgrzewana woda",
+      "stat4Value": "24h",
+      "stat4Label": "Dostęp do siłowni"
+    }
+  },
+  "testimonials": {
+  "label": "Opinie Gości",
+  "title": "Zobacz, jak wspominają nas goście",
+  "description": "Autentyczne recenzje od osób, które doświadczyły wyjątkowego pobytu w Riva Zegrze",
+  "items": {
+    "item1": {
+      "name": "Bartek",
+      "text": "Nowoczesny, nowy apartament ze wszystkimi udogodnieniami. Dostęp do basenu i siłowni był ogromnym atutem. No i bez problemu mogliśmy przyjechać z pieskiem, obok budynku jest też super miejsce na spacery. Kontakt z obsługą był na wysokim poziomie, szybko i bezproblemowo. Jeszcze tu wrócimy 😊",
+      "date": "Styczeń 2026"
+    },
+    "item2": {
+      "name": "Dominika",
+      "text": "Lokalizacja i widoki",
+      "date": "Listopad 2025"
+    },
+    "item3": {
+      "name": "Magdalena",
+      "text": "Apartament bardzo czysty, przytulny i świetnie wyposażony. Obiekt położony w pięknej okolicy. Dobry dojazd. Bardzo wygodne łóżko. Świetny kontakt z właścicielem.",
+      "date": "Październik 2025"
+    },
+    "item4": {
+      "name": "Magdalena",
+      "text": "Piękny, nowoczesny apartament, bardzo przytulny i czysty. Widok z balkonu bardzo ok, basen robi ogromne, pozytywne wrażenie. Spokojna, malownicza okolica. Kontakt z właścicielem bardzo dobry.",
+      "date": "Październik 2025"
+    },
+    "item5": {
+      "name": "Joanna",
+      "text": "Lokalizacja. Bardzo ładnie zagospodarowany teren wokół budynków. W pełni wyposażona kuchnia. Duży balkon. Piękny widok z okna. Winda ułatwiająca przemieszczanie się z bagażami. Wygodny przestronny prysznic.",
+      "date": "Wrzesień 2025"
+    },
+    "item6": {
+      "name": "Mariusz",
+      "text": "Jeżeli będę planował wizytę w okolicy, na pewno tam wrócę. Doskonała komunikacja z gospodarzem obiektu.",
+      "date": "Październik 2025"
+    },
+    "item7": {
+      "name": "Agnieszka",
+      "text": "Cisza, spokój, piękny widok. Bardzo dobry kontakt z właścicielem. Bardzo czysto, wspaniała lokalizacja. Bardzo dobre wyposażenie mieszkania.",
+      "date": "Październik 2025"
+    },
+    "item8": {
+      "name": "Jagoda",
+      "text": "Super miejsce na weekend polecam bardzo. Możliwe że wrócę. Czystość, łatwy dostęp, basen, komfort w apartamencie.",
+      "date": "Wrzesień 2025"
+    },
+    "item9": {
+      "name": "Maria",
+      "text": "Apartament jest położony w pięknym, malowniczym miejscu. Możliwość korzystania z rowerków wodnych i kajaków to dodatkowa zaleta. Dojazd z Warszawy, samochodem czy pociągiem, jest bezproblemowy. Osoby, z którymi się kontaktowaliśmy, zawsze były uprzejmie i pomocne. Napewno wrócimy w to miejsce :)",
+      "date": "Sierpień 2025"
+    },
+    "item10": {
+      "name": "Sylwester",
+      "text": "Nowoczesne apartamenty położone w doskonałej lokalizacji. Prywatny dostęp do pomostów, możliwość wypożyczenia kajaków i rowerku wodnego. Bardzo dobrze wyposażona siłownia, rewelacyjny basen. Ładnie urządzony ogród, przystrzyżona trawa. Apartament dobrze wyposażony - pralkosuszarka, zmywarka, żelazko z deską, naczynia, sztućce, wszystko ładnie urządzone.",
+      "date": "Sierpień 2025"
+    }
+  },
+  "bottom": {
+    "rating": "9.1 średnia ocen",
+    "reviews": "Ponad 200 opinii",
+    "recommendation": "100% rekomendacji"
+  }
+},
+  "location": {
+    "label": "Lokalizacja",
+    "title": "W sercu natury,",
+    "titleBreak": "blisko wszystkiego",
+    "activePoint": "Aktywny punkt",
+    "badge": "Riva Nawigacja",
+    "locations": {
+      "golf": {
+        "title": "Pole Golfowe Rajszew",
+        "distance": "5 km",
+        "address": "Golfowa 44, 05-110 Rajszew",
+        "description": "Profesjonalne pole golfowe"
+      },
+      "sailing": {
+        "title": "Akademia Żeglarska Mila",
+        "distance": "3 km",
+        "address": "Jerzego Szaniawskiego 56, Zegrzynek",
+        "description": "Nauka żeglowania i sporty wodne"
+      },
+      "reserve": {
+        "title": "Wieliszewskie Łęgi",
+        "distance": "4 km",
+        "address": "Rezerwat przyrody",
+        "description": "Rezerwat przyrody z unikalną fauną"
+      },
+      "bike": {
+        "title": "Trasa Rowerowa VM-O",
+        "distance": "0 km",
+        "address": "Rybaki 11, Zegrze Południowe",
+        "description": "Trasa Obwodowa tuż obok inwestycji"
+      },
+      "marina": {
+        "title": "Marina Riva Zegrze",
+        "distance": "0 km",
+        "address": "Rybaki 11B, Zegrze Południowe",
+        "description": "Prywatna marina dla gości"
+      }
+    }
+  }
+}

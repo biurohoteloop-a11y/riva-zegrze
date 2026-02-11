@@ -1,10 +1,12 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Menu, X, Waves, MapPin, Phone, Mail, Instagram, Facebook, Twitter, Calendar, Star, Compass } from 'lucide-react';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
 
 
@@ -31,88 +33,24 @@ interface Testimonial {
   color: string;
 }
 
-const testimonials = [
-  {
-    id: 1,
-    name: "Bartek",
-    text: "Nowoczesny, nowy apartament ze wszystkimi udogodnieniami. Dostęp do basenu i siłowni był ogromnym atutem. No i bez problemu mogliśmy przyjechać z pieskiem, obok budynku jest też super miejsce na spacery. Kontakt z obsługą był na wysokim poziomie, szybko i bezproblemowo. Jeszcze tu wrócimy 😊",
-    date: "Styczeń 2026",
-    rating: 5,
-    color: "linear-gradient(135deg, #8a968f 0%, #6e7a73 100%)"
-  },
-  {
-    id: 2,
-    name: "Dominika",
-    text: "Lokalizacja i widoki",
-    date: "Listopad 2025",
-    rating: 5,
-    color: "linear-gradient(135deg, #b6b9af 0%, #8a968f 100%)"
-  },
-  {
-    id: 3,
-    name: "Magdalena",
-    text: "Apartament bardzo czysty, przytulny i świetnie wyposażony. Obiekt położony w pięknej okolicy. Dobry dojazd. Bardzo wygodne łóżko. Świetny kontakt z właścicielem.",
-    date: "Październik 2025",
-    rating: 5,
-    color: "linear-gradient(135deg, #c8cabe 0%, #a3a89d 100%)"
-  },
-  {
-    id: 4,
-    name: "Magdalena",
-    text: "Piękny, nowoczesny apartament, bardzo przytulny i czysty. Widok z balkonu bardzo ok, basen robi ogromne, pozytywne wrażenie. Spokojna, malownicza okolica. Kontakt z właścicielem bardzo dobry.",
-    date: "Październik 2025",
-    rating: 5,
-    color: "linear-gradient(135deg, #d4d6ce 0%, #b6b9af 100%)"
-  },
-  {
-    id: 5,
-    name: "Joanna",
-    text: "Lokalizacja. Bardzo ładnie zagospodarowany teren wokół budynków. W pełni wyposażona kuchnia. Duży balkon. Piękny widok z okna. Winda ułatwiająca przemieszczanie się z bagażami. Wygodny przestronny prysznic.",
-    date: "Wrzesień 2025",
-    rating: 5,
-    color: "linear-gradient(135deg, #8a968f 0%, #71847b 100%)"
-  },
-  {
-    id: 6,
-    name: "Mariusz",
-    text: "Jeżeli będę planował wizytę w okolicy, na pewno tam wrócę. Doskonała komunikacja z gospodarzem obiektu.",
-    date: "Październik 2025",
-    rating: 5,
-    color: "linear-gradient(135deg, #a3a89d 0%, #8a968f 100%)"
-  },
-  {
-    id: 7,
-    name: "Agnieszka",
-    text: "Cisza, spokój, piękny widok. Bardzo dobry kontakt z właścicielem. Bardzo czysto, wspaniała lokalizacja. Bardzo dobre wyposażenie mieszkania.",
-    date: "Październik 2025",
-    rating: 5,
-    color: "linear-gradient(135deg, #b6b9af 0%, #9ca193 100%)"
-  },
-  {
-    id: 8,
-    name: "Jagoda",
-    text: "Super miejsce na weekend polecam bardzo. Możliwe że wrócę. Czystość, łatwy dostęp, basen, komfort w apartamencie.",
-    date: "Wrzesień 2025",
-    rating: 5,
-    color: "linear-gradient(135deg, #c8cabe 0%, #b6b9af 100%)"
-  },
-  {
-    id: 9,
-    name: "Maria",
-    text: "Apartament jest położony w pięknym, malowniczym miejscu. Możliwość korzystania z rowerków wodnych i kajaków to dodatkowa zaleta. Dojazd z Warszawy, samochodem czy pociągiem, jest bezproblemowy. Osoby, z którymi się kontaktowaliśmy, zawsze były uprzejmie i pomocne. Napewno wrócimy w to miejsce :)",
-    date: "Sierpień 2025",
-    rating: 5,
-    color: "linear-gradient(135deg, #8a968f 0%, #6e7a73 100%)"
-  },
-  {
-    id: 10,
-    name: "Sylwester",
-    text: "Nowoczesne apartamenty położone w doskonałej lokalizacji. Prywatny dostęp do pomostów, możliwość wypożyczenia kajaków i rowerku wodnego. Bardzo dobrze wyposażona siłownia, rewelacyjny basen. Ładnie urządzony ogród, przystrzyżona trawa. Apartament dobrze wyposażony - pralkosuszarka, zmywarka, żelazko z deską, naczynia, sztućce, wszystko ładnie urządzone.",
-    date: "Sierpień 2025",
-    rating: 5,
-    color: "linear-gradient(135deg, #9ca193 0%, #8a968f 100%)"
-  }
+const cardColors = [
+  "linear-gradient(135deg, #8a968f 0%, #6e7a73 100%)",
+  "linear-gradient(135deg, #b6b9af 0%, #8a968f 100%)",
+  "linear-gradient(135deg, #c8cabe 0%, #a3a89d 100%)",
+  "linear-gradient(135deg, #d4d6ce 0%, #b6b9af 100%)",
+  "linear-gradient(135deg, #8a968f 0%, #71847b 100%)",
+  "linear-gradient(135deg, #a3a89d 0%, #8a968f 100%)",
+  "linear-gradient(135deg, #b6b9af 0%, #9ca193 100%)",
+  "linear-gradient(135deg, #c8cabe 0%, #b6b9af 100%)",
+  "linear-gradient(135deg, #8a968f 0%, #6e7a73 100%)",
+  "linear-gradient(135deg, #9ca193 0%, #8a968f 100%)",
 ];
+
+const testimonialKeys = [
+  "item1", "item2", "item3", "item4", "item5",
+  "item6", "item7", "item8", "item9", "item10",
+] as const;
+
 
 export default function HomePage() {
   return (
@@ -143,13 +81,36 @@ export default function HomePage() {
 // PREMIUM FULLSCREEN MEGA MENU - FINAL
 // ============================================
 function Navigation() {
+  const t = useTranslations('nav');
+  const tNav = useTranslations('navItems');
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
-  const [hoveredItem, setHoveredItem] = useState<string | null>('O NAS'); // ← AUTO-OPEN "O NAS"
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   
   const menuRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<(HTMLButtonElement | null)[]>([]);
+
+  // Mapowanie kluczy tłumaczeń na obrazki
+  const imageKeys: Record<string, string> = {
+    about: '/images/about/hero/T3S-RivaZegrze-0620-m.jpg',
+    apartments: '/images/gallery/baner-pokoje/t3s-riva-zegrze-0446-m.jpg',
+    reservation: '/images/gallery/okolica/T3S-RivaZegrze-4183-m.jpg',
+    activities: '/images/gallery/aktywnosci/kajaki.jpeg',
+    gallery: '/images/gallery/okolica/T3S-RivaZegrze-4168-m.jpg',
+    contact: '/images/gallery/okolica/T3S-RivaZegrze-0940-m.jpg',
+  };
+
+  const navItems = [
+    { key: 'about', label: tNav('about'), href: '/about', hasImage: true },
+    { key: 'apartments', label: tNav('apartments'), href: '/apartamenty', hasImage: true },
+    { key: 'reservation', label: tNav('reservation'), href: '/rezerwacja', hasImage: true },
+    { key: 'activities', label: tNav('activities'), href: '/activities', hasImage: true },
+    { key: 'gallery', label: tNav('gallery'), href: '/galeria', hasImage: true },
+    { key: 'contact', label: tNav('contact'), href: '/contact', hasImage: true },
+    { key: 'companyInfo', label: tNav('companyInfo'), href: '/dane-firmy', hasImage: false },
+  ];
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -157,10 +118,10 @@ function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Auto-open "O NAS" po otwarciu menu
+  // Auto-open first item po otwarciu menu
   useEffect(() => {
     if (isMegaMenuOpen) {
-      setHoveredItem('O NAS');
+      setHoveredItem('about');
     }
   }, [isMegaMenuOpen]);
 
@@ -199,26 +160,6 @@ function Navigation() {
       }
     }
   }, [isMegaMenuOpen]);
-
-  // Mapowanie obrazków do zakładek
-  const sectionImages: Record<string, string> = {
-    'O NAS': '/images/about/hero/T3S-RivaZegrze-0620-m.jpg',
-    'APARTAMENTY': '/images/gallery/baner-pokoje/t3s-riva-zegrze-0446-m.jpg',
-    'REZERWACJA': '/images/gallery/okolica/T3S-RivaZegrze-4183-m.jpg',
-    'AKTYWNOŚCI': '/images/gallery/aktywnosci/kajaki.jpeg',
-    'GALERIA': '/images/gallery/okolica/T3S-RivaZegrze-4168-m.jpg',
-    'KONTAKT': '/images/gallery/okolica/T3S-RivaZegrze-0940-m.jpg',
-  };
-
-  const navItems = [
-    { label: 'O NAS', href: '/about', hasImage: true },
-    { label: 'APARTAMENTY', href: '/apartamenty', hasImage: true },
-    { label: 'REZERWACJA', href: '/rezerwacja', hasImage: true },
-    { label: 'AKTYWNOŚCI', href: '/activities', hasImage: true },
-    { label: 'GALERIA', href: '/galeria', hasImage: true },
-    { label: 'KONTAKT', href: '/contact', hasImage: true },
-    { label: 'DANE FIRMY', href: '/dane-firmy', hasImage: false },
-  ];
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -278,8 +219,12 @@ function Navigation() {
               </span>
             </a>
             
-            {/* Desktop: MENU + CTA */}
+            {/* Desktop: LANGUAGE + MENU + CTA */}
             <div className="hidden lg:flex items-center gap-4 xl:gap-6">
+              
+              {/* ✨ PRZEŁĄCZNIK JĘZYKA */}
+              <LanguageSwitcher isScrolled={isScrolled} />
+
               <button
                 onClick={() => setIsMegaMenuOpen(!isMegaMenuOpen)}
                 className={`flex items-center gap-2 xl:gap-3 text-[10px] xl:text-xs tracking-[0.25em] px-4 xl:px-6 py-2.5 xl:py-3 border transition-all duration-300 ${
@@ -293,12 +238,12 @@ function Navigation() {
                 {isMegaMenuOpen ? (
                   <>
                     <X className="w-3.5 h-3.5 xl:w-4 xl:h-4" strokeWidth={1.5} />
-                    <span>ZAMKNIJ</span>
+                    <span>{t('close')}</span>
                   </>
                 ) : (
                   <>
                     <Menu className="w-3.5 h-3.5 xl:w-4 xl:h-4" strokeWidth={1.5} />
-                    <span>MENU</span>
+                    <span>{t('menu')}</span>
                   </>
                 )}
               </button>
@@ -312,7 +257,7 @@ function Navigation() {
                 }`}
               >
                 <Calendar className="w-3.5 h-3.5 xl:w-4 xl:h-4" strokeWidth={1.5} />
-                <span>REZERWUJ</span>
+                <span>{t('book')}</span>
               </a>
             </div>
 
@@ -367,7 +312,6 @@ function Navigation() {
         >
           {/* Background Split - PASTEL */}
           <div className="absolute inset-0 flex">
-            {/* Left Background - Pastel Gradient */}
             <div 
               className="w-full lg:w-1/2 relative"
               style={{
@@ -385,7 +329,6 @@ function Navigation() {
                 }}
               />
             </div>
-            {/* Right Background - Image Container */}
             <div className="hidden lg:block lg:w-1/2 bg-[#8a968f]" />
           </div>
 
@@ -399,10 +342,10 @@ function Navigation() {
               {/* LEFT SIDE - Navigation Links */}
               <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 sm:px-8 lg:px-16 xl:px-24 py-20 lg:py-0">
                 
-                {/* Header - USUNIĘTY "Odkryj Riva Zegrze" */}
+                {/* Header */}
                 <div className="mb-12 lg:mb-16">
                   <span className="text-[9px] tracking-[0.4em] uppercase text-[#8a968f] font-light block">
-                    Menu
+                    {t('menuLabel')}
                   </span>
                 </div>
 
@@ -410,11 +353,11 @@ function Navigation() {
                 <nav className="space-y-1 mb-auto">
                   {navItems.map((item, idx) => (
                     <button
-                      key={item.label}
+                      key={item.key}
                       ref={(el) => { linksRef.current[idx] = el; }}
                       onClick={() => handleNavClick(item.href)}
-                      onMouseEnter={() => setHoveredItem(item.label)}
-                      onMouseLeave={() => setHoveredItem('O NAS')} // ← Wraca do "O NAS"
+                      onMouseEnter={() => setHoveredItem(item.key)}
+                      onMouseLeave={() => setHoveredItem('about')}
                       className="group w-full flex items-center gap-4 lg:gap-6 py-4 lg:py-5 border-b border-[#e8e9e4] hover:border-[#AB8A62] transition-all duration-300"
                     >
                       {/* Elegant Bullet */}
@@ -450,6 +393,11 @@ function Navigation() {
                   ))}
                 </nav>
 
+                {/* ✨ PRZEŁĄCZNIK JĘZYKA W MEGA MENU */}
+                <div className="mb-8 flex justify-start">
+                  <LanguageSwitcher isScrolled={true} />
+                </div>
+
                 {/* Bottom CTA */}
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 mt-12 lg:mt-16 pt-8 border-t border-[#e8e9e4]">
                   <a
@@ -458,7 +406,7 @@ function Navigation() {
                     className="flex items-center gap-3 text-xs tracking-[0.25em] px-8 py-4 bg-[#AB8A62] text-white hover:bg-[#967447] transition-all"
                   >
                     <Calendar className="w-4 h-4" strokeWidth={1.5} />
-                    <span>REZERWUJ POBYT</span>
+                    <span>{t('bookStay')}</span>
                   </a>
                   
                   <a 
@@ -471,13 +419,13 @@ function Navigation() {
                 </div>
               </div>
 
-              {/* RIGHT SIDE - PRAWDZIWE OBRAZKI */}
+              {/* RIGHT SIDE - OBRAZKI */}
               <div className="hidden lg:block lg:w-1/2 relative overflow-hidden">
-                {hoveredItem && sectionImages[hoveredItem] ? (
+                {hoveredItem && imageKeys[hoveredItem] ? (
                   <div 
                     className="absolute inset-0 bg-cover bg-center animate-fadeIn"
                     style={{
-                      backgroundImage: `url(${sectionImages[hoveredItem]})`,
+                      backgroundImage: `url(${imageKeys[hoveredItem]})`,
                       backgroundPosition: 'center',
                     }}
                   >
@@ -488,13 +436,13 @@ function Navigation() {
                     <div className="absolute inset-0 flex flex-col items-center justify-center text-white px-12">
                       <div className="text-center">
                         <p className="text-[10px] tracking-[0.4em] uppercase mb-6 opacity-70">
-                          Podgląd
+                          {t('preview')}
                         </p>
                         <h3 
                           className="text-5xl xl:text-6xl font-light mb-8 leading-tight drop-shadow-lg"
                           style={{ fontFamily: 'Playfair Display, serif' }}
                         >
-                          {hoveredItem}
+                          {navItems.find(item => item.key === hoveredItem)?.label || ''}
                         </h3>
                         <div className="flex items-center justify-center gap-4">
                           <div className="w-16 h-px bg-white/40" />
@@ -509,7 +457,6 @@ function Navigation() {
                     <div className="absolute bottom-8 right-8 w-20 h-20 border-b-2 border-r-2 border-white/30" />
                   </div>
                 ) : (
-                  // Default dla "DANE FIRMY"
                   <div 
                     className="absolute inset-0"
                     style={{
@@ -520,7 +467,7 @@ function Navigation() {
                       <div className="text-center text-[#6e7a73]">
                         <Compass className="w-24 h-24 mx-auto mb-8 opacity-20" strokeWidth={0.5} />
                         <p className="text-sm tracking-[0.3em] uppercase opacity-40">
-                          {hoveredItem || 'Menu'}
+                          {t('menuLabel')}
                         </p>
                       </div>
                     </div>
@@ -535,7 +482,7 @@ function Navigation() {
           <button
             onClick={() => setIsMegaMenuOpen(false)}
             className="hidden lg:flex fixed top-8 right-8 items-center justify-center w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:border-white/40 group transition-all duration-300 z-50"
-            aria-label="Zamknij menu"
+            aria-label={t('close')}
           >
             <X 
               className="w-6 h-6 text-white/60 group-hover:text-white group-hover:rotate-90 transition-all duration-300" 
@@ -546,7 +493,7 @@ function Navigation() {
       )}
 
       {/* Animations */}
-      <style jsx global>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @keyframes fadeIn {
           from { 
             opacity: 0; 
@@ -560,13 +507,15 @@ function Navigation() {
         .animate-fadeIn {
           animation: fadeIn 0.6s ease-out;
         }
-      `}</style>
+      ` }} />
     </>
   );
 }
 
 
 function HeroSection() {
+  const t = useTranslations('hero');
+
   const slides = [
     '/images/hero/T3S-RivaZegrze-0760-m.jpg',
     '/images/hero/T3S-RivaZegrze-0620-m.jpg',
@@ -574,12 +523,38 @@ function HeroSection() {
   ];
 
   const [current, setCurrent] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
   const heroRef = useRef(null);
   const labelRef = useRef(null);
   const titleRef = useRef(null);
   const descRef = useRef(null);
   const bookingRef = useRef(null);
+
+  // Mount check
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // HotRes script — ładuj PO tym jak div jest w DOM
+  useEffect(() => {
+    if (!mounted) return;
+
+    // Małe opóźnienie żeby div zdążył się wyrenderować
+    const timeout = setTimeout(() => {
+      const existingScript = document.querySelector('script[src*="hotres_popup"]');
+      if (existingScript) {
+        existingScript.remove();
+      }
+
+      const script = document.createElement('script');
+      script.src = 'https://panel.hotres.pl/public/api/hotres_popup.js';
+      script.async = true;
+      document.body.appendChild(script);
+    }, 100);
+
+    return () => clearTimeout(timeout);
+  }, [mounted]);
 
   // GSAP Entry Animation
   useEffect(() => {
@@ -647,7 +622,7 @@ function HeroSection() {
             ref={labelRef}
             className="inline-block text-xs tracking-[0.4em] uppercase font-light text-white/90 mb-6"
           >
-            Apartamenty przy samej wodzie
+            {t('label')}
           </span>
 
           {/* Main heading */}
@@ -656,7 +631,7 @@ function HeroSection() {
             className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-light mb-8 tracking-[0.1em] leading-none text-white drop-shadow-2xl"
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
-            RIVA ZEGRZE
+            {t('title')}
           </h1>
 
           {/* Description */}
@@ -664,23 +639,21 @@ function HeroSection() {
             ref={descRef}
             className="text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto mb-16 text-white/85 drop-shadow-lg"
           >
-            Cisza, natura i komfort. Prywatna plaża oraz basen nad Jeziorem
-            Zegrzyńskim — tylko 30 minut od Warszawy.
+            {t('description')}
           </p>
 
-          {/* ✅ HOTRES - DOKŁADNIE JAK W DOKUMENTACJI */}
+          {/* HOTRES Desktop */}
           <div ref={bookingRef} className="hidden lg:block max-w-5xl mx-auto">
-            <script 
-              src="https://panel.hotres.pl/public/api/hotres_popup.js" 
-              async
-            />
-            <div 
-              className="hotresSearchBar showHotres" 
-              data-button="Sprawdź terminy"  
-              data-oid="5226" 
-              data-lang="pl" 
-              data-action="bookingbar"
-            />
+            {mounted && (
+              <div 
+                className="hotresSearchBar showHotres" 
+                data-button={t('checkDates')}
+                data-oid="5226" 
+                data-lang="pl" 
+                data-action="bookingbar"
+                suppressHydrationWarning
+              />
+            )}
           </div>
 
         </div>
@@ -701,323 +674,279 @@ function HeroSection() {
 
       </section>
 
-      {/* ✅ HOTRES - Mobile */}
+      {/* HOTRES Mobile */}
       <section className="lg:hidden bg-[#f7f6f4] py-6 px-4">
         <div className="max-w-sm mx-auto">
-          <div 
-            className="hotresSearchBar showHotres" 
-            data-button="Sprawdź terminy"  
-            data-oid="5226" 
-            data-lang="pl" 
-            data-action="bookingbar"
-          />
+          {mounted && (
+            <div 
+              className="hotresSearchBar showHotres" 
+              data-button={t('checkDates')}
+              data-oid="5226" 
+              data-lang="pl" 
+              data-action="bookingbar"
+              suppressHydrationWarning
+            />
+          )}
         </div>
       </section>
 
-<style jsx global>{`
-  @keyframes kenBurns {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.1); }
-  }
 
-  /* ========================================
-     PREMIUM GLASSMORPHISM BOOKING BAR
-  ======================================== */
-  
-  .hotresSearchBar {
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    cursor: pointer;
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.12),
-      0 2px 8px rgba(0, 0, 0, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25);
-    border-radius: 14px;
-    height: 68px;
-    overflow: hidden;
-    min-width: 340px;
-    max-width: 580px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-  }
+      <style jsx global>{`
+        @keyframes kenBurns {
+          0% { transform: scale(1); }
+          100% { transform: scale(1.1); }
+        }
 
-  /* Subtelny gradient border */
-  .hotresSearchBar::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 14px;
-    padding: 1px;
-    background: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.3) 0%, 
-      rgba(255, 255, 255, 0.05) 50%, 
-      rgba(255, 255, 255, 0.15) 100%);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-  }
+        .hotresSearchBar {
+          background: rgba(255, 255, 255, 0.12);
+          backdrop-filter: blur(24px) saturate(180%);
+          -webkit-backdrop-filter: blur(24px) saturate(180%);
+          cursor: pointer;
+          box-shadow: 
+            0 8px 32px rgba(0, 0, 0, 0.12),
+            0 2px 8px rgba(0, 0, 0, 0.08),
+            inset 0 1px 0 rgba(255, 255, 255, 0.25);
+          border-radius: 14px;
+          height: 68px;
+          overflow: hidden;
+          min-width: 340px;
+          max-width: 580px;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          position: relative;
+        }
 
-  .hotresSearchBar:hover {
-    background: rgba(255, 255, 255, 0.18);
-    box-shadow: 
-      0 12px 40px rgba(0, 0, 0, 0.15),
-      0 4px 12px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.28);
-  }
+        .hotresSearchBar::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: 14px;
+          padding: 1px;
+          background: linear-gradient(135deg, 
+            rgba(255, 255, 255, 0.3) 0%, 
+            rgba(255, 255, 255, 0.05) 50%, 
+            rgba(255, 255, 255, 0.15) 100%);
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          pointer-events: none;
+        }
 
-  /* Kontenery dat - równomierne */
-  .hotresSearchBar > div {
-    flex: 1;
-    padding: 0 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
-    color: #ffffff;
-    transition: background 0.3s ease;
-    height: 100%;
-    position: relative;
-  }
+        .hotresSearchBar:hover {
+          background: rgba(255, 255, 255, 0.18);
+          box-shadow: 
+            0 12px 40px rgba(0, 0, 0, 0.15),
+            0 4px 12px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+          transform: translateY(-2px);
+          border-color: rgba(255, 255, 255, 0.28);
+        }
 
-  .hotresSearchBar > div:not(:last-child) {
-    border-right: 1px solid rgba(255, 255, 255, 0.15);
-  }
+        .hotresSearchBar > div {
+          flex: 1;
+          padding: 0 20px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 3px;
+          color: #ffffff;
+          transition: background 0.3s ease;
+          height: 100%;
+          position: relative;
+        }
 
-  .hotresSearchBar > div:not(:last-child):hover {
-    background: rgba(255, 255, 255, 0.06);
-  }
+        .hotresSearchBar > div:not(:last-child) {
+          border-right: 1px solid rgba(255, 255, 255, 0.15);
+        }
 
-  /* Ostatni element (przycisk) - nie flex */
-  .hotresSearchBar > div:last-child {
-    flex: 0 0 auto;
-    padding: 0;
-    border-right: none;
-  }
+        .hotresSearchBar > div:not(:last-child):hover {
+          background: rgba(255, 255, 255, 0.06);
+        }
 
-  /* Strzałka między datami */
-  .hotresSearchBar .arrival {
-    position: relative;
-  }
+        .hotresSearchBar > div:last-child {
+          flex: 0 0 auto;
+          padding: 0;
+          border-right: none;
+        }
 
-  .hotresSearchBar .arrival::after,
-  .hotresSearchBar .arrival::before {
-    content: '';
-    position: absolute;
-    right: -11px;
-    width: 6px;
-    height: 6px;
-    border-right: 1.5px solid rgba(255, 255, 255, 0.5);
-    border-bottom: 1.5px solid rgba(255, 255, 255, 0.5);
-  }
+        .hotresSearchBar .arrival {
+          position: relative;
+        }
 
-  .hotresSearchBar .arrival::after {
-    top: calc(50% - 7px);
-    transform: rotate(-45deg);
-  }
+        .hotresSearchBar .arrival::after,
+        .hotresSearchBar .arrival::before {
+          content: '';
+          position: absolute;
+          right: -11px;
+          width: 6px;
+          height: 6px;
+          border-right: 1.5px solid rgba(255, 255, 255, 0.5);
+          border-bottom: 1.5px solid rgba(255, 255, 255, 0.5);
+        }
 
-  .hotresSearchBar .arrival::before {
-    top: calc(50% + 1px);
-    transform: rotate(135deg);
-  }
+        .hotresSearchBar .arrival::after {
+          top: calc(50% - 7px);
+          transform: rotate(-45deg);
+        }
 
-  /* Dzień - wyśrodkowany */
-  .hotresSearchBar .day {
-    font-size: 26px;
-    font-weight: 300;
-    color: #ffffff;
-    line-height: 1;
-    letter-spacing: -0.01em;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  }
+        .hotresSearchBar .arrival::before {
+          top: calc(50% + 1px);
+          transform: rotate(135deg);
+        }
 
-  /* Miesiąc - wyśrodkowany */
-  .hotresSearchBar .month {
-    font-size: 10px;
-    line-height: 1.2;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.8);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    text-align: center;
-  }
+        .hotresSearchBar .day {
+          font-size: 26px;
+          font-weight: 300;
+          color: #ffffff;
+          line-height: 1;
+          letter-spacing: -0.01em;
+          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
 
-  .hotresSearchBar .month small {
-    font-size: 9px;
-    color: rgba(255, 255, 255, 0.6);
-    display: block;
-    letter-spacing: 0.08em;
-    margin-top: 1px;
-  }
+        .hotresSearchBar .month {
+          font-size: 10px;
+          line-height: 1.2;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.8);
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          text-align: center;
+        }
 
-  /* ✅ PERFEKCYJNY PRZYCISK - kompaktowy i elegancki */
-  .hotresSearchBar button {
-    height: 68px;
-    width: 140px;
-    border-radius: 0 13px 13px 0;
-    text-transform: uppercase;
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    font-weight: 500;
-    background: linear-gradient(135deg, 
-      rgba(171, 138, 98, 0.92) 0%, 
-      rgba(150, 116, 71, 0.92) 100%);
-    color: #ffffff;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 0;
-    position: relative;
-    overflow: hidden;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  }
+        .hotresSearchBar .month small {
+          font-size: 9px;
+          color: rgba(255, 255, 255, 0.6);
+          display: block;
+          letter-spacing: 0.08em;
+          margin-top: 1px;
+        }
 
-  /* Shine effect */
-  .hotresSearchBar button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, 
-      transparent, 
-      rgba(255, 255, 255, 0.2), 
-      transparent);
-    transition: left 0.6s ease;
-  }
+        .hotresSearchBar button {
+          height: 68px;
+          width: 140px;
+          border-radius: 0 13px 13px 0;
+          text-transform: uppercase;
+          font-size: 9px;
+          letter-spacing: 0.12em;
+          font-weight: 500;
+          background: linear-gradient(135deg, 
+            rgba(171, 138, 98, 0.92) 0%, 
+            rgba(150, 116, 71, 0.92) 100%);
+          color: #ffffff;
+          border: none;
+          cursor: pointer;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          padding: 0;
+          position: relative;
+          overflow: hidden;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
 
-  .hotresSearchBar button:hover {
-    background: linear-gradient(135deg, 
-      rgba(150, 116, 71, 0.98) 0%, 
-      rgba(171, 138, 98, 0.98) 100%);
-    box-shadow: 
-      0 3px 12px rgba(171, 138, 98, 0.35),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    transform: translateX(1px);
-  }
+        .hotresSearchBar button::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, 
+            transparent, 
+            rgba(255, 255, 255, 0.2), 
+            transparent);
+          transition: left 0.6s ease;
+        }
 
-  .hotresSearchBar button:hover::before {
-    left: 100%;
-  }
+        .hotresSearchBar button:hover {
+          background: linear-gradient(135deg, 
+            rgba(150, 116, 71, 0.98) 0%, 
+            rgba(171, 138, 98, 0.98) 100%);
+          box-shadow: 
+            0 3px 12px rgba(171, 138, 98, 0.35),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+          transform: translateX(1px);
+        }
 
-  .hotresSearchBar button:active {
-    transform: translateX(0) scale(0.98);
-  }
+        .hotresSearchBar button:hover::before {
+          left: 100%;
+        }
 
-  /* ========================================
-     MOBILE RESPONSIVE
-  ======================================== */
-  
-  @media (max-width: 1024px) {
-    .hotresSearchBar {
-      background: rgba(255, 255, 255, 0.98);
-      backdrop-filter: blur(30px);
-      border-radius: 18px;
-      height: auto;
-      flex-direction: column;
-      padding: 24px;
-      gap: 16px;
-      max-width: 100%;
-      border: 1px solid rgba(212, 214, 206, 0.25);
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-    }
+        .hotresSearchBar button:active {
+          transform: translateX(0) scale(0.98);
+        }
 
-    .hotresSearchBar::before {
-      display: none;
-    }
+        @media (max-width: 1024px) {
+          .hotresSearchBar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(30px);
+            border-radius: 18px;
+            height: auto;
+            flex-direction: column;
+            padding: 24px;
+            gap: 16px;
+            max-width: 100%;
+            border: 1px solid rgba(212, 214, 206, 0.25);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+          }
 
-    .hotresSearchBar > div {
-      width: 100%;
-      flex: none;
-      padding: 18px;
-      border-right: none;
-      border-bottom: 1px solid rgba(212, 214, 206, 0.2);
-      color: #0f0e0f;
-    }
+          .hotresSearchBar::before {
+            display: none;
+          }
 
-    .hotresSearchBar > div:not(:last-child):hover {
-      background: rgba(212, 214, 206, 0.12);
-    }
+          .hotresSearchBar > div {
+            width: 100%;
+            flex: none;
+            padding: 18px;
+            border-right: none;
+            border-bottom: 1px solid rgba(212, 214, 206, 0.2);
+            color: #0f0e0f;
+          }
 
-    .hotresSearchBar > div:last-child {
-      border-bottom: none;
-      padding: 0;
-      width: 100%;
-    }
+          .hotresSearchBar > div:not(:last-child):hover {
+            background: rgba(212, 214, 206, 0.12);
+          }
 
-    .hotresSearchBar .arrival::after,
-    .hotresSearchBar .arrival::before {
-      display: none;
-    }
+          .hotresSearchBar > div:last-child {
+            border-bottom: none;
+            padding: 0;
+            width: 100%;
+          }
 
-    .hotresSearchBar .day {
-      font-size: 32px;
-      color: #0f0e0f;
-      text-shadow: none;
-    }
+          .hotresSearchBar .arrival::after,
+          .hotresSearchBar .arrival::before {
+            display: none;
+          }
 
-    .hotresSearchBar .month {
-      font-size: 11px;
-      color: #6e7a73;
-    }
+          .hotresSearchBar .day {
+            font-size: 32px;
+            color: #0f0e0f;
+            text-shadow: none;
+          }
 
-    .hotresSearchBar .month small {
-      font-size: 10px;
-      color: #AB8A62;
-    }
+          .hotresSearchBar .month {
+            font-size: 11px;
+            color: #6e7a73;
+          }
 
-    .hotresSearchBar button {
-      width: 100%;
-      height: 52px;
-      border-radius: 12px;
-      font-size: 10px;
-      letter-spacing: 0.15em;
-    }
-  }
+          .hotresSearchBar .month small {
+            font-size: 10px;
+            color: #AB8A62;
+          }
 
-  /* ========================================
-     ANIMATIONS
-  ======================================== */
-  
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(15px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .hotresSearchBar > div {
-    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) backwards;
-  }
-
-  .hotresSearchBar > div:nth-child(1) {
-    animation-delay: 0.1s;
-  }
-
-  .hotresSearchBar > div:nth-child(2) {
-    animation-delay: 0.2s;
-  }
-
-  .hotresSearchBar > div:last-child {
-    animation-delay: 0.3s;
-  }
-`}</style>
-
+          .hotresSearchBar button {
+            width: 100%;
+            height: 52px;
+            border-radius: 12px;
+            font-size: 10px;
+            letter-spacing: 0.15em;
+          }
+        }
+      `}</style>
     </>
   );
 }
@@ -1025,7 +954,8 @@ function HeroSection() {
 
 
 function IntroSection() {
-  // Initialize AOS
+  const t = useTranslations('intro');
+
   useEffect(() => {
     const initAOS = async () => {
       const AOS = (await import('aos')).default;
@@ -1046,17 +976,17 @@ function IntroSection() {
           {/* LEFT */}
           <div className="lg:col-span-5" data-aos="fade-right">
             <span className="text-xs tracking-[0.4em] uppercase mb-6 block text-[#AB8A62]">
-              Riva Zegrze
+              {t('label')}
             </span>
 
             <h2
               className="text-4xl md:text-5xl xl:text-[3.5rem] font-light leading-[1.15] mb-8"
               style={{ 
                 fontFamily: 'Playfair Display, serif',
-                color: '#4A6B5E' // ← ZMIENIONE
+                color: '#4A6B5E'
               }}
             >
-              Apartamenty nad <br /> Jeziorem Zegrzyńskim
+              {t('title')} <br /> {t('titleBreak')}
             </h2>
 
             {/* GOLD LINE */}
@@ -1066,16 +996,16 @@ function IntroSection() {
           {/* RIGHT */}
           <div className="lg:col-span-7 space-y-8 lg:pt-12" data-aos="fade-left" data-aos-delay="200">
             <p className="text-lg md:text-xl leading-relaxed font-light text-[#6e7a73]">
-              Apartamenty położone są bezpośrednio nad Jeziorem Zegrzyńskim, w spokojnej części Zegrza Południowego. To miejsce stworzone z myślą o wypoczynku blisko natury, z dala od miejskiego zgiełku. Kameralny charakter obiektu sprzyja relaksowi i spokojnemu pobytowi o każdej porze roku.
+              {t('desc1')}
             </p>
 
             <p className="text-lg md:text-xl leading-relaxed font-light text-[#6e7a73]">
-              Nowoczesne wnętrza, funkcjonalne układy i dostęp do strefy rekreacyjnej sprawiają, że apartamenty sprawdzą się zarówno na krótszy wyjazd, jak i dłuższy pobyt. Dogodna lokalizacja pozwala łatwo połączyć wypoczynek nad wodą z szybkim dojazdem do Warszawy.
+              {t('desc2')}
             </p>
           </div>
         </div>
 
-        {/* ICONS SECTION - 3 columns - ZŁOTE IKONKI */}
+        {/* ICONS SECTION */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-32" data-aos="fade-up" data-aos-delay="400">
           
           {/* Icon 1 - Lokalizacja */}
@@ -1086,10 +1016,10 @@ function IntroSection() {
               </svg>
             </div>
             <h4 className="text-sm tracking-[0.2em] uppercase text-[#AB8A62] mb-3 font-light">
-              Lokalizacja
+              {t('location')}
             </h4>
             <p className="text-sm text-[#6e7a73] leading-relaxed max-w-xs mx-auto font-light">
-              Apartamenty położone bezpośrednio nad Jeziorem Zegrzyńskim, w spokojnej części Zegrza Południowego.
+              {t('locationDesc')}
             </p>
           </div>
 
@@ -1101,10 +1031,10 @@ function IntroSection() {
               </svg>
             </div>
             <h4 className="text-sm tracking-[0.2em] uppercase text-[#AB8A62] mb-3 font-light">
-              Rekreacja
+              {t('recreation')}
             </h4>
             <p className="text-sm text-[#6e7a73] leading-relaxed max-w-xs mx-auto font-light">
-              Na terenie obiektu dostępna jest strefa rekreacyjna z krytym, podgrzewanym basenem oraz siłownią.
+              {t('recreationDesc')}
             </p>
           </div>
 
@@ -1116,10 +1046,10 @@ function IntroSection() {
               </svg>
             </div>
             <h4 className="text-sm tracking-[0.2em] uppercase text-[#AB8A62] mb-3 font-light">
-              Standard
+              {t('standard')}
             </h4>
             <p className="text-sm text-[#6e7a73] leading-relaxed max-w-xs mx-auto font-light">
-              Nowe, starannie wykończone apartamenty zapewniają komfortowy pobyt o każdej porze roku.
+              {t('standardDesc')}
             </p>
           </div>
 
@@ -1130,112 +1060,53 @@ function IntroSection() {
 }
 
 
+
 // ============================================
 // Rooms Showcase - Z LOKALNYMI ZDJĘCIAMI
-// ============================================
 function RoomsShowcase() {
+  const t = useTranslations('rooms');
   const sectionRef = useRef<HTMLElement>(null);
   const horizontalRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const apartments = [
-    {
-      image: '/images/rooms/t3s-rivazegrze-3107-m.jpg',
-      title: 'Apartament C1',
-      description:
-        'Nowoczesny apartament z tarasem i prywatnym ogródkiem, położony bezpośrednio nad Jeziorem Zegrzyńskim.',
-      size: '38 m²',
-      guests: '4 Osoby',
-      bedrooms: '1 Sypialnia',
-      bathrooms: '1 Łazienka',
-      price: 'od 630 zł / noc',
-    },
-    {
-      image: '/images/rooms/t3s-rivazegrze-3500-m.jpg',
-      title: 'Apartament C4',
-      description:
-        'Nowoczesny apartament z tarasem i bezpośrednim widokiem na Jezioro Zegrzyńskie.',
-      size: '38 m²',
-      guests: '4 Osoby',
-      bedrooms: '1 Sypialnia',
-      bathrooms: '1 Łazienka',
-      price: 'od 570 zł / noc',
-    },
-    {
-      image: '/images/rooms/img_3650.jpg',
-      title: 'Apartament C7',
-      description:
-        'Nowoczesny apartament z tarasem i widokiem na Jezioro Zegrzyńskie.',
-      size: '38 m²',
-      guests: '4 Osoby',
-      bedrooms: '1 Sypialnia',
-      bathrooms: '1 Łazienka',
-      price: 'od 600 zł / noc',
-    },
-    {
-      image: '/images/rooms/img_3622.jpg',
-      title: 'Apartament D1',
-      description:
-        'Nowoczesny apartament z tarasem, położony na 1 piętrze.',
-      size: '38 m²',
-      guests: '4 Osoby',
-      bedrooms: '1 Sypialnia',
-      bathrooms: '1 Łazienka',
-      price: 'od 480 zł / noc',
-    },
-    {
-      image: '/images/rooms/img_3620.jpg',
-      title: 'Apartament D4',
-      description:
-        'Komfortowy apartament z tarasem, położony na 2 piętrze.',
-      size: '38 m²',
-      guests: '4 Osoby',
-      bedrooms: '1 Sypialnia',
-      bathrooms: '1 Łazienka',
-      price: 'od 510 zł / noc',
-    },
-    {
-      image: '/images/rooms/d4.jpg',
-      title: 'Apartament D7',
-      description:
-        'Przestronny apartament z tarasem, położony na 3 piętrze.',
-      size: '38 m²',
-      guests: '4 Osoby',
-      bedrooms: '1 Sypialnia',
-      bathrooms: '1 Łazienka',
-      price: 'od 540 zł / noc',
-    },
-    {
-      image: '/images/rooms/img_4647.jpg',
-      title: 'Apartament Deluxe B10',
-      description:
-        'Apartament Deluxe z panoramicznym widokiem na Jezioro Zegrzyńskie.',
-      size: '68 m²',
-      guests: '4 Osoby',
-      bedrooms: '1 Sypialnia',
-      bathrooms: '1 Łazienka',
-      price: 'od 900 zł / noc',
-    },
-  ];
+  const apartmentKeys = ['c1', 'c4', 'c7', 'd1', 'd4', 'd7', 'b10'] as const;
+
+  const imageMap: Record<string, string> = {
+    c1: '/images/rooms/t3s-rivazegrze-3107-m.jpg',
+    c4: '/images/rooms/t3s-rivazegrze-3500-m.jpg',
+    c7: '/images/rooms/img_3650.jpg',
+    d1: '/images/rooms/img_3622.jpg',
+    d4: '/images/rooms/img_3620.jpg',
+    d7: '/images/rooms/d4.jpg',
+    b10: '/images/rooms/img_4647.jpg',
+  };
+
+  const apartments = apartmentKeys.map((key) => ({
+    key,
+    image: imageMap[key],
+    title: t(`${key}.title`),
+    description: t(`${key}.description`),
+    size: t(`${key}.size`),
+    guests: t(`${key}.guests`),
+    bedrooms: t(`${key}.bedrooms`),
+    bathrooms: t(`${key}.bathrooms`),
+    price: t(`${key}.price`),
+  }));
 
   useEffect(() => {
     let scrollTriggerInstance: any = null;
 
-    const initHorizontalScroll = async () => {
+    const initHorizontalScroll = () => {
       if (typeof window === 'undefined') return;
 
-      try {
-        const { gsap } = await import('gsap');
-        const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-        
-        gsap.registerPlugin(ScrollTrigger);
+      const section = sectionRef.current;
+      const horizontal = horizontalRef.current;
+      
+      if (!section || !horizontal) return;
 
-        const section = sectionRef.current;
-        const horizontal = horizontalRef.current;
-        
-        if (!section || !horizontal) return;
-
-        setTimeout(() => {
+      // Czekamy aż DOM się ustabilizuje
+      const timer = setTimeout(() => {
+        try {
           const cards = horizontal.querySelectorAll('.room-card');
           
           const totalWidth = Array.from(cards).reduce<number>((acc, card) => {
@@ -1244,9 +1115,13 @@ function RoomsShowcase() {
           }, 0);
           
           const scrollDistance = totalWidth - window.innerWidth;
-
           const isMobile = window.innerWidth < 1024;
           const scrollMultiplier = isMobile ? 0.8 : 1.2;
+
+          // Kill previous instances
+          ScrollTrigger.getAll().forEach((t: any) => {
+            if (t.trigger === section) t.kill();
+          });
 
           scrollTriggerInstance = ScrollTrigger.create({
             trigger: section,
@@ -1272,12 +1147,16 @@ function RoomsShowcase() {
             anticipatePin: 1,
           });
 
+          // Double refresh for stability
           ScrollTrigger.refresh();
-        }, 100);
+          setTimeout(() => ScrollTrigger.refresh(), 500);
 
-      } catch (error) {
-        console.error('GSAP error:', error);
-      }
+        } catch (error) {
+          console.error('ScrollTrigger error:', error);
+        }
+      }, 500);
+
+      return () => clearTimeout(timer);
     };
 
     initHorizontalScroll();
@@ -1285,14 +1164,6 @@ function RoomsShowcase() {
     return () => {
       if (scrollTriggerInstance) {
         scrollTriggerInstance.kill();
-      }
-      if (typeof window !== 'undefined') {
-        try {
-          const { ScrollTrigger } = require('gsap/ScrollTrigger');
-          ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill());
-        } catch (e) {
-          // ignore
-        }
       }
     };
   }, [apartments.length]);
@@ -1303,7 +1174,7 @@ function RoomsShowcase() {
       {/* HEADER - Fixed/Pinned */}
       <div className="text-center py-16 px-6">
         <span className="text-xs tracking-[0.4em] uppercase text-[#AB8A62] mb-4 block">
-          Riva Zegrze
+          {t('label')}
         </span>
         <h2
           className="text-4xl md:text-6xl font-light"
@@ -1312,12 +1183,12 @@ function RoomsShowcase() {
             color: '#4A6B5E'
           }}
         >
-          Nasze Apartamenty
+          {t('title')}
         </h2>
         
         {/* Scroll Hint */}
         <div className="flex items-center justify-center gap-2 text-[#AB8A62] text-xs tracking-[0.2em] uppercase mt-8 animate-bounce">
-          <span>Przewiń aby zobaczyć</span>
+          <span>{t('scrollHint')}</span>
           <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
@@ -1330,7 +1201,7 @@ function RoomsShowcase() {
           
           {apartments.map((apt, idx) => (
             <div 
-              key={idx} 
+              key={apt.key} 
               className={`room-card shrink-0 w-[85vw] lg:w-[70vw] ${
                 idx === apartments.length - 1 ? 'mr-0' : ''
               }`}
@@ -1360,26 +1231,22 @@ function RoomsShowcase() {
                   </p>
 
                   <div className="grid grid-cols-2 gap-3 mb-4">
-                    <InfoItem icon={<SizeIcon />} label="Rozmiar" value={apt.size} />
-                    <InfoItem icon={<GuestsIcon />} label="Goście" value={apt.guests} />
-                    <InfoItem icon={<BedroomsIcon />} label="Sypialnie" value={apt.bedrooms} />
-                    <InfoItem icon={<BathroomsIcon />} label="Łazienki" value={apt.bathrooms} />
+                    <InfoItem icon={<SizeIcon />} label={t('size')} value={apt.size} />
+                    <InfoItem icon={<GuestsIcon />} label={t('guests')} value={apt.guests} />
+                    <InfoItem icon={<BedroomsIcon />} label={t('bedrooms')} value={apt.bedrooms} />
+                    <InfoItem icon={<BathroomsIcon />} label={t('bathrooms')} value={apt.bathrooms} />
                   </div>
 
                   <div className="flex items-center justify-between pt-4 border-t border-white/20">
                     <span className="text-base text-white font-light">{apt.price}</span>
                     <button className="bg-transparent border-2 border-white text-white px-5 py-2 text-xs tracking-wider uppercase hover:bg-white hover:text-[#6e7a73] transition-all duration-300">
-                      Rezerwuj
+                      {t('book')}
                     </button>
                   </div>
                 </div>
               </div>
 
-              {/* 
-                ============================================
-                🔧 DESKTOP LAYOUT - POPRAWIONY 
-                ============================================
-              */}
+              {/* DESKTOP LAYOUT */}
               <div className="hidden lg:grid lg:grid-cols-2 bg-white shadow-2xl overflow-hidden h-[550px] lg:h-[600px]">
                 
                 {/* Image Side - SZTYWNA WYSOKOŚĆ */}
@@ -1417,10 +1284,10 @@ function RoomsShowcase() {
                     </p>
 
                     <div className="grid grid-cols-2 gap-3 lg:gap-4">
-                      <InfoItem icon={<SizeIcon />} label="Rozmiar" value={apt.size} />
-                      <InfoItem icon={<GuestsIcon />} label="Goście" value={apt.guests} />
-                      <InfoItem icon={<BedroomsIcon />} label="Sypialnie" value={apt.bedrooms} />
-                      <InfoItem icon={<BathroomsIcon />} label="Łazienki" value={apt.bathrooms} />
+                      <InfoItem icon={<SizeIcon />} label={t('size')} value={apt.size} />
+                      <InfoItem icon={<GuestsIcon />} label={t('guests')} value={apt.guests} />
+                      <InfoItem icon={<BedroomsIcon />} label={t('bedrooms')} value={apt.bedrooms} />
+                      <InfoItem icon={<BathroomsIcon />} label={t('bathrooms')} value={apt.bathrooms} />
                     </div>
                   </div>
 
@@ -1428,7 +1295,7 @@ function RoomsShowcase() {
                   <div className="flex items-center justify-between pt-5 lg:pt-6 border-t border-white/20 mt-5 lg:mt-6">
                     <span className="text-lg lg:text-xl xl:text-2xl text-white font-light">{apt.price}</span>
                     <button className="bg-transparent border-2 border-white text-white px-5 py-2 lg:px-6 lg:py-2.5 xl:px-8 xl:py-3 text-xs lg:text-sm tracking-wider uppercase hover:bg-white hover:text-[#6e7a73] transition-all duration-300 whitespace-nowrap">
-                      Rezerwuj
+                      {t('book')}
                     </button>
                   </div>
 
@@ -1443,9 +1310,9 @@ function RoomsShowcase() {
 
       {/* Progress Indicators */}
       <div className="flex justify-center gap-2 pb-12">
-        {apartments.map((_, idx) => (
+        {apartments.map((apt, idx) => (
           <div
-            key={idx}
+            key={apt.key}
             className={`h-1 rounded-full transition-all duration-300 ${
               idx === currentIndex 
                 ? 'w-12 bg-[#AB8A62]' 
@@ -1505,10 +1372,10 @@ function BathroomsIcon() {
   );
 }
 
-
-
-// Additional Hero Section - ZAKTUALIZOWANE DANE
+// Additional Hero Section - WITH TRANSLATIONS
 function AdditionalHero() {
+  const t = useTranslations();
+
   // Initialize AOS
   useEffect(() => {
     const initAOS = async () => {
@@ -1530,7 +1397,7 @@ function AdditionalHero() {
         <div className="lg:hidden space-y-12">
           <div className="text-center" data-aos="fade-up">
             <span className="text-xs tracking-[0.4em] uppercase text-[#AB8A62] mb-4 block">
-              RIVA ZEGRZE
+              {t('additional.label')}
             </span>
             <h2
               className="text-3xl md:text-4xl font-light leading-tight mb-6"
@@ -1539,14 +1406,14 @@ function AdditionalHero() {
                 color: '#4A6B5E'
               }}
             >
-              Wiemy, że potrzebujesz<br />wakacji
+              {t('additional.title')}<br />{t('additional.titleBreak')}
             </h2>
           </div>
 
           <div className="relative h-[350px]" data-aos="fade-right" data-aos-delay="100">
             <img
               src="/images/additional-hero/apart.jpeg"
-              alt="Apartament Riva Zegrze"
+              alt={t('additional.imgApartAlt')}
               className="w-full h-full object-cover shadow-2xl"
             />
           </div>
@@ -1554,15 +1421,14 @@ function AdditionalHero() {
           <div className="relative h-[350px]" data-aos="fade-left" data-aos-delay="200">
             <img
               src="/images/additional-hero/T3S-RivaZegrze-4228-m.jpg"
-              alt="Riva Zegrze"
+              alt={t('additional.imgRivaAlt')}
               className="w-full h-full object-cover shadow-2xl"
             />
           </div>
 
           <div className="bg-[#F5F3EF] p-8" data-aos="fade-up" data-aos-delay="300">
             <p className="text-[#8a968f] leading-relaxed mb-8 text-center">
-              Zanurz się w luksusie nad brzegiem Zalewu Zegrzyńskiego. Nasze apartamenty 
-              łączą nowoczesny design z naturalnym pięknem.
+              {t('additional.descMobile')}
             </p>
 
             <div className="space-y-6">
@@ -1571,10 +1437,10 @@ function AdditionalHero() {
                   className="text-4xl font-light text-[#6E7A73] mb-2"
                   style={{ fontFamily: 'Playfair Display, serif' }}
                 >
-                  7
+                  {t('additional.stat1Value')}
                 </div>
                 <div className="text-xs tracking-[0.2em] uppercase text-[#8a968f]">
-                  Luksusowych Apartamentów
+                  {t('additional.stat1Label')}
                 </div>
               </div>
 
@@ -1583,10 +1449,10 @@ function AdditionalHero() {
                   className="text-4xl font-light text-[#6E7A73] mb-2"
                   style={{ fontFamily: 'Playfair Display, serif' }}
                 >
-                  100%
+                  {t('additional.stat2Value')}
                 </div>
                 <div className="text-xs tracking-[0.2em] uppercase text-[#8a968f]">
-                  Zadowolonych Gości
+                  {t('additional.stat2Label')}
                 </div>
               </div>
 
@@ -1595,10 +1461,10 @@ function AdditionalHero() {
                   className="text-4xl font-light text-[#6E7A73] mb-2"
                   style={{ fontFamily: 'Playfair Display, serif' }}
                 >
-                  9.1★
+                  {t('additional.stat3Value')}
                 </div>
                 <div className="text-xs tracking-[0.2em] uppercase text-[#8a968f]">
-                  Średnia Ocena
+                  {t('additional.stat3Label')}
                 </div>
               </div>
             </div>
@@ -1606,8 +1472,12 @@ function AdditionalHero() {
 
           <div className="flex items-center justify-center w-28 h-28 border-2 border-[#AB8A62] rounded-full mx-auto" data-aos="zoom-in" data-aos-delay="400">
             <div className="text-center">
-              <div className="text-xs tracking-[0.2em] uppercase text-[#AB8A62]">Since</div>
-              <div className="text-xl font-light text-[#6E7A73]" style={{ fontFamily: 'Playfair Display, serif' }}>2022</div>
+              <div className="text-xs tracking-[0.2em] uppercase text-[#AB8A62]">
+                {t('additional.since')}
+              </div>
+              <div className="text-xl font-light text-[#6E7A73]" style={{ fontFamily: 'Playfair Display, serif' }}>
+                {t('additional.sinceYear')}
+              </div>
             </div>
           </div>
         </div>
@@ -1619,7 +1489,7 @@ function AdditionalHero() {
           <div className="col-span-5 relative">
             <div className="mb-16" data-aos="fade-right">
               <span className="text-xs tracking-[0.4em] uppercase text-[#AB8A62] mb-6 block">
-                RIVA ZEGRZE
+                {t('additional.label')}
               </span>
               
               <h2
@@ -1629,14 +1499,18 @@ function AdditionalHero() {
                   color: '#4A6B5E'
                 }}
               >
-                Wiemy, że potrzebujesz<br />wakacji
+                {t('additional.title')}<br />{t('additional.titleBreak')}
               </h2>
 
               {/* Circular Badge */}
               <div className="inline-flex items-center justify-center w-36 h-36 border-2 border-[#AB8A62] rounded-full">
                 <div className="text-center">
-                  <div className="text-xs tracking-[0.2em] uppercase text-[#AB8A62] mb-1">Since</div>
-                  <div className="text-3xl font-light text-[#6E7A73]" style={{ fontFamily: 'Playfair Display, serif' }}>2025</div>
+                  <div className="text-xs tracking-[0.2em] uppercase text-[#AB8A62] mb-1">
+                    {t('additional.since')}
+                  </div>
+                  <div className="text-3xl font-light text-[#6E7A73]" style={{ fontFamily: 'Playfair Display, serif' }}>
+                    {t('additional.sinceYear')}
+                  </div>
                 </div>
               </div>
             </div>
@@ -1645,7 +1519,7 @@ function AdditionalHero() {
             <div className="relative h-[450px] shadow-2xl mt-8 overflow-hidden group" data-aos="fade-up" data-aos-delay="200">
               <img
                 src="/images/additional-hero/apart.jpeg"
-                alt="Apartament Riva Zegrze"
+                alt={t('additional.imgApartAlt')}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
             </div>
@@ -1658,7 +1532,7 @@ function AdditionalHero() {
             <div className="relative h-[400px] ml-auto w-[85%] shadow-2xl z-10 overflow-hidden group" data-aos="fade-left" data-aos-delay="100">
               <img
                 src="/images/additional-hero/T3S-RivaZegrze-4228-m.jpg"
-                alt="Riva Zegrze"
+                alt={t('additional.imgRivaAlt')}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
             </div>
@@ -1666,9 +1540,7 @@ function AdditionalHero() {
             {/* Stats Panel - Overlaps bottom of image */}
             <div className="relative bg-[#F5F3EF] p-12 xl:p-16 -mt-24 mr-16 shadow-xl z-20" data-aos="fade-up" data-aos-delay="300">
               <p className="text-[#8a968f] leading-relaxed mb-12 text-lg">
-                Zanurz się w luksusie nad brzegiem Zalewu Zegrzyńskiego. Nasze apartamenty 
-                łączą nowoczesny design z naturalnym pięknem, tworząc idealne miejsce na 
-                wypoczynek z dala od codziennego zgiełku.
+                {t('additional.descDesktop')}
               </p>
 
               <div className="space-y-8">
@@ -1677,10 +1549,10 @@ function AdditionalHero() {
                     className="text-6xl font-light text-[#6E7A73] mb-2"
                     style={{ fontFamily: 'Playfair Display, serif' }}
                   >
-                    7
+                    {t('additional.stat1Value')}
                   </div>
                   <div className="text-xs tracking-[0.2em] uppercase text-[#8a968f]">
-                    Luksusowych Apartamentów
+                    {t('additional.stat1Label')}
                   </div>
                 </div>
 
@@ -1689,10 +1561,10 @@ function AdditionalHero() {
                     className="text-6xl font-light text-[#6E7A73] mb-2"
                     style={{ fontFamily: 'Playfair Display, serif' }}
                   >
-                    100%
+                    {t('additional.stat2Value')}
                   </div>
                   <div className="text-xs tracking-[0.2em] uppercase text-[#8a968f]">
-                    Zadowolonych Gości
+                    {t('additional.stat2Label')}
                   </div>
                 </div>
 
@@ -1701,10 +1573,10 @@ function AdditionalHero() {
                     className="text-6xl font-light text-[#6E7A73] mb-2"
                     style={{ fontFamily: 'Playfair Display, serif' }}
                   >
-                    9.1★
+                    {t('additional.stat3Value')}
                   </div>
                   <div className="text-xs tracking-[0.2em] uppercase text-[#8a968f]">
-                    Średnia Ocena
+                    {t('additional.stat3Label')}
                   </div>
                 </div>
               </div>
@@ -1720,11 +1592,9 @@ function AdditionalHero() {
 
 
 
-
-// ============================================
-// ExperienceParallax - NAPRAWIONY
-// ============================================
+// ExperienceParallax - WITH TRANSLATIONS
 function ExperienceParallax() {
+  const t = useTranslations();
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -1748,7 +1618,6 @@ function ExperienceParallax() {
       }
     };
 
-    // Delay to ensure DOM is ready
     const timer = setTimeout(() => {
       initParallax();
     }, 100);
@@ -1757,7 +1626,6 @@ function ExperienceParallax() {
       isMounted = false;
       clearTimeout(timer);
       
-      // Cleanup jarallax
       if (sectionRef.current && typeof window !== 'undefined') {
         try {
           const { jarallax } = require('jarallax');
@@ -1776,24 +1644,22 @@ function ExperienceParallax() {
       data-jarallax
       data-speed="0.6"
     >
-      {/* Jarallax sam doda obrazek - nie trzeba img tutaj */}
-      
       <div className="absolute inset-0 bg-gradient-to-b from-[#0f0e0f]/40 via-transparent to-[#0f0e0f]/60 z-10" />
       <div className="absolute inset-0 bg-[#0f0e0f]/10 z-10" />
 
       <div className="relative z-20 container mx-auto px-6 text-center text-[#e8e9e4]">
         <div className="max-w-4xl mx-auto">
           <span className="block text-[10px] md:text-xs tracking-[0.6em] uppercase mb-8 font-bold text-[#e8e9e4]/80">
-            Rezerwacja Bezpośrednia
+            {t('experience.label')}
           </span>
 
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif leading-[1.1] mb-10 tracking-tight">
-            Twój spokój <br /> 
-            <span className="italic font-normal">zaczyna się tutaj</span>
+            {t('experience.title')} <br /> 
+            <span className="italic font-normal">{t('experience.titleItalic')}</span>
           </h2>
 
           <p className="max-w-xl mx-auto text-base md:text-lg lg:text-xl font-light leading-relaxed mb-12 text-[#e8e9e4]/90">
-            Gwarantujemy najlepszą cenę i elastyczne warunki anulacji przy rezerwacji bezpośrednio przez naszą stronę.
+            {t('experience.description')}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -1801,14 +1667,14 @@ function ExperienceParallax() {
               href="#booking"
               className="w-full sm:w-auto px-10 py-5 bg-[#8a968f] text-[#e8e9e4] text-[10px] font-bold tracking-[0.3em] uppercase transition-all duration-500 hover:bg-[#7d8a83] hover:scale-105 shadow-xl"
             >
-              Zarezerwuj bezpośrednio
+              {t('experience.bookDirect')}
             </a>
             
             <a 
               href="#packages"
               className="w-full sm:w-auto px-10 py-5 bg-transparent border border-[#b6b9af]/30 text-[#e8e9e4] text-[10px] font-bold tracking-[0.3em] uppercase transition-all duration-500 hover:bg-[#e8e9e4]/10"
             >
-              Zobacz pakiety
+              {t('experience.viewPackages')}
             </a>
           </div>
         </div>
@@ -1817,8 +1683,9 @@ function ExperienceParallax() {
   );
 }
 
-// Premium Features Section - Static Image Preview
+// Premium Features Section - WITH TRANSLATIONS
 function FeaturesSection() {
+  const t = useTranslations();
   const [activeHover, setActiveHover] = useState<string>('view');
 
   // Initialize AOS
@@ -1834,36 +1701,20 @@ function FeaturesSection() {
     initAOS();
   }, []);
 
-  const features = [
-    {
-      id: 'view',
-      label: 'Widok',
-      title: 'Zapierające Dech Widoki',
-      description: 'Panoramiczne widoki na Zalew Zegrzyński i otaczającą przyrodę',
-      image: '/images/features/widok.jpeg'
-    },
-    {
-      id: 'pool',
-      label: 'Basen',
-      title: 'Prywatny Basen',
-      description: 'Luksusowy basen z widokiem na Zalew Zegrzyński',
-      image: '/images/features/T3S-RivaZegrze-4404-m.jpg'
-    },
-    {
-      id: 'gym',
-      label: 'Siłownia',
-      title: 'Nowoczesna Siłownia',
-      description: 'Profesjonalny sprzęt fitness w eleganckim wnętrzu',
-      image: '/images/features/2.jpg'
-    },
-    {
-      id: 'apartments',
-      label: 'Apartamenty',
-      title: 'Designerskie Apartamenty',
-      description: 'Przestronne wnętrza z najwyższej jakości wykończeniem',
-      image: '/images/features/IMG_2750.jpg'
-    }
-  ];
+  const featureIds = ['view', 'pool', 'gym', 'apartments'] as const;
+
+  const features = featureIds.map((id) => ({
+    id,
+    label: t(`features.${id}.label`),
+    title: t(`features.${id}.title`),
+    description: t(`features.${id}.description`),
+    image: {
+      view: '/images/features/widok.jpeg',
+      pool: '/images/features/T3S-RivaZegrze-4404-m.jpg',
+      gym: '/images/features/2.jpg',
+      apartments: '/images/features/IMG_2750.jpg',
+    }[id],
+  }));
 
   const activeFeature = features.find(f => f.id === activeHover);
 
@@ -1880,16 +1731,16 @@ function FeaturesSection() {
           {/* Header */}
           <div className="mb-20" data-aos="fade-up">
             <span className="text-xs tracking-[0.4em] uppercase text-[#8a968f] mb-6 block font-light">
-              Odkryj
+              {t('features.label')}
             </span>
             <h2
               className="text-5xl md:text-6xl lg:text-7xl font-light mb-4 text-[#4A6B5E]"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
-              Zapierające Dech Widoki
+              {t('features.title')}
             </h2>
             <p className="text-[#8a968f] text-base max-w-xl mt-4 leading-relaxed">
-              Najedź kursorem na wybrane udogodnienie
+              {t('features.hoverHint')}
             </p>
           </div>
 
@@ -1938,13 +1789,13 @@ function FeaturesSection() {
             ))}
           </div>
 
-          {/* CTA Button - Link do /apartamenty */}
+          {/* CTA Button */}
           <div className="mt-16" data-aos="fade-up" data-aos-delay="300">
             <a
               href="/apartamenty"
               className="inline-block px-10 py-4 border-2 border-[#8a968f] text-[#6e7a73] text-xs tracking-[0.2em] uppercase font-light hover:bg-[#6E7A73] hover:text-white hover:border-[#6E7A73] transition-all duration-500"
             >
-              Zobacz Apartamenty
+              {t('features.viewApartments')}
             </a>
           </div>
         </div>
@@ -1990,13 +1841,13 @@ function FeaturesSection() {
       <div className="lg:hidden px-6">
         <div className="mb-12" data-aos="fade-up">
           <span className="text-xs tracking-[0.4em] uppercase text-[#8a968f] mb-4 block font-light">
-            Odkryj
+            {t('features.label')}
           </span>
           <h2
             className="text-4xl font-light mb-4 text-[#4A6B5E]"
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
-            Zapierające Dech Widoki
+            {t('features.title')}
           </h2>
         </div>
 
@@ -2051,13 +1902,13 @@ function FeaturesSection() {
           ))}
         </div>
 
-        {/* CTA Button Mobile - Link do /apartamenty */}
+        {/* CTA Button Mobile */}
         <div className="mt-12 text-center">
           <a
             href="/apartamenty"
             className="inline-block px-8 py-3 border-2 border-[#8a968f] text-[#6e7a73] text-xs tracking-[0.2em] uppercase font-light hover:bg-[#6E7A73] hover:text-white hover:border-[#6E7A73] transition-all duration-500"
           >
-            Zobacz Apartamenty
+            {t('features.viewApartments')}
           </a>
         </div>
       </div>
@@ -2065,8 +1916,10 @@ function FeaturesSection() {
   );
 }
 
+
 function InstagramGallery() {
   const sectionRef = useRef<HTMLElement>(null);
+  const t = useTranslations('gallery');
 
   const galleryItems = [
     {
@@ -2075,15 +1928,15 @@ function InstagramGallery() {
       url: '/images/instagram/T3S-RivaZegrze-0940-m.jpg',
       span: 'lg:col-span-2 lg:row-span-2',
       aspect: 'aspect-[4/5] sm:aspect-square lg:aspect-auto lg:h-[900px]',
-      title: 'Poranne wyciszenie nad Jeziorem'
+      title: t('items.item1.title')
     },
     {
       id: 2,
       type: 'text',
-      content: 'Riva Zegrze to miejsce, gdzie natura spotyka się z dyskretną elegancją.',
+      content: t('items.item2.content'),
       span: 'lg:col-span-1 lg:row-span-1',
       bg: 'bg-[#AB8A62]/5',
-      title: 'Odpoczynek'
+      title: t('items.item2.title')
     },
     {
       id: 3,
@@ -2091,7 +1944,7 @@ function InstagramGallery() {
       url: '/videos/rower-compressed.mp4',
       span: 'lg:col-span-1 lg:row-span-2',
       aspect: 'aspect-[9/16] lg:h-[900px]',
-      title: 'Aktywny wypoczynek'
+      title: t('items.item3.title')
     },
     {
       id: 4,
@@ -2099,15 +1952,15 @@ function InstagramGallery() {
       url: '/images/instagram/kajaki.jpg',
       span: 'lg:col-span-1 lg:row-span-1',
       aspect: 'aspect-square lg:h-[430px]',
-      title: 'Kajaki na jeziorze'
+      title: t('items.item4.title')
     },
     {
       id: 5,
       type: 'text',
-      content: 'Aktywny wypoczynek w sercu natury – odnajdź swój własny rytm.',
+      content: t('items.item5.content'),
       span: 'lg:col-span-1 lg:row-span-1',
       bg: 'bg-[#2C2C2C] text-white',
-      title: 'Styl Życia'
+      title: t('items.item5.title')
     },
     {
       id: 6,
@@ -2115,7 +1968,7 @@ function InstagramGallery() {
       url: '/videos/kajak-compressed.mp4',
       span: 'lg:col-span-3 lg:row-span-1',
       aspect: 'aspect-[21/9] lg:h-[430px]',
-      title: 'Kajaki na jeziorze'
+      title: t('items.item6.title')
     }
   ];
 
@@ -2156,18 +2009,15 @@ function InstagramGallery() {
     initAnimations();
   }, []);
 
-  // Seamless video loop handler
   useEffect(() => {
     const videos = document.querySelectorAll('video');
     
     videos.forEach(video => {
-      // Ensure smooth loop without gaps
       video.addEventListener('ended', () => {
         video.currentTime = 0;
         video.play();
       });
       
-      // Preload for instant replay
       video.load();
     });
     
@@ -2185,10 +2035,10 @@ function InstagramGallery() {
         {/* Branding & Nature-Focused Heading */}
         <div className="mb-20 sm:mb-28 text-center lg:text-left gallery-item max-w-[2000px] mx-auto">
           <span className="text-[10px] sm:text-xs uppercase tracking-[0.7em] text-[#AB8A62] font-bold mb-6 block">
-            Riva Zegrze Life
+            {t('label')}
           </span>
           <h2 className="text-4xl sm:text-7xl lg:text-8xl font-serif leading-[1.0] tracking-tight" style={{ color: '#4A6B5E' }}>
-              Natura <span className="italic font-normal">w obiektywie</span>
+            {t('title')} <span className="italic font-normal">{t('titleItalic')}</span>
           </h2>
         </div>
 
@@ -2244,7 +2094,7 @@ function InstagramGallery() {
                     {item.title}
                   </span>
                   <p className="text-2xl sm:text-3xl font-serif italic leading-[1.5] text-current/90 tracking-tight">
-                    "{item.content}"
+                    &ldquo;{item.content}&rdquo;
                   </p>
                   <div className="w-12 h-[1px] bg-[#AB8A62]/40 mt-12" />
                 </div>
@@ -2253,30 +2103,30 @@ function InstagramGallery() {
           ))}
         </div>
 
-        {/* Exclusive Branding CTA - Z ODWROTNYM EFEKTEM */}
-<div className="mt-32 sm:mt-48 border-t border-black/[0.03] pt-20 sm:pt-32 text-center gallery-item max-w-7xl mx-auto group">
-  <p className="text-[#AB8A62] group-hover:text-gray-400 text-[10px] tracking-[0.6em] uppercase mb-12 font-bold transition-colors duration-700">
-    Odkryj więcej na Instagramie
-  </p>
-  <a 
-    href="#instagram" 
-    className="inline-flex items-center space-x-8 text-3xl sm:text-6xl font-serif text-gray-400 hover:text-[#AB8A62] transition-colors duration-1000 relative"
-  >
-    <span className="relative pb-4">
-      @rivazegrze
-      <span className="absolute bottom-0 left-0 w-12 h-[1px] bg-[#AB8A62] transition-all duration-1000 group-hover:w-full" />
-    </span>
-    <svg 
-      className="w-12 h-12 sm:w-20 sm:h-20 transform transition-transform duration-1000 group-hover:rotate-45" 
-      viewBox="0 0 24 24" 
-      fill="none" 
-      stroke="currentColor" 
-      strokeWidth="0.4"
-    >
-      <path d="M7 17L17 7M17 7H7M17 7V17" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  </a>
-</div>
+        {/* Exclusive Branding CTA */}
+        <div className="mt-32 sm:mt-48 border-t border-black/[0.03] pt-20 sm:pt-32 text-center gallery-item max-w-7xl mx-auto group">
+          <p className="text-[#AB8A62] group-hover:text-gray-400 text-[10px] tracking-[0.6em] uppercase mb-12 font-bold transition-colors duration-700">
+            {t('cta.label')}
+          </p>
+          <a 
+            href="#instagram" 
+            className="inline-flex items-center space-x-8 text-3xl sm:text-6xl font-serif text-gray-400 hover:text-[#AB8A62] transition-colors duration-1000 relative"
+          >
+            <span className="relative pb-4">
+              {t('cta.handle')}
+              <span className="absolute bottom-0 left-0 w-12 h-[1px] bg-[#AB8A62] transition-all duration-1000 group-hover:w-full" />
+            </span>
+            <svg 
+              className="w-12 h-12 sm:w-20 sm:h-20 transform transition-transform duration-1000 group-hover:rotate-45" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="0.4"
+            >
+              <path d="M7 17L17 7M17 7H7M17 7V17" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </a>
+        </div>
       </div>
     </section>
   );
@@ -2284,9 +2134,10 @@ function InstagramGallery() {
 
 
 // ============================================
-// WellnessGrid - ZAKTUALIZOWANE DANE
-// ============================================
+
 function WellnessGrid() {
+  const t = useTranslations('wellness');
+
   useEffect(() => {
     const initAOS = async () => {
       try {
@@ -2302,6 +2153,26 @@ function WellnessGrid() {
     };
     initAOS();
   }, []);
+
+  const featureTags = [
+    t('pool.tags.tag1'),
+    t('pool.tags.tag2'),
+    t('pool.tags.tag3'),
+    t('pool.tags.tag4'),
+  ];
+
+  const gymFeatures = [
+    t('gymCard.features.feature1'),
+    t('gymCard.features.feature2'),
+    t('gymCard.features.feature3'),
+  ];
+
+  const stats = [
+    { number: t('stats.stat1Value'), label: t('stats.stat1Label') },
+    { number: t('stats.stat2Value'), label: t('stats.stat2Label') },
+    { number: t('stats.stat3Value'), label: t('stats.stat3Label') },
+    { number: t('stats.stat4Value'), label: t('stats.stat4Label') },
+  ];
 
   return (
     <section className="py-24 lg:py-40 bg-[#f8f8f6] relative overflow-hidden">
@@ -2324,7 +2195,7 @@ function WellnessGrid() {
             className="inline-block text-[10px] tracking-[0.6em] uppercase text-[#AB8A62] font-bold mb-8 relative"
             data-aos="fade-right"
           >
-            Wellness & Balance
+            {t('label')}
             <div className="absolute -bottom-3 left-0 w-12 h-px bg-[#AB8A62]/40" />
           </span>
 
@@ -2334,8 +2205,8 @@ function WellnessGrid() {
             data-aos-delay="100"
             style={{ color: '#4A6B5E' }}
           >
-            Odnajdź swój <br />{' '}
-            <span className="italic font-normal">wewnętrzny rytm</span>
+            {t('title')} <br />{' '}
+            <span className="italic font-normal">{t('titleItalic')}</span>
           </h2>
 
           <p
@@ -2343,9 +2214,7 @@ function WellnessGrid() {
             data-aos="fade-up"
             data-aos-delay="200"
           >
-            Ekskluzywna strefa regeneracji Riva Zegrze. Połączenie kojącej
-            bliskości jeziora z nowoczesnym podejściem do zdrowia i sprawności
-            fizycznej.
+            {t('description')}
           </p>
         </div>
 
@@ -2357,7 +2226,7 @@ function WellnessGrid() {
               <div className="relative overflow-hidden aspect-[16/10] lg:aspect-[16/9]">
                 <img
                   src="/images/wellness/T3S-RivaZegrze-3376-m.jpg"
-                  alt="Basen z widokiem"
+                  alt={t('pool.imgAlt')}
                   className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/5" />
@@ -2366,28 +2235,20 @@ function WellnessGrid() {
               <div className="p-10 lg:p-16">
                 <div className="flex items-center gap-4 text-[10px] tracking-[0.4em] uppercase text-[#AB8A62] font-bold mb-6">
                   <div className="w-8 h-px bg-[#AB8A62]/30" />
-                  Strefa Wody
+                  {t('pool.label')}
                 </div>
 
                 <h3 className="text-3xl lg:text-5xl font-serif text-[#1a4d2e] mb-8 leading-tight">
-                  Basen & Regeneracja
+                  {t('pool.title')}
                 </h3>
 
                 <p className="text-base lg:text-lg text-[#6e7a73] leading-relaxed mb-10 max-w-2xl font-light">
-                  Kryty, podgrzewany basen dostępny przez cały rok pozwala
-                  cieszyć się relaksem niezależnie od pogody i pory roku. To
-                  idealna przestrzeń do spokojnego wypoczynku po dniu spędzonym
-                  nad jeziorem lub aktywnie w okolicy.
+                  {t('pool.description')}
                 </p>
 
-                {/* Feature Pills - Refined */}
+                {/* Feature Pills */}
                 <div className="flex flex-wrap gap-4">
-                  {[
-                    'Kryty basen podgrzewany',
-                    'Relaks przez cały rok',
-                    'Strefa cardio i siłowa',
-                    'Kameralna siłownia',
-                  ].map((tag) => (
+                  {featureTags.map((tag) => (
                     <span
                       key={tag}
                       className="px-5 py-2.5 bg-[#f1f1ed] text-[#6e7a73] text-[10px] uppercase tracking-widest font-semibold border border-black/5"
@@ -2400,7 +2261,7 @@ function WellnessGrid() {
             </div>
           </div>
 
-          {/* RIGHT – SMALLER CARDS (GYM & YOGA) */}
+          {/* RIGHT – SMALLER CARDS */}
           <div className="lg:col-span-4 flex flex-col gap-8 lg:gap-16">
             {/* Gym Card */}
             <div
@@ -2411,21 +2272,21 @@ function WellnessGrid() {
               <div className="relative overflow-hidden aspect-[4/3]">
                 <img
                   src="/images/wellness/3.jpg"
-                  alt="Nowoczesna Siłownia"
+                  alt={t('gym.imgAlt')}
                   className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
                 />
               </div>
               <div className="p-8">
                 <div className="text-[9px] tracking-[0.4em] uppercase text-[#AB8A62] font-bold mb-4">
-                  Siłownia
+                  {t('gym.label')}
                 </div>
                 <h4 className="text-2xl font-serif text-[#1a4d2e] tracking-tight">
-                  Aktywność & Siła
+                  {t('gym.title')}
                 </h4>
               </div>
             </div>
 
-            {/* UPDATED: Fitness Card (replaces Yoga / Movement Card) */}
+            {/* Fitness Card */}
             <div
               className="bg-[#71847b] p-10 lg:p-14 text-white shadow-2xl relative overflow-hidden"
               data-aos="fade-up"
@@ -2435,22 +2296,15 @@ function WellnessGrid() {
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 -mr-16 -mt-16 rounded-full blur-3xl" />
 
               <h4 className="text-3xl lg:text-4xl font-serif mb-8 leading-tight">
-                Siłownia
+                {t('gymCard.title')}
               </h4>
 
               <p className="text-white/70 text-base leading-relaxed mb-10 font-light">
-                Nowoczesna, kameralna siłownia dostępna dla gości przez cały rok
-                to idealne miejsce na trening i aktywny wypoczynek. Przemyślana
-                przestrzeń oraz profesjonalny sprzęt pozwalają zadbać o formę
-                bez wychodzenia z obiektu.
+                {t('gymCard.description')}
               </p>
 
               <ul className="space-y-5 mb-12">
-                {[
-                  'sprzęt do treningu siłowego i cardio',
-                  'komfortowa, spokojna przestrzeń',
-                  'dostępna przez cały rok',
-                ].map((item, idx) => (
+                {gymFeatures.map((item, idx) => (
                   <li key={idx} className="flex items-center gap-4 text-white/80">
                     <div className="w-1 h-1 bg-[#AB8A62] rounded-full" />
                     <span className="text-sm tracking-wide font-light">
@@ -2464,24 +2318,19 @@ function WellnessGrid() {
                 href="#activities"
                 className="inline-flex items-center gap-4 text-[10px] tracking-[0.3em] uppercase font-bold group"
               >
-                <span>Sprawdź dostępność</span>
+                <span>{t('gymCard.cta')}</span>
                 <div className="w-8 h-px bg-white/30 transition-all duration-500 group-hover:w-12 group-hover:bg-white" />
               </a>
             </div>
           </div>
         </div>
 
-        {/* BOTTOM STATS - ZAKTUALIZOWANE */}
+        {/* BOTTOM STATS */}
         <div
           className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-24 mt-32 lg:mt-48 pt-20 border-t border-black/5"
           data-aos="fade-up"
         >
-          {[
-            { number: '300m²', label: 'Przestrzeń Wellness' },
-            { number: '15m', label: 'Basen sportowy' },
-            { number: 'Basen', label: 'Podgrzewana woda' },
-            { number: '24h', label: 'Dostęp do siłowni' },
-          ].map((stat, idx) => (
+          {stats.map((stat, idx) => (
             <div key={idx} className="text-left group">
               <div className="text-4xl lg:text-5xl font-serif text-[#1a4d2e] mb-4 group-hover:text-[#AB8A62] transition-colors duration-500">
                 {stat.number}
@@ -2497,86 +2346,87 @@ function WellnessGrid() {
   );
 }
 
-
 function TestimonialsSection() {
+  const t = useTranslations("testimonials");
   const sectionRef = useRef<HTMLDivElement>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
+
+  // Budujemy tablicę testimonials z tłumaczeń
+  const testimonials: Testimonial[] = testimonialKeys.map((key, index) => ({
+    id: index + 1,
+    name: t(`items.${key}.name`),
+    text: t(`items.${key}.text`),
+    date: t(`items.${key}.date`),
+    rating: 5,
+    color: cardColors[index],
+  }));
 
   useEffect(() => {
     if (!scrollerRef.current) return;
 
     const scrollerContent = scrollerRef.current;
     const cards = Array.from(scrollerContent.children);
-    
-    // Klonujemy karty dla ciągłego przewijania
-    cards.forEach(card => {
+
+    cards.forEach((card) => {
       const clone = card.cloneNode(true) as HTMLElement;
       scrollerContent.appendChild(clone);
     });
 
-    // GSAP infinite scroll
     const totalWidth = scrollerContent.scrollWidth / 2;
-    
+
     const tl = gsap.to(scrollerContent, {
       x: -totalWidth,
       duration: 60,
       ease: "none",
       repeat: -1,
       modifiers: {
-        x: gsap.utils.unitize(x => parseFloat(x) % totalWidth)
-      }
+        x: gsap.utils.unitize((x) => parseFloat(x) % totalWidth),
+      },
     });
 
-    // Hover pause
     const handleMouseEnter = () => {
       gsap.to(tl, { timeScale: 0, duration: 0.5 });
     };
-    
+
     const handleMouseLeave = () => {
       gsap.to(tl, { timeScale: 1, duration: 0.5 });
     };
 
-    scrollerContent.addEventListener('mouseenter', handleMouseEnter);
-    scrollerContent.addEventListener('mouseleave', handleMouseLeave);
+    scrollerContent.addEventListener("mouseenter", handleMouseEnter);
+    scrollerContent.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
       tl.kill();
-      scrollerContent.removeEventListener('mouseenter', handleMouseEnter);
-      scrollerContent.removeEventListener('mouseleave', handleMouseLeave);
+      scrollerContent.removeEventListener("mouseenter", handleMouseEnter);
+      scrollerContent.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, []);
 
   return (
     <section ref={sectionRef} className="relative py-32 overflow-hidden">
-      {/* Tło z gradientem i wzorem */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#f7f6f4] via-[#e8e9e4] to-[#f1f1ed]" />
-      
-      {/* Subtelny wzór/tekstura overlay */}
-      <div 
+
+      <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: `
             radial-gradient(circle at 20% 50%, #6e7a73 1px, transparent 1px),
             radial-gradient(circle at 80% 80%, #6e7a73 1px, transparent 1px)
           `,
-          backgroundSize: '50px 50px'
+          backgroundSize: "50px 50px",
         }}
       />
 
-      {/* Dekoracyjne kształty w tle */}
       <div className="absolute top-20 left-10 w-72 h-72 bg-[#d4d6ce] rounded-full opacity-20 blur-3xl" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#8a968f] rounded-full opacity-15 blur-3xl" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#c8cabe] rounded-full opacity-10 blur-3xl" />
 
-      {/* Złote akcenty - subtelne linie */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent opacity-30" />
       <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent opacity-30" />
 
-      {/* Content */}
       <div className="relative z-10">
         <div className="max-w-7xl mx-auto px-6 mb-16">
           <div className="text-center">
-            {/* Dekoracyjny element nad tytułem */}
             <div className="flex items-center justify-center gap-3 mb-6">
               <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-[#D4AF37]" />
               <Star className="w-5 h-5 fill-[#D4AF37] text-[#D4AF37]" />
@@ -2584,30 +2434,27 @@ function TestimonialsSection() {
             </div>
 
             <span className="text-sm tracking-[0.3em] text-[#6e7a73] uppercase mb-4 block font-medium">
-              Opinie Gości
+              {t("label")}
             </span>
             <h2 className="text-5xl md:text-6xl font-light text-[#0f0e0f] mb-4">
-              Zobacz, jak wspominają nas goście
+              {t("title")}
             </h2>
             <p className="text-lg text-[#6e7a73] max-w-2xl mx-auto leading-relaxed">
-              Autentyczne recenzje od osób, które doświadczyły wyjątkowego pobytu w Riva Zegrze
+              {t("description")}
             </p>
           </div>
         </div>
 
-        {/* Scrolling Container */}
         <div className="relative">
-          {/* Gradient Overlays - mocniejsze dla kontrastu */}
           <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-[#f7f6f4] via-[#f7f6f4]/80 to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-[#f7f6f4] via-[#f7f6f4]/80 to-transparent z-10 pointer-events-none" />
 
-          {/* Scroller */}
-          <div 
+          <div
             ref={scrollerRef}
             className="flex gap-6"
-            style={{ 
-              width: 'fit-content',
-              willChange: 'transform'
+            style={{
+              width: "fit-content",
+              willChange: "transform",
             }}
           >
             {testimonials.map((testimonial) => (
@@ -2616,7 +2463,6 @@ function TestimonialsSection() {
           </div>
         </div>
 
-        {/* Bottom Info - z tłem */}
         <div className="max-w-7xl mx-auto px-6 mt-20">
           <div className="bg-white/60 backdrop-blur-sm border border-[#b6b9af]/30 rounded-2xl p-8 shadow-lg">
             <div className="flex flex-col md:flex-row items-center justify-center gap-6 text-[#6e7a73]">
@@ -2626,19 +2472,25 @@ function TestimonialsSection() {
                     <Star key={i} className="w-5 h-5 fill-[#D4AF37] text-[#D4AF37]" />
                   ))}
                 </div>
-                <span className="text-lg font-medium text-[#0f0e0f]">9.1 średnia ocen</span>
+                <span className="text-lg font-medium text-[#0f0e0f]">
+                  {t("bottom.rating")}
+                </span>
               </div>
-              
+
               <div className="hidden md:block w-[1px] h-6 bg-[#b6b9af]" />
-              
+
               <div className="flex items-center gap-2">
-                <span className="text-lg font-medium text-[#0f0e0f]">Ponad 200 opinii</span>
+                <span className="text-lg font-medium text-[#0f0e0f]">
+                  {t("bottom.reviews")}
+                </span>
               </div>
-              
+
               <div className="hidden md:block w-[1px] h-6 bg-[#b6b9af]" />
-              
+
               <div className="flex items-center gap-2">
-                <span className="text-lg font-medium text-[#0f0e0f]">100% rekomendacji</span>
+                <span className="text-lg font-medium text-[#0f0e0f]">
+                  {t("bottom.recommendation")}
+                </span>
               </div>
             </div>
           </div>
@@ -2650,34 +2502,29 @@ function TestimonialsSection() {
 
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
-    <div 
+    <div
       className="relative flex-shrink-0 w-[420px] h-[300px] bg-white/90 backdrop-blur-sm border border-[#b6b9af]/50 rounded-xl p-8 transition-all duration-500 hover:shadow-2xl hover:-translate-y-3 hover:bg-white group"
     >
-      {/* Gradient Accent Bar - szerszy i bardziej widoczny */}
-      <div 
+      <div
         className="absolute top-0 left-0 right-0 h-1.5 rounded-t-xl"
         style={{ background: testimonial.color }}
       />
 
-      {/* Dekoracyjny róg - złoty akcent */}
       <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-[#D4AF37] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-tr-lg" />
 
-      {/* Rating Stars */}
       <div className="flex gap-1 mb-5">
         {[...Array(testimonial.rating)].map((_, i) => (
-          <Star 
-            key={i} 
-            className="w-5 h-5 fill-[#D4AF37] text-[#D4AF37] drop-shadow-sm" 
+          <Star
+            key={i}
+            className="w-5 h-5 fill-[#D4AF37] text-[#D4AF37] drop-shadow-sm"
           />
         ))}
       </div>
 
-      {/* Testimonial Text */}
       <p className="text-[#0f0e0f] leading-relaxed mb-6 text-[15px] line-clamp-4 group-hover:text-[#555e59] transition-colors duration-300">
-        "{testimonial.text}"
+        &ldquo;{testimonial.text}&rdquo;
       </p>
 
-      {/* Author Info */}
       <div className="absolute bottom-8 left-8 right-8">
         <div className="flex items-center justify-between">
           <div>
@@ -2688,25 +2535,23 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
               {testimonial.date}
             </p>
           </div>
-          
-          {/* Decorative Quote Icon with Gold Accent */}
-          <div 
+
+          <div
             className="w-14 h-14 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 border-2 border-[#D4AF37] shadow-lg"
             style={{ background: testimonial.color }}
           >
-            <span className="text-[#D4AF37] text-3xl font-serif font-bold leading-none">"</span>
+            <span className="text-[#D4AF37] text-3xl font-serif font-bold leading-none">&ldquo;</span>
           </div>
         </div>
       </div>
 
-      {/* Subtle inner shadow on hover */}
       <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none shadow-inner" />
     </div>
   );
 }
-
 // Location Section - Real Riva Zegrze Locations with Dynamic Maps
 function LocationSection() {
+  const t = useTranslations('location');
   const [activeLocation, setActiveLocation] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -2734,90 +2579,52 @@ function LocationSection() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const locations = [
-    {
-      id: 'golf',
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
-        </svg>
-      ),
-      title: 'Pole Golfowe Rajszew',
-      distance: '5 km',
-      address: 'Golfowa 44, 05-110 Rajszew',
-      description: 'Profesjonalne pole golfowe',
-      mapPosition: { top: '22%', left: '35%' },
-      mapPositionMobile: { top: '18%', left: '28%' },
-      coordinates: '52.500278, 20.946944',
-      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15560.428628045551!2d20.940029!3d52.48394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ec4b7004b0896%3A0x47004b0896ee9e5!2sGolfowa%2044%2C%2005-110%20Rajszew!5e0!3m2!1spl!2spl!4v1736123456789!5m2!1spl!2spl"
-    },
-    {
-      id: 'sailing',
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819" />
-        </svg>
-      ),
-      title: 'Akademia Żeglarska Mila',
-      distance: '3 km',
-      address: 'Jerzego Szaniawskiego 56, Zegrzynek',
-      description: 'Nauka żeglowania i sporty wodne',
-      mapPosition: { top: '38%', left: '68%' },
-      mapPositionMobile: { top: '35%', left: '72%' },
-      coordinates: '52.469167, 20.990556',
-      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25000!2d20.990556!3d52.469167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTLCsDI4JzA5LjAiTiAyMMKwNTknMjYuMCJF!5e0!3m2!1spl!2spl!4v1234567890"
-    },
-    {
-      id: 'reserve',
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-        </svg>
-      ),
-      title: 'Wieliszewskie Łęgi',
-      distance: '4 km',
-      address: 'Rezerwat przyrody',
-      description: 'Rezerwat przyrody z unikalną fauną',
-      mapPosition: { top: '48%', left: '28%' },
-      mapPositionMobile: { top: '45%', left: '22%' },
-      coordinates: '52.46163, 20.992039',
-      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25000!2d20.992039!3d52.46163!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTLCsDI3JzQxLjkiTiAyMMKwNTknMzEuMyJF!5e0!3m2!1spl!2spl!4v1234567890"
-    },
-    {
-      id: 'bike',
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M16.712 4.33a9.027 9.027 0 011.652 1.306c.51.51.944 1.064 1.306 1.652M16.712 4.33l-3.448 4.138m3.448-4.138a9.014 9.014 0 00-9.424 0M19.67 7.288l-4.138 3.448m4.138-3.448a9.014 9.014 0 010 9.424m-4.138-5.976a3.736 3.736 0 00-.88-1.388 3.737 3.737 0 00-1.388-.88m2.268 2.268a3.765 3.765 0 010 2.528m-2.268-4.796a3.765 3.765 0 00-2.528 0m4.796 4.796c-.181.506-.475.982-.88 1.388a3.736 3.736 0 01-1.388.88m2.268-2.268l4.138 3.448m0 0a9.027 9.027 0 01-1.306 1.652c-.51.51-1.064.944-1.652 1.306m0 0l-3.448-4.138m3.448 4.138a9.014 9.014 0 01-9.424 0m5.976-4.138a3.765 3.765 0 01-2.528 0m0 0a3.736 3.736 0 01-1.388-.88 3.737 3.737 0 01-.88-1.388m2.268 2.268L7.288 19.67m0 0a9.024 9.024 0 01-1.652-1.306 9.027 9.027 0 01-1.306-1.652m0 0l4.138-3.448M4.33 16.712a9.014 9.014 0 010-9.424m4.138 5.976a3.765 3.765 0 010-2.528m0 0c.181-.506.475-.982.88-1.388a3.736 3.736 0 011.388-.88m-2.268 2.268L4.33 7.288m6.406 1.18L7.288 4.33m0 0a9.024 9.024 0 00-1.652 1.306A9.025 9.025 0 004.33 7.288" />
-        </svg>
-      ),
-      title: 'Trasa Rowerowa VM-O',
-      distance: '0 km',
-      address: 'Rybaki 11, Zegrze Południowe',
-      description: 'Trasa Obwodowa tuż obok inwestycji',
-      mapPosition: { top: '62%', left: '52%' },
-      mapPositionMobile: { top: '58%', left: '50%' },
-      coordinates: '52.454722, 20.988889',
-      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15000!2d20.988889!3d52.454722!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTLCsDI3JzE3LjAiTiAyMMKwNTknMjAuMCJF!5e0!3m2!1spl!2spl!4v1234567890"
-    },
-    {
-      id: 'marina',
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
-        </svg>
-      ),
-      title: 'Marina Riva Zegrze',
-      distance: '0 km',
-      address: 'Rybaki 11B, Zegrze Południowe',
-      description: 'Prywatna przystań dla mieszkańców',
-      mapPosition: { top: '58%', left: '64%' },
-      mapPositionMobile: { top: '55%', left: '65%' },
-      coordinates: '52.454167, 20.989722',
-      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500!2d20.989722!3d52.454167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ec8b30732e6c9%3A0x5c5db36d47a5a0e4!2sRybaki%2011%2C%2005-130%20Zegrze%20Po%C5%82udniowe!5e0!3m2!1spl!2spl!4v1736123456789!5m2!1spl!2spl"
-    }
-  ];
+  const locationKeys = ['golf', 'sailing', 'reserve', 'bike', 'marina'] as const;
 
-  // Default map showing all of Zegrze area
+  const locationIcons: Record<string, React.ReactNode> = {
+    golf: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+      </svg>
+    ),
+    sailing: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819" />
+      </svg>
+    ),
+    reserve: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+      </svg>
+    ),
+    bike: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M16.712 4.33a9.027 9.027 0 011.652 1.306c.51.51.944 1.064 1.306 1.652M16.712 4.33l-3.448 4.138m3.448-4.138a9.014 9.014 0 00-9.424 0M19.67 7.288l-4.138 3.448m4.138-3.448a9.014 9.014 0 010 9.424m-4.138-5.976a3.736 3.736 0 00-.88-1.388 3.737 3.737 0 00-1.388-.88m2.268 2.268a3.765 3.765 0 010 2.528m-2.268-4.796a3.765 3.765 0 00-2.528 0m4.796 4.796c-.181.506-.475.982-.88 1.388a3.736 3.736 0 01-1.388.88m2.268-2.268l4.138 3.448m0 0a9.027 9.027 0 01-1.306 1.652c-.51.51-1.064.944-1.652 1.306m0 0l-3.448-4.138m3.448 4.138a9.014 9.014 0 01-9.424 0m5.976-4.138a3.765 3.765 0 01-2.528 0m0 0a3.736 3.736 0 01-1.388-.88 3.737 3.737 0 01-.88-1.388m2.268 2.268L7.288 19.67m0 0a9.024 9.024 0 01-1.652-1.306 9.027 9.027 0 01-1.306-1.652m0 0l4.138-3.448M4.33 16.712a9.014 9.014 0 010-9.424m4.138 5.976a3.765 3.765 0 010-2.528m0 0c.181-.506.475-.982.88-1.388a3.736 3.736 0 011.388-.88m-2.268 2.268L4.33 7.288m6.406 1.18L7.288 4.33m0 0a9.024 9.024 0 00-1.652 1.306A9.025 9.025 0 004.33 7.288" />
+      </svg>
+    ),
+    marina: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+      </svg>
+    ),
+  };
+
+  const mapPositions: Record<string, { mapPosition: { top: string; left: string }; mapPositionMobile: { top: string; left: string } }> = {
+    golf: { mapPosition: { top: '22%', left: '35%' }, mapPositionMobile: { top: '18%', left: '28%' } },
+    sailing: { mapPosition: { top: '38%', left: '68%' }, mapPositionMobile: { top: '35%', left: '72%' } },
+    reserve: { mapPosition: { top: '48%', left: '28%' }, mapPositionMobile: { top: '45%', left: '22%' } },
+    bike: { mapPosition: { top: '62%', left: '52%' }, mapPositionMobile: { top: '58%', left: '50%' } },
+    marina: { mapPosition: { top: '58%', left: '64%' }, mapPositionMobile: { top: '55%', left: '65%' } },
+  };
+
+  const mapUrls: Record<string, string> = {
+    golf: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15560.428628045551!2d20.940029!3d52.48394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ec4b7004b0896%3A0x47004b0896ee9e5!2sGolfowa%2044%2C%2005-110%20Rajszew!5e0!3m2!1spl!2spl!4v1736123456789!5m2!1spl!2spl",
+    sailing: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25000!2d20.990556!3d52.469167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTLCsDI4JzA5LjAiTiAyMMKwNTknMjYuMCJF!5e0!3m2!1spl!2spl!4v1234567890",
+    reserve: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25000!2d20.992039!3d52.46163!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTLCsDI3JzQxLjkiTiAyMMKwNTknMzEuMyJF!5e0!3m2!1spl!2spl!4v1234567890",
+    bike: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15000!2d20.988889!3d52.454722!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTLCsDI3JzE3LjAiTiAyMMKwNTknMjAuMCJF!5e0!3m2!1spl!2spl!4v1234567890",
+    marina: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500!2d20.989722!3d52.454167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ec8b30732e6c9%3A0x5c5db36d47a5a0e4!2sRybaki%2011%2C%2005-130%20Zegrze%20Po%C5%82udniowe!5e0!3m2!1spl!2spl!4v1736123456789!5m2!1spl!2spl",
+  };
+
   const defaultMap = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d39017.89!2d20.970!3d52.460!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ec8b30732e6c9%3A0x5c5db36d47a5a0e4!2sZegrze%20Reservoir!5e0!3m2!1sen!2spl!4v1234567890";
 
   return (
@@ -2833,27 +2640,27 @@ function LocationSection() {
             {/* Header */}
             <div className="mb-6 lg:mb-10">
               <span className="text-xs tracking-[0.4em] uppercase text-[#8a968f] mb-2 block font-light">
-                Lokalizacja
+                {t('label')}
               </span>
               <h2
                 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light text-[#6E7A73] mb-3 lg:mb-4 leading-tight"
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
-                W sercu natury,<br />
-                blisko wszystkiego
+                {t('title')}<br />
+                {t('titleBreak')}
               </h2>
             </div>
 
             {/* Locations List */}
             <div className="space-y-1 max-w-xl">
-              {locations.map((location) => (
+              {locationKeys.map((key) => (
                 <button
-                  key={location.id}
-                  onMouseEnter={() => setActiveLocation(location.id)}
+                  key={key}
+                  onMouseEnter={() => setActiveLocation(key)}
                   onMouseLeave={() => setActiveLocation(null)}
-                  onClick={() => setActiveLocation(activeLocation === location.id ? null : location.id)}
+                  onClick={() => setActiveLocation(activeLocation === key ? null : key)}
                   className={`w-full text-left p-3 md:p-4 lg:p-5 transition-all duration-300 border-l-2 rounded-r-sm ${
-                    activeLocation === location.id
+                    activeLocation === key
                       ? 'bg-white/90 border-l-[#AB8A62] shadow-sm'
                       : 'bg-transparent border-l-transparent hover:bg-white/40'
                   }`}
@@ -2862,30 +2669,30 @@ function LocationSection() {
                     
                     {/* Icon */}
                     <div className={`flex-shrink-0 transition-colors duration-300 ${
-                      activeLocation === location.id ? 'text-[#AB8A62]' : 'text-[#8a968f]'
+                      activeLocation === key ? 'text-[#AB8A62]' : 'text-[#8a968f]'
                     }`}>
-                      {location.icon}
+                      {locationIcons[key]}
                     </div>
 
                     {/* Content */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-baseline justify-between gap-2 mb-1">
                         <h3 className={`text-sm md:text-base font-light transition-colors duration-300 ${
-                          activeLocation === location.id ? 'text-[#1a4d2e] font-medium' : 'text-[#6e7a73]'
+                          activeLocation === key ? 'text-[#1a4d2e] font-medium' : 'text-[#6e7a73]'
                         }`}>
-                          {location.title}
+                          {t(`locations.${key}.title`)}
                         </h3>
                         <span className={`text-xs md:text-sm font-medium flex-shrink-0 transition-colors duration-300 ${
-                          activeLocation === location.id ? 'text-[#AB8A62]' : 'text-[#8a968f]'
+                          activeLocation === key ? 'text-[#AB8A62]' : 'text-[#8a968f]'
                         }`}>
-                          {location.distance}
+                          {t(`locations.${key}.distance`)}
                         </span>
                       </div>
                       <p className="text-xs md:text-sm text-[#8a968f] leading-relaxed mb-0.5">
-                        {location.description}
+                        {t(`locations.${key}.description`)}
                       </p>
                       <p className="text-xs text-[#8a968f]/70">
-                        {location.address}
+                        {t(`locations.${key}.address`)}
                       </p>
                     </div>
 
@@ -2904,7 +2711,7 @@ function LocationSection() {
           <iframe
             key={activeLocation || 'default'}
             src={activeLocation 
-              ? locations.find(l => l.id === activeLocation)?.mapUrl 
+              ? mapUrls[activeLocation]
               : defaultMap
             }
             width="100%"
@@ -2921,17 +2728,17 @@ function LocationSection() {
             <div className="absolute bottom-8 left-8 right-8 md:left-12 md:right-auto md:max-w-sm pointer-events-none z-20 animate-in fade-in slide-in-from-bottom-4 duration-500">
               <div className="bg-[#8a968f] text-white p-6 md:p-8 border-l-4 border-[#f1f1ed] shadow-2xl">
                 <div className="flex items-center gap-3 mb-3 text-[#f1f1ed]">
-                  {locations.find(l => l.id === activeLocation)?.icon}
-                  <span className="text-xs tracking-widest uppercase font-light">Aktywny punkt</span>
+                  {locationIcons[activeLocation]}
+                  <span className="text-xs tracking-widest uppercase font-light">{t('activePoint')}</span>
                 </div>
                 <h4 className="text-xl md:text-2xl font-light mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>
-                  {locations.find(l => l.id === activeLocation)?.title}
+                  {t(`locations.${activeLocation}.title`)}
                 </h4>
                 <p className="text-sm text-white/80 mb-4 leading-relaxed">
-                  {locations.find(l => l.id === activeLocation)?.description}
+                  {t(`locations.${activeLocation}.description`)}
                 </p>
                 <div className="text-3xl font-light text-[#f1f1ed]" style={{ fontFamily: 'Playfair Display, serif' }}>
-                  {locations.find(l => l.id === activeLocation)?.distance}
+                  {t(`locations.${activeLocation}.distance`)}
                 </div>
               </div>
             </div>
@@ -2940,7 +2747,7 @@ function LocationSection() {
           {/* Top Badge */}
           <div className="absolute top-8 left-8 pointer-events-none z-20">
             <div className="bg-[#8a968f] text-white px-4 py-2 md:px-6 md:py-3 font-serif text-xs md:text-sm tracking-widest uppercase shadow-lg">
-              Riva Navigation
+              {t('badge')}
             </div>
           </div>
 
@@ -2949,6 +2756,7 @@ function LocationSection() {
     </section>
   );
 }
+
 // Gallery Section - Full Width, No Padding
 function GallerySection() {
   const images = [
