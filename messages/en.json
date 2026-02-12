@@ -295,7 +295,7 @@
       "recommendation": "100% recommendation"
     }
   },
-    "location": {
+  "location": {
     "label": "Location",
     "title": "In the heart of nature,",
     "titleBreak": "close to everything",
@@ -333,7 +333,273 @@
         "description": "Private marina for guests"
       }
     }
+  },
+  "about": {
+    "hero": {
+      "label": "Discover Riva Zegrze",
+      "titleLine1": "Your place",
+      "titleLine2": "to unwind",
+      "descLine1": "An intimate retreat on Lake Zegrzyński,",
+      "descLine2": "designed with comfort and closeness to nature in mind."
+    },
+    "story": {
+      "titleLine1": "Your place",
+      "titleLine2": "close to Warsaw",
+      "img1Alt": "Interior",
+      "img2Alt": "Bedroom",
+      "img3Alt": "Pool"
+    },
+    "values": {
+      "label": "Close to nature, close to Warsaw",
+      "titleLine1": "Your favourite place",
+      "titleLine2": "on Lake Zegrzyński",
+      "desc1": "Riva Zegrze is a space designed for escaping the everyday — by the water, in peaceful surroundings, with the comfort that lets you truly slow down.",
+      "desc2": "A place you'll want to return to for weekends, holidays and every moment away from the city.",
+      "imgAlt": "Riva Zegrze Interior"
+    },
+        "team": {
+      "title": "Relaxation and active leisure zone",
+      "slides": {
+        "pool": {
+          "category": "Pool",
+          "title": "Relaxation all year round",
+          "description": "Indoor heated pool available to guests regardless of weather or season."
+        },
+        "gym": {
+          "category": "Gym",
+          "title": "Activity on your terms",
+          "description": "A modern gym lets you stay in shape and feel great without leaving the property."
+        },
+        "marina": {
+          "category": "Marina",
+          "title": "Right on the waterfront",
+          "description": "A private marina and lake access let you fully enjoy the charm of a waterside retreat."
+        }
+      }
+    },
+      "legacy": {
+      "label": "On-site amenities",
+      "titleLine1": "Everything you need",
+      "titleLine2": "for a perfect getaway",
+      "features": {
+        "pool": {
+          "title": "Pool",
+          "description": "Indoor heated pool available year-round, regardless of the weather."
+        },
+        "gym": {
+          "title": "Gym",
+          "description": "A modern gym for an active break without leaving the property."
+        },
+        "terraces": {
+          "title": "Terraces",
+          "description": "Private terraces and balconies with water or garden views ensure comfort and a sense of privacy."
+        },
+        "water": {
+          "title": "Water equipment",
+          "description": "Pedal boats, SUP boards and kayaks available to guests on site."
+        },
+        "volleyball": {
+          "title": "Volleyball",
+          "description": "A beach volleyball court for active time by the lake."
+        },
+        "parking": {
+          "title": "Parking",
+          "description": "Free parking spaces in front of the building and the option to reserve a garage spot."
+        }
+      }
+    },
+       "splitCta": {
+      "label": "Book directly",
+      "titleLine1": "Best price when you",
+      "titleLine2": "book on our",
+      "titleLine3": "website",
+      "description": "Book your stay directly with us and avoid intermediary fees. The same comfort, the same availability — cheaper and just as convenient, with no extra charges.",
+      "phoneLabel": "Call us",
+      "phone": "+48 510 038 038",
+      "addressLabel": "Riva Zegrze",
+      "addressLine1": "ul. Rybaki 11,",
+      "addressLine2": "Zegrze Południowe",
+      "imgAlt": "Riva Zegrze - Book directly"
+    },
+    "paradise": {
+      "title": "Apartments designed",
+      "titleLine2": "for a waterside retreat",
+      "description": "Thoughtful spaces, on-site amenities and the closeness of nature make a stay at Riva Zegrze comfortable and full of opportunities for active leisure – for families and those seeking relaxation alike.",
+      "family": {
+        "imgAlt": "Family leisure by the lake",
+        "title": "Family leisure",
+        "paragraph1": "Access to a pool, a private beach, a volleyball court and water equipment — including kayaks, SUP boards and a pedal boat — lets children spend active time outdoors.",
+        "paragraph2": "The property's open space encourages safe play, while the proximity of the lake and green areas gives parents peace of mind and comfort."
+      },
+      "comfort": {
+        "imgAlt": "Apartment comfort and space",
+        "title": "Comfort and space",
+        "paragraph1": "Modern apartments with a separate bedroom, a functional living room and a private terrace provide convenience for both short stays and longer getaways.",
+        "paragraph2": "Carefully designed interiors and access to the recreation area let you make the most of your stay on Lake Zegrzyńskie."
+      }
+    },
+    "invitation": {
+      "sectionTitle": "Discover a Waterside Paradise",
+      "sectionSubtitle": "Riva Zegrze • Lake Zegrzyńskie",
+      "leftCard": {
+        "imgAlt": "Lake Zegrzyńskie",
+        "title": "Discover a True",
+        "titleLine2": "Waterside Paradise",
+        "description": "Luxury apartments right on the waterfront with a private beach, pool and breathtaking views of Lake Zegrzyńskie.",
+        "signature": "Riva Zegrze"
+      },
+      "rightCard": {
+        "imgAlt": "Riva Zegrze apartment"
+      },
+            "socials": {
+        "instagramLabel": "Instagram Riva Zegrze",
+        "facebookLabel": "Facebook Riva Zegrze",
+        "emailLabel": "Email kontakt@rivazegrze.pl"
+      }
+    }
+  },
+ "roomsPage": {
+    "hero": {
+      "label": "Riva Zegrze",
+      "title": "Our Apartments",
+      "description": "Discover comfort on Lake Zegrzyński"
+    },
+    "roomsGrid": {
+      "viewDetailsButton": "VIEW DETAILS",
+      "banner": {
+        "imageAlt": "Riva Zegrze - Book Directly",
+        "badge": "Book",
+        "badgeHighlight": "Directly",
+        "titleLine1": "Best Price",
+        "titleLine2": "Guaranteed",
+        "description": "By booking through our website, you always get the best available price",
+        "benefit1": "Best price on the market",
+        "benefit2": "Lowest rate guarantee",
+        "benefit3": "Flexible booking conditions",
+        "benefit4": "Direct contact with us",
+        "benefit5": "Special offers for returning guests",
+        "infoTitle": "Why book directly?",
+        "infoText": "By booking directly through our website, you skip portal commissions and pay less.",
+        "trustText": "Trusted by over",
+        "trustHighlight": "500+ guests"
+      },
+      "rooms": {
+        "c1": {
+          "name": "Apartment C1",
+          "price": "from 630 PLN / night",
+          "size": "38 m²",
+          "guests": "4 Guests",
+          "beds": "1 Bedroom",
+          "description": "Modern apartment with a terrace and private garden, located directly on Lake Zegrzyński.",
+          "amenity1": "Lake view",
+          "amenity2": "Terrace",
+          "amenity3": "Private garden",
+          "amenity4": "WiFi"
+        },
+        "c4": {
+          "name": "Apartment C4",
+          "price": "from 570 PLN / night",
+          "size": "38 m²",
+          "guests": "4 Guests",
+          "beds": "1 Bedroom",
+          "description": "Modern apartment with a terrace and direct view of Lake Zegrzyński.",
+          "amenity1": "Lake view",
+          "amenity2": "Terrace",
+          "amenity3": "WiFi",
+          "amenity4": "2nd floor"
+        },
+        "c7": {
+          "name": "Apartment C7",
+          "price": "from 600 PLN / night",
+          "size": "38 m²",
+          "guests": "4 Guests",
+          "beds": "1 Bedroom",
+          "description": "Modern apartment with a terrace and view of Lake Zegrzyński.",
+          "amenity1": "Lake view",
+          "amenity2": "Terrace",
+          "amenity3": "WiFi",
+          "amenity4": "3rd floor"
+        },
+        "d1": {
+          "name": "Apartment D1",
+          "price": "from 480 PLN / night",
+          "size": "38 m²",
+          "guests": "4 Guests",
+          "beds": "1 Bedroom",
+          "description": "Modern apartment with a terrace, located on the 1st floor.",
+          "amenity1": "Terrace",
+          "amenity2": "Recreation area",
+          "amenity3": "WiFi",
+          "amenity4": "1st floor"
+        },
+        "d4": {
+          "name": "Apartment D4",
+          "price": "from 510 PLN / night",
+          "size": "38 m²",
+          "guests": "4 Guests",
+          "beds": "1 Bedroom",
+          "description": "Comfortable apartment with a terrace, located on the 2nd floor.",
+          "amenity1": "Terrace",
+          "amenity2": "Recreation area",
+          "amenity3": "WiFi",
+          "amenity4": "2nd floor"
+        },
+        "d7": {
+          "name": "Apartment D7",
+          "price": "from 540 PLN / night",
+          "size": "38 m²",
+          "guests": "4 Guests",
+          "beds": "1 Bedroom",
+          "description": "Spacious and functional apartment with a terrace.",
+          "amenity1": "Terrace",
+          "amenity2": "Recreation area",
+          "amenity3": "Green areas",
+          "amenity4": "3rd floor"
+        },
+                "b10": {
+          "name": "Apartment Deluxe B10",
+          "price": "from 900 PLN / night",
+          "size": "68 m²",
+          "guests": "4 Guests",
+          "beds": "1 Bedroom",
+          "description": "Deluxe apartment with a large terrace and panoramic view.",
+          "amenity1": "Panoramic view",
+          "amenity2": "Large terrace",
+          "amenity3": "Premium",
+          "amenity4": "3rd floor"
+        }
+      }
+    }
+  },
+    "galleryPage": {
+    "hero": {
+      "label": "Riva Zegrze",
+      "title": "Gallery",
+      "description": "Discover the beauty of our property • Curated photos"
+    },
+    "grid": {
+      "filterAll": "All",
+      "filterApartments": "Apartments",
+      "filterGym": "Gym & Pool",
+      "filterSurroundings": "Surroundings",
+      "categoryApartments": "Apartments",
+      "categoryGym": "Gym & Pool",
+      "categorySurroundings": "Surroundings",
+      "lightboxSeparator": "•",
+      "lightboxOf": "/"
+    }
+  },
+  "activitiesPage": {
+    "hero": {
+      "label": "Discover the Area",
+      "titleLine1": "Activities",
+      "titleLine2": "& Attractions",
+      "description": "Unique places and experiences in the heart of Mazovia",
+      "scrollDown": "Scroll down"
+    }
   }
 }
+
+
 
 

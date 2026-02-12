@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap'; // ← KLUCZOWY IMPORT
+import { useTranslations } from 'next-intl';
+import Navigation from '../../components/layout/Navigation';
 import { 
   Compass, 
   Calendar, 
@@ -36,433 +38,8 @@ export default function RoomsPage() {
   );
 }
 
-// NAVIGATION COMPONENT
-// ========================================
-// Navigation (identyczna)
-function Navigation() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
-  const [hoveredItem, setHoveredItem] = useState<string | null>('O NAS'); // ← AUTO-OPEN "O NAS"
-  
-  const menuRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const linksRef = useRef<(HTMLButtonElement | null)[]>([]);
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Auto-open "O NAS" po otwarciu menu
-  useEffect(() => {
-    if (isMegaMenuOpen) {
-      setHoveredItem('O NAS');
-    }
-  }, [isMegaMenuOpen]);
-
-  // GSAP Smooth Curtain
-  useEffect(() => {
-    if (typeof window !== 'undefined' && menuRef.current && contentRef.current) {
-      if (isMegaMenuOpen) {
-        const ctx = gsap.context(() => {
-          gsap.fromTo(
-            menuRef.current,
-            { clipPath: 'inset(0% 0% 100% 0%)', opacity: 0 },
-            { clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, duration: 0.7, ease: 'power2.inOut' }
-          );
-
-          gsap.fromTo(
-            contentRef.current,
-            { y: 30, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.6, delay: 0.3, ease: 'power1.out' }
-          );
-
-          gsap.fromTo(
-            linksRef.current.filter(Boolean),
-            { x: -30, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: 'power1.out', delay: 0.5 }
-          );
-        }, menuRef);
-
-        return () => ctx.revert();
-      } else if (menuRef.current) {
-        gsap.to(menuRef.current, {
-          clipPath: 'inset(0% 0% 100% 0%)',
-          opacity: 0,
-          duration: 0.5,
-          ease: 'power2.in'
-        });
-      }
-    }
-  }, [isMegaMenuOpen]);
-
-  // Mapowanie obrazków do zakładek
-  const sectionImages: Record<string, string> = {
-    'O NAS': '/images/about/hero/T3S-RivaZegrze-0620-m.jpg',
-    'APARTAMENTY': '/images/gallery/baner-pokoje/t3s-riva-zegrze-0446-m.jpg',
-    'REZERWACJA': '/images/gallery/okolica/T3S-RivaZegrze-4183-m.jpg',
-    'AKTYWNOŚCI': '/images/gallery/aktywnosci/kajaki.jpeg',
-    'GALERIA': '/images/gallery/okolica/T3S-RivaZegrze-4168-m.jpg',
-    'KONTAKT': '/images/gallery/okolica/T3S-RivaZegrze-0940-m.jpg',
-  };
-
-  const navItems = [
-    { label: 'O NAS', href: '/about', hasImage: true },
-    { label: 'APARTAMENTY', href: '/apartamenty', hasImage: true },
-    { label: 'REZERWACJA', href: '/rezerwacja', hasImage: true },
-    { label: 'AKTYWNOŚCI', href: '/activities', hasImage: true },
-    { label: 'GALERIA', href: '/galeria', hasImage: true },
-    { label: 'KONTAKT', href: '/contact', hasImage: true },
-    { label: 'DANE FIRMY', href: '/dane-firmy', hasImage: false },
-  ];
-
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setIsMegaMenuOpen(false);
-    };
-    if (isMegaMenuOpen) {
-      window.addEventListener('keydown', handleEsc);
-      return () => window.removeEventListener('keydown', handleEsc);
-    }
-  }, [isMegaMenuOpen]);
-
-  useEffect(() => {
-    document.body.style.overflow = isMegaMenuOpen ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isMegaMenuOpen]);
-
-  const handleNavClick = (href: string) => {
-    setIsMegaMenuOpen(false);
-    setTimeout(() => {
-      window.location.href = href;
-    }, 150);
-  };
-
-  return (
-    <>
-      {/* TOP NAV BAR */}
-      <nav 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled 
-            ? 'bg-white/95 backdrop-blur-md shadow-lg' 
-            : 'bg-white/10 backdrop-blur-sm'
-        }`}
-      >
-        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="flex justify-between items-center h-16 sm:h-20">
-            
-            {/* Logo */}
-            <a 
-              href="/" 
-              className="flex items-center gap-2 sm:gap-3 group z-50"
-            >
-              <Waves 
-                className={`w-6 h-6 sm:w-8 sm:h-8 transition-colors ${
-                  isScrolled ? 'text-[#AB8A62]' : 'text-white'
-                }`}
-                strokeWidth={1}
-              />
-              <span 
-                className={`text-lg sm:text-2xl font-light tracking-[0.15em] transition-colors ${
-                  isScrolled ? 'text-[#1a4d2e]' : 'text-white'
-                }`}
-                style={{ fontFamily: 'Playfair Display, serif' }}
-              >
-                RIVA ZEGRZE
-              </span>
-            </a>
-            
-            {/* Desktop: MENU + CTA */}
-            <div className="hidden lg:flex items-center gap-4 xl:gap-6">
-              <button
-                onClick={() => setIsMegaMenuOpen(!isMegaMenuOpen)}
-                className={`flex items-center gap-2 xl:gap-3 text-[10px] xl:text-xs tracking-[0.25em] px-4 xl:px-6 py-2.5 xl:py-3 border transition-all duration-300 ${
-                  isMegaMenuOpen
-                    ? 'border-[#AB8A62] bg-[#AB8A62] text-white'
-                    : isScrolled 
-                      ? 'border-[#AB8A62] text-[#AB8A62] hover:bg-[#AB8A62] hover:text-white' 
-                      : 'border-white/60 text-white hover:bg-white/10'
-                }`}
-              >
-                {isMegaMenuOpen ? (
-                  <>
-                    <X className="w-3.5 h-3.5 xl:w-4 xl:h-4" strokeWidth={1.5} />
-                    <span>ZAMKNIJ</span>
-                  </>
-                ) : (
-                  <>
-                    <Menu className="w-3.5 h-3.5 xl:w-4 xl:h-4" strokeWidth={1.5} />
-                    <span>MENU</span>
-                  </>
-                )}
-              </button>
-              
-              <a
-                href="/rezerwacja"
-                className={`flex items-center gap-2 text-[10px] xl:text-xs tracking-[0.2em] px-4 xl:px-6 py-2.5 xl:py-3 transition-all duration-300 ${
-                  isScrolled 
-                    ? 'bg-[#AB8A62] text-white hover:bg-[#967447]' 
-                    : 'bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm'
-                }`}
-              >
-                <Calendar className="w-3.5 h-3.5 xl:w-4 xl:h-4" strokeWidth={1.5} />
-                <span>REZERWUJ</span>
-              </a>
-            </div>
-
-            {/* Mobile: Hamburger */}
-            <button 
-              onClick={() => setIsMegaMenuOpen(!isMegaMenuOpen)}
-              className="lg:hidden z-50 relative w-10 h-10 flex items-center justify-center"
-              aria-label="Toggle menu"
-            >
-              <div className="relative w-6 h-6">
-                <span 
-                  className={`absolute left-0 right-0 h-0.5 transition-all duration-300 ${
-                    isMegaMenuOpen 
-                      ? 'top-1/2 -translate-y-1/2 rotate-45 bg-[#AB8A62]'
-                      : isScrolled 
-                        ? 'top-1 bg-[#6e7a73]' 
-                        : 'top-1 bg-white'
-                  }`}
-                />
-                <span 
-                  className={`absolute left-0 right-0 top-1/2 -translate-y-1/2 h-0.5 transition-all duration-300 ${
-                    isMegaMenuOpen 
-                      ? 'opacity-0 scale-0' 
-                      : isScrolled 
-                        ? 'opacity-100 bg-[#6e7a73]' 
-                        : 'opacity-100 bg-white'
-                  }`}
-                />
-                <span 
-                  className={`absolute left-0 right-0 h-0.5 transition-all duration-300 ${
-                    isMegaMenuOpen 
-                      ? 'top-1/2 -translate-y-1/2 -rotate-45 bg-[#AB8A62]'
-                      : isScrolled 
-                        ? 'bottom-1 bg-[#6e7a73]' 
-                        : 'bottom-1 bg-white'
-                  }`}
-                />
-              </div>
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* ============================================ */}
-      {/* FULLSCREEN MEGA MENU - PASTEL VERSION */}
-      {/* ============================================ */}
-      {isMegaMenuOpen && (
-        <div
-          ref={menuRef}
-          className="fixed inset-0 z-40"
-          style={{ clipPath: 'inset(0% 0% 100% 0%)' }}
-        >
-          {/* Background Split - PASTEL */}
-          <div className="absolute inset-0 flex">
-            {/* Left Background - Pastel Gradient */}
-            <div 
-              className="w-full lg:w-1/2 relative"
-              style={{
-                background: 'linear-gradient(135deg, #f1f1ed 0%, #e8e9e4 50%, #d4d6ce 100%)'
-              }}
-            >
-              <div 
-                className="absolute inset-0 opacity-[0.02]"
-                style={{
-                  backgroundImage: `
-                    linear-gradient(to right, #6e7a73 1px, transparent 1px),
-                    linear-gradient(to bottom, #6e7a73 1px, transparent 1px)
-                  `,
-                  backgroundSize: '40px 40px'
-                }}
-              />
-            </div>
-            {/* Right Background - Image Container */}
-            <div className="hidden lg:block lg:w-1/2 bg-[#8a968f]" />
-          </div>
-
-          {/* Content Container */}
-          <div 
-            ref={contentRef}
-            className="relative h-full flex items-center"
-          >
-            <div className="w-full h-full flex flex-col lg:flex-row">
-              
-              {/* LEFT SIDE - Navigation Links */}
-              <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 sm:px-8 lg:px-16 xl:px-24 py-20 lg:py-0">
-                
-                {/* Header - USUNIĘTY "Odkryj Riva Zegrze" */}
-                <div className="mb-12 lg:mb-16">
-                  <span className="text-[9px] tracking-[0.4em] uppercase text-[#8a968f] font-light block">
-                    Menu
-                  </span>
-                </div>
-
-                {/* Navigation Links */}
-                <nav className="space-y-1 mb-auto">
-                  {navItems.map((item, idx) => (
-                    <button
-                      key={item.label}
-                      ref={(el) => { linksRef.current[idx] = el; }}
-                      onClick={() => handleNavClick(item.href)}
-                      onMouseEnter={() => setHoveredItem(item.label)}
-                      onMouseLeave={() => setHoveredItem('O NAS')} // ← Wraca do "O NAS"
-                      className="group w-full flex items-center gap-4 lg:gap-6 py-4 lg:py-5 border-b border-[#e8e9e4] hover:border-[#AB8A62] transition-all duration-300"
-                    >
-                      {/* Elegant Bullet */}
-                      <div className="relative">
-                        <div className="w-2 h-2 rounded-full bg-[#d4d6ce] group-hover:bg-[#AB8A62] transition-all duration-300" />
-                        <div className="absolute inset-0 w-2 h-2 rounded-full bg-[#AB8A62] opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-300" />
-                      </div>
-                      
-                      {/* Divider Line */}
-                      <div className="w-8 lg:w-12 h-px bg-[#d4d6ce] group-hover:w-16 lg:group-hover:w-20 group-hover:bg-[#AB8A62] transition-all duration-300" />
-                      
-                      {/* Label */}
-                      <span 
-                        className="flex-1 text-left text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-light text-[#1a4d2e] group-hover:text-[#AB8A62] transition-colors duration-300"
-                        style={{ fontFamily: 'Playfair Display, serif' }}
-                      >
-                        {item.label}
-                      </span>
-                      
-                      {/* Arrow */}
-                      {item.hasImage && (
-                        <svg 
-                          className="w-5 h-5 lg:w-6 lg:h-6 text-[#8a968f] group-hover:text-[#AB8A62] group-hover:translate-x-2 transition-all duration-300" 
-                          fill="none" 
-                          stroke="currentColor" 
-                          strokeWidth="1.5" 
-                          viewBox="0 0 24 24"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                        </svg>
-                      )}
-                    </button>
-                  ))}
-                </nav>
-
-                {/* Bottom CTA */}
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 mt-12 lg:mt-16 pt-8 border-t border-[#e8e9e4]">
-                  <a
-                    href="/rezerwacja"
-                    onClick={() => setIsMegaMenuOpen(false)}
-                    className="flex items-center gap-3 text-xs tracking-[0.25em] px-8 py-4 bg-[#AB8A62] text-white hover:bg-[#967447] transition-all"
-                  >
-                    <Calendar className="w-4 h-4" strokeWidth={1.5} />
-                    <span>REZERWUJ POBYT</span>
-                  </a>
-                  
-                  <a 
-                    href="tel:+48510038038"
-                    className="flex items-center gap-2 text-sm text-[#6e7a73] hover:text-[#AB8A62] transition-colors"
-                  >
-                    <Phone className="w-4 h-4" strokeWidth={1.5} />
-                    <span>+48 510 038 038</span>
-                  </a>
-                </div>
-              </div>
-
-              {/* RIGHT SIDE - PRAWDZIWE OBRAZKI */}
-              <div className="hidden lg:block lg:w-1/2 relative overflow-hidden">
-                {hoveredItem && sectionImages[hoveredItem] ? (
-                  <div 
-                    className="absolute inset-0 bg-cover bg-center animate-fadeIn"
-                    style={{
-                      backgroundImage: `url(${sectionImages[hoveredItem]})`,
-                      backgroundPosition: 'center',
-                    }}
-                  >
-                    {/* Dark Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#0f0e0f]/40 via-[#0f0e0f]/20 to-transparent" />
-                    
-                    {/* Content Overlay */}
-                    <div className="absolute inset-0 flex flex-col items-center justify-center text-white px-12">
-                      <div className="text-center">
-                        <p className="text-[10px] tracking-[0.4em] uppercase mb-6 opacity-70">
-                          Podgląd
-                        </p>
-                        <h3 
-                          className="text-5xl xl:text-6xl font-light mb-8 leading-tight drop-shadow-lg"
-                          style={{ fontFamily: 'Playfair Display, serif' }}
-                        >
-                          {hoveredItem}
-                        </h3>
-                        <div className="flex items-center justify-center gap-4">
-                          <div className="w-16 h-px bg-white/40" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-white/60" />
-                          <div className="w-16 h-px bg-white/40" />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Decorative Corners */}
-                    <div className="absolute top-8 left-8 w-20 h-20 border-t-2 border-l-2 border-white/30" />
-                    <div className="absolute bottom-8 right-8 w-20 h-20 border-b-2 border-r-2 border-white/30" />
-                  </div>
-                ) : (
-                  // Default dla "DANE FIRMY"
-                  <div 
-                    className="absolute inset-0"
-                    style={{
-                      background: 'linear-gradient(135deg, #d4d6ce 0%, #b6b9af 100%)'
-                    }}
-                  >
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center text-[#6e7a73]">
-                        <Compass className="w-24 h-24 mx-auto mb-8 opacity-20" strokeWidth={0.5} />
-                        <p className="text-sm tracking-[0.3em] uppercase opacity-40">
-                          {hoveredItem || 'Menu'}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-            </div>
-          </div>
-
-          {/* Close Button - Floating */}
-          <button
-            onClick={() => setIsMegaMenuOpen(false)}
-            className="hidden lg:flex fixed top-8 right-8 items-center justify-center w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:border-white/40 group transition-all duration-300 z-50"
-            aria-label="Zamknij menu"
-          >
-            <X 
-              className="w-6 h-6 text-white/60 group-hover:text-white group-hover:rotate-90 transition-all duration-300" 
-              strokeWidth={1.5} 
-            />
-          </button>
-        </div>
-      )}
-
-      {/* Animations */}
-      <style jsx global>{`
-        @keyframes fadeIn {
-          from { 
-            opacity: 0; 
-            transform: scale(1.05); 
-          }
-          to { 
-            opacity: 1; 
-            transform: scale(1); 
-          }
-        }
-        .animate-fadeIn {
-          animation: fadeIn 0.6s ease-out;
-        }
-      `}</style>
-    </>
-  );
-}
-
 function RoomsHero() {
+  const t = useTranslations('roomsPage.hero');
   const heroRef = useRef(null);
 
   useEffect(() => {
@@ -510,21 +87,22 @@ function RoomsHero() {
       
       <div className="relative z-20 text-center text-white px-6 max-w-4xl mx-auto">
         <span className="text-xs tracking-[0.4em] uppercase font-light opacity-80 mb-4 block">
-          Riva Zegrze
+          {t('label')}
         </span>
         <h1 
           className="text-4xl md:text-7xl font-light mb-6 tracking-[0.15em] leading-tight" 
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
-          Nasze Apartamenty
+          {t('title')}
         </h1>
         <p className="text-sm md:text-base font-light opacity-90 max-w-2xl mx-auto leading-relaxed">
-          Odkryj komfort nad Jeziorem Zegrzyńskim
+          {t('description')}
         </p>
       </div>
     </section>
   );
 }
+
 
 function AnimatedButton({ 
   children, 
@@ -599,101 +177,28 @@ function AnimatedButton({
 }
 
 function RoomsGrid() {
+  const t = useTranslations('roomsPage.roomsGrid');
   const roomsRef = useRef<HTMLDivElement>(null);
   const bannerRef = useRef<HTMLDivElement>(null);
 
-  const rooms = [
-    {
-      name: 'Apartament C1',
-      slug: 'apartament-c1',
-      image: '/images/rooms/t3s-rivazegrze-3107-m.jpg',
-      price: 'od 630 zł / noc',
-      size: '38 m²',
-      guests: '4 Osoby',
-      beds: '1 Sypialnia',
-      bathrooms: '1 Łazienka',
-      amenities: ['Widok na jezioro', 'Taras', 'Prywatny ogródek', 'WiFi'],
-      description: 'Nowoczesny apartament z tarasem i prywatnym ogródkiem, położony bezpośrednio nad Jeziorem Zegrzyńskim.',
-      link: '/apartamenty/apartament-c1',
-    },
-    {
-      name: 'Apartament C4',
-      slug: 'apartament-c4',
-      image: '/images/rooms/t3s-rivazegrze-3500-m.jpg',
-      price: 'od 570 zł / noc',
-      size: '38 m²',
-      guests: '4 Osoby',
-      beds: '1 Sypialnia',
-      bathrooms: '1 Łazienka',
-      amenities: ['Widok na jezioro', 'Taras', 'WiFi', '2 piętro'],
-      description: 'Nowoczesny apartament z tarasem i bezpośrednim widokiem na Jezioro Zegrzyńskie.',
-      link: '/apartamenty/apartament-c4',
-    },
-    {
-      name: 'Apartament C7',
-      slug: 'apartament-c7',
-      image: '/images/rooms/img_3650.jpg',
-      price: 'od 600 zł / noc',
-      size: '38 m²',
-      guests: '4 Osoby',
-      beds: '1 Sypialnia',
-      bathrooms: '1 Łazienka',
-      amenities: ['Widok na jezioro', 'Taras', 'WiFi', '3 piętro'],
-      description: 'Nowoczesny apartament z tarasem i widokiem na Jezioro Zegrzyńskie.',
-      link: '/apartamenty/apartament-c7',
-    },
-    {
-      name: 'Apartament D1',
-      slug: 'apartament-d1',
-      image: '/images/rooms/img_3622.jpg',
-      price: 'od 480 zł / noc',
-      size: '38 m²',
-      guests: '4 Osoby',
-      beds: '1 Sypialnia',
-      bathrooms: '1 Łazienka',
-      amenities: ['Taras', 'Strefa rekreacyjna', 'WiFi', '1 piętro'],
-      description: 'Nowoczesny apartament z tarasem, położony na 1 piętrze.',
-      link: '/apartamenty/apartament-d1',
-    },
-    {
-      name: 'Apartament D4',
-      slug: 'apartament-d4',
-      image: '/images/rooms/img_3620.jpg',
-      price: 'od 510 zł / noc',
-      size: '38 m²',
-      guests: '4 Osoby',
-      beds: '1 Sypialnia',
-      bathrooms: '1 Łazienka',
-      amenities: ['Taras', 'Strefa rekreacyjna', 'WiFi', '2 piętro'],
-      description: 'Komfortowy apartament z tarasem, położony na 2 piętrze.',
-      link: '/apartamenty/apartament-d4',
-    },
-    {
-      name: 'Apartament D7',
-      slug: 'apartament-d7',
-      image: '/images/rooms/d4.jpg',
-      price: 'od 540 zł / noc',
-      size: '38 m²',
-      guests: '4 Osoby',
-      beds: '1 Sypialnia',
-      bathrooms: '1 Łazienka',
-      amenities: ['Taras', 'Strefa rekreacyjna', 'Tereny zielone', '3 piętro'],
-      description: 'Przestronny i funkcjonalny apartament z tarasem.',
-      link: '/apartamenty/apartament-d7',
-    },
-    {
-      name: 'Apartament Deluxe B10',
-      slug: 'apartament-deluxe-b10',
-      image: '/images/rooms/img_4647.jpg',
-      price: 'od 900 zł / noc',
-      size: '68 m²',
-      guests: '4 Osoby',
-      beds: '1 Sypialnia',
-      bathrooms: '1 Łazienka',
-      amenities: ['Panoramiczny widok', 'Duży taras', 'Premium', '3 piętro'],
-      description: 'Apartament Deluxe z dużym tarasem i panoramicznym widokiem.',
-      link: '/apartamenty/apartament-deluxe-b10',
-    },
+  const roomKeys = ['c1', 'c4', 'c7', 'd1', 'd4', 'd7', 'b10'];
+
+  const roomMeta: Record<string, { image: string; link: string }> = {
+    c1:  { image: '/images/rooms/t3s-rivazegrze-3107-m.jpg', link: '/apartamenty/apartament-c1' },
+    c4:  { image: '/images/rooms/t3s-rivazegrze-3500-m.jpg', link: '/apartamenty/apartament-c4' },
+    c7:  { image: '/images/rooms/img_3650.jpg',              link: '/apartamenty/apartament-c7' },
+    d1:  { image: '/images/rooms/img_3622.jpg',              link: '/apartamenty/apartament-d1' },
+    d4:  { image: '/images/rooms/img_3620.jpg',              link: '/apartamenty/apartament-d4' },
+    d7:  { image: '/images/rooms/d4.jpg',                    link: '/apartamenty/apartament-d7' },
+    b10: { image: '/images/rooms/img_4647.jpg',              link: '/apartamenty/apartament-deluxe-b10' },
+  };
+
+  const benefitIcons = [
+    'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+    'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+    'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
+    'M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z',
+    'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z',
   ];
 
   useEffect(() => {
@@ -705,7 +210,6 @@ function RoomsGrid() {
           
           gsap.registerPlugin(ScrollTrigger);
 
-          // Room cards animation
           const roomCards = roomsRef.current?.querySelectorAll('.room-card');
           
           if (roomCards) {
@@ -733,7 +237,6 @@ function RoomsGrid() {
                 card.addEventListener('mouseenter', () => {
                   gsap.to(img, { scale: 1.08, duration: 0.6, ease: 'power2.out' });
                 });
-                
                 card.addEventListener('mouseleave', () => {
                   gsap.to(img, { scale: 1, duration: 0.6, ease: 'power2.out' });
                 });
@@ -741,7 +244,6 @@ function RoomsGrid() {
             });
           }
 
-          // Banner animations
           if (bannerRef.current) {
             gsap.fromTo(
               bannerRef.current,
@@ -759,7 +261,6 @@ function RoomsGrid() {
               }
             );
 
-            // Benefit items stagger
             const benefits = bannerRef.current.querySelectorAll('.benefit-item');
             gsap.fromTo(
               benefits,
@@ -802,7 +303,7 @@ function RoomsGrid() {
           
           {/* LEFT - Rooms List */}
           <div ref={roomsRef} className="lg:col-span-8 space-y-16">
-            {rooms.map((room, idx) => (
+            {roomKeys.map((key, idx) => (
               <div
                 key={idx}
                 className="room-card grid grid-cols-1 md:grid-cols-2 gap-8 pb-16 border-b border-[#d4d6ce] last:border-0"
@@ -811,12 +312,14 @@ function RoomsGrid() {
                   <div className="relative bg-white p-3 shadow-lg">
                     <div className="relative h-[400px] overflow-hidden group border border-[#e8e6e1]">
                       <img
-                        src={room.image}
-                        alt={room.name}
+                        src={roomMeta[key].image}
+                        alt={t(`rooms.${key}.name`)}
                         className="room-image w-full h-full object-cover transition-transform duration-700"
                       />
                       <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 shadow-md">
-                        <span className="text-xs font-light text-[#0f0e0f]">{room.price}</span>
+                        <span className="text-xs font-light text-[#0f0e0f]">
+                          {t(`rooms.${key}.price`)}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -826,51 +329,51 @@ function RoomsGrid() {
                   <div>
                     <h3
                       className="text-3xl lg:text-4xl font-light text-[#0f0e0f] mb-4 leading-tight"
-                      style={{ fontFamily: "Playfair Display, serif" }}
+                      style={{ fontFamily: 'Playfair Display, serif' }}
                     >
-                      {room.name}
+                      {t(`rooms.${key}.name`)}
                     </h3>
 
                     <div className="flex items-center gap-6 text-sm text-[#6e7a73] mb-6 font-light">
                       <span className="flex items-center gap-2">
                         <Maximize size={16} strokeWidth={1.5} />
-                        {room.size}
+                        {t(`rooms.${key}.size`)}
                       </span>
                       <span className="flex items-center gap-2">
                         <Users size={16} strokeWidth={1.5} />
-                        {room.guests}
+                        {t(`rooms.${key}.guests`)}
                       </span>
                       <span className="flex items-center gap-2">
                         <Bed size={16} strokeWidth={1.5} />
-                        {room.beds}
+                        {t(`rooms.${key}.beds`)}
                       </span>
                     </div>
 
                     <p className="text-[#6e7a73] leading-relaxed mb-6 font-light">
-                      {room.description}
+                      {t(`rooms.${key}.description`)}
                     </p>
 
                     <div className="flex flex-wrap gap-2 mb-6">
-                      {room.amenities.map((amenity, i) => (
+                      {['amenity1', 'amenity2', 'amenity3', 'amenity4'].map((aKey, i) => (
                         <span
                           key={i}
                           className="px-3 py-1 bg-white border border-[#d4d6ce] text-xs text-[#6e7a73] font-light"
                         >
-                          {amenity}
+                          {t(`rooms.${key}.${aKey}`)}
                         </span>
                       ))}
                     </div>
                   </div>
 
-                  <AnimatedButton href={room.link} className="w-full">
-                    ZOBACZ SZCZEGÓŁY
+                  <AnimatedButton href={roomMeta[key].link} className="w-full">
+                    {t('viewDetailsButton')}
                   </AnimatedButton>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* 🎯 RIGHT - MINIMALIST PROMO BANNER */}
+          {/* RIGHT - PROMO BANNER */}
           <div className="lg:col-span-4">
             <div ref={bannerRef} className="sticky top-32">
               <div className="bg-white border border-[#d4d6ce] shadow-sm">
@@ -879,7 +382,7 @@ function RoomsGrid() {
                 <div className="relative h-[240px] overflow-hidden">
                   <img
                     src="/images/gallery/baner-kontakt/zdjecie-kontakt.jpg"
-                    alt="Riva Zegrze - Rezerwuj Bezpośrednio"
+                    alt={t('banner.imageAlt')}
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0f0e0f]/50 via-[#0f0e0f]/20 to-transparent" />
@@ -887,8 +390,8 @@ function RoomsGrid() {
                   {/* Marketing Badge */}
                   <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-5 py-3 shadow-md">
                     <p className="text-xs text-[#6e7a73] font-light tracking-wide leading-tight text-center">
-                      Rezerwuj<br/>
-                      <span className="text-[#0f0e0f] font-normal">Bezpośrednio</span>
+                      {t('banner.badge')}<br/>
+                      <span className="text-[#0f0e0f] font-normal">{t('banner.badgeHighlight')}</span>
                     </p>
                   </div>
                 </div>
@@ -901,28 +404,23 @@ function RoomsGrid() {
                     className="text-2xl lg:text-3xl font-light text-[#0f0e0f] mb-2 leading-tight"
                     style={{ fontFamily: 'Playfair Display, serif' }}
                   >
-                    Najlepsza Cena<br/>Gwarantowana
+                    {t('banner.titleLine1')}<br/>
+                    {t('banner.titleLine2')}
                   </h3>
 
                   <p className="text-[#6e7a73] text-sm font-light mb-6 leading-relaxed">
-                    Rezerwując przez naszą stronę, zawsze otrzymujesz najlepszą dostępną cenę
+                    {t('banner.description')}
                   </p>
 
                   {/* Benefits List */}
                   <div className="space-y-3 mb-8">
-                    {[
-                      { icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z', text: 'Najlepsza cena na rynku' },
-                      { icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z', text: 'Gwarancja najniższej stawki' },
-                      { icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z', text: 'Elastyczne warunki rezerwacji' },
-                      { icon: 'M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z', text: 'Bezpośredni kontakt z nami' },
-                      { icon: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z', text: 'Specjalne oferty dla stałych gości' },
-                    ].map((benefit, i) => (
+                    {[1, 2, 3, 4, 5].map((num, i) => (
                       <div key={i} className="benefit-item flex items-start gap-3">
                         <svg className="w-5 h-5 text-[#8a968f] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" d={benefit.icon} />
+                          <path strokeLinecap="round" strokeLinejoin="round" d={benefitIcons[i]} />
                         </svg>
                         <span className="text-sm text-[#6e7a73] font-light leading-relaxed">
-                          {benefit.text}
+                          {t(`banner.benefit${num}`)}
                         </span>
                       </div>
                     ))}
@@ -931,7 +429,8 @@ function RoomsGrid() {
                   {/* Info Box */}
                   <div className="bg-[#f7f6f4] border border-[#d4d6ce] p-4 mb-6">
                     <p className="text-xs text-[#6e7a73] font-light leading-relaxed">
-                      <strong className="font-normal text-[#0f0e0f]">Dlaczego warto?</strong> Rezerwując bezpośrednio przez naszą stronę, omijasz prowizje portali rezerwacyjnych i płacisz mniej.
+                      <strong className="font-normal text-[#0f0e0f]">{t('banner.infoTitle')}</strong>{' '}
+                      {t('banner.infoText')}
                     </p>
                   </div>
 
@@ -967,7 +466,8 @@ function RoomsGrid() {
                       ))}
                     </div>
                     <p className="text-xs text-[#6e7a73] font-light">
-                      Zaufało nam ponad <strong className="font-normal text-[#0f0e0f]">500+ gości</strong>
+                      {t('banner.trustText')}{' '}
+                      <strong className="font-normal text-[#0f0e0f]">{t('banner.trustHighlight')}</strong>
                     </p>
                   </div>
 
@@ -981,6 +481,7 @@ function RoomsGrid() {
     </section>
   );
 }
+
 // Minimal Footer – Riva Zegrze - Professional Pastel Version - MOBILE OPTIMIZED
 function MinimalFooter() {
   return (
