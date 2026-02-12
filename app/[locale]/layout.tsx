@@ -7,7 +7,6 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "../../i18n/routing";
-import Script from "next/script";
 
 const GTM_ID = "GTM-PQVRVNPC";
 
@@ -49,31 +48,23 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <head>
-        {/* GTM - DataLayer MUSI być PIERWSZY */}
-        <Script
-          id="gtm-dataLayer"
-          strategy="beforeInteractive"
+        {/* Google Tag Manager */}
+        <script
           dangerouslySetInnerHTML={{
             __html: `
-              window.dataLayer = window.dataLayer || [];
-              window.dataLayer.push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js'
-              });
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)<a href="" class="citation-link" target="_blank" style="vertical-align: super; font-size: 0.8em; margin-left: 3px;">[0]</a>,
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','${GTM_ID}');
             `,
           }}
-        />
-        {/* GTM - Główny skrypt DRUGI */}
-        <Script
-          id="gtm-script"
-          strategy="beforeInteractive"
-          src={`https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`}
         />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* Google Tag Manager (noscript) - zaraz po <body> */}
+        {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
             src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
