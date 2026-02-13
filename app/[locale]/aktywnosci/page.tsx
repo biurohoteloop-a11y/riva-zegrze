@@ -174,90 +174,90 @@ function ActivitiesHero() {
 // BENTO GRID - Z 2-step interaction (mobile)
 // ============================================
 function LocationsGrid() {
+  const t = useTranslations('activitiesPage.locationsGrid');
   const gridRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
   const activities = [
-  {
-    id: 1,
-    category: 'SPORTY WODNE',
-    title: 'Skutery Wodne',
-    distance: '0.5 km',
-    description: 'Największa wypożyczalnia nad Zalewem. Skutery 90-300 KM dla rodzin i miłośników adrenaliny.',
-    image: '/images/gallery/aktywnosci/skuter.jpeg',
-    icon: <Ship size={24} strokeWidth={1.5} />,
-    mapLink: 'https://www.google.com/maps/search/SkuteryZegrze.pl+Rybaki+1+Zegrze+Południowe', // Skutery
-    gridClass: 'md:col-span-2 lg:col-span-2'
-  },
-  {
-    id: 2,
-    category: 'GOLF',
-    title: 'Pole Golfowe Rajszew',
-    distance: '5 km',
-    description: '18 dołków, driving range i profesjonalni instruktorzy.',
-    image: 'https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=2070',
-    icon: <Award size={24} strokeWidth={1.5} />,
-    mapLink: 'https://www.google.com/maps/search/First+Warsaw+Golf+Golfowa+44+Rajszew', // Golf
-    gridClass: ''
-  },
-  {
-    id: 3,
-    category: 'ŻEGLARSTWO',
-    title: 'Akademia Żeglarska',
-    distance: '3 km',
-    description: 'Nauka żeglowania, wypożyczalnia sprzętu, kursy dla początkujących.',
-    image: '/images/gallery/aktywnosci/lodka.jpeg',
-    icon: <Sailboat size={24} strokeWidth={1.5} />,
-    mapLink: 'https://www.google.com/maps/search/Akademia+Żeglarska+Klub+Mila+Szaniawskiego+56+Zegrzynek', // Żeglarstwo
-    gridClass: ''
-  },
-  {
-    id: 4,
-    category: 'PRZYRODA',
-    title: 'Wieliszewskie Łęgi',
-    distance: '4 km',
-    description: 'Rezerwat z unikalną fauną i florą. Idealne na spacery i obserwację ptaków.',
-    image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2070',
-    icon: <TreePine size={24} strokeWidth={1.5} />,
-    mapLink: 'https://www.google.com/maps/search/Rezerwat+przyrody+Wieliszewskie+Łęgi+Wieliszew', // Rezerwat
-    gridClass: ''
-  },
-  {
-    id: 5,
-    category: 'ROWER',
-    title: 'Trasa Rowerowa VM-O',
-    distance: '0 km',
-    description: 'Trasa Obwodowa tuż obok. Poranny jogging lub wieczorny rower.',
-    image: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?q=80&w=2070',
-    icon: <Bike size={24} strokeWidth={1.5} />,
-    mapLink: 'https://www.google.com/maps/search/Trakt+pieszo-rowerowy+nad+Zalewem+Zegrze', // Trasa rowerowa
-    gridClass: ''
-  },
-  {
-    id: 6,
-    category: 'MARINA',
-    title: 'Marina Riva Zegrze',
-    distance: '0 km',
-    description: 'Prywatna przystań z dostępem do łodzi, kajaków i sprzętu wodnego.',
-    image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=2070',
-    icon: <Anchor size={24} strokeWidth={1.5} />,
-    mapLink: 'https://www.google.com/maps/search/Apartamenty+Riva+Zegrze+Rybaki+11+Zegrze+Południowe', // Marina
-    gridClass: 'md:col-span-2 lg:col-span-1'
-  },
-  {
-    id: 7,
-    category: 'KULTURA',
-    title: 'Twierdza Modlin',
-    distance: '12 km',
-    description: 'Historyczna twierdza napoleońska z XIX wieku. Wycieczki z przewodnikiem.',
-    image: '/images/gallery/aktywnosci/twierdza.jpeg',
-    icon: <MapPin size={24} strokeWidth={1.5} />,
-    mapLink: 'https://www.google.com/maps/search/Twierdza+Modlin+Generała+Bema+200c+Nowy+Dwór+Mazowiecki', // Twierdza
-    gridClass: 'md:col-span-2 lg:col-span-2'
-  }
-];
-
+    {
+      id: 1,
+      category: t('activities.waterSports.category'),
+      title: t('activities.waterSports.title'),
+      distance: t('activities.waterSports.distance'),
+      description: t('activities.waterSports.description'),
+      image: '/images/gallery/aktywnosci/skuter.jpeg',
+      icon: <Ship size={24} strokeWidth={1.5} />,
+      mapLink: 'https://www.google.com/maps/search/SkuteryZegrze.pl+Rybaki+1+Zegrze+Południowe',
+      gridClass: 'md:col-span-2 lg:col-span-2'
+    },
+    {
+      id: 2,
+      category: t('activities.golf.category'),
+      title: t('activities.golf.title'),
+      distance: t('activities.golf.distance'),
+      description: t('activities.golf.description'),
+      image: 'https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=2070',
+      icon: <Award size={24} strokeWidth={1.5} />,
+      mapLink: 'https://www.google.com/maps/search/First+Warsaw+Golf+Golfowa+44+Rajszew',
+      gridClass: ''
+    },
+    {
+      id: 3,
+      category: t('activities.sailing.category'),
+      title: t('activities.sailing.title'),
+      distance: t('activities.sailing.distance'),
+      description: t('activities.sailing.description'),
+      image: '/images/gallery/aktywnosci/lodka.jpeg',
+      icon: <Sailboat size={24} strokeWidth={1.5} />,
+      mapLink: 'https://www.google.com/maps/search/Akademia+Żeglarska+Klub+Mila+Szaniawskiego+56+Zegrzynek',
+      gridClass: ''
+    },
+    {
+      id: 4,
+      category: t('activities.nature.category'),
+      title: t('activities.nature.title'),
+      distance: t('activities.nature.distance'),
+      description: t('activities.nature.description'),
+      image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2070',
+      icon: <TreePine size={24} strokeWidth={1.5} />,
+      mapLink: 'https://www.google.com/maps/search/Rezerwat+przyrody+Wieliszewskie+Łęgi+Wieliszew',
+      gridClass: ''
+    },
+    {
+      id: 5,
+      category: t('activities.bike.category'),
+      title: t('activities.bike.title'),
+      distance: t('activities.bike.distance'),
+      description: t('activities.bike.description'),
+      image: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?q=80&w=2070',
+      icon: <Bike size={24} strokeWidth={1.5} />,
+      mapLink: 'https://www.google.com/maps/search/Trakt+pieszo-rowerowy+nad+Zalewem+Zegrze',
+      gridClass: ''
+    },
+    {
+      id: 6,
+      category: t('activities.marina.category'),
+      title: t('activities.marina.title'),
+      distance: t('activities.marina.distance'),
+      description: t('activities.marina.description'),
+      image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=2070',
+      icon: <Anchor size={24} strokeWidth={1.5} />,
+      mapLink: 'https://www.google.com/maps/search/Apartamenty+Riva+Zegrze+Rybaki+11+Zegrze+Południowe',
+      gridClass: 'md:col-span-2 lg:col-span-1'
+    },
+    {
+      id: 7,
+      category: t('activities.culture.category'),
+      title: t('activities.culture.title'),
+      distance: t('activities.culture.distance'),
+      description: t('activities.culture.description'),
+      image: '/images/gallery/aktywnosci/twierdza.jpeg',
+      icon: <MapPin size={24} strokeWidth={1.5} />,
+      mapLink: 'https://www.google.com/maps/search/Twierdza+Modlin+Generała+Bema+200c+Nowy+Dwór+Mazowiecki',
+      gridClass: 'md:col-span-2 lg:col-span-2'
+    }
+  ];
 
   // ========================================
   // GSAP Animations
@@ -493,20 +493,20 @@ function LocationsGrid() {
       <div className="relative z-20 max-w-[1600px] mx-auto px-6 lg:px-12">
         
         <div ref={headerRef} className="text-center mb-16 lg:mb-24">
-          <span className="header-subtitle text-xs tracking-[0.4em] uppercase text-[#8a968f] mb-4 block font-light">
-            NIEZAPOMNIANE CHWILE
-          </span>
-          <h2 
-            className="header-title text-4xl md:text-5xl lg:text-6xl font-light text-[#6e7a73] mb-6" 
-            style={{ fontFamily: 'Playfair Display, serif' }}
-          >
-            Poznaj Piękno Okolicy Zegrza
-          </h2>
-          <p className="header-description text-lg text-[#6e7a73] leading-relaxed font-light max-w-3xl mx-auto">
-            Od sportów wodnych po pola golfowe, od rezerwatów przyrody po kulinarną przygodę—odkryj 
-            wyjątkowe miejsca i aktywności tuż obok Riva Zegrze, które uczynią Twój pobyt niezapomnianym.
-          </p>
-        </div>
+  <span className="header-subtitle text-xs tracking-[0.4em] uppercase text-[#8a968f] mb-4 block font-light">
+    {t('sectionLabel')}
+  </span>
+  <h2 
+    className="header-title text-4xl md:text-5xl lg:text-6xl font-light text-[#6e7a73] mb-6" 
+    style={{ fontFamily: 'Playfair Display, serif' }}
+  >
+    {t('sectionTitle')}
+  </h2>
+  <p className="header-description text-lg text-[#6e7a73] leading-relaxed font-light max-w-3xl mx-auto">
+    {t('sectionDescription')}
+  </p>
+</div>
+
 
         {/* BENTO GRID */}
         <div 
@@ -590,6 +590,8 @@ function LocationsGrid() {
 // CTA Section - ZAKTUALIZOWANE TEKSTY
 // ============================================
 function ExperiencesCTA() {
+  const t = useTranslations('activitiesPage.cta');
+
   return (
     <section className="py-32 bg-[#6e7a73] text-white relative overflow-hidden">
       <div className="absolute inset-0 opacity-10">
@@ -605,16 +607,16 @@ function ExperiencesCTA() {
       
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <span className="text-xs tracking-[0.4em] uppercase mb-6 opacity-75 block font-light">
-          Wypoczynek nad wodą
+          {t('label')}
         </span>
         <h2 
           className="text-4xl md:text-5xl font-light mb-8" 
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
-          Odkryj wszystko, co oferuje Riva Zegrze
+          {t('title')}
         </h2>
         <p className="text-lg leading-relaxed mb-12 opacity-90 font-light">
-          Komfortowe apartamenty, atrakcje na terenie obiektu oraz liczne możliwości aktywnego wypoczynku w okolicy sprawiają, że każdy pobyt w Riva Zegrze jest wyjątkowy. Zarezerwuj bezpośrednio i zaplanuj pobyt dopasowany do swoich potrzeb.
+          {t('description')}
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -622,13 +624,13 @@ function ExperiencesCTA() {
             href="/#booking"
             className="px-10 py-4 bg-white text-[#6e7a73] text-xs tracking-[0.2em] hover:bg-[#f1f1ed] transition-all font-light"
           >
-            SPRAWDŹ DOSTĘPNOŚĆ
+            {t('checkAvailability')}
           </a>
           <a 
             href="/#booking"
             className="px-10 py-4 border border-white text-white text-xs tracking-[0.2em] hover:bg-white hover:text-[#6e7a73] transition-all font-light"
           >
-            ZAREZERWUJ POBYT
+            {t('bookStay')}
           </a>
         </div>
       </div>

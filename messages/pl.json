@@ -458,133 +458,307 @@
       }
     }
   },
-  "roomsPage": {
-    "hero": {
-      "label": "Riva Zegrze",
-      "title": "Nasze Apartamenty",
-      "description": "Odkryj komfort nad Jeziorem Zegrzyńskim"
+ "roomsPage": {
+  "hero": {
+    "label": "Riva Zegrze",
+    "title": "Nasze Apartamenty",
+    "description": "Odkryj komfort nad Jeziorem Zegrzyńskim"
+  },
+  "roomsGrid": {
+    "viewDetailsButton": "ZOBACZ SZCZEGÓŁY",
+    "banner": {
+      "imageAlt": "Riva Zegrze - Rezerwuj Bezpośrednio",
+      "badge": "Rezerwuj",
+      "badgeHighlight": "Bezpośrednio",
+      "titleLine1": "Najlepsza Cena",
+      "titleLine2": "Gwarantowana",
+      "description": "Rezerwując przez naszą stronę, zawsze otrzymujesz najlepszą dostępną cenę",
+      "benefit1": "Najlepsza cena na rynku",
+      "benefit2": "Gwarancja najniższej stawki",
+      "benefit3": "Elastyczne warunki rezerwacji",
+      "benefit4": "Bezpośredni kontakt z nami",
+      "benefit5": "Specjalne oferty dla stałych gości",
+      "infoTitle": "Dlaczego warto?",
+      "infoText": "Rezerwując bezpośrednio przez naszą stronę, omijasz prowizje portali rezerwacyjnych i płacisz mniej.",
+      "trustText": "Zaufało nam ponad",
+      "trustHighlight": "500+ gości"
     },
-      "roomsGrid": {
-      "viewDetailsButton": "ZOBACZ SZCZEGÓŁY",
-      "banner": {
-        "imageAlt": "Riva Zegrze - Rezerwuj Bezpośrednio",
-        "badge": "Rezerwuj",
-        "badgeHighlight": "Bezpośrednio",
-        "title": "Najlepsza Cena\nGwarantowana",
-        "description": "Rezerwując przez naszą stronę, zawsze otrzymujesz najlepszą dostępną cenę",
-        "benefits": {
-          "b1": "Najlepsza cena na rynku",
-          "b2": "Gwarancja najniższej stawki",
-          "b3": "Elastyczne warunki rezerwacji",
-          "b4": "Bezpośredni kontakt z nami",
-          "b5": "Specjalne oferty dla stałych gości"
-        },
-        "infoTitle": "Dlaczego warto?",
-        "infoText": "Rezerwując bezpośrednio przez naszą stronę, omijasz prowizje portali rezerwacyjnych i płacisz mniej.",
-        "trustText": "Zaufało nam ponad",
-        "trustHighlight": "500+ gości"
+    "rooms": {
+      "c1": {
+        "name": "Apartament C1",
+        "price": "od 630 zł / noc",
+        "size": "38 m²",
+        "guests": "4 Osoby",
+        "beds": "1 Sypialnia",
+        "description": "Nowoczesny apartament z tarasem i prywatnym ogródkiem, położony bezpośrednio nad Jeziorem Zegrzyńskim.",
+        "amenity1": "Widok na jezioro",
+        "amenity2": "Taras",
+        "amenity3": "Prywatny ogródek",
+        "amenity4": "WiFi"
       },
-      "rooms": {
-        "c1": {
-          "name": "Apartament C1",
-          "price": "od 630 zł / noc",
-          "size": "38 m²",
-          "guests": "4 Osoby",
-          "beds": "1 Sypialnia",
-          "bathrooms": "1 Łazienka",
-          "amenities": ["Widok na jezioro", "Taras", "Prywatny ogródek", "WiFi"],
-          "description": "Nowoczesny apartament z tarasem i prywatnym ogródkiem, położony bezpośrednio nad Jeziorem Zegrzyńskim."
-        },
-        "c4": {
-          "name": "Apartament C4",
-          "price": "od 570 zł / noc",
-          "size": "38 m²",
-          "guests": "4 Osoby",
-          "beds": "1 Sypialnia",
-          "bathrooms": "1 Łazienka",
-          "amenities": ["Widok na jezioro", "Taras", "WiFi", "2 piętro"],
-          "description": "Nowoczesny apartament z tarasem i bezpośrednim widokiem na Jezioro Zegrzyńskie."
-        },
-        "c7": {
-          "name": "Apartament C7",
-          "price": "od 600 zł / noc",
-          "size": "38 m²",
-          "guests": "4 Osoby",
-          "beds": "1 Sypialnia",
-          "bathrooms": "1 Łazienka",
-          "amenities": ["Widok na jezioro", "Taras", "WiFi", "3 piętro"],
-          "description": "Nowoczesny apartament z tarasem i widokiem na Jezioro Zegrzyńskie."
-        },
-        "d1": {
-          "name": "Apartament D1",
-          "price": "od 480 zł / noc",
-          "size": "38 m²",
-          "guests": "4 Osoby",
-          "beds": "1 Sypialnia",
-          "bathrooms": "1 Łazienka",
-          "amenities": ["Taras", "Strefa rekreacyjna", "WiFi", "1 piętro"],
-          "description": "Nowoczesny apartament z tarasem, położony na 1 piętrze."
-        },
-        "d4": {
-          "name": "Apartament D4",
-          "price": "od 510 zł / noc",
-          "size": "38 m²",
-          "guests": "4 Osoby",
-          "beds": "1 Sypialnia",
-          "bathrooms": "1 Łazienka",
-          "amenities": ["Taras", "Strefa rekreacyjna", "WiFi", "2 piętro"],
-          "description": "Komfortowy apartament z tarasem, położony na 2 piętrze."
-        },
-        "d7": {
-          "name": "Apartament D7",
-          "price": "od 540 zł / noc",
-          "size": "38 m²",
-          "guests": "4 Osoby",
-          "beds": "1 Sypialnia",
-          "bathrooms": "1 Łazienka",
-          "amenities": ["Taras", "Strefa rekreacyjna", "Tereny zielone", "3 piętro"],
-          "description": "Przestronny i funkcjonalny apartament z tarasem."
-        },
-               "b10": {
-          "name": "Apartament Deluxe B10",
-          "price": "od 900 zł / noc",
-          "size": "68 m²",
-          "guests": "4 Osoby",
-          "beds": "1 Sypialnia",
-          "bathrooms": "1 Łazienka",
-          "amenities": ["Panoramiczny widok", "Duży taras", "Premium", "3 piętro"],
-          "description": "Apartament Deluxe z dużym tarasem i panoramicznym widokiem."
-        }
+      "c4": {
+        "name": "Apartament C4",
+        "price": "od 570 zł / noc",
+        "size": "38 m²",
+        "guests": "4 Osoby",
+        "beds": "1 Sypialnia",
+        "description": "Nowoczesny apartament z tarasem i bezpośrednim widokiem na Jezioro Zegrzyńskie.",
+        "amenity1": "Widok na jezioro",
+        "amenity2": "Taras",
+        "amenity3": "WiFi",
+        "amenity4": "2 piętro"
+      },
+      "c7": {
+        "name": "Apartament C7",
+        "price": "od 600 zł / noc",
+        "size": "38 m²",
+        "guests": "4 Osoby",
+        "beds": "1 Sypialnia",
+        "description": "Nowoczesny apartament z tarasem i widokiem na Jezioro Zegrzyńskie.",
+        "amenity1": "Widok na jezioro",
+        "amenity2": "Taras",
+        "amenity3": "WiFi",
+        "amenity4": "3 piętro"
+      },
+          "d1": {
+        "name": "Apartament D1",
+        "price": "od 480 zł / noc",
+        "size": "38 m²",
+        "guests": "4 Osoby",
+        "beds": "1 Sypialnia",
+        "description": "Nowoczesny apartament z tarasem, położony na 1 piętrze.",
+        "amenity1": "Taras",
+        "amenity2": "Strefa rekreacyjna",
+        "amenity3": "WiFi",
+        "amenity4": "1 piętro"
+      },
+      "d4": {
+        "name": "Apartament D4",
+        "price": "od 510 zł / noc",
+        "size": "38 m²",
+        "guests": "4 Osoby",
+        "beds": "1 Sypialnia",
+        "description": "Komfortowy apartament z tarasem, położony na 2 piętrze.",
+        "amenity1": "Taras",
+        "amenity2": "Strefa rekreacyjna",
+        "amenity3": "WiFi",
+        "amenity4": "2 piętro"
+      },
+      "d7": {
+        "name": "Apartament D7",
+        "price": "od 540 zł / noc",
+        "size": "38 m²",
+        "guests": "4 Osoby",
+        "beds": "1 Sypialnia",
+        "description": "Przestronny i funkcjonalny apartament z tarasem.",
+        "amenity1": "Taras",
+        "amenity2": "Strefa rekreacyjna",
+        "amenity3": "Tereny zielone",
+        "amenity4": "3 piętro"
+      },
+      "b10": {
+        "name": "Apartament Deluxe B10",
+        "price": "od 900 zł / noc",
+        "size": "68 m²",
+        "guests": "4 Osoby",
+        "beds": "1 Sypialnia",
+        "description": "Apartament Deluxe z dużym tarasem i panoramicznym widokiem.",
+        "amenity1": "Panoramiczny widok",
+        "amenity2": "Duży taras",
+        "amenity3": "Premium",
+        "amenity4": "3 piętro"
+      }
+    }
+  }
+},
+"galleryPage": {
+  "hero": {
+    "label": "Riva Zegrze",
+    "title": "Galeria",
+    "description": "Odkryj piękno naszego obiektu • Wyselekcjonowane zdjęcia"
+  },
+  "grid": {
+    "filterAll": "Wszystkie",
+    "filterApartments": "Apartamenty",
+    "filterGym": "Siłownia i Basen",
+    "filterSurroundings": "Okolica",
+    "categoryApartments": "Apartamenty",
+    "categoryGym": "Siłownia i Basen",
+    "categorySurroundings": "Okolica",
+    "lightboxSeparator": "•",
+    "lightboxOf": "/"
+  }
+},
+"activitiesPage": {
+  "hero": {
+    "label": "Odkryj Okolicę",
+    "titleLine1": "Aktywności",
+    "titleLine2": "i Atrakcje",
+    "description": "Wyjątkowe miejsca i doświadczenia w sercu Mazowsza",
+    "scrollDown": "Przewiń w dół"
+  },
+  "locationsGrid": {
+    "sectionLabel": "NIEZAPOMNIANE CHWILE",
+    "sectionTitle": "Poznaj Piękno Okolicy Zegrza",
+    "sectionDescription": "Od sportów wodnych po pola golfowe, od rezerwatów przyrody po kulinarną przygodę—odkryj wyjątkowe miejsca i aktywności tuż obok Riva Zegrze, które uczynią Twój pobyt niezapomnianym.",
+    "activities": {
+      "waterSports": {
+        "category": "SPORTY WODNE",
+        "title": "Skutery Wodne",
+        "distance": "0.5 km",
+        "description": "Największa wypożyczalnia nad Zalewem. Skutery 90-300 KM dla rodzin i miłośników adrenaliny."
+      },
+      "golf": {
+        "category": "GOLF",
+        "title": "Pole Golfowe Rajszew",
+        "distance": "5 km",
+        "description": "18 dołków, driving range i profesjonalni instruktorzy."
+      },
+      "sailing": {
+        "category": "ŻEGLARSTWO",
+        "title": "Akademia Żeglarska",
+        "distance": "3 km",
+        "description": "Nauka żeglowania, wypożyczalnia sprzętu, kursy dla początkujących."
+      },
+      "nature": {
+        "category": "PRZYRODA",
+        "title": "Wieliszewskie Łęgi",
+        "distance": "4 km",
+        "description": "Rezerwat z unikalną fauną i florą. Idealne na spacery i obserwację ptaków."
+      },
+      "bike": {
+        "category": "ROWER",
+        "title": "Trasa Rowerowa VM-O",
+        "distance": "0 km",
+        "description": "Trasa Obwodowa tuż obok. Poranny jogging lub wieczorny rower."
+      },
+      "marina": {
+        "category": "MARINA",
+        "title": "Marina Riva Zegrze",
+        "distance": "0 km",
+        "description": "Prywatna przystań z dostępem do łodzi, kajaków i sprzętu wodnego."
+      },
+      "culture": {
+        "category": "KULTURA",
+        "title": "Twierdza Modlin",
+        "distance": "12 km",
+        "description": "Historyczna twierdza napoleońska z XIX wieku. Wycieczki z przewodnikiem."
       }
     }
   },
-    "galleryPage": {
-    "hero": {
-      "label": "Riva Zegrze",
-      "title": "Galeria",
-      "description": "Odkryj piękno naszego obiektu • Wyselekcjonowane zdjęcia"
+  "cta": {
+    "label": "Wypoczynek nad wodą",
+    "title": "Odkryj wszystko, co oferuje Riva Zegrze",
+    "description": "Komfortowe apartamenty, atrakcje na terenie obiektu oraz liczne możliwości aktywnego wypoczynku w okolicy sprawiają, że każdy pobyt w Riva Zegrze jest wyjątkowy. Zarezerwuj bezpośrednio i zaplanuj pobyt dopasowany do swoich potrzeb.",
+    "checkAvailability": "SPRAWDŹ DOSTĘPNOŚĆ",
+    "bookStay": "ZAREZERWUJ POBYT"
+  }
+},
+"contactPage": {
+  "hero": {
+    "label": "Skontaktuj się z nami",
+    "title": "Kontakt",
+    "description": "Jesteśmy do Twojej dyspozycji w sprawach rezerwacji, zapytań i specjalnych próśb"
+  },
+  "info": {
+    "sectionLabel": "JAK MOŻEMY POMÓC?",
+    "sectionTitle": "Skontaktuj się z nami",
+    "sectionDescription": "Kameralne apartamenty nad wodą. Spokój, komfort i bezpośrednia rezerwacja w wyjątkowej lokalizacji pod Warszawą.",
+    "phone": {
+      "label": "Telefon",
+      "number": "+48 510 038 038",
+      "action": "Zadzwoń",
+      "description": "Dostępni 24/7 dla rezerwacji"
     },
-    "grid": {
-      "filterAll": "Wszystkie",
-      "filterApartments": "Apartamenty",
-      "filterGym": "Siłownia i Basen",
-      "filterSurroundings": "Okolica",
-      "categoryApartments": "Apartamenty",
-      "categoryGym": "Siłownia i Basen",
-      "categorySurroundings": "Okolica",
-      "lightboxSeparator": "•",
-      "lightboxOf": "/"
+    "email": {
+      "label": "Email",
+      "address": "wynajem@rivazegrze.pl",
+      "action": "Wyślij Email",
+      "description": "Odpowiadamy w ciągu 24h"
+    },
+    "address": {
+      "label": "Lokalizacja",
+      "line1": "Rybaki 11",
+      "line2": "05-130 Zegrze Południowe",
+      "action": "Dojazd",
+      "description": "Nad Zalewem Zegrzyńskim"
+    },
+    "hours": {
+      "label": "Godziny",
+      "reception": "Wirtualna recepcja",
+      "checkin": "Zameldowanie: 15:00",
+      "checkout": "Wymeldowanie: 11:00",
+      "action": "Szczegóły",
+      "description": "Samodzielne zameldowanie 24/7"
     }
   },
-  "activitiesPage": {
-    "hero": {
-      "label": "Odkryj Okolicę",
-      "titleLine1": "Aktywności",
-      "titleLine2": "i Atrakcje",
-      "description": "Wyjątkowe miejsca i doświadczenia w sercu Mazowsza",
-      "scrollDown": "Przewiń w dół"
+  "faq": {
+    "sectionLabel": "FAQ",
+    "sectionTitle": "Najczęściej Zadawane Pytania",
+    "sectionDescription": "Odpowiedzi na najważniejsze pytania dotyczące pobytu w Riva Zegrze",
+    "ctaText": "Nie znalazłeś odpowiedzi?",
+    "items": {
+      "checkin": {
+        "question": "O której godzinie odbywa się zameldowanie?",
+        "answer": "Zameldowanie możliwe jest w godzinach 15:00–22:00. Obiekt oferuje samodzielne zameldowanie – kody dostępu przesyłane są w dniu przyjazdu."
+      },
+      "checkout": {
+        "question": "Do której godziny należy się wymeldować?",
+        "answer": "Wymeldowanie odbywa się do godziny 11:00."
+      },
+      "earlyLate": {
+        "question": "Czy możliwe jest wcześniejsze zameldowanie lub późniejsze wymeldowanie?",
+        "answer": "Możliwość wcześniejszego zameldowania lub późniejszego wymeldowania zależy od dostępności i ustalana jest indywidualnie."
+      },
+      "extraBeds": {
+        "question": "Czy w apartamentach dostępne są dostawki?",
+        "answer": "Nie, nie oferujemy dostawek. Każdy apartament przeznaczony jest maksymalnie dla 4 osób."
+      },
+      "children": {
+        "question": "Czy w apartamentach mogą przebywać dzieci?",
+        "answer": "Tak, obiekt jest przyjazny rodzinom z dziećmi. Dzieci w każdym wieku są mile widziane."
+      },
+      "pets": {
+        "question": "Czy można przyjechać z psem?",
+        "answer": "Tak, zwierzęta są akceptowane i nie pobieramy za nie dodatkowych opłat."
+      },
+      "parking": {
+        "question": "Czy na terenie obiektu dostępny jest parking?",
+        "answer": "Tak, dostępne są bezpłatne miejsca ogólnodostępne przed budynkiem."
+      },
+      "garage": {
+        "question": "Czy można zarezerwować miejsce parkingowe w garażu?",
+        "answer": "Tak, miejsce w garażu dostępne jest po wcześniejszej rezerwacji w cenie 75 zł / doba."
+      },
+      "quietHours": {
+        "question": "Czy w obiekcie obowiązuje cisza nocna?",
+        "answer": "Tak, cisza nocna obowiązuje w godzinach 22:00–7:00."
+      },
+      "parties": {
+        "question": "Czy w obiekcie można organizować imprezy?",
+        "answer": "Nie, na terenie obiektu obowiązuje całkowity zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich."
+      }
     }
+  },
+  "form": {
+    "sectionLabel": "WYŚLIJ WIADOMOŚĆ",
+    "sectionTitle": "Chętnie Odpowiemy na Pytania",
+    "sectionDescription": "Wypełnij formularz poniżej, a nasz zespół odpowie niezwłocznie",
+    "nameLabel": "Imię i Nazwisko",
+    "namePlaceholder": "Jan Kowalski",
+    "emailLabel": "Adres Email",
+    "emailPlaceholder": "jan@example.com",
+    "phoneLabel": "Numer Telefonu",
+    "phonePlaceholder": "+48 510 038 038",
+    "subjectLabel": "Temat",
+    "subjectPlaceholder": "Wybierz temat",
+    "subjectReservation": "Rezerwacja",
+    "subjectInfo": "Informacje",
+    "subjectOther": "Inne",
+    "messageLabel": "Wiadomość",
+    "messagePlaceholder": "Twoja wiadomość...",
+    "submitButton": "WYŚLIJ WIADOMOŚĆ",
+    "privacyNote": "* Pola wymagane. Twoje dane są bezpieczne i chronione zgodnie z RODO."
   }
 }
-
-
+}

@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap'; 
 import { Calendar,Compass,Waves, Menu, X, Instagram, Facebook, MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
 import Navigation from '../../components/layout/Navigation';
+import { useTranslations } from 'next-intl';
 
 export default function ContactPage() {
   return (
@@ -28,13 +29,13 @@ export default function ContactPage() {
 // ============================================
 
 function ContactHero() {
+  const t = useTranslations('contactPage.hero');
   const heroRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const initParallax = async () => {
       if (typeof window !== 'undefined' && heroRef.current) {
         const { jarallax } = await import('jarallax');
-
         jarallax(heroRef.current, {
           speed: 0.6,
           imgSrc: '/images/gallery/baner-kontakt/zdjecie-kontakt.jpg',
@@ -43,7 +44,6 @@ function ContactHero() {
         });
       }
     };
-
     initParallax();
   }, []);
 
@@ -51,26 +51,23 @@ function ContactHero() {
     <section
       ref={heroRef}
       className="jarallax relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden"
-      data-jarallax
-      data-speed="0.6"
-      data-jarallax-img="/images/gallery/baner-kontakt/zdjecie-kontakt.jpg"
     >
       <div className="absolute inset-0 bg-[#0f0e0f]/40 z-10" />
 
       <div className="relative z-20 text-center text-white px-6 max-w-4xl mx-auto">
         <span className="text-xs tracking-[0.4em] uppercase font-light opacity-80 mb-4 block">
-          Skontaktuj się z nami
+          {t('label')}
         </span>
 
         <h1
           className="text-4xl md:text-7xl font-light mb-4 md:mb-6 tracking-[0.15em] leading-tight"
           style={{ fontFamily: 'Playfair Display, serif' }}
         >
-          Kontakt
+          {t('title')}
         </h1>
 
         <p className="text-sm md:text-base font-light opacity-90 max-w-2xl mx-auto leading-relaxed">
-          Jesteśmy do Twojej dyspozycji w sprawach rezerwacji, zapytań i specjalnych próśb
+          {t('description')}
         </p>
       </div>
     </section>
@@ -80,40 +77,42 @@ function ContactHero() {
 // Contact Info Cards - WYRÓWNANE WYSOKOŚCI
 // ============================================
 function ContactInfo() {
+  const t = useTranslations('contactPage.info');
+
   const contactMethods = [
-  {
-    icon: <Phone size={28} strokeWidth={1.5} />,
-    title: 'Telefon',
-    details: ['+48 510 038 038'],
-    action: 'Zadzwoń',
-    description: 'Dostępni 24/7 dla rezerwacji',
-    link: 'tel:+48510038038'
-  },
-  {
-    icon: <Mail size={28} strokeWidth={1.5} />,
-    title: 'Email',
-    details: ['wynajem@rivazegrze.pl'],
-    action: 'Wyślij email',
-    description: 'Odpowiadamy w ciągu 24h',
-    link: 'mailto:wynajem@rivazegrze.pl'
-  },
-  {
-    icon: <MapPin size={28} strokeWidth={1.5} />,
-    title: 'Lokalizacja',
-    details: ['Rybaki 11', '05-130 Zegrze Południowe'],
-    action: 'Dojazd',
-    description: 'Nad Zalewem Zegrzyńskim',
-    link: 'https://maps.google.com/?q=Rybaki+11,+05-130+Zegrze+Południowe'
-  },
-  {
-    icon: <Clock size={28} strokeWidth={1.5} />,
-    title: 'Godziny',
-    details: ['Wirtualna recepcja', 'Zameldowanie: 15:00', 'Wymeldowanie: 11:00'],
-    action: 'Szczegóły',
-    description: 'Samodzielne zameldowanie 24/7',
-    link: '/informacje-o-rezerwacji'
-  }
-];
+    {
+      icon: <Phone size={28} strokeWidth={1.5} />,
+      title: t('phone.label'),
+      details: [t('phone.number')],
+      action: t('phone.action'),
+      description: t('phone.description'),
+      link: 'tel:+48510038038'
+    },
+    {
+      icon: <Mail size={28} strokeWidth={1.5} />,
+      title: t('email.label'),
+      details: [t('email.address')],
+      action: t('email.action'),
+      description: t('email.description'),
+      link: 'mailto:wynajem@rivazegrze.pl'
+    },
+    {
+      icon: <MapPin size={28} strokeWidth={1.5} />,
+      title: t('address.label'),
+      details: [t('address.line1'), t('address.line2')],
+      action: t('address.action'),
+      description: t('address.description'),
+      link: 'https://maps.google.com/?q=Rybaki+11,+05-130+Zegrze+Południowe'
+    },
+    {
+      icon: <Clock size={28} strokeWidth={1.5} />,
+      title: t('hours.label'),
+      details: [t('hours.reception'), t('hours.checkin'), t('hours.checkout')],
+      action: t('hours.action'),
+      description: t('hours.description'),
+      link: '/informacje-o-rezerwacji'
+    }
+  ];
 
   return (
     <section className="py-24 bg-white">
@@ -122,7 +121,7 @@ function ContactInfo() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <span className="text-xs tracking-[0.4em] uppercase text-[#AB8A62] font-light mb-4 block">
-            Jak możemy pomóc?
+            {t('sectionLabel')}
           </span>
           <h2 
             className="text-4xl md:text-5xl font-light mb-6" 
@@ -131,32 +130,26 @@ function ContactInfo() {
               color: '#4A6B5E'
             }}
           >
-            Skontaktuj się z nami
+            {t('sectionTitle')}
           </h2>
           <p className="text-[#6e7a73] font-light max-w-2xl mx-auto leading-relaxed">
-            Kameralne apartamenty nad wodą. Spokój, komfort i bezpośrednia rezerwacja w wyjątkowej lokalizacji pod Warszawą.
+            {t('sectionDescription')}
           </p>
         </div>
 
-        {/* ✅ ZMIENIONE: Dodany h-full dla równych wysokości */}
+        {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {contactMethods.map((method, idx) => (
-            <div 
-              key={idx} 
-              className="text-center group h-full" // ← DODANE h-full
-            >
-              {/* Card with Frame */}
-              <div className="relative bg-white p-3 shadow-lg hover:shadow-2xl transition-all duration-500 h-full"> {/* ← DODANE h-full */}
-                <div className="bg-[#f7f6f4] p-8 border border-[#e8e6e1] h-full flex flex-col"> {/* ← DODANE h-full flex flex-col */}
+            <div key={idx} className="text-center group h-full">
+              <div className="relative bg-white p-3 shadow-lg hover:shadow-2xl transition-all duration-500 h-full">
+                <div className="bg-[#f7f6f4] p-8 border border-[#e8e6e1] h-full flex flex-col">
                   
-                  {/* Icon Container - Złoty border */}
                   <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-[#C4A77D] rounded-full mb-6 group-hover:bg-[#C4A77D] transition-all duration-300 mx-auto">
                     <div className="text-[#C4A77D] group-hover:text-white transition-colors">
                       {method.icon}
                     </div>
                   </div>
                   
-                  {/* Title */}
                   <h3 
                     className="text-xl font-light mb-4" 
                     style={{ 
@@ -167,8 +160,7 @@ function ContactInfo() {
                     {method.title}
                   </h3>
                   
-                  {/* Details - Fixed Height */}
-                  <div className="space-y-2 mb-4 min-h-[4.5rem]"> {/* ← DODANE min-h-[4.5rem] */}
+                  <div className="space-y-2 mb-4 min-h-[4.5rem]">
                     {method.details.map((detail, i) => (
                       <p key={i} className="text-[#6e7a73] font-light text-sm">
                         {detail}
@@ -176,13 +168,11 @@ function ContactInfo() {
                     ))}
                   </div>
                   
-                  {/* Description - Fixed Height */}
                   <p className="text-xs text-[#8a968f] font-light mb-6 min-h-[3rem] flex items-center justify-center">
                     {method.description}
                   </p>
                   
-                  {/* Action Link - Pushed to Bottom */}
-                  <div className="mt-auto"> {/* ← DODANE mt-auto */}
+                  <div className="mt-auto">
                     <a 
                       href={method.link}
                       className="text-xs tracking-[0.2em] text-[#C4A77D] hover:text-[#AB8A62] transition-colors font-light flex items-center gap-2 mx-auto justify-center"
@@ -196,13 +186,11 @@ function ContactInfo() {
                   
                 </div>
                 
-                {/* Corner Decorations - Złote */}
                 <div className="absolute top-2 left-2 w-6 h-6 border-t-2 border-l-2 border-[#C4A77D] opacity-50"></div>
                 <div className="absolute top-2 right-2 w-6 h-6 border-t-2 border-r-2 border-[#C4A77D] opacity-50"></div>
                 <div className="absolute bottom-2 left-2 w-6 h-6 border-b-2 border-l-2 border-[#C4A77D] opacity-50"></div>
                 <div className="absolute bottom-2 right-2 w-6 h-6 border-b-2 border-r-2 border-[#C4A77D] opacity-50"></div>
               </div>
-              
             </div>
           ))}
         </div>
@@ -211,11 +199,8 @@ function ContactInfo() {
   );
 }
 
-
-
-// FAQ SECTION - Z KOLOREM #4A6B5E
-// ============================================
 function FAQSection() {
+  const t = useTranslations('contactPage.faq');
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const faqRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -230,7 +215,6 @@ function FAQSection() {
           
           gsap.registerPlugin(ScrollTrigger);
 
-          // Animate header
           gsap.fromTo(
             faqRef.current.querySelector('.faq-header'),
             { opacity: 0, y: 30 },
@@ -245,7 +229,6 @@ function FAQSection() {
             }
           );
 
-          // Stagger FAQ items
           gsap.fromTo(
             itemsRef.current.filter(Boolean),
             { opacity: 0, x: -30 },
@@ -268,47 +251,18 @@ function FAQSection() {
     initAnimations();
   }, []);
 
-  const faqs = [
-    {
-      question: 'O której godzinie odbywa się zameldowanie?',
-      answer: 'Zameldowanie możliwe jest w godzinach 15:00–22:00. Obiekt oferuje samodzielne zameldowanie – kody dostępu przesyłane są w dniu przyjazdu.'
-    },
-    {
-      question: 'Do której godziny należy się wymeldować?',
-      answer: 'Wymeldowanie odbywa się do godziny 11:00.'
-    },
-    {
-      question: 'Czy możliwe jest wcześniejsze zameldowanie lub późniejsze wymeldowanie?',
-      answer: 'Możliwość wcześniejszego zameldowania lub późniejszego wymeldowania zależy od dostępności i ustalana jest indywidualnie.'
-    },
-    {
-      question: 'Czy w apartamentach dostępne są dostawki?',
-      answer: 'Nie, nie oferujemy dostawek. Każdy apartament przeznaczony jest maksymalnie dla 4 osób.'
-    },
-    {
-      question: 'Czy w apartamentach mogą przebywać dzieci?',
-      answer: 'Tak, obiekt jest przyjazny rodzinom z dziećmi. Dzieci w każdym wieku są mile widziane.'
-    },
-    {
-      question: 'Czy można przyjechać z psem?',
-      answer: 'Tak, zwierzęta są akceptowane i nie pobieramy za nie dodatkowych opłat.'
-    },
-    {
-      question: 'Czy na terenie obiektu dostępny jest parking?',
-      answer: 'Tak, dostępne są bezpłatne miejsca ogólnodostępne przed budynkiem.'
-    },
-    {
-      question: 'Czy można zarezerwować miejsce parkingowe w garażu?',
-      answer: 'Tak, miejsce w garażu dostępne jest po wcześniejszej rezerwacji w cenie 75 zł / doba.'
-    },
-    {
-      question: 'Czy w obiekcie obowiązuje cisza nocna?',
-      answer: 'Tak, cisza nocna obowiązuje w godzinach 22:00–7:00.'
-    },
-    {
-      question: 'Czy w obiekcie można organizować imprezy?',
-      answer: 'Nie, na terenie obiektu obowiązuje całkowity zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich.'
-    }
+  // FAQ keys array
+  const faqKeys = [
+    'checkin',
+    'checkout', 
+    'earlyLate',
+    'extraBeds',
+    'children',
+    'pets',
+    'parking',
+    'garage',
+    'quietHours',
+    'parties'
   ];
 
   const toggleFAQ = (index: number) => {
@@ -317,7 +271,6 @@ function FAQSection() {
 
   return (
     <section ref={faqRef} className="relative py-24 lg:py-32 overflow-hidden">
-      {/* Gradient Background */}
       <div 
         className="absolute inset-0" 
         style={{
@@ -325,11 +278,9 @@ function FAQSection() {
         }}
       />
 
-      {/* Decorative Elements */}
       <div className="absolute top-20 right-0 w-96 h-96 bg-[#d4d6ce]/20 blur-3xl"></div>
       <div className="absolute bottom-20 left-0 w-96 h-96 bg-[#8a968f]/10 blur-3xl"></div>
       
-      {/* Subtle Pattern Overlay */}
       <div 
         className="absolute inset-0 opacity-5"
         style={{
@@ -343,11 +294,10 @@ function FAQSection() {
           
           {/* LEFT COLUMN - Header */}
           <div className="lg:col-span-4 faq-header">
-            {/* Premium Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm border border-[#d4d6ce] mb-6">
               <div className="w-2 h-2 bg-[#AB8A62]"></div>
               <span className="text-[10px] tracking-[0.3em] uppercase text-[#6e7a73] font-light">
-                FAQ
+                {t('sectionLabel')}
               </span>
             </div>
 
@@ -355,19 +305,16 @@ function FAQSection() {
               className="text-5xl lg:text-6xl font-light mb-8 leading-tight" 
               style={{ 
                 fontFamily: 'Playfair Display, serif',
-                color: '#4A6B5E' // ← ZMIENIONE NA #4A6B5E
+                color: '#4A6B5E'
               }}
             >
-              Najczęściej<br />
-              Zadawane<br />
-              Pytania
+              {t('sectionTitle')}
             </h2>
             
             <p className="text-[#6e7a73] font-light leading-relaxed mb-8">
-              Odpowiedzi na najważniejsze pytania dotyczące pobytu w Riva Zegrze
+              {t('sectionDescription')}
             </p>
 
-            {/* Decorative Element */}
             <div className="relative mb-12">
               <div className="flex items-center gap-3">
                 <div className="w-16 h-px bg-[#AB8A62]"></div>
@@ -378,7 +325,7 @@ function FAQSection() {
             {/* Contact CTA Card */}
             <div className="bg-white/80 backdrop-blur-sm border border-[#e8e6e1] p-6 shadow-lg">
               <p className="text-sm text-[#6e7a73] font-light mb-4">
-                Nie znalazłeś odpowiedzi?
+                {t('ctaText')}
               </p>
               
               <div className="space-y-3">
@@ -395,41 +342,38 @@ function FAQSection() {
                 </a>
                 
                 <a 
-  href="mailto:wynajem@rivazegrze.pl"
-  className="flex items-center gap-3 text-[#AB8A62] hover:text-[#967447] transition-colors group"
->
-  <div className="w-8 h-8 flex items-center justify-center border border-[#d4d6ce] group-hover:border-[#AB8A62] transition-colors">
-    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-    </svg>
-  </div>
-  <span className="text-sm font-light">wynajem@rivazegrze.pl</span>
-</a>
-
+                  href="mailto:wynajem@rivazegrze.pl"
+                  className="flex items-center gap-3 text-[#AB8A62] hover:text-[#967447] transition-colors group"
+                >
+                  <div className="w-8 h-8 flex items-center justify-center border border-[#d4d6ce] group-hover:border-[#AB8A62] transition-colors">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                    </svg>
+                  </div>
+                  <span className="text-sm font-light">wynajem@rivazegrze.pl</span>
+                </a>
               </div>
             </div>
           </div>
 
-          {/* RIGHT COLUMN - FAQ List with Card */}
+          {/* RIGHT COLUMN - FAQ List */}
           <div className="lg:col-span-8">
             <div className="bg-white/80 backdrop-blur-sm border border-[#e8e6e1] shadow-xl">
               <div className="divide-y divide-[#e8e6e1]">
-                {faqs.map((faq, index) => (
+                {faqKeys.map((key, index) => (
                   <div
-                    key={index}
+                    key={key}
                     ref={(el) => { itemsRef.current[index] = el; }}
                     className="group"
                   >
-                    {/* Question Button */}
                     <button
                       onClick={() => toggleFAQ(index)}
                       className="w-full py-6 px-8 flex items-start justify-between text-left hover:bg-[#f7f6f4] transition-all duration-300"
                     >
                       <span className="flex-1 text-lg font-light text-[#4A6B5E] pr-8 group-hover:text-[#AB8A62] transition-colors">
-                        {faq.question}
+                        {t(`items.${key}.question`)}
                       </span>
                       
-                      {/* Plus/Minus Icon */}
                       <div className="flex-shrink-0 w-6 h-6 flex items-center justify-center">
                         {openIndex === index ? (
                           <svg className="w-5 h-5 text-[#AB8A62] transition-transform duration-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -443,7 +387,6 @@ function FAQSection() {
                       </div>
                     </button>
 
-                    {/* Answer - Smooth Expand */}
                     <div
                       className={`overflow-hidden transition-all duration-500 ease-in-out ${
                         openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
@@ -452,7 +395,7 @@ function FAQSection() {
                       <div className="pb-6 px-8 bg-[#f7f6f4]/50">
                         <div className="w-12 h-px bg-[#AB8A62] mb-4"></div>
                         <p className="text-[#6e7a73] font-light leading-relaxed">
-                          {faq.answer}
+                          {t(`items.${key}.answer`)}
                         </p>
                       </div>
                     </div>
@@ -469,11 +412,10 @@ function FAQSection() {
 }
 
 
-
-// ============================================
-// Contact Form - Z KOLOREM #4A6B5E
 // ============================================
 function ContactForm() {
+  const t = useTranslations('contactPage.form');
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -492,24 +434,23 @@ function ContactForm() {
       <div className="max-w-4xl mx-auto px-6">
         
         {/* Header */}
-<div className="text-center mb-12">
-  <span className="text-xs tracking-[0.4em] uppercase text-[#AB8A62] mb-4 block font-light">
-    {/* ← ZMIENIONE z #8a968f na #AB8A62 */}
-    Wyślij Wiadomość
-  </span>
-  <h2 
-    className="text-4xl md:text-5xl font-light mb-6" 
-    style={{ 
-      fontFamily: 'Playfair Display, serif',
-      color: '#4A6B5E'
-    }}
-  >
-    Chętnie Odpowiemy na Pytania
-  </h2>
-  <p className="text-[#6e7a73] font-light">
-    Wypełnij formularz poniżej, a nasz zespół odpowie niezwłocznie
-  </p>
-</div>
+        <div className="text-center mb-12">
+          <span className="text-xs tracking-[0.4em] uppercase text-[#AB8A62] mb-4 block font-light">
+            {t('sectionLabel')}
+          </span>
+          <h2 
+            className="text-4xl md:text-5xl font-light mb-6" 
+            style={{ 
+              fontFamily: 'Playfair Display, serif',
+              color: '#4A6B5E'
+            }}
+          >
+            {t('sectionTitle')}
+          </h2>
+          <p className="text-[#6e7a73] font-light">
+            {t('sectionDescription')}
+          </p>
+        </div>
 
         {/* Form with Frame */}
         <div className="relative bg-white p-3 shadow-lg">
@@ -519,7 +460,7 @@ function ContactForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
                 <label className="block text-[10px] tracking-[0.2em] uppercase text-[#6e7a73] mb-2 font-light">
-                  Imię i Nazwisko *
+                  {t('nameLabel')} *
                 </label>
                 <input
                   type="text"
@@ -527,12 +468,12 @@ function ContactForm() {
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
                   className="w-full px-4 py-3 bg-white border border-[#d4d6ce] text-[#0f0e0f] font-light focus:outline-none focus:border-[#8a968f] transition-all"
-                  placeholder="Jan Kowalski"
+                  placeholder={t('namePlaceholder')}
                 />
               </div>
               <div>
                 <label className="block text-[10px] tracking-[0.2em] uppercase text-[#6e7a73] mb-2 font-light">
-                  Adres Email *
+                  {t('emailLabel')} *
                 </label>
                 <input
                   type="email"
@@ -540,7 +481,7 @@ function ContactForm() {
                   value={formData.email}
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
                   className="w-full px-4 py-3 bg-white border border-[#d4d6ce] text-[#0f0e0f] font-light focus:outline-none focus:border-[#8a968f] transition-all"
-                  placeholder="jan@example.com"
+                  placeholder={t('emailPlaceholder')}
                 />
               </div>
             </div>
@@ -549,19 +490,19 @@ function ContactForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
                 <label className="block text-[10px] tracking-[0.2em] uppercase text-[#6e7a73] mb-2 font-light">
-                  Numer Telefonu
+                  {t('phoneLabel')}
                 </label>
                 <input
                   type="tel"
                   value={formData.phone}
                   onChange={(e) => setFormData({...formData, phone: e.target.value})}
                   className="w-full px-4 py-3 bg-white border border-[#d4d6ce] text-[#0f0e0f] font-light focus:outline-none focus:border-[#8a968f] transition-all"
-                  placeholder="+48 510 038 038"
+                  placeholder={t('phonePlaceholder')}
                 />
               </div>
               <div>
                 <label className="block text-[10px] tracking-[0.2em] uppercase text-[#6e7a73] mb-2 font-light">
-                  Temat
+                  {t('subjectLabel')}
                 </label>
                 <select
                   value={formData.subject}
@@ -573,11 +514,10 @@ function ContactForm() {
                     backgroundPosition: 'right 12px center'
                   }}
                 >
-                  <option value="">Wybierz temat</option>
-                  <option value="reservation">Rezerwacja</option>
-                  <option value="info">Informacje</option>
-                  {/* ← USUNIĘTE: Wydarzenie */}
-                  <option value="other">Inne</option>
+                  <option value="">{t('subjectPlaceholder')}</option>
+                  <option value="reservation">{t('subjectReservation')}</option>
+                  <option value="info">{t('subjectInfo')}</option>
+                  <option value="other">{t('subjectOther')}</option>
                 </select>
               </div>
             </div>
@@ -585,7 +525,7 @@ function ContactForm() {
             {/* Message */}
             <div className="mb-6">
               <label className="block text-[10px] tracking-[0.2em] uppercase text-[#6e7a73] mb-2 font-light">
-                Wiadomość *
+                {t('messageLabel')} *
               </label>
               <textarea
                 required
@@ -593,7 +533,7 @@ function ContactForm() {
                 value={formData.message}
                 onChange={(e) => setFormData({...formData, message: e.target.value})}
                 className="w-full px-4 py-3 bg-white border border-[#d4d6ce] text-[#0f0e0f] font-light focus:outline-none focus:border-[#8a968f] transition-all resize-none"
-                placeholder="Twoja wiadomość..."
+                placeholder={t('messagePlaceholder')}
               />
             </div>
 
@@ -603,12 +543,12 @@ function ContactForm() {
               className="w-full flex items-center justify-center gap-3 text-xs tracking-[0.25em] py-4 bg-[#8a968f] text-white hover:bg-[#7d8a83] transition-all font-light"
             >
               <Send size={16} strokeWidth={1.5} />
-              <span>WYŚLIJ WIADOMOŚĆ</span>
+              <span>{t('submitButton')}</span>
             </button>
 
             {/* Privacy Note */}
             <p className="text-xs text-[#8a968f] text-center mt-6 font-light">
-              * Pola wymagane. Twoje dane są bezpieczne i chronione zgodnie z RODO.
+              {t('privacyNote')}
             </p>
 
           </form>

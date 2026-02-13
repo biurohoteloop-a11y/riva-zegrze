@@ -458,120 +458,121 @@
       }
     }
   },
- "roomsPage": {
-    "hero": {
-      "label": "Riva Zegrze",
-      "title": "Our Apartments",
-      "description": "Discover comfort on Lake Zegrzyński"
+"roomsPage": {
+  "hero": {
+    "label": "Riva Zegrze",
+    "title": "Our Apartments",
+    "description": "Discover comfort on Lake Zegrzyński"
+  },
+  "roomsGrid": {
+    "viewDetailsButton": "VIEW DETAILS",
+    "banner": {
+      "imageAlt": "Riva Zegrze - Book Directly",
+      "badge": "Book",
+      "badgeHighlight": "Directly",
+      "titleLine1": "Best Price",
+      "titleLine2": "Guaranteed",
+      "description": "By booking through our website, you always get the best available price",
+      "benefit1": "Best price on the market",
+      "benefit2": "Lowest rate guarantee",
+      "benefit3": "Flexible booking conditions",
+      "benefit4": "Direct contact with us",
+      "benefit5": "Special offers for returning guests",
+      "infoTitle": "Why book directly?",
+      "infoText": "By booking directly through our website, you skip portal commissions and pay less.",
+      "trustText": "Trusted by over",
+      "trustHighlight": "500+ guests"
     },
-    "roomsGrid": {
-      "viewDetailsButton": "VIEW DETAILS",
-      "banner": {
-        "imageAlt": "Riva Zegrze - Book Directly",
-        "badge": "Book",
-        "badgeHighlight": "Directly",
-        "titleLine1": "Best Price",
-        "titleLine2": "Guaranteed",
-        "description": "By booking through our website, you always get the best available price",
-        "benefit1": "Best price on the market",
-        "benefit2": "Lowest rate guarantee",
-        "benefit3": "Flexible booking conditions",
-        "benefit4": "Direct contact with us",
-        "benefit5": "Special offers for returning guests",
-        "infoTitle": "Why book directly?",
-        "infoText": "By booking directly through our website, you skip portal commissions and pay less.",
-        "trustText": "Trusted by over",
-        "trustHighlight": "500+ guests"
+    "rooms": {
+      "c1": {
+        "name": "Apartment C1",
+        "price": "from 630 PLN / night",
+        "size": "38 m²",
+        "guests": "4 Guests",
+        "beds": "1 Bedroom",
+        "description": "Modern apartment with a terrace and private garden, located directly on Lake Zegrzyński.",
+        "amenity1": "Lake view",
+        "amenity2": "Terrace",
+        "amenity3": "Private garden",
+        "amenity4": "WiFi"
       },
-      "rooms": {
-        "c1": {
-          "name": "Apartment C1",
-          "price": "from 630 PLN / night",
-          "size": "38 m²",
-          "guests": "4 Guests",
-          "beds": "1 Bedroom",
-          "description": "Modern apartment with a terrace and private garden, located directly on Lake Zegrzyński.",
-          "amenity1": "Lake view",
-          "amenity2": "Terrace",
-          "amenity3": "Private garden",
-          "amenity4": "WiFi"
-        },
-        "c4": {
-          "name": "Apartment C4",
-          "price": "from 570 PLN / night",
-          "size": "38 m²",
-          "guests": "4 Guests",
-          "beds": "1 Bedroom",
-          "description": "Modern apartment with a terrace and direct view of Lake Zegrzyński.",
-          "amenity1": "Lake view",
-          "amenity2": "Terrace",
-          "amenity3": "WiFi",
-          "amenity4": "2nd floor"
-        },
-        "c7": {
-          "name": "Apartment C7",
-          "price": "from 600 PLN / night",
-          "size": "38 m²",
-          "guests": "4 Guests",
-          "beds": "1 Bedroom",
-          "description": "Modern apartment with a terrace and view of Lake Zegrzyński.",
-          "amenity1": "Lake view",
-          "amenity2": "Terrace",
-          "amenity3": "WiFi",
-          "amenity4": "3rd floor"
-        },
-        "d1": {
-          "name": "Apartment D1",
-          "price": "from 480 PLN / night",
-          "size": "38 m²",
-          "guests": "4 Guests",
-          "beds": "1 Bedroom",
-          "description": "Modern apartment with a terrace, located on the 1st floor.",
-          "amenity1": "Terrace",
-          "amenity2": "Recreation area",
-          "amenity3": "WiFi",
-          "amenity4": "1st floor"
-        },
-        "d4": {
-          "name": "Apartment D4",
-          "price": "from 510 PLN / night",
-          "size": "38 m²",
-          "guests": "4 Guests",
-          "beds": "1 Bedroom",
-          "description": "Comfortable apartment with a terrace, located on the 2nd floor.",
-          "amenity1": "Terrace",
-          "amenity2": "Recreation area",
-          "amenity3": "WiFi",
-          "amenity4": "2nd floor"
-        },
-        "d7": {
-          "name": "Apartment D7",
-          "price": "from 540 PLN / night",
-          "size": "38 m²",
-          "guests": "4 Guests",
-          "beds": "1 Bedroom",
-          "description": "Spacious and functional apartment with a terrace.",
-          "amenity1": "Terrace",
-          "amenity2": "Recreation area",
-          "amenity3": "Green areas",
-          "amenity4": "3rd floor"
-        },
-                "b10": {
-          "name": "Apartment Deluxe B10",
-          "price": "from 900 PLN / night",
-          "size": "68 m²",
-          "guests": "4 Guests",
-          "beds": "1 Bedroom",
-          "description": "Deluxe apartment with a large terrace and panoramic view.",
-          "amenity1": "Panoramic view",
-          "amenity2": "Large terrace",
-          "amenity3": "Premium",
-          "amenity4": "3rd floor"
-        }
+      "c4": {
+        "name": "Apartment C4",
+        "price": "from 570 PLN / night",
+        "size": "38 m²",
+        "guests": "4 Guests",
+        "beds": "1 Bedroom",
+        "description": "Modern apartment with a terrace and direct view of Lake Zegrzyński.",
+        "amenity1": "Lake view",
+        "amenity2": "Terrace",
+        "amenity3": "WiFi",
+        "amenity4": "2nd floor"
+      },
+      "c7": {
+        "name": "Apartment C7",
+        "price": "from 600 PLN / night",
+        "size": "38 m²",
+        "guests": "4 Guests",
+        "beds": "1 Bedroom",
+        "description": "Modern apartment with a terrace and view of Lake Zegrzyński.",
+        "amenity1": "Lake view",
+        "amenity2": "Terrace",
+        "amenity3": "WiFi",
+        "amenity4": "3rd floor"
+      },
+      "d1": {
+        "name": "Apartment D1",
+        "price": "from 480 PLN / night",
+        "size": "38 m²",
+        "guests": "4 Guests",
+        "beds": "1 Bedroom",
+        "description": "Modern apartment with a terrace, located on the 1st floor.",
+        "amenity1": "Terrace",
+        "amenity2": "Recreation area",
+        "amenity3": "WiFi",
+        "amenity4": "1st floor"
+      },
+      "d4": {
+        "name": "Apartment D4",
+        "price": "from 510 PLN / night",
+        "size": "38 m²",
+        "guests": "4 Guests",
+        "beds": "1 Bedroom",
+        "description": "Comfortable apartment with a terrace, located on the 2nd floor.",
+        "amenity1": "Terrace",
+        "amenity2": "Recreation area",
+        "amenity3": "WiFi",
+        "amenity4": "2nd floor"
+      },
+      "d7": {
+        "name": "Apartment D7",
+        "price": "from 540 PLN / night",
+        "size": "38 m²",
+        "guests": "4 Guests",
+        "beds": "1 Bedroom",
+        "description": "Spacious and functional apartment with a terrace.",
+        "amenity1": "Terrace",
+        "amenity2": "Recreation area",
+        "amenity3": "Green areas",
+        "amenity4": "3rd floor"
+      },
+      "b10": {
+        "name": "Apartment Deluxe B10",
+        "price": "from 900 PLN / night",
+        "size": "68 m²",
+        "guests": "4 Guests",
+        "beds": "1 Bedroom",
+        "description": "Deluxe apartment with a large terrace and panoramic view.",
+        "amenity1": "Panoramic view",
+        "amenity2": "Large terrace",
+        "amenity3": "Premium",
+        "amenity4": "3rd floor"
       }
     }
-  },
-    "galleryPage": {
+  }
+},
+
+      "galleryPage": {
     "hero": {
       "label": "Riva Zegrze",
       "title": "Gallery",
@@ -589,17 +590,178 @@
       "lightboxOf": "/"
     }
   },
-  "activitiesPage": {
+    "activitiesPage": {
     "hero": {
       "label": "Discover the Area",
       "titleLine1": "Activities",
       "titleLine2": "& Attractions",
       "description": "Unique places and experiences in the heart of Mazovia",
       "scrollDown": "Scroll down"
+    },
+    "locationsGrid": {
+      "sectionLabel": "UNFORGETTABLE MOMENTS",
+      "sectionTitle": "Discover the Beauty of the Zegrze Area",
+      "sectionDescription": "From water sports to golf courses, from nature reserves to culinary adventures—discover unique places and activities right next to Riva Zegrze that will make your stay unforgettable.",
+      "activities": {
+        "waterSports": {
+          "category": "WATER SPORTS",
+          "title": "Jet Skis",
+          "distance": "0.5 km",
+          "description": "The largest rental on the Lake. Jet skis 90-300 HP for families and adrenaline lovers."
+        },
+        "golf": {
+          "category": "GOLF",
+          "title": "Rajszew Golf Course",
+          "distance": "5 km",
+          "description": "18 holes, driving range and professional instructors."
+        },
+        "sailing": {
+          "category": "SAILING",
+          "title": "Sailing Academy",
+          "distance": "3 km",
+          "description": "Sailing lessons, equipment rental, beginner courses."
+        },
+        "nature": {
+          "category": "NATURE",
+          "title": "Wieliszew Wetlands",
+          "distance": "4 km",
+          "description": "Reserve with unique fauna and flora. Perfect for walks and bird watching."
+        },
+        "bike": {
+          "category": "CYCLING",
+          "title": "VM-O Cycling Trail",
+          "distance": "0 km",
+          "description": "Loop trail right next door. Morning jog or evening bike ride."
+        },
+        "marina": {
+          "category": "MARINA",
+          "title": "Marina Riva Zegrze",
+          "distance": "0 km",
+          "description": "Private dock with access to boats, kayaks and water equipment."
+        },
+        "culture": {
+          "category": "CULTURE",
+          "title": "Modlin Fortress",
+          "distance": "12 km",
+          "description": "Historic Napoleonic fortress from the 19th century. Guided tours."
+        }
+      }
+    },
+    "cta": {
+      "label": "Waterfront Relaxation",
+      "title": "Discover Everything Riva Zegrze Has to Offer",
+      "description": "Comfortable apartments, on-site attractions and numerous opportunities for active recreation in the area make every stay at Riva Zegrze unique. Book directly and plan a stay tailored to your needs.",
+      "checkAvailability": "CHECK AVAILABILITY",
+      "bookStay": "BOOK YOUR STAY"
+    }
+  },
+  "contactPage": {
+    "hero": {
+      "label": "Get in Touch",
+      "title": "Contact",
+      "description": "We are at your disposal for reservations, inquiries and special requests"
+    },
+    "info": {
+      "sectionLabel": "HOW CAN WE HELP?",
+      "sectionTitle": "Get in Touch",
+      "sectionDescription": "Intimate waterfront apartments. Peace, comfort and direct booking in a unique location near Warsaw.",
+      "phone": {
+        "label": "Phone",
+        "number": "+48 510 038 038",
+        "action": "Call",
+        "description": "Available 24/7 for reservations"
+      },
+      "email": {
+        "label": "Email",
+        "address": "wynajem@rivazegrze.pl",
+        "action": "Send Email",
+        "description": "We respond within 24h"
+      },
+      "address": {
+        "label": "Location",
+        "line1": "Rybaki 11",
+        "line2": "05-130 Zegrze Południowe",
+        "action": "Directions",
+        "description": "On Lake Zegrzyński"
+      },
+      "hours": {
+        "label": "Hours",
+        "reception": "Virtual reception",
+        "checkin": "Check-in: 3:00 PM",
+        "checkout": "Check-out: 11:00 AM",
+        "action": "Details",
+        "description": "Self check-in 24/7"
+      }
+    },
+        "faq": {
+      "sectionLabel": "FAQ",
+      "sectionTitle": "Frequently\nAsked\nQuestions",
+      "sectionDescription": "Answers to the most important questions about your stay at Riva Zegrze",
+      "ctaText": "Didn't find an answer?",
+      "items": {
+        "checkin": {
+          "question": "What time is check-in?",
+          "answer": "Check-in is possible between 3:00 PM and 10:00 PM. The property offers self check-in – access codes are sent on the day of arrival."
+        },
+        "checkout": {
+          "question": "What time is check-out?",
+          "answer": "Check-out is until 11:00 AM."
+        },
+        "earlyLate": {
+          "question": "Is early check-in or late check-out possible?",
+          "answer": "The possibility of early check-in or late check-out depends on availability and is arranged individually."
+        },
+        "extraBeds": {
+          "question": "Are extra beds available in the apartments?",
+          "answer": "No, we do not offer extra beds. Each apartment is designed for a maximum of 4 people."
+        },
+        "children": {
+          "question": "Can children stay in the apartments?",
+          "answer": "Yes, the property is family-friendly. Children of all ages are welcome."
+        },
+        "pets": {
+          "question": "Can I bring a dog?",
+          "answer": "Yes, pets are accepted and we do not charge extra fees for them."
+        },
+        "parking": {
+          "question": "Is parking available on-site?",
+          "answer": "Yes, free public parking spaces are available in front of the building."
+        },
+        "garage": {
+          "question": "Can I reserve a garage parking space?",
+          "answer": "Yes, a garage space is available upon prior reservation for PLN 75 / day."
+        },
+        "quietHours": {
+          "question": "Are there quiet hours at the property?",
+          "answer": "Yes, quiet hours are from 10:00 PM to 7:00 AM."
+        },
+        "parties": {
+          "question": "Can I organize parties at the property?",
+          "answer": "No, organizing parties, including bachelor and bachelorette parties, is strictly prohibited on the premises."
+        }
+      }
+    },
+    "form": {
+      "sectionLabel": "SEND A MESSAGE",
+      "sectionTitle": "We're Happy to Answer Questions",
+      "sectionDescription": "Fill out the form below and our team will respond promptly",
+      "nameLabel": "Full Name",
+      "namePlaceholder": "John Doe",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "john@example.com",
+      "phoneLabel": "Phone Number",
+      "phonePlaceholder": "+48 510 038 038",
+      "subjectLabel": "Subject",
+      "subjectPlaceholder": "Select subject",
+      "subjectReservation": "Reservation",
+      "subjectInfo": "Information",
+      "subjectOther": "Other",
+      "messageLabel": "Message",
+      "messagePlaceholder": "Your message...",
+      "submitButton": "SEND MESSAGE",
+      "privacyNote": "* Required fields. Your data is safe and protected in accordance with GDPR."
     }
   }
 }
-
-
 
 
