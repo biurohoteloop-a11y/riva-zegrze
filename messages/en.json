@@ -655,7 +655,8 @@
       "bookStay": "BOOK YOUR STAY"
     }
   },
-    "contactPage": {
+
+  "contactPage": {
     "hero": {
       "label": "Get in Touch",
       "title": "Contact",
@@ -880,6 +881,131 @@
         "title": "Availability",
         "loadingText": "Loading calendar..."
       }
+    },
+   "importantInfo": {
+      "sectionLabel": "Before Arrival",
+      "sectionTitle": "Important Information",
+      "items": {
+        "checkin": {
+          "label": "Check-in",
+          "value": "3:00 PM - 10:00 PM",
+          "note": "Self check-in - access codes sent on arrival day"
+        },
+        "checkout": {
+          "label": "Check-out",
+          "value": "until 11:00 AM",
+          "note": ""
+        },
+        "quietHours": {
+          "label": "Quiet Hours",
+          "value": "10:00 PM - 7:00 AM",
+          "note": "Enforced during night hours"
+        },
+        "noParties": {
+          "label": "No Parties",
+          "value": "No parties allowed",
+          "note": "No parties, including bachelor/bachelorette parties"
+        },
+        "parking": {
+          "label": "Parking",
+          "value": "Free parking in front of building",
+          "note": "Garage spot: 75 PLN/day (advance booking required)"
+        }
+      },
+      "fullWidthNote": {
+        "title": "No Parties Policy",
+        "description": "A strict no-party policy is enforced in the apartment, including bachelor and bachelorette parties. Please observe quiet hours between 10:00 PM and 7:00 AM for the comfort of other guests."
+      }
+    },
+        "surroundingsGallery": {
+      "sectionLabel": "Surroundings",
+      "sectionTitle": "Discover the Beauty of Lake Zegrzyński",
+      "imageAlt": "Surroundings of Riva Zegrze - photo",
+      "viewFullImage": "View full image",
+      "closeGallery": "Close gallery",
+      "previousPhoto": "Previous photo",
+      "nextPhoto": "Next photo",
+      "modalCaption": "Lake Zegrzyński - Riva Zegrze"
+    },
+       "reviews": {
+      "sectionLabel": "Guest Reviews",
+      "sectionTitle": "What Our Guests Say",
+      "rating": "5.0",
+      "basedOn": "based on",
+      "reviewsCount": "reviews",
+      "items": [
+        {
+          "name": "Anna Kowalska",
+          "date": "July 2024",
+          "rating": 5,
+          "comment": "Beautiful place! The apartment was clean, spacious and well-equipped. The lake view is breathtaking. Highly recommend!",
+          "avatar": "AK"
+        },
+        {
+          "name": "Marek Nowak",
+          "date": "June 2024",
+          "rating": 5,
+          "comment": "Perfect place for a weekend getaway. Peace, quiet and beautiful nature. Very helpful owners. We will definitely return!",
+          "avatar": "MN"
+        },
+        {
+          "name": "Katarzyna Wiśniewska",
+          "date": "May 2024",
+          "rating": 5,
+          "comment": "Best apartment in the area! Close to Warsaw, yet feels like the end of the world. Top-notch amenities.",
+          "avatar": "KW"
+        }
+      ]
+    },
+    "cta": {
+      "badge": "Special Offer",
+      "title": "Book 3+ nights",
+      "titleHighlight": "and get 40% off",
+      "description": "Take advantage of our limited promotion. When booking a minimum of 3 nights, you'll receive",
+      "descriptionHighlight": "up to 40% discount",
+      "descriptionEnd": "on your entire stay in Apartment C1.",
+      "bookButton": "Book apartment",
+      "phoneButton": "Call: +48 510 038 038",
+      "trustBadges": {
+        "payment": "Secure payment",
+        "cancellation": "Cancel up to 48h",
+        "bestPrice": "Best price",
+        "noCosts": "No hidden costs"
+      }
+    },
+    "footer": {
+      "brand": {
+        "description": "Intimate waterfront apartments. Peace, comfort and direct booking in a unique location near Warsaw.",
+        "rating": "5.0 • Booking.com"
+      },
+      "discover": {
+        "title": "Discover",
+        "apartments": "Apartments",
+        "specialOffer": "Special Offer",
+        "activities": "Activities",
+        "gallery": "Gallery",
+        "about": "About Us"
+      },
+      "contact": {
+        "title": "Contact",
+        "address": "Riva Zegrze\nRybaki 11\n05-130 Zegrze Południowe",
+        "phone": "+48 510 038 038",
+        "email": "wynajem@rivazegrze.pl"
+      },
+      "newsletter": {
+        "title": "Newsletter",
+        "description": "Stay up to date with special offers",
+        "placeholder": "Your email",
+        "socialMedia": "Social Media"
+      },
+      "bottom": {
+        "copyright": "© {year} Riva Zegrze. All rights reserved.",
+        "privacy": "Privacy Policy",
+        "terms": "Terms & Conditions",
+        "cookies": "Cookies"
+      }
     }
   }
 }
+
+

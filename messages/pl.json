@@ -654,7 +654,7 @@
     "bookStay": "ZAREZERWUJ POBYT"
   }
 },
-  "contactPage": {
+ "contactPage": {
     "hero": {
       "label": "Skontaktuj się z nami",
       "title": "Kontakt",
@@ -879,6 +879,131 @@
         "title": "Dostępność",
         "loadingText": "Ładowanie kalendarza..."
       }
+    },
+    "importantInfo": {
+  "sectionLabel": "Przed przyjazdem",
+  "sectionTitle": "Ważne informacje",
+  "items": {
+    "checkin": {
+      "label": "Zameldowanie",
+      "value": "15:00 - 22:00",
+      "note": "Samodzielne zameldowanie - kody dostępu przesyłane w dniu przyjazdu"
+    },
+    "checkout": {
+      "label": "Wymeldowanie",
+      "value": "do 11:00",
+      "note": ""
+    },
+    "quietHours": {
+      "label": "Cisza nocna",
+      "value": "22:00 - 7:00",
+      "note": "Obowiązuje w godzinach nocnych"
+    },
+    "noParties": {
+      "label": "Zakaz imprez",
+      "value": "Brak imprez",
+      "note": "Zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich"
+    },
+    "parking": {
+      "label": "Parking",
+      "value": "Bezpłatne miejsca przed budynkiem",
+      "note": "Miejsce w garażu: 75 zł/doba (po wcześniejszej rezerwacji)"
+    }
+  },
+  "fullWidthNote": {
+    "title": "Zakaz organizowania imprez",
+    "description": "W apartamencie obowiązuje całkowity zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich. Prosimy o zachowanie ciszy nocnej w godzinach 22:00–7:00 ze względu na komfort innych gości."
+  }
+},
+    "surroundingsGallery": {
+      "sectionLabel": "Okolica",
+      "sectionTitle": "Odkryj piękno Jeziora Zegrzyńskiego",
+      "imageAlt": "Okolica Riva Zegrze - zdjęcie",
+      "viewFullImage": "Zobacz pełny obraz",
+      "closeGallery": "Zamknij galerię",
+      "previousPhoto": "Poprzednie zdjęcie",
+      "nextPhoto": "Następne zdjęcie",
+      "modalCaption": "Jezioro Zegrzyńskie - Riva Zegrze"
+    },
+        "reviews": {
+      "sectionLabel": "Opinie gości",
+      "sectionTitle": "Co mówią nasi goście",
+      "rating": "5.0",
+      "basedOn": "na podstawie",
+      "reviewsCount": "opinii",
+      "items": [
+        {
+          "name": "Anna Kowalska",
+          "date": "Lipiec 2024",
+          "rating": 5,
+          "comment": "Przepiękne miejsce! Apartament był czysty, przestronny i świetnie wyposażony. Widok na jezioro zapiera dech w piersiach. Polecam każdemu!",
+          "avatar": "AK"
+        },
+        {
+          "name": "Marek Nowak",
+          "date": "Czerwiec 2024",
+          "rating": 5,
+          "comment": "Idealne miejsce na weekend. Cisza, spokój i piękna przyroda. Właściciele bardzo pomocni. Na pewno wrócimy!",
+          "avatar": "MN"
+        },
+        {
+          "name": "Katarzyna Wiśniewska",
+          "date": "Maj 2024",
+          "rating": 5,
+          "comment": "Najlepszy apartament w okolicy! Blisko Warszawy, a czujesz się jak na końcu świata. Wyposażenie na najwyższym poziomie.",
+          "avatar": "KW"
+        }
+      ]
+    },
+    "cta": {
+      "badge": "Oferta specjalna",
+      "title": "Zarezerwuj min. 3 noce",
+      "titleHighlight": "i zyskaj 40% rabatu",
+      "description": "Skorzystaj z naszej limitowanej promocji. Przy rezerwacji minimum 3 nocy otrzymasz",
+      "descriptionHighlight": "aż 40% zniżki",
+      "descriptionEnd": "na cały pobyt w Apartamencie C1.",
+      "bookButton": "Zarezerwuj apartament",
+      "phoneButton": "Zadzwoń: +48 510 038 038",
+      "trustBadges": {
+        "payment": "Bezpieczna płatność",
+        "cancellation": "Anulowanie do 48h",
+        "bestPrice": "Najlepsza cena",
+        "noCosts": "Brak ukrytych kosztów"
+      }
+    },
+    "footer": {
+      "brand": {
+        "description": "Kameralne apartamenty nad wodą. Spokój, komfort i bezpośrednia rezerwacja w wyjątkowej lokalizacji pod Warszawą.",
+        "rating": "5.0 • Booking.com"
+      },
+      "discover": {
+        "title": "Odkryj",
+        "apartments": "Apartamenty",
+        "specialOffer": "Oferta Specjalna",
+        "activities": "Aktywności",
+        "gallery": "Galeria",
+        "about": "O Nas"
+      },
+      "contact": {
+        "title": "Kontakt",
+        "address": "Riva Zegrze\nRybaki 11\n05-130 Zegrze Południowe",
+        "phone": "+48 510 038 038",
+        "email": "wynajem@rivazegrze.pl"
+      },
+      "newsletter": {
+        "title": "Newsletter",
+        "description": "Bądź na bieżąco z ofertami specjalnymi",
+        "placeholder": "Twój e-mail",
+        "socialMedia": "Social Media"
+      },
+      "bottom": {
+        "copyright": "© {year} Riva Zegrze. Wszystkie prawa zastrzeżone.",
+        "privacy": "Polityka prywatności",
+        "terms": "Regulamin",
+        "cookies": "Cookies"
+      }
     }
   }
 }
+
+

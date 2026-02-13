@@ -910,8 +910,8 @@ function ApartmentDetails() {
 }
 
 
-// 3. IMPORTANT INFO SECTION - POPRAWIONY GRID DLA 5 ELEMENTÓW
 function ImportantInfoSection() {
+  const t = useTranslations('apartmentC1.importantInfo');
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -950,44 +950,53 @@ function ImportantInfoSection() {
     initGSAP();
   }, []);
 
+  // ✅ Mapowanie kluczy z ikonami
+  const infoItems = [
+    { key: 'checkin', icon: Clock },
+    { key: 'checkout', icon: Clock },
+    { key: 'quietHours', icon: Star },
+    { key: 'noParties', icon: Check },
+    { key: 'parking', icon: CarFront },
+  ];
+
   return (
     <section ref={sectionRef} className="py-20 lg:py-28 bg-[#f7f6f4]">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         
         <div className="text-center mb-16">
           <span className="text-xs tracking-[0.3em] uppercase text-[#555e59] font-light block mb-4">
-            Przed przyjazdem
+            {t('sectionLabel')}
           </span>
           <h2 
             className="text-4xl lg:text-5xl font-light text-[#4a6b5e]" 
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
-            Ważne informacje
+            {t('sectionTitle')}
           </h2>
         </div>
 
         {/* GRID 3+2 DLA 5 ELEMENTÓW */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-          {/* Pierwsze 3 elementy w jednym rzędzie (desktop) */}
-          {apartmentData.importantInfo.slice(0, 3).map((info, idx) => (
+          {/* Pierwsze 3 elementy */}
+          {infoItems.slice(0, 3).map(({ key, icon: Icon }) => (
             <div 
-              key={idx} 
+              key={key} 
               className="info-item bg-white p-6 border border-[#d4d6ce] hover:border-[#4a6b5e] transition-all duration-300"
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-full bg-[#f7f6f4] border border-[#d4d6ce] flex items-center justify-center flex-shrink-0">
-                  <info.icon className="w-6 h-6 text-[#4a6b5e]" strokeWidth={1.5} />
+                  <Icon className="w-6 h-6 text-[#4a6b5e]" strokeWidth={1.5} />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-base font-medium text-[#0f0e0f] mb-2">
-                    {info.label}
+                    {t(`items.${key}.label`)}
                   </h3>
                   <p className="text-sm text-[#4a6b5e] font-medium mb-1">
-                    {info.value}
+                    {t(`items.${key}.value`)}
                   </p>
-                  {info.note && (
+                  {t(`items.${key}.note`) && (
                     <p className="text-xs text-[#8a968f] font-light leading-relaxed">
-                      {info.note}
+                      {t(`items.${key}.note`)}
                     </p>
                   )}
                 </div>
@@ -998,25 +1007,25 @@ function ImportantInfoSection() {
 
         {/* Ostatnie 2 elementy wycentrowane */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {apartmentData.importantInfo.slice(3).map((info, idx) => (
+          {infoItems.slice(3).map(({ key, icon: Icon }) => (
             <div 
-              key={idx + 3} 
+              key={key} 
               className="info-item bg-white p-6 border border-[#d4d6ce] hover:border-[#4a6b5e] transition-all duration-300"
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-full bg-[#f7f6f4] border border-[#d4d6ce] flex items-center justify-center flex-shrink-0">
-                  <info.icon className="w-6 h-6 text-[#4a6b5e]" strokeWidth={1.5} />
+                  <Icon className="w-6 h-6 text-[#4a6b5e]" strokeWidth={1.5} />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-base font-medium text-[#0f0e0f] mb-2">
-                    {info.label}
+                    {t(`items.${key}.label`)}
                   </h3>
                   <p className="text-sm text-[#4a6b5e] font-medium mb-1">
-                    {info.value}
+                    {t(`items.${key}.value`)}
                   </p>
-                  {info.note && (
+                  {t(`items.${key}.note`) && (
                     <p className="text-xs text-[#8a968f] font-light leading-relaxed">
-                      {info.note}
+                      {t(`items.${key}.note`)}
                     </p>
                   )}
                 </div>
@@ -1031,11 +1040,10 @@ function ImportantInfoSection() {
             <Star className="w-6 h-6 text-[#AB8A62] flex-shrink-0 mt-1" strokeWidth={1.5} />
             <div>
               <h4 className="text-base font-medium text-[#0f0e0f] mb-2">
-                Zakaz organizowania imprez
+                {t('fullWidthNote.title')}
               </h4>
               <p className="text-sm text-[#6e7a73] leading-relaxed font-light">
-                W apartamencie obowiązuje całkowity zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich. 
-                Prosimy o zachowanie ciszy nocnej w godzinach 22:00–7:00 ze względu na komfort innych gości.
+                {t('fullWidthNote.description')}
               </p>
             </div>
           </div>
@@ -1046,8 +1054,10 @@ function ImportantInfoSection() {
   );
 }
 
+
 // ============================================
 function SurroundingsGallery() {
+  const t = useTranslations('apartmentC1.surroundingsGallery');
   const sectionRef = useRef<HTMLElement>(null);
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
@@ -1138,13 +1148,13 @@ function SurroundingsGallery() {
           
           <div className="text-center mb-16">
             <span className="text-xs tracking-[0.3em] uppercase text-[#6e7a73] font-light block mb-4">
-              Okolica
+              {t('sectionLabel')}
             </span>
             <h2 
               className="text-4xl lg:text-5xl font-light text-[#4a6b5e]" 
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
-              Odkryj piękno Jeziora Zegrzyńskiego
+              {t('sectionTitle')}
             </h2>
           </div>
 
@@ -1159,13 +1169,13 @@ function SurroundingsGallery() {
                 <div className="relative w-full h-full overflow-hidden">
                   <img
                     src={img}
-                    alt={`Okolica Riva Zegrze - zdjęcie ${idx + 1}`}
+                    alt={`${t('imageAlt')} ${idx + 1}`}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute bottom-3 left-3 flex items-center gap-2 text-white">
                       <Eye className="w-5 h-5" strokeWidth={1.5} />
-                      <span className="text-sm font-light">Zobacz pełny obraz</span>
+                      <span className="text-sm font-light">{t('viewFullImage')}</span>
                     </div>
                     <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs text-[#4a6b5e] font-medium">
                       {idx + 1} / {apartmentData.surroundingsGallery.length}
@@ -1199,7 +1209,7 @@ function SurroundingsGallery() {
             onClick={closeModal}
             className="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all group"
             style={{ zIndex: 50 }}
-            aria-label="Zamknij galerię"
+            aria-label={t('closeGallery')}
           >
             <svg className="w-6 h-6 text-white group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -1211,7 +1221,7 @@ function SurroundingsGallery() {
             onClick={(e) => { e.stopPropagation(); prevImage(); }}
             className="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all group"
             style={{ zIndex: 50 }}
-            aria-label="Poprzednie zdjęcie"
+            aria-label={t('previousPhoto')}
           >
             <svg className="w-7 h-7 text-white group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -1223,7 +1233,7 @@ function SurroundingsGallery() {
             onClick={(e) => { e.stopPropagation(); nextImage(); }}
             className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all group"
             style={{ zIndex: 50 }}
-            aria-label="Następne zdjęcie"
+            aria-label={t('nextPhoto')}
           >
             <svg className="w-7 h-7 text-white group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
@@ -1246,7 +1256,7 @@ function SurroundingsGallery() {
             <img
               key={selectedImage}
               src={apartmentData.surroundingsGallery[selectedImage]}
-              alt={`Okolica Riva Zegrze - zdjęcie ${selectedImage + 1}`}
+              alt={`${t('imageAlt')} ${selectedImage + 1}`}
               className="max-w-full max-h-[90vh] object-contain shadow-2xl"
               style={{ animation: 'imageScaleIn 0.4s ease-out' }}
             />
@@ -1258,12 +1268,12 @@ function SurroundingsGallery() {
             style={{ zIndex: 50 }}
           >
             <MapPin className="w-4 h-4 inline-block mr-2" strokeWidth={1.5} />
-            Jezioro Zegrzyńskie - Riva Zegrze
+            {t('modalCaption')}
           </div>
         </div>
       )}
 
-      <style>{`
+      <style jsx>{`
         @keyframes modalFadeIn {
           from { opacity: 0; }
           to { opacity: 1; }
@@ -1284,6 +1294,7 @@ function SurroundingsGallery() {
   );
 }
 
+
 // ============================================
 
 
@@ -1291,6 +1302,7 @@ function SurroundingsGallery() {
 // 6. REVIEWS SECTION
 // ============================================
 function ReviewsSection() {
+  const t = useTranslations('apartmentC1.reviews');
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -1329,19 +1341,26 @@ function ReviewsSection() {
     initGSAP();
   }, []);
 
+  // Pobierz opinie z tłumaczeń
+  const reviews = [
+    t.raw('items.0'),
+    t.raw('items.1'),
+    t.raw('items.2'),
+  ];
+
   return (
     <section ref={sectionRef} className="py-20 lg:py-28 bg-white">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         
         <div className="text-center mb-16">
           <span className="text-xs tracking-[0.3em] uppercase text-[#555e59] font-light block mb-4">
-            Opinie gości
+            {t('sectionLabel')}
           </span>
           <h2 
             className="text-4xl lg:text-5xl font-light text-[#0f0e0f] mb-4" 
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
-            Co mówią nasi goście
+            {t('sectionTitle')}
           </h2>
           
           <div className="flex items-center justify-center gap-4 mt-6">
@@ -1350,13 +1369,15 @@ function ReviewsSection() {
                 <Star key={i} className="w-6 h-6 text-[#d4af37] fill-[#d4af37]" strokeWidth={0} />
               ))}
             </div>
-            <span className="text-2xl font-light text-[#0f0e0f]">5.0</span>
-            <span className="text-sm text-[#8a968f]">• na podstawie {apartmentData.reviews.length} opinii</span>
+            <span className="text-2xl font-light text-[#0f0e0f]">{t('rating')}</span>
+            <span className="text-sm text-[#8a968f]">
+              • {t('basedOn')} {reviews.length} {t('reviewsCount')}
+            </span>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {apartmentData.reviews.map((review, idx) => (
+          {reviews.map((review, idx) => (
             <div 
               key={idx} 
               className="review-card bg-[#f7f6f4] p-8 border border-[#d4d6ce] relative group hover:border-[#8a968f] transition-all duration-300"
@@ -1392,9 +1413,11 @@ function ReviewsSection() {
     </section>
   );
 }
+
 import Image from 'next/image';
 
 function CTAWithFooter() {
+  const t = useTranslations('apartmentC1');
   const sectionRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -1469,10 +1492,12 @@ function CTAWithFooter() {
     initGSAP();
   }, []);
 
+  const currentYear = new Date().getFullYear();
+
   return (
     <section ref={sectionRef} className="relative text-white overflow-hidden">
       
-      {/* PREMIUM BACKGROUND IMAGE - Next.js optimized */}
+      {/* PREMIUM BACKGROUND IMAGE */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/gallery/apartments/c1/sunset-hero.jpg"
@@ -1486,7 +1511,6 @@ function CTAWithFooter() {
             transform: `scale(${1 + scrollProgress * 0.1})`,
           }}
         />
-        {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#2a3d35]/70 via-[#2a3d35]/85 to-[#1a2820]/95 z-10" />
       </div>
 
@@ -1538,7 +1562,7 @@ function CTAWithFooter() {
             <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 backdrop-blur-md rounded-full mb-8 border border-white/20">
               <Sparkles className="w-4 h-4 text-[#AB8A62]" strokeWidth={1} />
               <span className="text-xs tracking-[0.25em] uppercase text-white/90 font-light">
-                Oferta specjalna
+                {t('cta.badge')}
               </span>
             </div>
 
@@ -1547,14 +1571,15 @@ function CTAWithFooter() {
               className="text-4xl md:text-5xl lg:text-6xl font-light mb-6 leading-tight text-white drop-shadow-lg" 
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
-              Zarezerwuj min. 3 noce <br />
-              <span className="text-[#AB8A62]">i zyskaj 40% rabatu</span>
+              {t('cta.title')} <br />
+              <span className="text-[#AB8A62]">{t('cta.titleHighlight')}</span>
             </h2>
 
             {/* Description */}
             <p className="text-base md:text-lg font-light mb-12 max-w-2xl mx-auto text-white/90 leading-relaxed">
-              Skorzystaj z naszej limitowanej promocji. Przy rezerwacji minimum 3 nocy otrzymasz 
-              <strong className="font-medium text-white"> aż 40% zniżki</strong> na cały pobyt w Apartamencie C1.
+              {t('cta.description')}{' '}
+              <strong className="font-medium text-white">{t('cta.descriptionHighlight')}</strong>{' '}
+              {t('cta.descriptionEnd')}
             </p>
 
             {/* CTA Buttons */}
@@ -1562,7 +1587,7 @@ function CTAWithFooter() {
               
               <button className="flex items-center gap-3 px-10 py-5 bg-white text-[#2a3d35] hover:bg-[#AB8A62] hover:text-white transition-all duration-300 text-sm tracking-[0.15em] uppercase group shadow-2xl font-light">
                 <Calendar className="w-5 h-5 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
-                <span>Zarezerwuj apartament</span>
+                <span>{t('cta.bookButton')}</span>
               </button>
 
               <a 
@@ -1570,22 +1595,17 @@ function CTAWithFooter() {
                 className="flex items-center gap-3 px-10 py-5 bg-white/10 backdrop-blur-md border-2 border-white/30 text-white hover:bg-white/20 hover:border-white/50 transition-all duration-300 text-sm tracking-[0.15em] uppercase group font-light"
               >
                 <Phone className="w-5 h-5 group-hover:rotate-12 transition-transform" strokeWidth={1.5} />
-                <span>Zadzwoń: +48 510 038 038</span>
+                <span>{t('cta.phoneButton')}</span>
               </a>
 
             </div>
 
             {/* Trust Badges */}
             <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 text-white/70">
-              {[
-                'Bezpieczna płatność',
-                'Anulowanie do 48h',
-                'Najlepsza cena',
-                'Brak ukrytych kosztów'
-              ].map((badge, idx) => (
-                <div key={idx} className="flex items-center gap-2 text-xs tracking-wide">
+              {['payment', 'cancellation', 'bestPrice', 'noCosts'].map((badge) => (
+                <div key={badge} className="flex items-center gap-2 text-xs tracking-wide">
                   <Check className="w-4 h-4 text-[#AB8A62]" strokeWidth={2} />
-                  <span>{badge}</span>
+                  <span>{t(`cta.trustBadges.${badge}`)}</span>
                 </div>
               ))}
             </div>
@@ -1623,8 +1643,7 @@ function CTAWithFooter() {
                   </span>
                 </div>
                 <p className="text-sm text-white/70 leading-relaxed font-light mb-6">
-                  Kameralne apartamenty nad wodą. Spokój, komfort i bezpośrednia
-                  rezerwacja w wyjątkowej lokalizacji pod Warszawą.
+                  {t('footer.brand.description')}
                 </p>
                 
                 <div className="flex items-center gap-3 pt-4">
@@ -1633,30 +1652,30 @@ function CTAWithFooter() {
                       <Star key={i} className="w-4 h-4 text-[#AB8A62] fill-[#AB8A62]" strokeWidth={0} />
                     ))}
                   </div>
-                  <span className="text-xs text-white/50 font-light">5.0 • Booking.com</span>
+                  <span className="text-xs text-white/50 font-light">{t('footer.brand.rating')}</span>
                 </div>
               </div>
 
               {/* NAVIGATION */}
               <div>
                 <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
-                  Odkryj
+                  {t('footer.discover.title')}
                 </h4>
                 <ul className="space-y-3">
                   {[
-                    { label: 'Apartamenty', href: '/apartamenty' },
-                    { label: 'Oferta Specjalna', href: '/offers' },
-                    { label: 'Aktywności', href: '/activities' },
-                    { label: 'Galeria', href: '/galeria' },
-                    { label: 'O Nas', href: '/about' },
+                    { key: 'apartments', href: '/apartamenty' },
+                    { key: 'specialOffer', href: '/offers' },
+                    { key: 'activities', href: '/activities' },
+                    { key: 'gallery', href: '/galeria' },
+                    { key: 'about', href: '/about' },
                   ].map((item) => (
-                    <li key={item.label}>
+                    <li key={item.key}>
                       <a
                         href={item.href}
                         className="text-sm text-white/70 hover:text-white transition-colors font-light inline-flex items-center gap-2 group"
                       >
                         <span className="w-0 group-hover:w-4 h-px bg-[#AB8A62] transition-all duration-300"></span>
-                        {item.label}
+                        {t(`footer.discover.${item.key}`)}
                       </a>
                     </li>
                   ))}
@@ -1666,27 +1685,25 @@ function CTAWithFooter() {
               {/* CONTACT */}
               <div>
                 <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
-                  Kontakt
+                  {t('footer.contact.title')}
                 </h4>
                 <ul className="space-y-4">
                   <li className="flex items-start gap-3 text-sm text-white/70 font-light">
                     <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0 text-[#AB8A62]" strokeWidth={1} />
-                    <span>
-                      Riva Zegrze<br />
-                      Rybaki 11<br />
-                      05-130 Zegrze Południowe
+                    <span style={{ whiteSpace: 'pre-line' }}>
+                      {t('footer.contact.address')}
                     </span>
                   </li>
                   <li>
-                    <a href="tel:+48510038038" className="flex items-center gap-3 text-sm text-white/70 font-light hover:text-white transition-colors group">
+                    <a href={`tel:${t('footer.contact.phone')}`} className="flex items-center gap-3 text-sm text-white/70 font-light hover:text-white transition-colors group">
                       <Phone className="w-5 h-5 text-[#AB8A62] group-hover:scale-110 transition-transform" strokeWidth={1} />
-                      <span>+48 510 038 038</span>
+                      <span>{t('footer.contact.phone')}</span>
                     </a>
                   </li>
                   <li>
-                    <a href="mailto:wynajem@rivazegrze.pl" className="flex items-center gap-3 text-sm text-white/70 font-light hover:text-white transition-colors group">
+                    <a href={`mailto:${t('footer.contact.email')}`} className="flex items-center gap-3 text-sm text-white/70 font-light hover:text-white transition-colors group">
                       <Mail className="w-5 h-5 text-[#AB8A62] group-hover:scale-110 transition-transform" strokeWidth={1} />
-                      <span>wynajem@rivazegrze.pl</span>
+                      <span>{t('footer.contact.email')}</span>
                     </a>
                   </li>
                 </ul>
@@ -1695,17 +1712,17 @@ function CTAWithFooter() {
               {/* SOCIAL & NEWSLETTER */}
               <div>
                 <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
-                  Newsletter
+                  {t('footer.newsletter.title')}
                 </h4>
                 <p className="text-sm text-white/70 mb-4 font-light">
-                  Bądź na bieżąco z ofertami specjalnymi
+                  {t('footer.newsletter.description')}
                 </p>
                 
                 <form className="mb-8">
                   <div className="flex gap-2">
                     <input
                       type="email"
-                      placeholder="Twój e-mail"
+                      placeholder={t('footer.newsletter.placeholder')}
                       className="flex-1 px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-[#AB8A62] focus:bg-white/15 transition-all font-light"
                     />
                     <button
@@ -1719,7 +1736,7 @@ function CTAWithFooter() {
 
                 <div className="space-y-3">
                   <h5 className="text-xs tracking-[0.2em] uppercase font-light text-white/60">
-                    Social Media
+                    {t('footer.newsletter.socialMedia')}
                   </h5>
                   <div className="flex gap-3">
                     {[
@@ -1743,20 +1760,16 @@ function CTAWithFooter() {
             {/* BOTTOM BAR */}
             <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-xs text-white/50 font-light">
-                © {new Date().getFullYear()} Riva Zegrze. Wszystkie prawa zastrzeżone.
+                {t('footer.bottom.copyright', { year: currentYear })}
               </p>
               <div className="flex gap-8">
-                {[
-                  { label: 'Polityka prywatności', href: '/privacy' },
-                  { label: 'Regulamin', href: '/terms' },
-                  { label: 'Cookies', href: '/cookies' },
-                ].map((item) => (
+                {['privacy', 'terms', 'cookies'].map((item) => (
                   <a
-                    key={item.label}
-                    href={item.href}
+                    key={item}
+                    href={`/${item}`}
                     className="text-xs text-white/50 hover:text-white/80 transition-colors font-light"
                   >
-                    {item.label}
+                    {t(`footer.bottom.${item}`)}
                   </a>
                 ))}
               </div>
