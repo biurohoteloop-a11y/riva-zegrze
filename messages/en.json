@@ -655,7 +655,7 @@
       "bookStay": "BOOK YOUR STAY"
     }
   },
-  "contactPage": {
+    "contactPage": {
     "hero": {
       "label": "Get in Touch",
       "title": "Contact",
@@ -693,9 +693,9 @@
         "description": "Self check-in 24/7"
       }
     },
-        "faq": {
+    "faq": {
       "sectionLabel": "FAQ",
-      "sectionTitle": "Frequently\nAsked\nQuestions",
+      "sectionTitle": "Frequently Asked Questions",
       "sectionDescription": "Answers to the most important questions about your stay at Riva Zegrze",
       "ctaText": "Didn't find an answer?",
       "items": {
@@ -761,7 +761,125 @@
       "submitButton": "SEND MESSAGE",
       "privacyNote": "* Required fields. Your data is safe and protected in accordance with GDPR."
     }
+  },
+  "apartmentC1": {
+    "hero": {
+      "breadcrumbs": {
+        "home": "Home",
+        "apartments": "Apartments",
+        "current": "Apartment C1"
+      },
+      "badge": "Premium",
+      "name": "Apartment C1",
+      "tagline": "Modern apartment with terrace and private garden",
+      "subtitle": "Located directly on Lake Zegrzyński",
+      "specs": {
+        "size": {
+          "label": "Size",
+          "value": "38 m²"
+        },
+        "guests": {
+          "label": "Guests",
+          "value": "4 Guests"
+        },
+        "bedrooms": {
+          "label": "Bedrooms",
+          "value": "1 Bedroom"
+        },
+        "bathrooms": {
+          "label": "Bathrooms",
+          "value": "1 Bathroom"
+        }
+      },
+      "price": {
+        "from": "from",
+        "value": "630",
+        "currency": "PLN",
+        "period": "night"
+      },
+      "gallery": {
+        "imageAlt": "Apartment C1 - photo",
+        "thumbnailAlt": "Thumbnail"
+      }
+    },
+    "details": {
+      "aboutApartment": {
+        "title": "About the Apartment",
+        "description": "Modern apartment with a private terrace and garden, located directly on the shore of Lake Zegrzyński. Ideal for couples and families who value comfort, space, and direct contact with nature."
+      },
+      "highlights": {
+        "title": "Key Features",
+        "items": [
+          "Direct lake access",
+          "Private terrace with garden furniture",
+          "Modern fitted kitchen",
+          "Panoramic glazing",
+          "Indoor heated pool",
+          "Gym access"
+        ]
+      },
+      "amenities": {
+        "title": "Amenities",
+        "items": {
+          "wifi": {
+            "label": "WiFi",
+            "description": "High-speed fiber internet"
+          },
+          "tv": {
+            "label": "Smart TV",
+            "description": "55\" with Netflix & HBO"
+          },
+          "kitchen": {
+            "label": "Kitchen",
+            "description": "Fully equipped"
+          },
+          "ac": {
+            "label": "Air Conditioning",
+            "description": "Heating & cooling"
+          },
+          "bathroom": {
+            "label": "Bathroom",
+            "description": "Premium toiletries"
+          },
+          "utensils": {
+            "label": "Dishes",
+            "description": "Complete cutlery & plates"
+          },
+          "terrace": {
+            "label": "Terrace",
+            "description": "15 m² with loungers"
+          },
+          "garden": {
+            "label": "Garden",
+            "description": "Private green space"
+          }
+        }
+      },
+      "aboutProperty": {
+        "title": "About the Property",
+        "paragraphs": [
+          "The apartments are located directly on Lake Zegrzyński, in the quiet part of Zegrze Południowe. This place was created with relaxation close to nature in mind, away from the urban hustle and bustle. The intimate character of the property is conducive to relaxation and a peaceful stay at any time of the year.",
+          "Modern interiors, functional layouts and access to the recreational area make the apartments suitable for both a short trip and a longer stay. The convenient location allows you to easily combine a waterside vacation with a quick commute to Warsaw."
+        ],
+        "features": {
+          "location": {
+            "title": "Location",
+            "description": "Apartments located directly on Lake Zegrzyński, in the quiet part of Zegrze Południowe."
+          },
+          "pool": {
+            "title": "Pool",
+            "description": "On-site recreational area with an indoor heated pool."
+          },
+          "gym": {
+            "title": "Gym",
+            "description": "Access to a fully equipped gym for all guests."
+          }
+        }
+      },
+      "availability": {
+        "title": "Availability",
+        "loadingText": "Loading calendar..."
+      }
+    }
   }
 }
-
-

@@ -654,111 +654,231 @@
     "bookStay": "ZAREZERWUJ POBYT"
   }
 },
-"contactPage": {
-  "hero": {
-    "label": "Skontaktuj się z nami",
-    "title": "Kontakt",
-    "description": "Jesteśmy do Twojej dyspozycji w sprawach rezerwacji, zapytań i specjalnych próśb"
-  },
-  "info": {
-    "sectionLabel": "JAK MOŻEMY POMÓC?",
-    "sectionTitle": "Skontaktuj się z nami",
-    "sectionDescription": "Kameralne apartamenty nad wodą. Spokój, komfort i bezpośrednia rezerwacja w wyjątkowej lokalizacji pod Warszawą.",
-    "phone": {
-      "label": "Telefon",
-      "number": "+48 510 038 038",
-      "action": "Zadzwoń",
-      "description": "Dostępni 24/7 dla rezerwacji"
+  "contactPage": {
+    "hero": {
+      "label": "Skontaktuj się z nami",
+      "title": "Kontakt",
+      "description": "Jesteśmy do Twojej dyspozycji w sprawach rezerwacji, zapytań i specjalnych próśb"
     },
-    "email": {
-      "label": "Email",
-      "address": "wynajem@rivazegrze.pl",
-      "action": "Wyślij Email",
-      "description": "Odpowiadamy w ciągu 24h"
+    "info": {
+      "sectionLabel": "JAK MOŻEMY POMÓC?",
+      "sectionTitle": "Skontaktuj się z nami",
+      "sectionDescription": "Kameralne apartamenty nad wodą. Spokój, komfort i bezpośrednia rezerwacja w wyjątkowej lokalizacji pod Warszawą.",
+      "phone": {
+        "label": "Telefon",
+        "number": "+48 510 038 038",
+        "action": "Zadzwoń",
+        "description": "Dostępni 24/7 dla rezerwacji"
+      },
+      "email": {
+        "label": "Email",
+        "address": "wynajem@rivazegrze.pl",
+        "action": "Wyślij Email",
+        "description": "Odpowiadamy w ciągu 24h"
+      },
+      "address": {
+        "label": "Lokalizacja",
+        "line1": "Rybaki 11",
+        "line2": "05-130 Zegrze Południowe",
+        "action": "Dojazd",
+        "description": "Nad Zalewem Zegrzyńskim"
+      },
+      "hours": {
+        "label": "Godziny",
+        "reception": "Wirtualna recepcja",
+        "checkin": "Zameldowanie: 15:00",
+        "checkout": "Wymeldowanie: 11:00",
+        "action": "Szczegóły",
+        "description": "Samodzielne zameldowanie 24/7"
+      }
     },
-    "address": {
-      "label": "Lokalizacja",
-      "line1": "Rybaki 11",
-      "line2": "05-130 Zegrze Południowe",
-      "action": "Dojazd",
-      "description": "Nad Zalewem Zegrzyńskim"
+    "faq": {
+      "sectionLabel": "FAQ",
+      "sectionTitle": "Najczęściej Zadawane Pytania",
+      "sectionDescription": "Odpowiedzi na najważniejsze pytania dotyczące pobytu w Riva Zegrze",
+      "ctaText": "Nie znalazłeś odpowiedzi?",
+      "items": {
+        "checkin": {
+          "question": "O której godzinie odbywa się zameldowanie?",
+          "answer": "Zameldowanie możliwe jest w godzinach 15:00–22:00. Obiekt oferuje samodzielne zameldowanie – kody dostępu przesyłane są w dniu przyjazdu."
+        },
+        "checkout": {
+          "question": "Do której godziny należy się wymeldować?",
+          "answer": "Wymeldowanie odbywa się do godziny 11:00."
+        },
+        "earlyLate": {
+          "question": "Czy możliwe jest wcześniejsze zameldowanie lub późniejsze wymeldowanie?",
+          "answer": "Możliwość wcześniejszego zameldowania lub późniejszego wymeldowania zależy od dostępności i ustalana jest indywidualnie."
+        },
+        "extraBeds": {
+          "question": "Czy w apartamentach dostępne są dostawki?",
+          "answer": "Nie, nie oferujemy dostawek. Każdy apartament przeznaczony jest maksymalnie dla 4 osób."
+        },
+        "children": {
+          "question": "Czy w apartamentach mogą przebywać dzieci?",
+          "answer": "Tak, obiekt jest przyjazny rodzinom z dziećmi. Dzieci w każdym wieku są mile widziane."
+        },
+        "pets": {
+          "question": "Czy można przyjechać z psem?",
+          "answer": "Tak, zwierzęta są akceptowane i nie pobieramy za nie dodatkowych opłat."
+        },
+        "parking": {
+          "question": "Czy na terenie obiektu dostępny jest parking?",
+          "answer": "Tak, dostępne są bezpłatne miejsca ogólnodostępne przed budynkiem."
+        },
+        "garage": {
+          "question": "Czy można zarezerwować miejsce parkingowe w garażu?",
+          "answer": "Tak, miejsce w garażu dostępne jest po wcześniejszej rezerwacji w cenie 75 zł / doba."
+        },
+        "quietHours": {
+          "question": "Czy w obiekcie obowiązuje cisza nocna?",
+          "answer": "Tak, cisza nocna obowiązuje w godzinach 22:00–7:00."
+        },
+        "parties": {
+          "question": "Czy w obiekcie można organizować imprezy?",
+          "answer": "Nie, na terenie obiektu obowiązuje całkowity zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich."
+        }
+      }
     },
-    "hours": {
-      "label": "Godziny",
-      "reception": "Wirtualna recepcja",
-      "checkin": "Zameldowanie: 15:00",
-      "checkout": "Wymeldowanie: 11:00",
-      "action": "Szczegóły",
-      "description": "Samodzielne zameldowanie 24/7"
+    "form": {
+      "sectionLabel": "WYŚLIJ WIADOMOŚĆ",
+      "sectionTitle": "Chętnie Odpowiemy na Pytania",
+      "sectionDescription": "Wypełnij formularz poniżej, a nasz zespół odpowie niezwłocznie",
+      "nameLabel": "Imię i Nazwisko",
+      "namePlaceholder": "Jan Kowalski",
+      "emailLabel": "Adres Email",
+      "emailPlaceholder": "jan@example.com",
+      "phoneLabel": "Numer Telefonu",
+      "phonePlaceholder": "+48 510 038 038",
+      "subjectLabel": "Temat",
+      "subjectPlaceholder": "Wybierz temat",
+      "subjectReservation": "Rezerwacja",
+      "subjectInfo": "Informacje",
+      "subjectOther": "Inne",
+      "messageLabel": "Wiadomość",
+      "messagePlaceholder": "Twoja wiadomość...",
+      "submitButton": "WYŚLIJ WIADOMOŚĆ",
+      "privacyNote": "* Pola wymagane. Twoje dane są bezpieczne i chronione zgodnie z RODO."
     }
   },
-  "faq": {
-    "sectionLabel": "FAQ",
-    "sectionTitle": "Najczęściej Zadawane Pytania",
-    "sectionDescription": "Odpowiedzi na najważniejsze pytania dotyczące pobytu w Riva Zegrze",
-    "ctaText": "Nie znalazłeś odpowiedzi?",
-    "items": {
-      "checkin": {
-        "question": "O której godzinie odbywa się zameldowanie?",
-        "answer": "Zameldowanie możliwe jest w godzinach 15:00–22:00. Obiekt oferuje samodzielne zameldowanie – kody dostępu przesyłane są w dniu przyjazdu."
+  "apartmentC1": {
+    "hero": {
+      "breadcrumbs": {
+        "home": "Strona główna",
+        "apartments": "Apartamenty",
+        "current": "Apartament C1"
       },
-      "checkout": {
-        "question": "Do której godziny należy się wymeldować?",
-        "answer": "Wymeldowanie odbywa się do godziny 11:00."
+      "badge": "Premium",
+      "name": "Apartament C1",
+      "tagline": "Nowoczesny apartament z tarasem i prywatnym ogródkiem",
+      "subtitle": "Położony bezpośrednio nad Jeziorem Zegrzyńskim",
+      "specs": {
+        "size": {
+          "label": "Rozmiar",
+          "value": "38 m²"
+        },
+        "guests": {
+          "label": "Goście",
+          "value": "4 Osoby"
+        },
+        "bedrooms": {
+          "label": "Sypialnie",
+          "value": "1 Sypialnia"
+        },
+        "bathrooms": {
+          "label": "Łazienki",
+          "value": "1 Łazienka"
+        }
       },
-      "earlyLate": {
-        "question": "Czy możliwe jest wcześniejsze zameldowanie lub późniejsze wymeldowanie?",
-        "answer": "Możliwość wcześniejszego zameldowania lub późniejszego wymeldowania zależy od dostępności i ustalana jest indywidualnie."
+      "price": {
+        "from": "od",
+        "value": "630",
+        "currency": "zł",
+        "period": "noc"
       },
-      "extraBeds": {
-        "question": "Czy w apartamentach dostępne są dostawki?",
-        "answer": "Nie, nie oferujemy dostawek. Każdy apartament przeznaczony jest maksymalnie dla 4 osób."
+      "gallery": {
+        "imageAlt": "Apartament C1 - zdjęcie",
+        "thumbnailAlt": "Miniatura"
+      }
+    },
+    "details": {
+      "aboutApartment": {
+        "title": "O apartamencie",
+        "description": "Nowoczesny apartament z prywatnym tarasem i ogródkiem, położony bezpośrednio nad brzegiem Jeziora Zegrzyńskiego. Idealny dla par oraz rodzin ceniących komfort, przestrzeń i bezpośredni kontakt z naturą."
       },
-      "children": {
-        "question": "Czy w apartamentach mogą przebywać dzieci?",
-        "answer": "Tak, obiekt jest przyjazny rodzinom z dziećmi. Dzieci w każdym wieku są mile widziane."
+      "highlights": {
+        "title": "Najważniejsze atuty",
+        "items": [
+          "Bezpośredni dostęp do jeziora",
+          "Prywatny taras z meblami ogrodowymi",
+          "Nowoczesna zabudowa kuchenna",
+          "Panoramiczne przeszklenia",
+          "Kryty podgrzewany basen",
+          "Dostęp do siłowni"
+        ]
       },
-      "pets": {
-        "question": "Czy można przyjechać z psem?",
-        "answer": "Tak, zwierzęta są akceptowane i nie pobieramy za nie dodatkowych opłat."
+      "amenities": {
+        "title": "Udogodnienia",
+        "items": {
+          "wifi": {
+            "label": "WiFi",
+            "description": "Szybki internet światłowodowy"
+          },
+          "tv": {
+            "label": "Smart TV",
+            "description": "55\" z Netflix i HBO"
+          },
+          "kitchen": {
+            "label": "Kuchnia",
+            "description": "W pełni wyposażona"
+          },
+          "ac": {
+            "label": "Klimatyzacja",
+            "description": "Chłodzenie i ogrzewanie"
+          },
+          "bathroom": {
+            "label": "Łazienka",
+            "description": "Premium kosmetyki"
+          },
+          "utensils": {
+            "label": "Naczynia",
+            "description": "Komplet sztućców i talerzy"
+          },
+          "terrace": {
+            "label": "Taras",
+            "description": "15 m² z leżakami"
+          },
+          "garden": {
+            "label": "Ogródek",
+            "description": "Prywatna przestrzeń zielona"
+          }
+        }
       },
-      "parking": {
-        "question": "Czy na terenie obiektu dostępny jest parking?",
-        "answer": "Tak, dostępne są bezpłatne miejsca ogólnodostępne przed budynkiem."
+      "aboutProperty": {
+        "title": "O obiekcie",
+        "paragraphs": [
+          "Apartamenty położone są bezpośrednio nad Jeziorem Zegrzyńskim, w spokojnej części Zegrza Południowego. To miejsce stworzone z myślą o wypoczynku blisko natury, z dala od miejskiego zgiełku. Kameralny charakter obiektu sprzyja relaksowi i spokojnemu pobytowi o każdej porze roku.",
+          "Nowoczesne wnętrza, funkcjonalne układy i dostęp do strefy rekreacyjnej sprawiają, że apartamenty sprawdzą się zarówno na krótszy wyjazd, jak i dłuższy pobyt. Dogodna lokalizacja pozwala łatwo połączyć wypoczynek nad wodą z szybkim dojazdem do Warszawy."
+        ],
+        "features": {
+          "location": {
+            "title": "Lokalizacja",
+            "description": "Apartamenty położone bezpośrednio nad Jeziorem Zegrzyńskim, w spokojnej części Zegrza Południowego."
+          },
+          "pool": {
+            "title": "Basen",
+            "description": "Na terenie obiektu dostępna jest strefa rekreacyjna z krytym, podgrzewanym basenem."
+          },
+          "gym": {
+            "title": "Siłownia",
+            "description": "Dostęp do w pełni wyposażonej siłowni dla wszystkich gości obiektu."
+          }
+        }
       },
-      "garage": {
-        "question": "Czy można zarezerwować miejsce parkingowe w garażu?",
-        "answer": "Tak, miejsce w garażu dostępne jest po wcześniejszej rezerwacji w cenie 75 zł / doba."
-      },
-      "quietHours": {
-        "question": "Czy w obiekcie obowiązuje cisza nocna?",
-        "answer": "Tak, cisza nocna obowiązuje w godzinach 22:00–7:00."
-      },
-      "parties": {
-        "question": "Czy w obiekcie można organizować imprezy?",
-        "answer": "Nie, na terenie obiektu obowiązuje całkowity zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich."
+      "availability": {
+        "title": "Dostępność",
+        "loadingText": "Ładowanie kalendarza..."
       }
     }
-  },
-  "form": {
-    "sectionLabel": "WYŚLIJ WIADOMOŚĆ",
-    "sectionTitle": "Chętnie Odpowiemy na Pytania",
-    "sectionDescription": "Wypełnij formularz poniżej, a nasz zespół odpowie niezwłocznie",
-    "nameLabel": "Imię i Nazwisko",
-    "namePlaceholder": "Jan Kowalski",
-    "emailLabel": "Adres Email",
-    "emailPlaceholder": "jan@example.com",
-    "phoneLabel": "Numer Telefonu",
-    "phonePlaceholder": "+48 510 038 038",
-    "subjectLabel": "Temat",
-    "subjectPlaceholder": "Wybierz temat",
-    "subjectReservation": "Rezerwacja",
-    "subjectInfo": "Informacje",
-    "subjectOther": "Inne",
-    "messageLabel": "Wiadomość",
-    "messagePlaceholder": "Twoja wiadomość...",
-    "submitButton": "WYŚLIJ WIADOMOŚĆ",
-    "privacyNote": "* Pola wymagane. Twoje dane są bezpieczne i chronione zgodnie z RODO."
   }
-}
 }

@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useTranslations } from 'next-intl';
 import Navigation from '../../../components/layout/Navigation';
 
 import { 
@@ -202,9 +203,8 @@ export default function ApartmentC1Page() {
 
 
 // ============================================
-// 1. HERO GALLERY - BEZ SCRAMBLE TEXT
-// ============================================
 function HeroGallery() {
+  const t = useTranslations('apartmentC1.hero');
   const [activeIndex, setActiveIndex] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
 
@@ -312,11 +312,11 @@ function HeroGallery() {
         
         {/* Breadcrumbs */}
         <div className="flex items-center gap-2 text-xs text-[#8a968f] mb-8">
-          <a href="/" className="hover:text-[#4a6b5e] transition-colors">Strona główna</a>
+          <a href="/" className="hover:text-[#4a6b5e] transition-colors">{t('breadcrumbs.home')}</a>
           <span>/</span>
-          <a href="/apartamenty" className="hover:text-[#4a6b5e] transition-colors">Apartamenty</a>
+          <a href="/apartamenty" className="hover:text-[#4a6b5e] transition-colors">{t('breadcrumbs.apartments')}</a>
           <span>/</span>
-          <span className="text-[#4a6b5e]">Apartament C1</span>
+          <span className="text-[#4a6b5e]">{t('breadcrumbs.current')}</span>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -326,37 +326,37 @@ function HeroGallery() {
             
             <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 bg-white border border-[#d4d6ce] rounded-full mb-6">
               <Sparkles className="w-4 h-4 text-[#4a6b5e]" strokeWidth={1.5} />
-              <span className="text-xs tracking-[0.2em] text-[#4a6b5e] uppercase">Premium</span>
+              <span className="text-xs tracking-[0.2em] text-[#4a6b5e] uppercase">{t('badge')}</span>
             </div>
 
             <h1 
               className="hero-title text-5xl lg:text-6xl xl:text-7xl font-light text-[#4a6b5e] mb-4 leading-tight" 
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
-              {apartmentData.name}
+              {t('name')}
             </h1>
 
             <p className="hero-tagline text-xl text-[#4a6b5e] font-light mb-2 leading-relaxed">
-              {apartmentData.tagline}
+              {t('tagline')}
             </p>
 
             <p className="hero-subtitle text-base text-[#8a968f] font-light mb-8 leading-relaxed">
-              {apartmentData.subtitle}
+              {t('subtitle')}
             </p>
 
             {/* Specs Grid */}
             <div className="grid grid-cols-2 gap-4 mb-8">
               {[
-                { icon: Maximize, label: 'Rozmiar', value: apartmentData.specs.size },
-                { icon: Users, label: 'Goście', value: `${apartmentData.specs.guests} Osoby` },
-                { icon: Bed, label: 'Sypialnie', value: `${apartmentData.specs.bedrooms} Sypialnia` },
-                { icon: Bath, label: 'Łazienki', value: `${apartmentData.specs.bathrooms} Łazienka` },
+                { icon: Maximize, key: 'size' },
+                { icon: Users, key: 'guests' },
+                { icon: Bed, key: 'bedrooms' },
+                { icon: Bath, key: 'bathrooms' },
               ].map((spec, idx) => (
                 <div key={idx} className="spec-card flex items-center gap-3 p-4 bg-white border border-[#d4d6ce] group hover:border-[#4a6b5e] transition-all duration-300">
                   <spec.icon className="w-5 h-5 text-[#4a6b5e] group-hover:scale-110 transition-transform" strokeWidth={1.5} />
                   <div className="flex flex-col">
-                    <span className="text-xs text-[#8a968f] uppercase tracking-wide">{spec.label}</span>
-                    <span className="text-sm text-[#4a6b5e] font-medium">{spec.value}</span>
+                    <span className="text-xs text-[#8a968f] uppercase tracking-wide">{t(`specs.${spec.key}.label`)}</span>
+                    <span className="text-sm text-[#4a6b5e] font-medium">{t(`specs.${spec.key}.value`)}</span>
                   </div>
                 </div>
               ))}
@@ -364,11 +364,11 @@ function HeroGallery() {
 
             {/* Price Box */}
             <div className="price-box flex items-baseline gap-3 mb-8 p-6 bg-white border-l-4 border-[#4a6b5e]">
-              <span className="text-sm tracking-[0.2em] text-[#8a968f] uppercase">od</span>
+              <span className="text-sm tracking-[0.2em] text-[#8a968f] uppercase">{t('price.from')}</span>
               <span className="text-4xl lg:text-5xl font-light text-[#4a6b5e]" style={{ fontFamily: 'Playfair Display, serif' }}>
-                {apartmentData.price.from}
+                {t('price.value')}
               </span>
-              <span className="text-lg text-[#6e7a73]">{apartmentData.price.currency} / {apartmentData.price.period}</span>
+              <span className="text-lg text-[#6e7a73]">{t('price.currency')} / {t('price.period')}</span>
             </div>
 
           </div>
@@ -400,7 +400,7 @@ function HeroGallery() {
                         <div className="relative h-full cursor-pointer group">
                           <img
                             src={img}
-                            alt={`${apartmentData.name} - zdjęcie ${idx + 1}`}
+                            alt={`${t('gallery.imageAlt')} ${idx + 1}`}
                             className="w-full h-full object-cover"
                           />
                           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
@@ -436,7 +436,7 @@ function HeroGallery() {
                     >
                       <img
                         src={img}
-                        alt={`Miniatura ${idx + 1}`}
+                        alt={`${t('gallery.thumbnailAlt')} ${idx + 1}`}
                         className="w-full h-full object-cover"
                       />
                     </div>
@@ -451,63 +451,58 @@ function HeroGallery() {
     </section>
   );
 }
-
 // ============================================
-// 2. APARTMENT DETAILS - BEZ SCRAMBLE TEXT
 // ============================================
 function ApartmentDetails() {
+  const t = useTranslations('apartmentC1.details');
   const sectionRef = useRef<HTMLElement>(null);
   const [calendarLoaded, setCalendarLoaded] = useState(false);
 
   // Load Hotres scripts
-// Load Hotres scripts
-useEffect(() => {
-  const loadHotresScripts = async () => {
-    const win = window as any;
-    
-    // jQuery
-    if (!win.jQuery) {
-      const jqueryScript = document.createElement('script');
-      jqueryScript.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js';
-      jqueryScript.async = true;
-      document.body.appendChild(jqueryScript);
+  useEffect(() => {
+    const loadHotresScripts = async () => {
+      const win = window as any;
+      
+      if (!win.jQuery) {
+        const jqueryScript = document.createElement('script');
+        jqueryScript.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js';
+        jqueryScript.async = true;
+        document.body.appendChild(jqueryScript);
 
-      await new Promise((resolve) => {
-        jqueryScript.onload = resolve;
-      });
-    }
-
-    // Hotres V4
-    const hotresScript = document.createElement('script');
-    hotresScript.src = 'https://panel.hotres.pl/public/api/hotres_v4.js';
-    hotresScript.async = true;
-    document.body.appendChild(hotresScript);
-
-    hotresScript.onload = () => {
-      if (win.createHotres) {
-        win.createHotres({
-          oid: 5226,
-          lang: 'pl',
-          tid: '43212',
-          action: 'room/calendar'
+        await new Promise((resolve) => {
+          jqueryScript.onload = resolve;
         });
-        setCalendarLoaded(true);
       }
+
+      const hotresScript = document.createElement('script');
+      hotresScript.src = 'https://panel.hotres.pl/public/api/hotres_v4.js';
+      hotresScript.async = true;
+      document.body.appendChild(hotresScript);
+
+      hotresScript.onload = () => {
+        if (win.createHotres) {
+          win.createHotres({
+            oid: 5226,
+            lang: 'pl',
+            tid: '43212',
+            action: 'room/calendar'
+          });
+          setCalendarLoaded(true);
+        }
+      };
     };
-  };
 
-  loadHotresScripts();
+    loadHotresScripts();
 
-  return () => {
-    const scripts = document.querySelectorAll('script[src*="hotres"], script[src*="jquery"]');
-    scripts.forEach(script => {
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-    });
-  };
-}, []);
-
+    return () => {
+      const scripts = document.querySelectorAll('script[src*="hotres"], script[src*="jquery"]');
+      scripts.forEach(script => {
+        if (script.parentNode) {
+          script.parentNode.removeChild(script);
+        }
+      });
+    };
+  }, []);
 
   // GSAP animations
   useEffect(() => {
@@ -575,6 +570,18 @@ useEffect(() => {
     initGSAP();
   }, []);
 
+  // ✅ Mapowanie ikon z amenities
+  const amenitiesIcons = [
+    { key: 'wifi', icon: Wifi },
+    { key: 'tv', icon: Tv },
+    { key: 'kitchen', icon: Coffee },
+    { key: 'ac', icon: Wind },
+    { key: 'bathroom', icon: Bath },
+    { key: 'utensils', icon: Utensils },
+    { key: 'terrace', icon: MapPin },
+    { key: 'garden', icon: Sparkles },
+  ];
+
   return (
     <section ref={sectionRef} className="py-20 lg:py-28 bg-white">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
@@ -590,125 +597,151 @@ useEffect(() => {
                 className="section-heading text-3xl lg:text-4xl font-light text-[#4a6b5e] mb-6" 
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
-                O apartamencie
+                {t('aboutApartment.title')}
               </h2>
               <p className="text-base text-[#6e7a73] leading-relaxed font-light">
-                {apartmentData.description}
+                {t('aboutApartment.description')}
               </p>
             </div>
 
             {/* Najważniejsze atuty */}
             <div>
               <h3 className="text-xl font-light text-[#0f0e0f] mb-6">
-                Najważniejsze atuty
+                {t('highlights.title')}
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {apartmentData.highlights.map((highlight, idx) => (
+                {Array.from({ length: 6 }).map((_, idx) => (
                   <div key={idx} className="highlight-item flex items-start gap-3 p-4 bg-[#f7f6f4] border-l-2 border-[#555e59]">
                     <Check className="w-5 h-5 text-[#555e59] flex-shrink-0 mt-0.5" strokeWidth={2} />
-                    <span className="text-sm text-[#6e7a73]">{highlight}</span>
+                    <span className="text-sm text-[#6e7a73]">
+                      {t(`highlights.items.${idx}`)}
+                    </span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* O Obiekcie */}
+            {/* ✅ Udogodnienia - POPRAWIONE */}
+            <div>
+              <h3 className="text-xl font-light text-[#0f0e0f] mb-6">
+                {t('amenities.title')}
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                {amenitiesIcons.map(({ key, icon: Icon }) => (
+                  <div 
+                    key={key} 
+                    className="amenity-item flex flex-col items-center text-center gap-3 p-4 bg-[#f7f6f4] border border-[#d4d6ce] hover:border-[#555e59] transition-all group"
+                  >
+                    <div className="w-12 h-12 rounded-full bg-white border border-[#d4d6ce] flex items-center justify-center group-hover:border-[#555e59] group-hover:bg-[#555e59] transition-all">
+                      <Icon className="w-6 h-6 text-[#555e59] group-hover:text-white transition-colors" strokeWidth={1.5} />
+                    </div>
+                    <div>
+                      <span className="text-sm font-medium text-[#0f0e0f] block mb-1">
+                        {t(`amenities.items.${key}.label`)}
+                      </span>
+                      <span className="text-xs text-[#6e7a73]">
+                        {t(`amenities.items.${key}.description`)}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* ✅ O Obiekcie - POPRAWIONE */}
             <div className="pt-8 border-t border-[#d4d6ce]">
               <h2 
                 className="section-heading text-3xl lg:text-4xl font-light text-[#4a6b5e] mb-6" 
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
-                {apartmentData.aboutProperty.title}
+                {t('aboutProperty.title')}
               </h2>
               
               <div className="space-y-4 mb-8">
-                {apartmentData.aboutProperty.paragraphs.map((paragraph, idx) => (
+                {Array.from({ length: 2 }).map((_, idx) => (
                   <p key={idx} className="text-base text-[#6e7a73] leading-relaxed font-light">
-                    {paragraph}
+                    {t(`aboutProperty.paragraphs.${idx}`)}
                   </p>
                 ))}
               </div>
 
               {/* Features Grid */}
               <div className="features-grid grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                {apartmentData.aboutProperty.features.map((feature, idx) => (
-                  <div 
-                    key={idx} 
-                    className="feature-card group bg-[#f7f6f4] p-6 border border-[#d4d6ce] hover:border-[#555e59] transition-all duration-300"
-                  >
-                    <div className="w-12 h-12 rounded-full bg-white border border-[#d4d6ce] flex items-center justify-center mb-4 group-hover:border-[#AB8A62] group-hover:bg-gradient-to-br group-hover:from-[#f4e4c1] group-hover:to-[#AB8A62] transition-all">
-                      <feature.icon className="w-6 h-6 text-[#555e59] group-hover:text-[#8b6914] transition-colors" strokeWidth={1} />
+                {['location', 'pool', 'gym'].map((key, idx) => {
+                  const icons = [MapPin, Droplets, Dumbbell];
+                  const Icon = icons[idx];
+                  
+                  return (
+                    <div 
+                      key={key} 
+                      className="feature-card group bg-[#f7f6f4] p-6 border border-[#d4d6ce] hover:border-[#555e59] transition-all duration-300"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-white border border-[#d4d6ce] flex items-center justify-center mb-4 group-hover:border-[#AB8A62] group-hover:bg-gradient-to-br group-hover:from-[#f4e4c1] group-hover:to-[#AB8A62] transition-all">
+                        <Icon className="w-6 h-6 text-[#555e59] group-hover:text-[#8b6914] transition-colors" strokeWidth={1} />
+                      </div>
+                      <h4 className="text-base font-medium text-[#0f0e0f] mb-2">
+                        {t(`aboutProperty.features.${key}.title`)}
+                      </h4>
+                      <p className="text-sm text-[#6e7a73] leading-relaxed font-light">
+                        {t(`aboutProperty.features.${key}.description`)}
+                      </p>
                     </div>
-                    <h4 className="text-base font-medium text-[#0f0e0f] mb-2">
-                      {feature.title}
-                    </h4>
-                    <p className="text-sm text-[#6e7a73] leading-relaxed font-light">
-                      {feature.description}
-                    </p>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
           </div>
 
-          {/* ✅ RIGHT - KALENDARZ DOSTĘPNOŚCI */}
-<div className="lg:col-span-1">
-  <div className="sticky top-24 bg-gradient-to-br from-white to-[#f7f6f4] p-8 border border-[#d4d6ce] shadow-xl rounded-lg">
-    
-    <div className="flex items-center gap-3 mb-6">
-      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#4a6b5e] to-[#8a968f] flex items-center justify-center">
-        <Calendar className="w-5 h-5 text-white" strokeWidth={1.5} />
-      </div>
-      <h3 
-        className="text-2xl font-light text-[#4a6b5e]" 
-        style={{ fontFamily: 'Playfair Display, serif' }}
-      >
-        Dostępność
-      </h3>
-    </div>
+          {/* RIGHT - KALENDARZ */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-24 bg-gradient-to-br from-white to-[#f7f6f4] p-8 border border-[#d4d6ce] shadow-xl rounded-lg">
+              
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#4a6b5e] to-[#8a968f] flex items-center justify-center">
+                  <Calendar className="w-5 h-5 text-white" strokeWidth={1.5} />
+                </div>
+                <h3 
+                  className="text-2xl font-light text-[#4a6b5e]" 
+                  style={{ fontFamily: 'Playfair Display, serif' }}
+                >
+                  {t('availability.title')}
+                </h3>
+              </div>
 
-    {/* Loading State */}
-    {!calendarLoaded && (
-      <div className="calendar-skeleton">
-        <div className="skeleton-header"></div>
-        <div className="skeleton-grid">
-          {[...Array(35)].map((_, i) => (
-            <div key={i} className="skeleton-day"></div>
-          ))}
+              {!calendarLoaded && (
+                <div className="calendar-skeleton">
+                  <div className="skeleton-header"></div>
+                  <div className="skeleton-grid">
+                    {[...Array(35)].map((_, i) => (
+                      <div key={i} className="skeleton-day"></div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div 
+                id="hotresContainer" 
+                className="hotres-calendar-wrapper"
+                style={{
+                  opacity: calendarLoaded ? 1 : 0,
+                  transition: 'opacity 0.5s ease'
+                }}
+                suppressHydrationWarning
+              ></div>
+
+            </div>
+          </div>
+
         </div>
       </div>
-    )}
 
-    {/* ✅ Hotres Calendar Container */}
-    <div 
-      id="hotresContainer" 
-      className="hotres-calendar-wrapper"
-      style={{
-        opacity: calendarLoaded ? 1 : 0,
-        transition: 'opacity 0.5s ease'
-      }}
-      suppressHydrationWarning
-    ></div>
-
-  </div>
-</div>
-</div>
-
-          
-      </div>
-
-      {/* ✅ PREMIUM CALENDAR STYLES */}
+      {/* Style bez zmian */}
       <style jsx global>{`
-        /* ========================================
-           HOTRES CALENDAR - PREMIUM STYLING
-        ======================================== */
-        
         .hotres-calendar-wrapper {
           min-height: 400px;
         }
 
-        /* Loading skeleton */
         .calendar-skeleton {
           animation: fadeIn 0.3s ease;
         }
@@ -746,7 +779,6 @@ useEffect(() => {
           to { opacity: 1; }
         }
 
-        /* Hotres calendar override styles */
         #hotresContainer table {
           width: 100%;
           border-collapse: separate;
@@ -785,7 +817,6 @@ useEffect(() => {
           border: 1px solid transparent;
         }
 
-        /* Dostępne dni */
         #hotresContainer td.available div,
         #hotresContainer td.available a {
           background: #e8f5e9;
@@ -801,7 +832,6 @@ useEffect(() => {
           box-shadow: 0 2px 8px rgba(74, 107, 94, 0.2);
         }
 
-        /* Zarezerwowane dni */
         #hotresContainer td.reserved div,
         #hotresContainer td.reserved a,
         #hotresContainer td.unavailable div,
@@ -812,7 +842,6 @@ useEffect(() => {
           cursor: not-allowed;
         }
 
-        /* Check-in/Check-out */
         #hotresContainer td.checkin div,
         #hotresContainer td.checkin a,
         #hotresContainer td.checkout div,
@@ -822,14 +851,12 @@ useEffect(() => {
           color: #e65100;
         }
 
-        /* Dzisiejszy dzień */
         #hotresContainer td.today div,
         #hotresContainer td.today a {
           border: 2px solid #4a6b5e !important;
           font-weight: 600;
         }
 
-        /* Nagłówek miesiąca */
         #hotresContainer .calendar-header {
           display: flex;
           align-items: center;
@@ -865,7 +892,6 @@ useEffect(() => {
           color: white;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
           #hotresContainer td div,
           #hotresContainer td a {
@@ -882,6 +908,7 @@ useEffect(() => {
     </section>
   );
 }
+
 
 // 3. IMPORTANT INFO SECTION - POPRAWIONY GRID DLA 5 ELEMENTÓW
 function ImportantInfoSection() {

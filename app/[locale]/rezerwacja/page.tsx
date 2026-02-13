@@ -1,39 +1,40 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { Waves, Menu, X } from 'lucide-react';
-import gsap from 'gsap'; 
+import { useEffect, useRef } from 'react';
 import Script from 'next/script';
 import Navigation from '../../components/layout/Navigation';
-import { 
-  Compass, 
-  Calendar,  
-  MapPin, 
-  Phone, 
-  Mail, 
-  Instagram, 
-  Facebook, 
-  Twitter,  
-  Users, 
-  Bed, 
-  Maximize, 
-  Wifi, 
-  Coffee, 
-  Tv, 
-  Wind 
-} from 'lucide-react';
 
 export default function RezerwacjaPage() {
   return (
     <>
-      {/* HotRes Scripts */}
+      {/* jQuery */}
       <Script
         src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"
         strategy="beforeInteractive"
       />
+      
+      {/* HotRes API */}
       <Script
         src="https://panel.hotres.pl/public/api/hotres_v4.js"
         strategy="afterInteractive"
+        onLoad={() => {
+          console.log('✅ HotRes API załadowane');
+          // Wywołaj NATYCHMIAST po załadowaniu API
+          if (typeof (window as any).createHotres === 'function') {
+            setTimeout(() => {
+              try {
+                console.log('🚀 Inicjalizacja HotRes...');
+                (window as any).createHotres({
+                  oid: 5226,
+                  lang: "pl"
+                });
+                console.log('✅ HotRes widget utworzony!');
+              } catch (error) {
+                console.error('❌ Błąd:', error);
+              }
+            }, 500);
+          }
+        }}
       />
 
       <Navigation />
@@ -45,7 +46,6 @@ export default function RezerwacjaPage() {
     </>
   );
 }
-
 
 function ReservationHero() {
   const heroRef = useRef(null);
@@ -77,9 +77,7 @@ function ReservationHero() {
         try {
           const { jarallax } = require('jarallax');
           jarallax(heroRef.current, 'destroy');
-        } catch (e) {
-          // ignore
-        }
+        } catch (e) {}
       }
     };
   }, []);
@@ -116,27 +114,8 @@ function ReservationHero() {
   );
 }
 
-
 function ReservationContent() {
   const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // HotRes initialization
-    if (typeof window !== 'undefined') {
-      const initHotRes = () => {
-        if ((window as any).createHotres) {
-          (window as any).createHotres({
-            oid: 5226,
-            lang: "pl"
-          });
-        }
-      };
-
-      // Delay to ensure scripts are loaded
-      const timer = setTimeout(initHotRes, 500);
-      return () => clearTimeout(timer);
-    }
-  }, []);
 
   useEffect(() => {
     const initAnimations = async () => {
@@ -182,7 +161,6 @@ function ReservationContent() {
     <section className="py-16 lg:py-24 bg-[#f7f6f4]">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         
-        {/* Info Section */}
         <div ref={containerRef} className="text-center mb-12 max-w-3xl mx-auto">
           <h2 
             className="text-3xl lg:text-4xl font-light text-[#0f0e0f] mb-4"
@@ -196,84 +174,8 @@ function ReservationContent() {
           </p>
         </div>
 
-        {/* HotRes Plugin Container */}
-        <div className="bg-white border border-[#d4d6ce] shadow-lg p-4 lg:p-8">
-          <div id="hotresContainer"></div>
-        </div>
-
-        {/* Additional Info */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-[#8a968f]/10 rounded-full mb-4">
-              <svg className="w-6 h-6 text-[#8a968f]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h3 className="text-lg font-light text-[#0f0e0f] mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>
-              Najlepsza Cena
-            </h3>
-            <p className="text-sm text-[#6e7a73] font-light leading-relaxed">
-              Gwarantujemy najniższą cenę przy rezerwacji bezpośredniej
-            </p>
-          </div>
-
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-[#8a968f]/10 rounded-full mb-4">
-              <svg className="w-6 h-6 text-[#8a968f]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <h3 className="text-lg font-light text-[#0f0e0f] mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>
-              Elastyczne Warunki
-            </h3>
-            <p className="text-sm text-[#6e7a73] font-light leading-relaxed">
-              Możliwość zmiany lub anulowania rezerwacji zgodnie z regulaminem
-            </p>
-          </div>
-
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-[#8a968f]/10 rounded-full mb-4">
-              <svg className="w-6 h-6 text-[#8a968f]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-              </svg>
-            </div>
-            <h3 className="text-lg font-light text-[#0f0e0f] mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>
-              Wsparcie 24/7
-            </h3>
-            <p className="text-sm text-[#6e7a73] font-light leading-relaxed">
-              Bezpośredni kontakt z nami w każdej sprawie dotyczącej pobytu
-            </p>
-          </div>
-
-        </div>
-
-        {/* Contact Info */}
-        <div className="mt-12 text-center">
-          <p className="text-sm text-[#6e7a73] font-light mb-4">
-            Potrzebujesz pomocy z rezerwacją? Skontaktuj się z nami:
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-6">
-            <a 
-              href="tel:+48510038038" 
-              className="flex items-center gap-2 text-sm text-[#6e7a73] hover:text-[#0f0e0f] transition-colors"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-              </svg>
-              <span>+48 510 038 038</span>
-            </a>
-            <a 
-              href="mailto:wynajem@rivazegrze.pl" 
-              className="flex items-center gap-2 text-sm text-[#6e7a73] hover:text-[#0f0e0f] transition-colors"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-              </svg>
-              <span>wynajem@rivazegrze.pl</span>
-            </a>
-          </div>
-        </div>
+        {/* HotRes Container */}
+        <div id="hotresContainer"></div>
 
       </div>
     </section>
