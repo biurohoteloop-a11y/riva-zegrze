@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Navigation from '../../../components/layout/Navigation';
+import { useTranslations, useLocale } from 'next-intl';
 
 import { 
   Navigation as SwiperNavigation, 
@@ -15,11 +16,11 @@ import {
 import type { Swiper as SwiperType } from 'swiper';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import { 
-  X,Menu,Compass,Waves, Users, Bed, Maximize, Wifi, Coffee, 
+  X, Menu, Compass, Waves, Users, Bed, Maximize, Wifi, Coffee, 
   Tv, Wind, Bath, Utensils, Check, Star, Quote, 
   ChevronLeft, ChevronRight, Calendar, MapPin, 
   Sparkles, Eye, Phone, Mail, Instagram, Facebook,
-  Droplets, Dumbbell, Clock, CarFront  // ✅ DODANE IMPORTY
+  Droplets, Dumbbell, Clock, CarFront
 } from 'lucide-react';
 
 import 'swiper/css';
@@ -29,79 +30,11 @@ import 'swiper/css/effect-fade';
 import 'react-photo-view/dist/react-photo-view.css';
 
 // ============================================
-// DANE APARTAMENTU C4
+// DANE APARTAMENTU C4 (tylko ścieżki do zdjęć)
+// Wszystkie teksty są w pl.json / en.json
 // ============================================
 const apartmentData = {
-  name: 'Apartament C4',
-  tagline: 'Nowoczesny apartament z balkonem',
-  subtitle: 'Położony bezpośrednio nad Jeziorem Zegrzyńskim',
-  price: {
-    from: 780,
-    currency: 'zł',
-    period: 'noc'
-  },
-  specs: {
-    size: '37 m²',
-    guests: 4,
-    bedrooms: 1,
-    bathrooms: 1,
-    floor: '2 piętro',
-    balcony: 'Tak',
-    terrace: 'Z meblami ogrodowymi'
-  },
-  
-  description: `Nowoczesny apartament z balkonem, położony bezpośrednio nad Jeziorem Zegrzyńskim. 
-    Komfortowy wybór na pobyt rodzinny, weekendowy lub dłuższy wypoczynek nad wodą.`,
-  
-  fullDescription: `Apartament o powierzchni 37 m² przeznaczony jest dla maksymalnie czterech osób. Składa się z oddzielnej sypialni z łóżkiem podwójnym, salonu z rozkładaną sofą, funkcjonalnego aneksu kuchennego oraz prywatnej łazienki z prysznicem. Wnętrze zostało zaprojektowane z myślą o wygodzie zarówno krótszych, jak i dłuższych pobytów. Do dyspozycji gości jest balkon oraz taras z meblami ogrodowymi, które pozwalają spędzać czas na świeżym powietrzu.`,
-
-  aboutProperty: {
-    title: 'O obiekcie',
-    paragraphs: [
-      'Apartament znajduje się na terenie Riva Zegrze – obiektu stworzonego z myślą o wypoczynku nad wodą przez cały rok. Położenie bezpośrednio przy plaży nad Jeziorem Zegrzyńskim, w otoczeniu zieleni i terenów rekreacyjnych, zapewnia spokojną atmosferę i bliskość natury. Goście mają dostęp do krytego, podgrzewanego basenu, siłowni, a także przestrzeni do spędzania czasu na zewnątrz, w tym prywatnej plaży, mariny, miejsca na ognisko i grilla.',
-      
-      'Apartamenty w Riva Zegrze są w pełni wyposażone i przystosowane do komfortowego pobytu rodzin, par oraz gości podróżujących służbowo. Obiekt jest przyjazny dzieciom, osobom z niepełnosprawnościami oraz gościom podróżującym ze zwierzętami, które są akceptowane bez dodatkowych opłat. Na terenie obiektu dostępna jest winda, pokoje dla niepalących, bezpłatne Wi-Fi oraz monitorowany parking z możliwością rezerwacji miejsca w garażu.',
-
-      'Riva Zegrze oferuje szerokie możliwości aktywnego wypoczynku. W okolicy dostępne są sporty wodne, kajaki, rowerki wodne, liczne trasy spacerowe i rowerowe, a w niedalekiej odległości znajduje się pole golfowe w Rajszewie. Dogodny dojazd z Warszawy sprawia, że apartament jest idealnym wyborem na weekendowy wyjazd lub dłuższy wypoczynek nad wodą.'
-    ],
-    features: [
-      {
-        icon: MapPin,
-        title: 'Lokalizacja',
-        description: 'Bezpośrednio przy plaży nad Jeziorem Zegrzyńskim, w otoczeniu zieleni i terenów rekreacyjnych.'
-      },
-      {
-        icon: Droplets,
-        title: 'Basen',
-        description: 'Dostęp do krytego, podgrzewanego basenu przez cały rok.'
-      },
-      {
-        icon: Dumbbell,
-        title: 'Siłownia',
-        description: 'W pełni wyposażona siłownia dla wszystkich gości obiektu.'
-      }
-    ]
-  },
-  
-  highlights: [
-    'Balkon z widokiem',
-    'Taras z meblami ogrodowymi',
-    'Widok na jezioro',
-    'Kryty podgrzewany basen',
-    'Prywatna plaża',
-    'Siłownia'
-  ],
-
-
-  // WAŻNE INFORMACJE
-  importantInfo: [
-    { icon: Clock, label: 'Zameldowanie', value: '15:00 - 22:00', note: 'Samodzielne zameldowanie - kody dostępu przesyłane w dniu przyjazdu' },
-    { icon: Clock, label: 'Wymeldowanie', value: 'do 11:00', note: '' },
-    { icon: Star, label: 'Cisza nocna', value: '22:00 - 7:00', note: 'Obowiązuje w godzinach nocnych' },
-    { icon: Check, label: 'Zakaz imprez', value: 'Brak imprez', note: 'Zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich' },
-    { icon: CarFront, label: 'Parking', value: 'Bezpłatne miejsca przed budynkiem', note: 'Miejsce w garażu: 75 zł/doba (po wcześniejszej rezerwacji)' },
-  ],
-
+  // Galeria zdjęć apartamentu
   gallery: [
     '/images/rooms/t3s-rivazegrze-3500-m.jpg',
     '/images/rooms/t3s-rivazegrze-3107-m.jpg',
@@ -111,7 +44,8 @@ const apartmentData = {
     '/images/rooms/d4.jpg',
   ],
 
-   surroundingsGallery: [
+  // Galeria zdjęć okolicy
+  surroundingsGallery: [
     '/images/gallery/apartments/c1/T3S-RivaZegrze-0430-m.jpg',
     '/images/gallery/apartments/c1/T3S-RivaZegrze-0610-m.jpg',
     '/images/gallery/apartments/c1/T3S-RivaZegrze-0903-m.jpg',
@@ -119,30 +53,6 @@ const apartmentData = {
     '/images/gallery/apartments/c1/T3S-RivaZegrze-4175-m.jpg',
     '/images/gallery/apartments/c1/T3S-RivaZegrze-RG-3669-m.jpg',
   ],
-
-  reviews: [
-    {
-      name: 'Piotr Kowalczyk',
-      date: 'Sierpień 2024',
-      rating: 5,
-      comment: 'Wspaniały apartament z pięknym widokiem na jezioro! Balkon idealny na poranne kawy. Polecam!',
-      avatar: 'PK'
-    },
-    {
-      name: 'Magdalena Nowak',
-      date: 'Lipiec 2024',
-      rating: 5,
-      comment: 'Bardzo wygodny apartament, wszystko co potrzebne na miejscu. Basen i siłownia to duży plus!',
-      avatar: 'MN'
-    },
-    {
-      name: 'Tomasz Wiśniewski',
-      date: 'Czerwiec 2024',
-      rating: 5,
-      comment: 'Idealne miejsce na rodzinny wypoczynek. Blisko Warszawy, a czujesz się jak na wakacjach!',
-      avatar: 'TW'
-    }
-  ]
 };
 
 // ============================================
@@ -156,7 +66,6 @@ export default function ApartmentC4Page() {
         <HeroGallery />
         <ApartmentDetails />
         <ImportantInfoSection />
-    
         <SurroundingsGallery />
         <ReviewsSection />
         <CTAWithFooter />
@@ -166,9 +75,8 @@ export default function ApartmentC4Page() {
 }
 
 // ============================================
-// 1. HERO GALLERY
-// ============================================
 function HeroGallery() {
+  const t = useTranslations('apartmentC4.hero');
   const [activeIndex, setActiveIndex] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
 
@@ -201,65 +109,73 @@ function HeroGallery() {
     <section ref={heroRef} className="relative pt-20 bg-gradient-to-b from-[#f1f1ed] to-[#f7f6f4]">
       <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-16 lg:py-24">
         
+        {/* Breadcrumbs */}
         <div className="flex items-center gap-2 text-xs text-[#8a968f] mb-8">
-          <a href="/" className="hover:text-[#4a6b5e] transition-colors">Strona główna</a>
+          <a href="/" className="hover:text-[#4a6b5e] transition-colors">{t('breadcrumbs.home')}</a>
           <span>/</span>
-          <a href="/apartamenty" className="hover:text-[#4a6b5e] transition-colors">Apartamenty</a>
+          <a href="/apartamenty" className="hover:text-[#4a6b5e] transition-colors">{t('breadcrumbs.apartments')}</a>
           <span>/</span>
-          <span className="text-[#4a6b5e]">Apartament C4</span>
+          <span className="text-[#4a6b5e]">{t('breadcrumbs.current')}</span>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
           <div className="order-2 lg:order-1">
             
+            {/* Badge */}
             <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 bg-white border border-[#d4d6ce] rounded-full mb-6">
               <Sparkles className="w-4 h-4 text-[#4a6b5e]" strokeWidth={1.5} />
-              <span className="text-xs tracking-[0.2em] text-[#4a6b5e] uppercase">Premium</span>
+              <span className="text-xs tracking-[0.2em] text-[#4a6b5e] uppercase">{t('badge')}</span>
             </div>
 
+            {/* Title */}
             <h1 
               className="hero-title text-5xl lg:text-6xl xl:text-7xl font-light text-[#4a6b5e] mb-4 leading-tight" 
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
-              {apartmentData.name}
+              {t('name')}
             </h1>
 
+            {/* Tagline */}
             <p className="hero-tagline text-xl text-[#4a6b5e] font-light mb-2 leading-relaxed">
-              {apartmentData.tagline}
+              {t('tagline')}
             </p>
 
+            {/* Subtitle */}
             <p className="hero-subtitle text-base text-[#8a968f] font-light mb-8 leading-relaxed">
-              {apartmentData.subtitle}
+              {t('subtitle')}
             </p>
 
+            {/* Specs Grid */}
             <div className="grid grid-cols-2 gap-4 mb-8">
               {[
-                { icon: Maximize, label: 'Rozmiar', value: apartmentData.specs.size },
-                { icon: Users, label: 'Goście', value: `${apartmentData.specs.guests} Osoby` },
-                { icon: Bed, label: 'Sypialnie', value: `${apartmentData.specs.bedrooms} Sypialnia` },
-                { icon: Bath, label: 'Łazienki', value: `${apartmentData.specs.bathrooms} Łazienka` },
+                { icon: Maximize, key: 'size' },
+                { icon: Users, key: 'guests' },
+                { icon: Bed, key: 'bedrooms' },
+                { icon: Bath, key: 'bathrooms' },
               ].map((spec, idx) => (
                 <div key={idx} className="spec-card flex items-center gap-3 p-4 bg-white border border-[#d4d6ce] group hover:border-[#4a6b5e] transition-all duration-300">
                   <spec.icon className="w-5 h-5 text-[#4a6b5e] group-hover:scale-110 transition-transform" strokeWidth={1.5} />
                   <div className="flex flex-col">
-                    <span className="text-xs text-[#8a968f] uppercase tracking-wide">{spec.label}</span>
-                    <span className="text-sm text-[#4a6b5e] font-medium">{spec.value}</span>
+                    <span className="text-xs text-[#8a968f] uppercase tracking-wide">{t(`specs.${spec.key}.label`)}</span>
+                    <span className="text-sm text-[#4a6b5e] font-medium">{t(`specs.${spec.key}.value`)}</span>
                   </div>
                 </div>
               ))}
             </div>
 
+            {/* Price Box */}
             <div className="price-box flex items-baseline gap-3 mb-8 p-6 bg-white border-l-4 border-[#4a6b5e]">
-              <span className="text-sm tracking-[0.2em] text-[#8a968f] uppercase">od</span>
+              <span className="text-sm tracking-[0.2em] text-[#8a968f] uppercase">{t('price.from')}</span>
               <span className="text-4xl lg:text-5xl font-light text-[#4a6b5e]" style={{ fontFamily: 'Playfair Display, serif' }}>
-                {apartmentData.price.from}
+                {t('price.value')}
               </span>
-              <span className="text-lg text-[#6e7a73]">{apartmentData.price.currency} / {apartmentData.price.period}</span>
+              <span className="text-lg text-[#6e7a73]">{t('price.currency')} / {t('price.period')}</span>
             </div>
 
           </div>
 
+          {/* Gallery */}
           <div className="order-1 lg:order-2">
             <PhotoProvider>
               <div className="space-y-4">
@@ -286,7 +202,7 @@ function HeroGallery() {
                         <div className="relative h-full cursor-pointer group">
                           <img
                             src={img}
-                            alt={`${apartmentData.name} - zdjęcie ${idx + 1}`}
+                            alt={`${t('gallery.imageAlt')} ${idx + 1}`}
                             className="w-full h-full object-cover"
                           />
                           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
@@ -311,6 +227,7 @@ function HeroGallery() {
                   <div className="swiper-pagination-custom absolute bottom-6 left-6 z-10"></div>
                 </Swiper>
 
+                {/* Thumbnails */}
                 <div className="grid grid-cols-4 md:grid-cols-6 gap-3">
                   {apartmentData.gallery.map((img, idx) => (
                     <div 
@@ -321,7 +238,7 @@ function HeroGallery() {
                     >
                       <img
                         src={img}
-                        alt={`Miniatura ${idx + 1}`}
+                        alt={`${t('gallery.thumbnailAlt')} ${idx + 1}`}
                         className="w-full h-full object-cover"
                       />
                     </div>
@@ -342,6 +259,7 @@ function HeroGallery() {
 // 2. APARTMENT DETAILS WITH CALENDAR
 // ============================================
 function ApartmentDetails() {
+  const t = useTranslations('apartmentC4.details');
   const sectionRef = useRef<HTMLElement>(null);
   const [calendarLoaded, setCalendarLoaded] = useState(false);
 
@@ -416,6 +334,18 @@ function ApartmentDetails() {
     initGSAP();
   }, []);
 
+  // Amenities with icons
+  const amenitiesIcons = [
+    { key: 'wifi', icon: Wifi },
+    { key: 'tv', icon: Tv },
+    { key: 'kitchen', icon: Coffee },
+    { key: 'ac', icon: Wind },
+    { key: 'bathroom', icon: Bath },
+    { key: 'utensils', icon: Utensils },
+    { key: 'terrace', icon: MapPin },
+    { key: 'garden', icon: Sparkles },
+  ];
+
   return (
     <section ref={sectionRef} className="py-20 lg:py-28 bg-white">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
@@ -425,74 +355,110 @@ function ApartmentDetails() {
           {/* LEFT - Description */}
           <div className="lg:col-span-2 space-y-12">
             
+            {/* About Apartment */}
             <div>
               <h2 
                 className="section-heading text-3xl lg:text-4xl font-light text-[#4a6b5e] mb-6" 
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
-                O apartamencie
+                {t('aboutApartment.title')}
               </h2>
               <p className="text-base text-[#6e7a73] leading-relaxed font-light mb-6">
-                {apartmentData.description}
+                {t('aboutApartment.description')}
               </p>
               <p className="text-base text-[#6e7a73] leading-relaxed font-light">
-                {apartmentData.fullDescription}
+                {t('aboutApartment.fullDescription')}
               </p>
             </div>
 
+            {/* Highlights */}
             <div>
               <h3 className="text-xl font-light text-[#0f0e0f] mb-6">
-                Najważniejsze atuty
+                {t('highlights.title')}
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {apartmentData.highlights.map((highlight, idx) => (
+                {Array.from({ length: 6 }).map((_, idx) => (
                   <div key={idx} className="highlight-item flex items-start gap-3 p-4 bg-[#f7f6f4] border-l-2 border-[#4a6b5e]">
                     <Check className="w-5 h-5 text-[#4a6b5e] flex-shrink-0 mt-0.5" strokeWidth={2} />
-                    <span className="text-sm text-[#6e7a73]">{highlight}</span>
+                    <span className="text-sm text-[#6e7a73]">{t(`highlights.items.${idx}`)}</span>
                   </div>
                 ))}
               </div>
             </div>
 
+            {/* Amenities */}
+            <div>
+              <h3 className="text-xl font-light text-[#0f0e0f] mb-6">
+                {t('amenities.title')}
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                {amenitiesIcons.map(({ key, icon: Icon }) => (
+                  <div 
+                    key={key} 
+                    className="amenity-item flex flex-col items-center text-center gap-3 p-4 bg-[#f7f6f4] border border-[#d4d6ce] hover:border-[#555e59] transition-all group"
+                  >
+                    <div className="w-12 h-12 rounded-full bg-white border border-[#d4d6ce] flex items-center justify-center group-hover:border-[#555e59] group-hover:bg-[#555e59] transition-all">
+                      <Icon className="w-6 h-6 text-[#555e59] group-hover:text-white transition-colors" strokeWidth={1.5} />
+                    </div>
+                    <div>
+                      <span className="text-sm font-medium text-[#0f0e0f] block mb-1">
+                        {t(`amenities.items.${key}.label`)}
+                      </span>
+                      <span className="text-xs text-[#6e7a73]">
+                        {t(`amenities.items.${key}.description`)}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* About Property */}
             <div className="pt-8 border-t border-[#d4d6ce]">
               <h2 
                 className="section-heading text-3xl lg:text-4xl font-light text-[#4a6b5e] mb-6" 
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
-                {apartmentData.aboutProperty.title}
+                {t('aboutProperty.title')}
               </h2>
               
               <div className="space-y-4 mb-8">
-                {apartmentData.aboutProperty.paragraphs.map((paragraph, idx) => (
+                {Array.from({ length: 3 }).map((_, idx) => (
                   <p key={idx} className="text-base text-[#6e7a73] leading-relaxed font-light">
-                    {paragraph}
+                    {t(`aboutProperty.paragraphs.${idx}`)}
                   </p>
                 ))}
               </div>
 
+              {/* Features Grid */}
               <div className="features-grid grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                {apartmentData.aboutProperty.features.map((feature, idx) => (
-                  <div 
-                    key={idx} 
-                    className="feature-card group bg-[#f7f6f4] p-6 border border-[#d4d6ce] hover:border-[#4a6b5e] transition-all duration-300"
-                  >
-                    <div className="w-12 h-12 rounded-full bg-white border border-[#d4d6ce] flex items-center justify-center mb-4 group-hover:border-[#AB8A62] group-hover:bg-gradient-to-br group-hover:from-[#f4e4c1] group-hover:to-[#AB8A62] transition-all">
-                      <feature.icon className="w-6 h-6 text-[#4a6b5e] group-hover:text-[#8b6914] transition-colors" strokeWidth={1} />
+                {['location', 'pool', 'gym'].map((key, idx) => {
+                  const icons = [MapPin, Droplets, Dumbbell];
+                  const Icon = icons[idx];
+                  
+                  return (
+                    <div 
+                      key={key} 
+                      className="feature-card group bg-[#f7f6f4] p-6 border border-[#d4d6ce] hover:border-[#555e59] transition-all duration-300"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-white border border-[#d4d6ce] flex items-center justify-center mb-4 group-hover:border-[#AB8A62] group-hover:bg-gradient-to-br group-hover:from-[#f4e4c1] group-hover:to-[#AB8A62] transition-all">
+                        <Icon className="w-6 h-6 text-[#555e59] group-hover:text-[#8b6914] transition-colors" strokeWidth={1} />
+                      </div>
+                      <h4 className="text-base font-medium text-[#0f0e0f] mb-2">
+                        {t(`aboutProperty.features.${key}.title`)}
+                      </h4>
+                      <p className="text-sm text-[#6e7a73] leading-relaxed font-light">
+                        {t(`aboutProperty.features.${key}.description`)}
+                      </p>
                     </div>
-                    <h4 className="text-base font-medium text-[#0f0e0f] mb-2">
-                      {feature.title}
-                    </h4>
-                    <p className="text-sm text-[#6e7a73] leading-relaxed font-light">
-                      {feature.description}
-                    </p>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
           </div>
 
-          {/* ✅ RIGHT - KALENDARZ DOSTĘPNOŚCI C4 */}
+          {/* RIGHT - Calendar */}
           <div className="lg:col-span-1">
             <div className="sticky top-24 bg-gradient-to-br from-white to-[#f7f6f4] p-8 border border-[#d4d6ce] shadow-xl rounded-lg">
               
@@ -504,11 +470,10 @@ function ApartmentDetails() {
                   className="text-2xl font-light text-[#4a6b5e]" 
                   style={{ fontFamily: 'Playfair Display, serif' }}
                 >
-                  Dostępność
+                  {t('availability.title')}
                 </h3>
               </div>
 
-              {/* Loading State */}
               {!calendarLoaded && (
                 <div className="calendar-skeleton">
                   <div className="skeleton-header"></div>
@@ -722,9 +687,8 @@ function ApartmentDetails() {
   );
 }
 
-
-
 function ImportantInfoSection() {
+  const t = useTranslations('apartmentC4.importantInfo');
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -763,44 +727,53 @@ function ImportantInfoSection() {
     initGSAP();
   }, []);
 
+  // Mapowanie kluczy z ikonami
+  const infoItems = [
+    { key: 'checkin', icon: Clock },
+    { key: 'checkout', icon: Clock },
+    { key: 'quietHours', icon: Star },
+    { key: 'noParties', icon: Check },
+    { key: 'parking', icon: CarFront },
+  ];
+
   return (
     <section ref={sectionRef} className="py-20 lg:py-28 bg-[#f7f6f4]">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         
         <div className="text-center mb-16">
           <span className="text-xs tracking-[0.3em] uppercase text-[#555e59] font-light block mb-4">
-            Przed przyjazdem
+            {t('sectionLabel')}
           </span>
           <h2 
             className="text-4xl lg:text-5xl font-light text-[#4a6b5e]" 
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
-            Ważne informacje
+            {t('sectionTitle')}
           </h2>
         </div>
 
         {/* GRID 3+2 DLA 5 ELEMENTÓW */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-          {/* Pierwsze 3 elementy w jednym rzędzie (desktop) */}
-          {apartmentData.importantInfo.slice(0, 3).map((info, idx) => (
+          {/* Pierwsze 3 elementy */}
+          {infoItems.slice(0, 3).map(({ key, icon: Icon }) => (
             <div 
-              key={idx} 
+              key={key} 
               className="info-item bg-white p-6 border border-[#d4d6ce] hover:border-[#4a6b5e] transition-all duration-300"
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-full bg-[#f7f6f4] border border-[#d4d6ce] flex items-center justify-center flex-shrink-0">
-                  <info.icon className="w-6 h-6 text-[#4a6b5e]" strokeWidth={1.5} />
+                  <Icon className="w-6 h-6 text-[#4a6b5e]" strokeWidth={1.5} />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-base font-medium text-[#0f0e0f] mb-2">
-                    {info.label}
+                    {t(`items.${key}.label`)}
                   </h3>
                   <p className="text-sm text-[#4a6b5e] font-medium mb-1">
-                    {info.value}
+                    {t(`items.${key}.value`)}
                   </p>
-                  {info.note && (
+                  {t(`items.${key}.note`) && (
                     <p className="text-xs text-[#8a968f] font-light leading-relaxed">
-                      {info.note}
+                      {t(`items.${key}.note`)}
                     </p>
                   )}
                 </div>
@@ -811,25 +784,25 @@ function ImportantInfoSection() {
 
         {/* Ostatnie 2 elementy wycentrowane */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {apartmentData.importantInfo.slice(3).map((info, idx) => (
+          {infoItems.slice(3).map(({ key, icon: Icon }) => (
             <div 
-              key={idx + 3} 
+              key={key} 
               className="info-item bg-white p-6 border border-[#d4d6ce] hover:border-[#4a6b5e] transition-all duration-300"
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-full bg-[#f7f6f4] border border-[#d4d6ce] flex items-center justify-center flex-shrink-0">
-                  <info.icon className="w-6 h-6 text-[#4a6b5e]" strokeWidth={1.5} />
+                  <Icon className="w-6 h-6 text-[#4a6b5e]" strokeWidth={1.5} />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-base font-medium text-[#0f0e0f] mb-2">
-                    {info.label}
+                    {t(`items.${key}.label`)}
                   </h3>
                   <p className="text-sm text-[#4a6b5e] font-medium mb-1">
-                    {info.value}
+                    {t(`items.${key}.value`)}
                   </p>
-                  {info.note && (
+                  {t(`items.${key}.note`) && (
                     <p className="text-xs text-[#8a968f] font-light leading-relaxed">
-                      {info.note}
+                      {t(`items.${key}.note`)}
                     </p>
                   )}
                 </div>
@@ -844,11 +817,10 @@ function ImportantInfoSection() {
             <Star className="w-6 h-6 text-[#AB8A62] flex-shrink-0 mt-1" strokeWidth={1.5} />
             <div>
               <h4 className="text-base font-medium text-[#0f0e0f] mb-2">
-                Zakaz organizowania imprez
+                {t('fullWidthNote.title')}
               </h4>
               <p className="text-sm text-[#6e7a73] leading-relaxed font-light">
-                W apartamencie obowiązuje całkowity zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich. 
-                Prosimy o zachowanie ciszy nocnej w godzinach 22:00–7:00 ze względu na komfort innych gości.
+                {t('fullWidthNote.description')}
               </p>
             </div>
           </div>
@@ -860,11 +832,9 @@ function ImportantInfoSection() {
 }
 
 
-
-// ============================================
-// 5. SURROUNDINGS GALLERY
 // ============================================
 function SurroundingsGallery() {
+  const t = useTranslations('apartmentC4.surroundings');
   const sectionRef = useRef<HTMLElement>(null);
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
@@ -955,13 +925,13 @@ function SurroundingsGallery() {
           
           <div className="text-center mb-16">
             <span className="text-xs tracking-[0.3em] uppercase text-[#6e7a73] font-light block mb-4">
-              Okolica
+              {t('sectionLabel')}
             </span>
             <h2 
               className="text-4xl lg:text-5xl font-light text-[#4a6b5e]" 
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
-              Odkryj piękno Jeziora Zegrzyńskiego
+              {t('sectionTitle')}
             </h2>
           </div>
 
@@ -976,13 +946,13 @@ function SurroundingsGallery() {
                 <div className="relative w-full h-full overflow-hidden">
                   <img
                     src={img}
-                    alt={`Okolica Riva Zegrze - zdjęcie ${idx + 1}`}
+                    alt={t('imageAlt', { number: idx + 1 })}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute bottom-3 left-3 flex items-center gap-2 text-white">
                       <Eye className="w-5 h-5" strokeWidth={1.5} />
-                      <span className="text-sm font-light">Zobacz pełny obraz</span>
+                      <span className="text-sm font-light">{t('viewFullImage')}</span>
                     </div>
                     <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs text-[#4a6b5e] font-medium">
                       {idx + 1} / {apartmentData.surroundingsGallery.length}
@@ -1016,7 +986,7 @@ function SurroundingsGallery() {
             onClick={closeModal}
             className="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all group"
             style={{ zIndex: 50 }}
-            aria-label="Zamknij galerię"
+            aria-label={t('modal.closeGallery')}
           >
             <svg className="w-6 h-6 text-white group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -1028,7 +998,7 @@ function SurroundingsGallery() {
             onClick={(e) => { e.stopPropagation(); prevImage(); }}
             className="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all group"
             style={{ zIndex: 50 }}
-            aria-label="Poprzednie zdjęcie"
+            aria-label={t('modal.previousPhoto')}
           >
             <svg className="w-7 h-7 text-white group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -1040,7 +1010,7 @@ function SurroundingsGallery() {
             onClick={(e) => { e.stopPropagation(); nextImage(); }}
             className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all group"
             style={{ zIndex: 50 }}
-            aria-label="Następne zdjęcie"
+            aria-label={t('modal.nextPhoto')}
           >
             <svg className="w-7 h-7 text-white group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
@@ -1063,7 +1033,7 @@ function SurroundingsGallery() {
             <img
               key={selectedImage}
               src={apartmentData.surroundingsGallery[selectedImage]}
-              alt={`Okolica Riva Zegrze - zdjęcie ${selectedImage + 1}`}
+              alt={t('imageAlt', { number: selectedImage + 1 })}
               className="max-w-full max-h-[90vh] object-contain shadow-2xl"
               style={{ animation: 'imageScaleIn 0.4s ease-out' }}
             />
@@ -1075,7 +1045,7 @@ function SurroundingsGallery() {
             style={{ zIndex: 50 }}
           >
             <MapPin className="w-4 h-4 inline-block mr-2" strokeWidth={1.5} />
-            Jezioro Zegrzyńskie - Riva Zegrze
+            {t('modal.caption')}
           </div>
         </div>
       )}
@@ -1101,11 +1071,17 @@ function SurroundingsGallery() {
   );
 }
 
+
+// ============================================
+// ============================================
+
 // ============================================
 // 6. REVIEWS SECTION
 // ============================================
 function ReviewsSection() {
+  const t = useTranslations('apartmentC4.reviews');
   const sectionRef = useRef<HTMLElement>(null);
+  const reviewCount = 3;
 
   useEffect(() => {
     const initGSAP = async () => {
@@ -1149,13 +1125,13 @@ function ReviewsSection() {
         
         <div className="text-center mb-16">
           <span className="text-xs tracking-[0.3em] uppercase text-[#555e59] font-light block mb-4">
-            Opinie gości
+            {t('sectionLabel')}
           </span>
           <h2 
             className="text-4xl lg:text-5xl font-light text-[#4a6b5e] mb-4" 
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
-            Co mówią nasi goście
+            {t('sectionTitle')}
           </h2>
           
           <div className="flex items-center justify-center gap-4 mt-6">
@@ -1165,12 +1141,14 @@ function ReviewsSection() {
               ))}
             </div>
             <span className="text-2xl font-light text-[#0f0e0f]">5.0</span>
-            <span className="text-sm text-[#8a968f]">• na podstawie {apartmentData.reviews.length} opinii</span>
+            <span className="text-sm text-[#8a968f]">
+              • {t('basedOn', { count: reviewCount })}
+            </span>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {apartmentData.reviews.map((review, idx) => (
+          {Array.from({ length: reviewCount }, (_, idx) => (
             <div 
               key={idx} 
               className="review-card bg-[#f7f6f4] p-8 border border-[#d4d6ce] relative group hover:border-[#8a968f] transition-all duration-300"
@@ -1180,22 +1158,27 @@ function ReviewsSection() {
               <div className="relative">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#4a6b5e] to-[#6c7a72] flex items-center justify-center text-white font-medium">
-                    {review.avatar}
+                    {t(`items.${idx}.avatar`)}
                   </div>
                   <div>
-                    <h4 className="text-base font-medium text-[#0f0e0f]">{review.name}</h4>
-                    <p className="text-xs text-[#8a968f]">{review.date}</p>
+                    <h4 className="text-base font-medium text-[#0f0e0f]">
+                      {t(`items.${idx}.name`)}
+                    </h4>
+                    <p className="text-xs text-[#8a968f]">
+                      {t(`items.${idx}.date`)}
+                    </p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-1 mb-4">
-                  {[...Array(review.rating)].map((_, i) => (
+                  {/* ✅ POPRAWKA: t.raw() zamiast t() dla wartości numerycznej */}
+                  {[...Array(Number(t.raw(`items.${idx}.rating`)))].map((_, i) => (
                     <Star key={i} className="w-4 h-4 text-[#AB8A62] fill-[#AB8A62]" strokeWidth={0} />
                   ))}
                 </div>
 
                 <p className="text-sm text-[#6e7a73] leading-relaxed font-light">
-                  "{review.comment}"
+                  &ldquo;{t(`items.${idx}.comment`)}&rdquo;
                 </p>
               </div>
             </div>
@@ -1208,9 +1191,13 @@ function ReviewsSection() {
 }
 
 // ============================================
+// ============================================
 // 7. CTA + FOOTER
 // ============================================
 function CTAWithFooter() {
+  const t = useTranslations('apartmentC4.cta');
+  const f = useTranslations('apartmentC4.footer');
+  const locale = useLocale();
   const sectionRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -1274,38 +1261,41 @@ function CTAWithFooter() {
             
             <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 backdrop-blur-md rounded-full mb-8 border border-white/20">
               <Sparkles className="w-4 h-4 text-[#AB8A62]" strokeWidth={1} />
-              <span className="text-xs tracking-[0.25em] uppercase text-white/90 font-light">Oferta specjalna</span>
+              <span className="text-xs tracking-[0.25em] uppercase text-white/90 font-light">
+                {t('badge')}
+              </span>
             </div>
 
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-light mb-6 leading-tight text-white drop-shadow-lg" style={{ fontFamily: 'Playfair Display, serif' }}>
-              Zarezerwuj min. 3 noce <br />
-              <span className="text-[#AB8A62]">i zyskaj 40% rabatu</span>
+              {t('title')} <br />
+              <span className="text-[#AB8A62]">{t('titleHighlight')}</span>
             </h2>
 
             <p className="text-base md:text-lg font-light mb-12 max-w-2xl mx-auto text-white/90 leading-relaxed">
-              Skorzystaj z naszej limitowanej promocji. Przy rezerwacji minimum 3 nocy otrzymasz 
-              <strong className="font-medium text-white"> aż 40% zniżki</strong> na cały pobyt w Apartamencie C4.
+              {t('description')}{' '}
+              <strong className="font-medium text-white">{t('descriptionHighlight')}</strong>{' '}
+              {t('descriptionEnd')}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
               
               <button className="flex items-center gap-3 px-10 py-5 bg-white text-[#2a3d35] hover:bg-[#AB8A62] hover:text-white transition-all duration-300 text-sm tracking-[0.15em] uppercase group shadow-2xl font-light">
                 <Calendar className="w-5 h-5 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
-                <span>Zarezerwuj apartament</span>
+                <span>{t('bookButton')}</span>
               </button>
 
               <a href="tel:+48510038038" className="flex items-center gap-3 px-10 py-5 bg-white/10 backdrop-blur-md border-2 border-white/30 text-white hover:bg-white/20 hover:border-white/50 transition-all duration-300 text-sm tracking-[0.15em] uppercase group font-light">
                 <Phone className="w-5 h-5 group-hover:rotate-12 transition-transform" strokeWidth={1.5} />
-                <span>Zadzwoń: +48 510 038 038</span>
+                <span>{t('phoneButton')}</span>
               </a>
 
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 text-white/70">
-              {['Bezpieczna płatność', 'Anulowanie do 48h', 'Najlepsza cena', 'Brak ukrytych kosztów'].map((badge, idx) => (
-                <div key={idx} className="flex items-center gap-2 text-xs tracking-wide">
+              {(['payment', 'cancellation', 'bestPrice', 'noCosts'] as const).map((key) => (
+                <div key={key} className="flex items-center gap-2 text-xs tracking-wide">
                   <Check className="w-4 h-4 text-[#AB8A62]" strokeWidth={2} />
-                  <span>{badge}</span>
+                  <span>{t(`trustBadges.${key}`)}</span>
                 </div>
               ))}
             </div>
@@ -1334,8 +1324,7 @@ function CTAWithFooter() {
                   </span>
                 </div>
                 <p className="text-sm text-white/70 leading-relaxed font-light mb-6">
-                  Kameralne apartamenty nad wodą. Spokój, komfort i bezpośrednia
-                  rezerwacja w wyjątkowej lokalizacji pod Warszawą.
+                  {f('brand.description')}
                 </p>
                 
                 <div className="flex items-center gap-3 pt-4">
@@ -1344,25 +1333,25 @@ function CTAWithFooter() {
                       <Star key={i} className="w-4 h-4 text-[#AB8A62] fill-[#AB8A62]" strokeWidth={0} />
                     ))}
                   </div>
-                  <span className="text-xs text-white/50 font-light">5.0 • Booking.com</span>
+                  <span className="text-xs text-white/50 font-light">{f('brand.rating')}</span>
                 </div>
               </div>
 
               {/* NAVIGATION */}
               <div>
                 <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
-                  Odkryj
+                  {f('discover.title')}
                 </h4>
                 <ul className="space-y-3">
                   {[
-                    { label: 'Apartamenty', href: '/apartamenty' },
-                    { label: 'Oferta Specjalna', href: '/offers' },
-                    { label: 'Aktywności', href: '/activities' },
-                    { label: 'Galeria', href: '/galeria' },
-                    { label: 'O Nas', href: '/about' },
+                    { label: f('discover.apartments'), href: '/apartamenty' },
+                    { label: f('discover.specialOffer'), href: '/offers' },
+                    { label: f('discover.activities'), href: '/activities' },
+                    { label: f('discover.gallery'), href: '/galeria' },
+                    { label: f('discover.about'), href: '/about' },
                   ].map((item) => (
                     <li key={item.label}>
-                      <a href={item.href} className="text-sm text-white/70 hover:text-white transition-colors font-light inline-flex items-center gap-2 group">
+                      <a href={`/${locale}${item.href}`} className="text-sm text-white/70 hover:text-white transition-colors font-light inline-flex items-center gap-2 group">
                         <span className="w-0 group-hover:w-4 h-px bg-[#AB8A62] transition-all duration-300"></span>
                         {item.label}
                       </a>
@@ -1374,27 +1363,25 @@ function CTAWithFooter() {
               {/* CONTACT */}
               <div>
                 <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
-                  Kontakt
+                  {f('contact.title')}
                 </h4>
                 <ul className="space-y-4">
                   <li className="flex items-start gap-3 text-sm text-white/70 font-light">
                     <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0 text-[#AB8A62]" strokeWidth={1} />
-                    <span>
-                      Riva Zegrze<br />
-                      Rybaki 11<br />
-                      05-130 Zegrze Południowe
+                    <span className="whitespace-pre-line">
+                      {f('contact.address')}
                     </span>
                   </li>
                   <li>
-                    <a href="tel:+48510038038" className="flex items-center gap-3 text-sm text-white/70 font-light hover:text-white transition-colors group">
+                    <a href={`tel:${f('contact.phone').replace(/\s/g, '')}`} className="flex items-center gap-3 text-sm text-white/70 font-light hover:text-white transition-colors group">
                       <Phone className="w-5 h-5 text-[#AB8A62] group-hover:scale-110 transition-transform" strokeWidth={1} />
-                      <span>+48 510 038 038</span>
+                      <span>{f('contact.phone')}</span>
                     </a>
                   </li>
                   <li>
-                    <a href="mailto:wynajem@rivazegrze.pl" className="flex items-center gap-3 text-sm text-white/70 font-light hover:text-white transition-colors group">
+                    <a href={`mailto:${f('contact.email')}`} className="flex items-center gap-3 text-sm text-white/70 font-light hover:text-white transition-colors group">
                       <Mail className="w-5 h-5 text-[#AB8A62] group-hover:scale-110 transition-transform" strokeWidth={1} />
-                      <span>wynajem@rivazegrze.pl</span>
+                      <span>{f('contact.email')}</span>
                     </a>
                   </li>
                 </ul>
@@ -1403,28 +1390,31 @@ function CTAWithFooter() {
               {/* SOCIAL & NEWSLETTER */}
               <div>
                 <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
-                  Newsletter
+                  {f('newsletter.title')}
                 </h4>
                 <p className="text-sm text-white/70 mb-4 font-light">
-                  Bądź na bieżąco z ofertami specjalnymi
+                  {f('newsletter.description')}
                 </p>
                 
                 <form className="mb-8">
-                  <div className="flex gap-2">
+                  <div className="flex">
                     <input
                       type="email"
-                      placeholder="Twój e-mail"
-                      className="flex-1 px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-[#AB8A62] focus:bg-white/15 transition-all font-light"
+                      placeholder={f('newsletter.placeholder')}
+                      className="flex-1 px-4 py-3 bg-white/10 border border-white/20 text-white text-sm font-light placeholder:text-white/40 focus:outline-none focus:border-[#AB8A62] transition-colors"
                     />
-                    <button type="submit" className="px-6 py-3 bg-[#AB8A62] text-white hover:bg-[#8b6914] transition-colors">
-                      <ChevronRight className="w-5 h-5" strokeWidth={2} />
+                    <button
+                      type="submit"
+                      className="px-6 py-3 bg-[#AB8A62] text-white text-sm tracking-wider uppercase hover:bg-[#c4a882] transition-colors font-light"
+                    >
+                      OK
                     </button>
                   </div>
                 </form>
 
                 <div className="space-y-3">
                   <h5 className="text-xs tracking-[0.2em] uppercase font-light text-white/60">
-                    Social Media
+                    {f('newsletter.socialMedia')}
                   </h5>
                   <div className="flex gap-3">
                     {[
@@ -1448,15 +1438,15 @@ function CTAWithFooter() {
             {/* BOTTOM BAR */}
             <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-xs text-white/50 font-light">
-                © {new Date().getFullYear()} Riva Zegrze. Wszystkie prawa zastrzeżone.
+                {f('bottom.copyright', { year: new Date().getFullYear() })}
               </p>
               <div className="flex gap-8">
                 {[
-                  { label: 'Polityka prywatności', href: '/privacy' },
-                  { label: 'Regulamin', href: '/terms' },
-                  { label: 'Cookies', href: '/cookies' },
+                  { label: f('bottom.privacy'), href: '/privacy' },
+                  { label: f('bottom.terms'), href: '/terms' },
+                  { label: f('bottom.cookies'), href: '/cookies' },
                 ].map((item) => (
-                  <a key={item.label} href={item.href} className="text-xs text-white/50 hover:text-white/80 transition-colors font-light">
+                  <a key={item.label} href={`/${locale}${item.href}`} className="text-xs text-white/50 hover:text-white/80 transition-colors font-light">
                     {item.label}
                   </a>
                 ))}

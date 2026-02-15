@@ -819,7 +819,7 @@
           "Gym access"
         ]
       },
-      "amenities": {
+          "amenities": {
         "title": "Amenities",
         "items": {
           "wifi": {
@@ -882,7 +882,7 @@
         "loadingText": "Loading calendar..."
       }
     },
-   "importantInfo": {
+    "importantInfo": {
       "sectionLabel": "Before Arrival",
       "sectionTitle": "Important Information",
       "items": {
@@ -917,7 +917,7 @@
         "description": "A strict no-party policy is enforced in the apartment, including bachelor and bachelorette parties. Please observe quiet hours between 10:00 PM and 7:00 AM for the comfort of other guests."
       }
     },
-        "surroundingsGallery": {
+    "surroundingsGallery": {
       "sectionLabel": "Surroundings",
       "sectionTitle": "Discover the Beauty of Lake Zegrzyński",
       "imageAlt": "Surroundings of Riva Zegrze - photo",
@@ -927,7 +927,7 @@
       "nextPhoto": "Next photo",
       "modalCaption": "Lake Zegrzyński - Riva Zegrze"
     },
-       "reviews": {
+    "reviews": {
       "sectionLabel": "Guest Reviews",
       "sectionTitle": "What Our Guests Say",
       "rating": "5.0",
@@ -1005,7 +1005,250 @@
         "cookies": "Cookies"
       }
     }
+  },
+   "apartmentC4": {
+    "hero": {
+      "breadcrumbs": {
+        "home": "Home",
+        "apartments": "Apartments",
+        "current": "Apartment C4"
+      },
+      "badge": "Premium",
+      "name": "Apartment C4",
+      "tagline": "Modern apartment with balcony",
+      "subtitle": "Located directly on Lake Zegrzyński",
+      "specs": {
+        "size": {
+          "label": "Size",
+          "value": "37 m²"
+        },
+        "guests": {
+          "label": "Guests",
+          "value": "4 Persons"
+        },
+        "bedrooms": {
+          "label": "Bedrooms",
+          "value": "1 Bedroom"
+        },
+        "bathrooms": {
+          "label": "Bathrooms",
+          "value": "1 Bathroom"
+        }
+      },
+      "price": {
+        "from": "from",
+        "value": "780",
+        "currency": "PLN",
+        "period": "night"
+      },
+      "gallery": {
+        "imageAlt": "Apartment C4 - photo",
+        "thumbnailAlt": "Thumbnail"
+      }
+    },
+    "details": {
+      "aboutApartment": {
+        "title": "About the Apartment",
+        "description": "Modern apartment with balcony, located directly on Lake Zegrzyński. A comfortable choice for a family stay, weekend getaway, or longer waterfront vacation.",
+        "fullDescription": "The 37 m² apartment accommodates up to four guests. It features a separate bedroom with a double bed, a living room with a sofa bed, a functional kitchenette, and a private bathroom with shower. The interior has been designed with comfort in mind for both shorter and longer stays. Guests have access to a balcony and a terrace with garden furniture, allowing them to spend time outdoors."
+      },
+      "highlights": {
+        "title": "Key Highlights",
+        "items": [
+          "Balcony with a view",
+          "Terrace with garden furniture",
+          "Lake view",
+          "Indoor heated pool",
+          "Private beach",
+          "Gym"
+        ]
+      },
+      "amenities": {
+        "title": "Amenities",
+        "items": {
+          "wifi": {
+            "label": "WiFi",
+            "description": "High-speed fiber internet"
+          },
+          "tv": {
+            "label": "Smart TV",
+            "description": "55\" with Netflix & HBO"
+          },
+          "kitchen": {
+            "label": "Kitchen",
+            "description": "Fully equipped"
+          },
+          "ac": {
+            "label": "Air Conditioning",
+            "description": "Heating & cooling"
+          },
+          "bathroom": {
+            "label": "Bathroom",
+            "description": "Premium toiletries"
+          },
+          "utensils": {
+            "label": "Dishes",
+            "description": "Complete cutlery & plates"
+          },
+          "terrace": {
+            "label": "Balcony",
+            "description": "With garden furniture"
+          },
+          "garden": {
+            "label": "View",
+            "description": "Lake view"
+          }
+        }
+      },
+      "aboutProperty": {
+        "title": "About the Property",
+        "paragraphs": [
+          "The apartment is located at Riva Zegrze – a property designed for waterfront relaxation throughout the year. Located directly on the beach of Lake Zegrzyński, surrounded by greenery and recreational areas, it provides a peaceful atmosphere and closeness to nature. Guests have access to an indoor heated pool, gym, and outdoor spaces, including a private beach, marina, bonfire area, and grill.",
+          "The apartments at Riva Zegrze are fully equipped and adapted for comfortable stays for families, couples, and business travelers. The property is child-friendly, accessible for people with disabilities, and welcomes guests traveling with pets at no additional charge. The property features an elevator, non-smoking rooms, free Wi-Fi, and monitored parking with the option to reserve a garage space.",
+          "Riva Zegrze offers a wide range of active recreation opportunities. Water sports, kayaks, pedal boats, numerous walking and cycling routes are available nearby, and a golf course in Rajszewo is not far away. Convenient access from Warsaw makes the apartment an ideal choice for a weekend getaway or longer waterfront vacation."
+        ],
+        "features": {
+          "location": {
+            "title": "Location",
+            "description": "Directly on the beach of Lake Zegrzyński, surrounded by greenery and recreational areas."
+          },
+          "pool": {
+            "title": "Pool",
+            "description": "Access to an indoor heated pool year-round."
+          },
+          "gym": {
+            "title": "Gym",
+            "description": "Fully equipped gym for all guests."
+          }
+        }
+      },
+      "availability": {
+        "title": "Availability",
+        "loadingText": "Loading calendar..."
+      }
+    },
+    "importantInfo": {
+      "sectionLabel": "Practical information",
+      "sectionTitle": "Important Information",
+      "items": {
+        "checkin": {
+          "label": "Check-in",
+          "value": "3:00 PM - 10:00 PM",
+          "note": "Self check-in - access codes sent on the day of arrival"
+        },
+        "checkout": {
+          "label": "Check-out",
+          "value": "Until 11:00 AM",
+          "note": ""
+        },
+        "quietHours": {
+          "label": "Quiet Hours",
+          "value": "10:00 PM - 7:00 AM",
+          "note": "Applicable during nighttime hours"
+        },
+        "noParties": {
+          "label": "No Parties",
+          "value": "No parties allowed",
+          "note": "No parties permitted, including hen and stag parties"
+        },
+        "parking": {
+          "label": "Parking",
+          "value": "Free parking spaces in front of the building",
+          "note": "Garage space: 75 PLN/night (advance reservation required)"
+        }
+      },
+      "fullWidthNote": {
+        "title": "Respect for the Property",
+        "description": "Please take care of the apartment and treat it as your own home. Additional charges may apply in case of damage or excessive soiling. Thank you for your understanding and we wish you a pleasant stay."
+      }
+    },
+    "surroundings": {
+      "sectionLabel": "Surroundings",
+      "sectionTitle": "Discover the Beauty of Lake Zegrzyński",
+      "imageAlt": "Riva Zegrze surroundings - photo {number}",
+      "viewFullImage": "View full image",
+      "modal": {
+        "closeGallery": "Close gallery",
+        "previousPhoto": "Previous photo",
+        "nextPhoto": "Next photo",
+        "caption": "Lake Zegrzyński - Riva Zegrze"
+      }
+    },
+    "reviews": {
+      "sectionLabel": "Guest Reviews",
+      "sectionTitle": "What Our Guests Say",
+      "basedOn": "based on {count} reviews",
+      "items": [
+        {
+          "name": "Piotr Kowalczyk",
+          "date": "August 2024",
+          "rating": 5,
+          "comment": "Wonderful apartment with a beautiful lake view! The balcony is perfect for morning coffee. Highly recommend!",
+          "avatar": "PK"
+        },
+        {
+          "name": "Magdalena Nowak",
+          "date": "July 2024",
+          "rating": 5,
+          "comment": "Very comfortable apartment, everything you need is on site. The pool and gym are a great bonus!",
+          "avatar": "MN"
+        },
+        {
+          "name": "Tomasz Wiśniewski",
+          "date": "June 2024",
+          "rating": 5,
+          "comment": "Perfect place for a family vacation. Close to Warsaw, yet you feel like you're on holiday!",
+          "avatar": "TW"
+        }
+      ]
+    },
+    "cta": {
+      "badge": "Special Offer",
+      "title": "Book 3+ nights",
+      "titleHighlight": "and get 40% off",
+      "description": "Take advantage of our limited promotion. When booking a minimum of 3 nights, you'll receive",
+      "descriptionHighlight": "up to 40% discount",
+      "descriptionEnd": "on your entire stay in Apartment C4.",
+      "bookButton": "Book apartment",
+      "phoneButton": "Call: +48 510 038 038",
+      "trustBadges": {
+        "payment": "Secure payment",
+        "cancellation": "Cancel up to 48h",
+        "bestPrice": "Best price",
+        "noCosts": "No hidden costs"
+      }
+    },
+    "footer": {
+      "brand": {
+        "description": "Intimate waterfront apartments. Peace, comfort and direct booking in a unique location near Warsaw.",
+        "rating": "5.0 • Booking.com"
+      },
+      "discover": {
+        "title": "Discover",
+        "apartments": "Apartments",
+        "specialOffer": "Special Offer",
+        "activities": "Activities",
+        "gallery": "Gallery",
+        "about": "About Us"
+      },
+      "contact": {
+        "title": "Contact",
+        "address": "Riva Zegrze\nRybaki 11\n05-130 Zegrze Południowe",
+        "phone": "+48 510 038 038",
+        "email": "wynajem@rivazegrze.pl"
+      },
+      "newsletter": {
+        "title": "Newsletter",
+        "description": "Stay up to date with special offers",
+        "placeholder": "Your email",
+        "socialMedia": "Social Media"
+      },
+      "bottom": {
+        "copyright": "© {year} Riva Zegrze. All rights reserved.",
+        "privacy": "Privacy Policy",
+        "terms": "Terms & Conditions",
+        "cookies": "Cookies"
+      }
+    }
   }
 }
-
-

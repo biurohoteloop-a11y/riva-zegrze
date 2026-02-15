@@ -8,7 +8,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Menu, X, Waves, MapPin, Phone, Mail, Instagram, Facebook, Twitter, Calendar, Star, Compass } from 'lucide-react';
 import LanguageSwitcher from '../components/LanguageSwitcher';
 import Navigation from '../components/layout/Navigation';
-
+import Link from 'next/link';
+import { useLocale } from 'next-intl';
 
 
 
@@ -633,14 +634,28 @@ function IntroSection() {
 
 
 // ============================================
+// ============================================
 // Rooms Showcase - Z LOKALNYMI ZDJĘCIAMI
+// ============================================
 function RoomsShowcase() {
   const t = useTranslations('rooms');
+  const locale = useLocale();
   const sectionRef = useRef<HTMLElement>(null);
   const horizontalRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const apartmentKeys = ['c1', 'c4', 'c7', 'd1', 'd4', 'd7', 'b10'] as const;
+
+  // Mapowanie klucza na URL apartamentu
+  const apartmentUrls: Record<string, string> = {
+    c1: `/${locale}/apartamenty/apartament-c1`,
+    c4: `/${locale}/apartamenty/apartament-c4`,
+    c7: `/${locale}/apartamenty/apartament-c7`,
+    d1: `/${locale}/apartamenty/apartament-d1`,
+    d4: `/${locale}/apartamenty/apartament-d4`,
+    d7: `/${locale}/apartamenty/apartament-d7`,
+    b10: `/${locale}/apartamenty/apartament-deluxe-b10`,
+  };
 
   const imageMap: Record<string, string> = {
     c1: '/images/rooms/t3s-rivazegrze-3107-m.jpg',
@@ -810,9 +825,12 @@ function RoomsShowcase() {
 
                   <div className="flex items-center justify-between pt-4 border-t border-white/20">
                     <span className="text-base text-white font-light">{apt.price}</span>
-                    <button className="bg-transparent border-2 border-white text-white px-5 py-2 text-xs tracking-wider uppercase hover:bg-white hover:text-[#6e7a73] transition-all duration-300">
+                    <Link 
+                      href={apartmentUrls[apt.key]}
+                      className="bg-transparent border-2 border-white text-white px-5 py-2 text-xs tracking-wider uppercase hover:bg-white hover:text-[#6e7a73] transition-all duration-300 inline-block text-center"
+                    >
                       {t('book')}
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -865,9 +883,12 @@ function RoomsShowcase() {
                   {/* DOLNA CZĘŚĆ (Price + Button) - ZAWSZE NA DOLE */}
                   <div className="flex items-center justify-between pt-5 lg:pt-6 border-t border-white/20 mt-5 lg:mt-6">
                     <span className="text-lg lg:text-xl xl:text-2xl text-white font-light">{apt.price}</span>
-                    <button className="bg-transparent border-2 border-white text-white px-5 py-2 lg:px-6 lg:py-2.5 xl:px-8 xl:py-3 text-xs lg:text-sm tracking-wider uppercase hover:bg-white hover:text-[#6e7a73] transition-all duration-300 whitespace-nowrap">
+                    <Link
+                      href={apartmentUrls[apt.key]}
+                      className="bg-transparent border-2 border-white text-white px-5 py-2 lg:px-6 lg:py-2.5 xl:px-8 xl:py-3 text-xs lg:text-sm tracking-wider uppercase hover:bg-white hover:text-[#6e7a73] transition-all duration-300 whitespace-nowrap inline-block text-center"
+                    >
                       {t('book')}
-                    </button>
+                    </Link>
                   </div>
 
                 </div>
@@ -942,6 +963,7 @@ function BathroomsIcon() {
     </svg>
   );
 }
+
 
 // Additional Hero Section - WITH TRANSLATIONS
 function AdditionalHero() {

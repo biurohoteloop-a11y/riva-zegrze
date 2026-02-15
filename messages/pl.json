@@ -817,7 +817,7 @@
           "Dostęp do siłowni"
         ]
       },
-      "amenities": {
+            "amenities": {
         "title": "Udogodnienia",
         "items": {
           "wifi": {
@@ -881,40 +881,40 @@
       }
     },
     "importantInfo": {
-  "sectionLabel": "Przed przyjazdem",
-  "sectionTitle": "Ważne informacje",
-  "items": {
-    "checkin": {
-      "label": "Zameldowanie",
-      "value": "15:00 - 22:00",
-      "note": "Samodzielne zameldowanie - kody dostępu przesyłane w dniu przyjazdu"
+      "sectionLabel": "Przed przyjazdem",
+      "sectionTitle": "Ważne informacje",
+      "items": {
+        "checkin": {
+          "label": "Zameldowanie",
+          "value": "15:00 - 22:00",
+          "note": "Samodzielne zameldowanie - kody dostępu przesyłane w dniu przyjazdu"
+        },
+        "checkout": {
+          "label": "Wymeldowanie",
+          "value": "do 11:00",
+          "note": ""
+        },
+        "quietHours": {
+          "label": "Cisza nocna",
+          "value": "22:00 - 7:00",
+          "note": "Obowiązuje w godzinach nocnych"
+        },
+        "noParties": {
+          "label": "Zakaz imprez",
+          "value": "Brak imprez",
+          "note": "Zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich"
+        },
+        "parking": {
+          "label": "Parking",
+          "value": "Bezpłatne miejsca przed budynkiem",
+          "note": "Miejsce w garażu: 75 zł/doba (po wcześniejszej rezerwacji)"
+        }
+      },
+      "fullWidthNote": {
+        "title": "Zakaz organizowania imprez",
+        "description": "W apartamencie obowiązuje całkowity zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich. Prosimy o zachowanie ciszy nocnej w godzinach 22:00–7:00 ze względu na komfort innych gości."
+      }
     },
-    "checkout": {
-      "label": "Wymeldowanie",
-      "value": "do 11:00",
-      "note": ""
-    },
-    "quietHours": {
-      "label": "Cisza nocna",
-      "value": "22:00 - 7:00",
-      "note": "Obowiązuje w godzinach nocnych"
-    },
-    "noParties": {
-      "label": "Zakaz imprez",
-      "value": "Brak imprez",
-      "note": "Zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich"
-    },
-    "parking": {
-      "label": "Parking",
-      "value": "Bezpłatne miejsca przed budynkiem",
-      "note": "Miejsce w garażu: 75 zł/doba (po wcześniejszej rezerwacji)"
-    }
-  },
-  "fullWidthNote": {
-    "title": "Zakaz organizowania imprez",
-    "description": "W apartamencie obowiązuje całkowity zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich. Prosimy o zachowanie ciszy nocnej w godzinach 22:00–7:00 ze względu na komfort innych gości."
-  }
-},
     "surroundingsGallery": {
       "sectionLabel": "Okolica",
       "sectionTitle": "Odkryj piękno Jeziora Zegrzyńskiego",
@@ -925,7 +925,7 @@
       "nextPhoto": "Następne zdjęcie",
       "modalCaption": "Jezioro Zegrzyńskie - Riva Zegrze"
     },
-        "reviews": {
+    "reviews": {
       "sectionLabel": "Opinie gości",
       "sectionTitle": "Co mówią nasi goście",
       "rating": "5.0",
@@ -1003,7 +1003,250 @@
         "cookies": "Cookies"
       }
     }
+  },
+    "apartmentC4": {
+    "hero": {
+      "breadcrumbs": {
+        "home": "Strona główna",
+        "apartments": "Apartamenty",
+        "current": "Apartament C4"
+      },
+      "badge": "Premium",
+      "name": "Apartament C4",
+      "tagline": "Nowoczesny apartament z balkonem",
+      "subtitle": "Położony bezpośrednio nad Jeziorem Zegrzyńskim",
+      "specs": {
+        "size": {
+          "label": "Rozmiar",
+          "value": "37 m²"
+        },
+        "guests": {
+          "label": "Goście",
+          "value": "4 Osoby"
+        },
+        "bedrooms": {
+          "label": "Sypialnie",
+          "value": "1 Sypialnia"
+        },
+        "bathrooms": {
+          "label": "Łazienki",
+          "value": "1 Łazienka"
+        }
+      },
+      "price": {
+        "from": "od",
+        "value": "780",
+        "currency": "zł",
+        "period": "noc"
+      },
+      "gallery": {
+        "imageAlt": "Apartament C4 - zdjęcie",
+        "thumbnailAlt": "Miniatura"
+      }
+    },
+    "details": {
+      "aboutApartment": {
+        "title": "O apartamencie",
+        "description": "Nowoczesny apartament z balkonem, położony bezpośrednio nad Jeziorem Zegrzyńskim. Komfortowy wybór na pobyt rodzinny, weekendowy lub dłuższy wypoczynek nad wodą.",
+        "fullDescription": "Apartament o powierzchni 37 m² przeznaczony jest dla maksymalnie czterech osób. Składa się z oddzielnej sypialni z łóżkiem podwójnym, salonu z rozkładaną sofą, funkcjonalnego aneksu kuchennego oraz prywatnej łazienki z prysznicem. Wnętrze zostało zaprojektowane z myślą o wygodzie zarówno krótszych, jak i dłuższych pobytów. Do dyspozycji gości jest balkon oraz taras z meblami ogrodowymi, które pozwalają spędzać czas na świeżym powietrzu."
+      },
+      "highlights": {
+        "title": "Najważniejsze atuty",
+        "items": [
+          "Balkon z widokiem",
+          "Taras z meblami ogrodowymi",
+          "Widok na jezioro",
+          "Kryty podgrzewany basen",
+          "Prywatna plaża",
+          "Siłownia"
+        ]
+      },
+      "amenities": {
+        "title": "Udogodnienia",
+        "items": {
+          "wifi": {
+            "label": "WiFi",
+            "description": "Szybki internet światłowodowy"
+          },
+          "tv": {
+            "label": "Smart TV",
+            "description": "55\" z Netflix i HBO"
+          },
+          "kitchen": {
+            "label": "Kuchnia",
+            "description": "W pełni wyposażona"
+          },
+          "ac": {
+            "label": "Klimatyzacja",
+            "description": "Chłodzenie i ogrzewanie"
+          },
+          "bathroom": {
+            "label": "Łazienka",
+            "description": "Premium kosmetyki"
+          },
+          "utensils": {
+            "label": "Naczynia",
+            "description": "Komplet sztućców i talerzy"
+          },
+          "terrace": {
+            "label": "Balkon",
+            "description": "Z meblami ogrodowymi"
+          },
+          "garden": {
+            "label": "Widok",
+            "description": "Widok na jezioro"
+          }
+        }
+      },
+      "aboutProperty": {
+        "title": "O obiekcie",
+        "paragraphs": [
+          "Apartament znajduje się na terenie Riva Zegrze – obiektu stworzonego z myślą o wypoczynku nad wodą przez cały rok. Położenie bezpośrednio przy plaży nad Jeziorem Zegrzyńskim, w otoczeniu zieleni i terenów rekreacyjnych, zapewnia spokojną atmosferę i bliskość natury. Goście mają dostęp do krytego, podgrzewanego basenu, siłowni, a także przestrzeni do spędzania czasu na zewnątrz, w tym prywatnej plaży, mariny, miejsca na ognisko i grilla.",
+          "Apartamenty w Riva Zegrze są w pełni wyposażone i przystosowane do komfortowego pobytu rodzin, par oraz gości podróżujących służbowo. Obiekt jest przyjazny dzieciom, osobom z niepełnosprawnościami oraz gościom podróżującym ze zwierzętami, które są akceptowane bez dodatkowych opłat. Na terenie obiektu dostępna jest winda, pokoje dla niepalących, bezpłatne Wi-Fi oraz monitorowany parking z możliwością rezerwacji miejsca w garażu.",
+          "Riva Zegrze oferuje szerokie możliwości aktywnego wypoczynku. W okolicy dostępne są sporty wodne, kajaki, rowerki wodne, liczne trasy spacerowe i rowerowe, a w niedalekiej odległości znajduje się pole golfowe w Rajszewie. Dogodny dojazd z Warszawy sprawia, że apartament jest idealnym wyborem na weekendowy wyjazd lub dłuższy wypoczynek nad wodą."
+        ],
+        "features": {
+          "location": {
+            "title": "Lokalizacja",
+            "description": "Bezpośrednio przy plaży nad Jeziorem Zegrzyńskim, w otoczeniu zieleni i terenów rekreacyjnych."
+          },
+          "pool": {
+            "title": "Basen",
+            "description": "Dostęp do krytego, podgrzewanego basenu przez cały rok."
+          },
+          "gym": {
+            "title": "Siłownia",
+            "description": "W pełni wyposażona siłownia dla wszystkich gości obiektu."
+          }
+        }
+      },
+      "availability": {
+        "title": "Dostępność",
+        "loadingText": "Ładowanie kalendarza..."
+      }
+    },
+    "importantInfo": {
+      "sectionLabel": "Informacje praktyczne",
+      "sectionTitle": "Ważne informacje",
+      "items": {
+        "checkin": {
+          "label": "Zameldowanie",
+          "value": "15:00 - 22:00",
+          "note": "Samodzielne zameldowanie - kody dostępu przesyłane w dniu przyjazdu"
+        },
+        "checkout": {
+          "label": "Wymeldowanie",
+          "value": "Do 11:00",
+          "note": ""
+        },
+        "quietHours": {
+          "label": "Cisza nocna",
+          "value": "22:00 - 7:00",
+          "note": "Obowiązuje w godzinach nocnych"
+        },
+        "noParties": {
+          "label": "Zakaz imprez",
+          "value": "Brak imprez",
+          "note": "Zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich"
+        },
+        "parking": {
+          "label": "Parking",
+          "value": "Bezpłatne miejsca przed budynkiem",
+          "note": "Miejsce w garażu: 75 zł/doba (po wcześniejszej rezerwacji)"
+        }
+      },
+      "fullWidthNote": {
+        "title": "Szacunek dla obiektu",
+        "description": "Prosimy o dbanie o apartament i traktowanie go jak własnego domu. W przypadku uszkodzeń lub nadmiernego zabrudzenia mogą zostać naliczone dodatkowe opłaty. Dziękujemy za zrozumienie i życzymy miłego pobytu."
+      }
+    },
+    "surroundings": {
+      "sectionLabel": "Okolica",
+      "sectionTitle": "Odkryj piękno Jeziora Zegrzyńskiego",
+      "imageAlt": "Okolica Riva Zegrze - zdjęcie {number}",
+      "viewFullImage": "Zobacz pełny obraz",
+      "modal": {
+        "closeGallery": "Zamknij galerię",
+        "previousPhoto": "Poprzednie zdjęcie",
+        "nextPhoto": "Następne zdjęcie",
+        "caption": "Jezioro Zegrzyńskie - Riva Zegrze"
+      }
+    },
+    "reviews": {
+      "sectionLabel": "Opinie gości",
+      "sectionTitle": "Co mówią nasi goście",
+      "basedOn": "na podstawie {count} opinii",
+      "items": [
+        {
+          "name": "Piotr Kowalczyk",
+          "date": "Sierpień 2024",
+          "rating": 5,
+          "comment": "Wspaniały apartament z pięknym widokiem na jezioro! Balkon idealny na poranne kawy. Polecam!",
+          "avatar": "PK"
+        },
+        {
+          "name": "Magdalena Nowak",
+          "date": "Lipiec 2024",
+          "rating": 5,
+          "comment": "Bardzo wygodny apartament, wszystko co potrzebne na miejscu. Basen i siłownia to duży plus!",
+          "avatar": "MN"
+        },
+        {
+          "name": "Tomasz Wiśniewski",
+          "date": "Czerwiec 2024",
+          "rating": 5,
+          "comment": "Idealne miejsce na rodzinny wypoczynek. Blisko Warszawy, a czujesz się jak na wakacjach!",
+          "avatar": "TW"
+        }
+      ]
+    },
+    "cta": {
+      "badge": "Oferta specjalna",
+      "title": "Zarezerwuj min. 3 noce",
+      "titleHighlight": "i zyskaj 40% rabatu",
+      "description": "Skorzystaj z naszej limitowanej promocji. Przy rezerwacji minimum 3 nocy otrzymasz",
+      "descriptionHighlight": "aż 40% zniżki",
+      "descriptionEnd": "na cały pobyt w Apartamencie C4.",
+      "bookButton": "Zarezerwuj apartament",
+      "phoneButton": "Zadzwoń: +48 510 038 038",
+      "trustBadges": {
+        "payment": "Bezpieczna płatność",
+        "cancellation": "Anulowanie do 48h",
+        "bestPrice": "Najlepsza cena",
+        "noCosts": "Brak ukrytych kosztów"
+      }
+    },
+    "footer": {
+      "brand": {
+        "description": "Kameralne apartamenty nad wodą. Spokój, komfort i bezpośrednia rezerwacja w wyjątkowej lokalizacji pod Warszawą.",
+        "rating": "5.0 • Booking.com"
+      },
+      "discover": {
+        "title": "Odkryj",
+        "apartments": "Apartamenty",
+        "specialOffer": "Oferta Specjalna",
+        "activities": "Aktywności",
+        "gallery": "Galeria",
+        "about": "O Nas"
+      },
+      "contact": {
+        "title": "Kontakt",
+        "address": "Riva Zegrze\nRybaki 11\n05-130 Zegrze Południowe",
+        "phone": "+48 510 038 038",
+        "email": "wynajem@rivazegrze.pl"
+      },
+      "newsletter": {
+        "title": "Newsletter",
+        "description": "Bądź na bieżąco z ofertami specjalnymi",
+        "placeholder": "Twój email",
+        "socialMedia": "Social Media"
+      },
+      "bottom": {
+        "copyright": "© {year} Riva Zegrze. Wszystkie prawa zastrzeżone.",
+        "privacy": "Polityka prywatności",
+        "terms": "Regulamin",
+        "cookies": "Cookies"
+      }
+    }
   }
 }
-
-
