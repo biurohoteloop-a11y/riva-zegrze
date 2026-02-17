@@ -217,9 +217,7 @@ function HeroSection() {
 
   return (
     <>
-      {/* HERO BANNER */}
       <section ref={heroRef} className="relative h-screen overflow-hidden flex items-center justify-center">
-        {/* SLIDES */}
         {slides.map((src, index) => (
           <div
             key={index}
@@ -238,10 +236,8 @@ function HeroSection() {
           </div>
         ))}
 
-        {/* Overlay */}
         <div className="hero-overlay absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/50" />
 
-        {/* CONTENT */}
         <div className="relative z-10 text-center px-6 max-w-6xl mx-auto w-full">
           <span
             ref={labelRef}
@@ -273,14 +269,7 @@ function HeroSection() {
             {t('description')}
           </p>
 
-          {/* HOTRES DESKTOP */}
           <div ref={bookingRef} className="hidden lg:block max-w-5xl mx-auto">
-            <p
-              className="text-[9px] tracking-[0.5em] uppercase text-white/50 mb-4"
-              style={{ fontFamily: 'DM Sans, sans-serif' }}
-            >
-              {t('checkDates')}
-            </p>
             <div
               className="hotresSearchBar showHotres"
               data-button={t('checkDates')}
@@ -292,7 +281,6 @@ function HeroSection() {
           </div>
         </div>
 
-        {/* Slide indicators */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">
           {slides.map((_, index) => (
             <button
@@ -309,15 +297,8 @@ function HeroSection() {
         </div>
       </section>
 
-      {/* HOTRES MOBILE */}
       <section className="lg:hidden bg-gradient-to-b from-[#f5f4f0] to-[#efeee9] py-8 px-5">
         <div className="max-w-md mx-auto">
-          <p
-            className="text-[9px] tracking-[0.5em] uppercase text-[#8a968f] mb-4 text-center"
-            style={{ fontFamily: 'DM Sans, sans-serif' }}
-          >
-            {t('checkDates')}
-          </p>
           <div
             className="hotresSearchBar showHotres"
             data-button={t('checkDates')}
@@ -329,7 +310,6 @@ function HeroSection() {
         </div>
       </section>
 
-      {/* STYLES */}
       <style jsx global>{`
         @keyframes kenBurns {
           0% { transform: scale(1); }
@@ -337,84 +317,68 @@ function HeroSection() {
         }
 
         /* ============================== */
-        /* HOTRES BAR — Desktop           */
+        /* HOTRES BAR — Desktop SLIM      */
         /* ============================== */
         .hotresSearchBar {
-          background: rgba(255, 255, 255, 0.08);
-          backdrop-filter: blur(30px) saturate(200%);
-          -webkit-backdrop-filter: blur(30px) saturate(200%);
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
           cursor: pointer;
           box-shadow:
-            0 8px 40px rgba(0, 0, 0, 0.15),
-            0 1px 3px rgba(0, 0, 0, 0.08),
-            inset 0 1px 0 rgba(255, 255, 255, 0.2),
-            inset 0 -1px 0 rgba(255, 255, 255, 0.05);
-          border-radius: 16px;
-          height: 72px;
+            0 4px 30px rgba(0, 0, 0, 0.12),
+            0 1px 2px rgba(0, 0, 0, 0.06);
+          border-radius: 50px;
+          height: 54px;
           overflow: hidden;
-          min-width: 480px;
-          max-width: 780px;
+          min-width: 560px;
+          max-width: 900px;
           margin: 0 auto;
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          justify-content: stretch;
           gap: 0;
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+          border: none;
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
           position: relative;
         }
 
         .hotresSearchBar::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          border-radius: 16px;
-          padding: 1px;
-          background: linear-gradient(160deg,
-            rgba(255, 255, 255, 0.35) 0%,
-            rgba(255, 255, 255, 0) 40%,
-            rgba(255, 255, 255, 0.1) 100%);
-          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-          -webkit-mask-composite: xor;
-          mask-composite: exclude;
-          pointer-events: none;
+          display: none;
         }
 
         .hotresSearchBar:hover {
-          background: rgba(255, 255, 255, 0.14);
+          background: rgba(255, 255, 255, 1);
           box-shadow:
-            0 16px 56px rgba(0, 0, 0, 0.2),
-            0 4px 16px rgba(0, 0, 0, 0.1),
-            inset 0 1px 0 rgba(255, 255, 255, 0.25);
-          transform: translateY(-3px);
-          border-color: rgba(255, 255, 255, 0.25);
+            0 8px 40px rgba(0, 0, 0, 0.18),
+            0 2px 6px rgba(0, 0, 0, 0.08);
+          transform: translateY(-2px);
         }
 
         .hotresSearchBar > div {
           flex: 1;
-          padding: 0 28px;
+          padding: 0 32px;
           display: flex;
-          flex-direction: column;
+          flex-direction: row;
           align-items: center;
           justify-content: center;
-          gap: 2px;
-          color: #ffffff;
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          gap: 10px;
+          color: #1a4d2e;
+          transition: all 0.3s ease;
           height: 100%;
           position: relative;
         }
 
         .hotresSearchBar > div:not(:last-child) {
-          border-right: 1px solid rgba(255, 255, 255, 0.1);
+          border-right: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .hotresSearchBar > div:not(:last-child):hover {
-          background: rgba(255, 255, 255, 0.06);
+          background: rgba(171, 138, 98, 0.04);
         }
 
         .hotresSearchBar > div:last-child {
           flex: 0 0 auto;
-          padding: 0;
+          padding: 0 4px 0 0;
           border-right: none;
         }
 
@@ -426,15 +390,15 @@ function HeroSection() {
         .hotresSearchBar .arrival::before {
           content: '';
           position: absolute;
-          right: -12px;
+          right: -14px;
           width: 5px;
           height: 5px;
-          border-right: 1.5px solid rgba(255, 255, 255, 0.4);
-          border-bottom: 1.5px solid rgba(255, 255, 255, 0.4);
+          border-right: 1.5px solid rgba(171, 138, 98, 0.5);
+          border-bottom: 1.5px solid rgba(171, 138, 98, 0.5);
         }
 
         .hotresSearchBar .arrival::after {
-          top: calc(50% - 7px);
+          top: calc(50% - 6px);
           transform: rotate(-45deg);
         }
 
@@ -445,55 +409,52 @@ function HeroSection() {
 
         .hotresSearchBar .day {
           font-family: 'Playfair Display', serif;
-          font-size: 28px;
-          font-weight: 300;
-          color: #ffffff;
+          font-size: 22px;
+          font-weight: 400;
+          color: #1a4d2e;
           line-height: 1;
           letter-spacing: 0.02em;
-          text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+          text-shadow: none;
         }
 
         .hotresSearchBar .month {
           font-family: 'DM Sans', sans-serif;
           font-size: 9px;
-          line-height: 1.3;
+          line-height: 1.2;
           font-weight: 400;
-          color: rgba(255, 255, 255, 0.65);
+          color: #8a968f;
           text-transform: uppercase;
-          letter-spacing: 0.15em;
-          text-align: center;
+          letter-spacing: 0.12em;
+          text-align: left;
         }
 
         .hotresSearchBar .month small {
           font-size: 8px;
-          color: rgba(255, 255, 255, 0.45);
+          color: #AB8A62;
           display: block;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.08em;
           margin-top: 1px;
         }
 
         .hotresSearchBar button {
-          height: 72px;
-          width: 180px;
-          border-radius: 0 15px 15px 0;
+          height: 44px;
+          min-width: 180px;
+          padding: 0 28px;
+          border-radius: 50px;
           text-transform: uppercase;
           font-family: 'DM Sans', sans-serif;
-          font-size: 9px;
-          letter-spacing: 0.2em;
+          font-size: 10px;
+          letter-spacing: 0.18em;
           font-weight: 500;
-          background: linear-gradient(145deg,
-            #AB8A62 0%,
-            #967447 100%);
+          background: #AB8A62;
           color: #ffffff;
           border: none;
           cursor: pointer;
-          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-          padding: 0;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           position: relative;
           overflow: hidden;
-          box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.15),
-            -1px 0 0 rgba(171, 138, 98, 0.3);
+          box-shadow: 0 2px 8px rgba(171, 138, 98, 0.3);
+          margin: 0;
         }
 
         .hotresSearchBar button::before {
@@ -503,21 +464,14 @@ function HeroSection() {
           left: -100%;
           width: 100%;
           height: 100%;
-          background: linear-gradient(90deg,
-            transparent,
-            rgba(255, 255, 255, 0.15),
-            transparent);
-          transition: left 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+          transition: left 0.6s ease;
         }
 
         .hotresSearchBar button:hover {
-          background: linear-gradient(145deg,
-            #967447 0%,
-            #AB8A62 100%);
-          box-shadow:
-            0 4px 20px rgba(171, 138, 98, 0.4),
-            inset 0 1px 0 rgba(255, 255, 255, 0.2);
-          letter-spacing: 0.25em;
+          background: #967447;
+          box-shadow: 0 4px 16px rgba(171, 138, 98, 0.4);
+          transform: scale(1.02);
         }
 
         .hotresSearchBar button:hover::before {
@@ -526,9 +480,6 @@ function HeroSection() {
 
         .hotresSearchBar button:active {
           transform: scale(0.98);
-          box-shadow:
-            0 2px 8px rgba(171, 138, 98, 0.3),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         /* ============================== */
@@ -538,38 +489,30 @@ function HeroSection() {
           .hotresSearchBar {
             background: #ffffff;
             backdrop-filter: none;
-            border-radius: 20px;
+            border-radius: 16px;
             height: auto;
             flex-direction: column;
             padding: 0;
             gap: 0;
             max-width: 100%;
             min-width: unset;
-            border: 1px solid rgba(212, 214, 206, 0.3);
-            box-shadow:
-              0 4px 24px rgba(0, 0, 0, 0.06),
-              0 1px 3px rgba(0, 0, 0, 0.04);
-          }
-
-          .hotresSearchBar::before {
-            display: none;
+            border: 1px solid rgba(212, 214, 206, 0.25);
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05);
           }
 
           .hotresSearchBar:hover {
             transform: none;
-            box-shadow:
-              0 4px 24px rgba(0, 0, 0, 0.06),
-              0 1px 3px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05);
           }
 
           .hotresSearchBar > div {
             width: 100%;
             flex: none;
-            padding: 20px 24px;
+            padding: 16px 20px;
             flex-direction: row;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             border-right: none;
             border-bottom: 1px solid rgba(212, 214, 206, 0.15);
             color: #1a4d2e;
@@ -581,7 +524,7 @@ function HeroSection() {
 
           .hotresSearchBar > div:last-child {
             border-bottom: none;
-            padding: 0;
+            padding: 8px;
             width: 100%;
           }
 
@@ -592,35 +535,31 @@ function HeroSection() {
 
           .hotresSearchBar .day {
             font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            font-weight: 300;
+            font-size: 22px;
+            font-weight: 400;
             color: #1a4d2e;
             text-shadow: none;
           }
 
           .hotresSearchBar .month {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 10px;
+            font-size: 9px;
             color: #8a968f;
-            letter-spacing: 0.12em;
           }
 
           .hotresSearchBar .month small {
-            font-size: 9px;
             color: #AB8A62;
           }
 
           .hotresSearchBar button {
             width: 100%;
-            height: 56px;
-            border-radius: 0 0 19px 19px;
+            height: 46px;
+            border-radius: 12px;
             font-size: 10px;
-            letter-spacing: 0.2em;
-            font-weight: 500;
+            letter-spacing: 0.18em;
           }
 
           .hotresSearchBar button:hover {
-            letter-spacing: 0.2em;
+            transform: none;
           }
         }
       `}</style>
