@@ -10,8 +10,7 @@ import LanguageSwitcher from '../components/LanguageSwitcher';
 import Navigation from '../components/layout/Navigation';
 import Link from 'next/link';
 import { useLocale } from 'next-intl';
-import Script from 'next/script'; //
-import { usePathname } from 'next/navigation'; // DODAJ TO!
+import Script from 'next/script'; // 
 
 
 
@@ -57,6 +56,80 @@ const testimonialKeys = [
 ] as const;
 
 
+// ============================================
+// HOTRES SEARCH BAR COMPONENT
+// ============================================
+function HotresSearchBar() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const retryRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    const existingScript = document.querySelector('script[src*="hotres_popup.js"]');
+    if (existingScript) {
+      existingScript.remove();
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://panel.hotres.pl/public/api/hotres_popup.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    const fixScroll = () => {
+      document.body.style.overflow = '';
+      document.body.style.overflowY = '';
+      document.documentElement.style.overflow = '';
+      document.documentElement.style.overflowY = '';
+    };
+
+    retryRef.current = setInterval(() => {
+      fixScroll();
+      const bar = containerRef.current;
+      if (!bar) return;
+      const hasContent = bar.querySelector(".hotresSearchBar .day") ||
+                         bar.querySelector(".hotresSearchBar button");
+      if (hasContent) {
+        if (retryRef.current) clearInterval(retryRef.current);
+        fixScroll();
+        return;
+      }
+      if ((window as any).showHotres) {
+        try {
+          (window as any).showHotres();
+        } catch (e) {}
+        fixScroll();
+      }
+    }, 800);
+
+    const scrollObserver = new MutationObserver(() => {
+      const bodyStyle = document.body.style.overflow;
+      const htmlStyle = document.documentElement.style.overflow;
+      if (bodyStyle === 'hidden' || htmlStyle === 'hidden') {
+        fixScroll();
+      }
+    });
+    scrollObserver.observe(document.body, { attributes: true, attributeFilter: ['style'] });
+    scrollObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['style'] });
+
+    return () => {
+      if (retryRef.current) clearInterval(retryRef.current);
+      scrollObserver.disconnect();
+    };
+  }, []);
+
+  return (
+    <div ref={containerRef} className="hotres-wrapper">
+      <div
+        className="hotresSearchBar showHotres"
+        data-button="Sprawdź terminy"
+        data-oid="5226"
+        data-lang="pl"
+        data-action="bookingbar"
+      />
+    </div>
+  );
+}
+
+
 export default function HomePage() {
   return (
     <>
@@ -83,7 +156,6 @@ export default function HomePage() {
 // ============================================
 function HeroSection() {
   const t = useTranslations('hero');
-  const pathname = usePathname();
 
   const slides = [
     '/images/hero/T3S-RivaZegrze-0760-m.jpg',
@@ -92,43 +164,12 @@ function HeroSection() {
   ];
 
   const [current, setCurrent] = useState(0);
-  const [isScriptLoaded, setIsScriptLoaded] = useState(false);
 
   const heroRef = useRef(null);
   const labelRef = useRef(null);
   const titleRef = useRef(null);
   const descRef = useRef(null);
-  const bookingRef = useRef(null);
-
-  // ============================================
-  // HOTRES INITIALIZATION & REINITIALIZATION
-  // ============================================
-  useEffect(() => {
-    if (!isScriptLoaded) return;
-
-    const initHotRes = () => {
-      if (typeof window !== 'undefined' && (window as any).HotRes) {
-        try {
-          // Cleanup poprzedniej instancji jeśli istnieje
-          const existingElements = document.querySelectorAll('.hotres-popup, .hotres-overlay');
-          existingElements.forEach(el => el.remove());
-
-          // Inicjalizacja
-          (window as any).HotRes.init();
-          console.log('HotRes initialized successfully');
-        } catch (error) {
-          console.error('HotRes init error:', error);
-        }
-      }
-    };
-
-    // Opóźnienie dla pewności że DOM jest gotowy
-    const timer = setTimeout(initHotRes, 300);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [pathname, isScriptLoaded]);
+  const searchBarRef = useRef<HTMLDivElement>(null);
 
   // ============================================
   // GSAP ENTRY ANIMATION
@@ -144,10 +185,7 @@ function HeroSection() {
           tl.fromTo(labelRef.current, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, '-=1.2');
           tl.fromTo(titleRef.current, { y: 100, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 1.2 }, '-=0.8');
           tl.fromTo(descRef.current, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, '-=0.6');
-          
-          if (bookingRef.current) {
-            tl.fromTo(bookingRef.current, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, '-=0.4');
-          }
+          tl.fromTo(searchBarRef.current, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, '-=0.4');
         } catch (error) {
           console.error('GSAP animation error:', error);
         }
@@ -168,29 +206,8 @@ function HeroSection() {
 
   return (
     <>
-      {/* HotRes Script */}
-      <Script
-        src="https://panel.hotres.pl/public/api/hotres_popup.js"
-        strategy="afterInteractive"
-        onLoad={() => {
-          setIsScriptLoaded(true);
-          if ((window as any).HotRes) {
-            try {
-              (window as any).HotRes.init();
-              console.log('HotRes script loaded and initialized');
-            } catch (error) {
-              console.error('HotRes initial load error:', error);
-            }
-          }
-        }}
-        onError={(e) => {
-          console.error('Failed to load HotRes script:', e);
-        }}
-      />
-
       <section ref={heroRef} className="relative h-screen overflow-hidden flex items-center justify-center">
 
-        {/* BACKGROUND SLIDES */}
         {slides.map((src, index) => (
           <div
             key={index}
@@ -209,10 +226,8 @@ function HeroSection() {
           </div>
         ))}
 
-        {/* OVERLAY */}
         <div className="hero-overlay absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40" />
 
-        {/* CONTENT */}
         <div className="relative z-10 text-center px-6 max-w-6xl mx-auto w-full">
 
           <span
@@ -232,26 +247,18 @@ function HeroSection() {
 
           <p
             ref={descRef}
-            className="text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto text-white/85 drop-shadow-lg mb-12"
+            className="text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto text-white/85 drop-shadow-lg"
           >
             {t('description')}
           </p>
 
-          {/* HOTRES BOOKING BAR */}
-          <div ref={bookingRef} className="hotres-container">
-            <div 
-              key={pathname} // Wymusza rerender przy zmianie strony
-              className="hotresSearchBar showHotres" 
-              data-button="Sprawdź dostępność"  
-              data-oid="5226" 
-              data-lang="pl" 
-              data-action="bookingbar"
-            />
+          {/* HOTRES SEARCH BAR */}
+          <div ref={searchBarRef} className="mt-10 w-full flex justify-center" style={{ opacity: 0 }}>
+            <HotresSearchBar />
           </div>
 
         </div>
 
-        {/* SLIDER NAVIGATION DOTS */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
           {slides.map((_, index) => (
             <button
@@ -267,19 +274,114 @@ function HeroSection() {
 
       </section>
 
-     {/* STYLES */}
-<style jsx global>{`
-  @keyframes kenBurns {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.1); }
-  }
-`}</style>
+      <style jsx global>{`
+        html, body {
+          overflow-y: auto !important;
+          height: auto !important;
+        }
 
+        @keyframes kenBurns {
+          0% { transform: scale(1); }
+          100% { transform: scale(1.1); }
+        }
+
+        .hotres-wrapper {
+          display: flex;
+          justify-content: center;
+          width: 100%;
+        }
+
+        .hotresSearchBar {
+          background: #fff;
+          cursor: pointer;
+          box-shadow: 1px 1px 4px #00000040;
+          border-radius: 20px;
+          height: 60px;
+          overflow: hidden;
+          min-width: 340px;
+          max-width: 450px;
+          display: flex;
+          flex-wrap: nowrap;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+        }
+
+        .hotresSearchBar > div {
+          padding: 0px 20px;
+          min-width: 100px;
+          transition: 0.3s;
+          color: var(--text-color, #333);
+          flex-wrap: nowrap;
+          align-items: center;
+          justify-content: center;
+          display: flex;
+        }
+
+        .hotresSearchBar .arrival {
+          position: relative;
+        }
+
+        .hotresSearchBar .arrival::after,
+        .hotresSearchBar .arrival::before {
+          content: '';
+          width: 10px;
+          border: 1px solid #000;
+          transform: rotate(45deg);
+          position: absolute;
+          top: 11px;
+          right: -12px;
+        }
+
+        .hotresSearchBar .arrival::before {
+          top: 18px;
+          transform: rotate(-45deg);
+        }
+
+        .hotresSearchBar > div:last-child {
+          padding: 0;
+          height: 100%;
+          flex-grow: 2;
+        }
+
+        .hotresSearchBar button {
+          height: 100%;
+          width: 100%;
+          border-radius: 0px;
+          text-transform: uppercase;
+          font-size: 12px;
+          letter-spacing: 1px;
+          background: #303030;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+          transition: background 0.3s;
+        }
+
+        .hotresSearchBar button:hover {
+          background: #505050;
+        }
+
+        .hotresSearchBar .day {
+          font-size: 32px;
+          padding-right: 10px;
+          font-weight: bold;
+        }
+
+        .hotresSearchBar .month {
+          font-size: 13px;
+          line-height: 14px;
+        }
+
+        .hotresSearchBar .month small {
+          font-size: 11px;
+          color: grey;
+          display: block;
+        }
+      `}</style>
     </>
   );
 }
-
-
 function IntroSection() {
   const t = useTranslations('intro');
 
@@ -2357,8 +2459,3 @@ function MinimalFooter() {
     </footer>
   );
 }
-
-
-
-
-
