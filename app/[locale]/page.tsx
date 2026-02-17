@@ -65,15 +65,22 @@ function HotresSearchBar() {
   const observerRef = useRef<MutationObserver | null>(null);
 
   useEffect(() => {
-    document.querySelectorAll('script[src*="hotres_popup.js"]').forEach((s) => s.remove());
-    try { (window as any).showHotres = undefined; } catch (_e) {}
-    try { (window as any).HotresPopup = undefined; } catch (_e) {}
-
     const forceScroll = () => {
       document.body.style.setProperty("overflow-y", "auto", "important");
       document.body.style.setProperty("overflow-x", "hidden", "important");
       document.documentElement.style.setProperty("overflow-y", "auto", "important");
     };
+
+    const cleanupHotres = () => {
+      document.querySelectorAll('script[src*="hotres_popup.js"]').forEach((s) => s.remove());
+      document.querySelectorAll('.hotresPopup, .hotresOverlay, .hotresModal, [id^="hotres"]').forEach((el) => el.remove());
+      try { (window as any).showHotres = undefined; } catch (_e) {}
+      try { (window as any).HotresPopup = undefined; } catch (_e) {}
+      try { (window as any).hotresData = undefined; } catch (_e) {}
+      try { (window as any).hotresInit = undefined; } catch (_e) {}
+    };
+
+    cleanupHotres();
     forceScroll();
 
     observerRef.current = new MutationObserver(() => {
@@ -89,28 +96,66 @@ function HotresSearchBar() {
     const script = document.createElement("script");
     script.src = "https://panel.hotres.pl/public/api/hotres_popup.js?_t=" + Date.now();
     script.async = true;
+
+    let retryCount = 0;
+    const maxRetries = 30;
+
+    script.onload = () => {
+      retryRef.current = setInterval(() => {
+        retryCount++;
+        if (retryCount > maxRetries) {
+          if (retryRef.current) clearInterval(retryRef.current);
+          return;
+        }
+
+        const bar = containerRef.current;
+        if (!bar) return;
+
+        const hotresDiv = bar.querySelector(".hotresSearchBar");
+        if (!hotresDiv) return;
+
+        const hasContent = hotresDiv.querySelector(".day") || hotresDiv.querySelector("button");
+        if (hasContent) {
+          if (retryRef.current) clearInterval(retryRef.current);
+          forceScroll();
+          return;
+        }
+
+        if ((window as any).showHotres) {
+          try {
+            (window as any).showHotres();
+          } catch (_e) {}
+          forceScroll();
+        }
+      }, 600);
+    };
+
     document.body.appendChild(script);
 
-    retryRef.current = setInterval(() => {
-      const bar = containerRef.current;
-      if (!bar) return;
-      const hasContent = bar.querySelector(".hotresSearchBar .day") ||
-                         bar.querySelector(".hotresSearchBar button");
-      if (hasContent) {
-        if (retryRef.current) clearInterval(retryRef.current);
-        return;
+    const fallbackRetry = setTimeout(() => {
+      if (!retryRef.current) {
+        retryRef.current = setInterval(() => {
+          const bar = containerRef.current;
+          if (!bar) return;
+          const hasContent = bar.querySelector(".hotresSearchBar .day") ||
+                             bar.querySelector(".hotresSearchBar button");
+          if (hasContent) {
+            if (retryRef.current) clearInterval(retryRef.current);
+            return;
+          }
+          if ((window as any).showHotres) {
+            try { (window as any).showHotres(); } catch (_e) {}
+            forceScroll();
+          }
+        }, 1000);
       }
-      if ((window as any).showHotres) {
-        try {
-          (window as any).showHotres();
-        } catch (_e) {}
-      }
-    }, 800);
+    }, 3000);
 
     return () => {
       if (retryRef.current) clearInterval(retryRef.current);
+      clearTimeout(fallbackRetry);
       if (observerRef.current) observerRef.current.disconnect();
-      document.querySelectorAll('script[src*="hotres_popup.js"]').forEach((s) => s.remove());
+      cleanupHotres();
       forceScroll();
     };
   }, []);

@@ -101,9 +101,18 @@ export default function Navigation() {
   }, [isMegaMenuOpen]);
 
   useEffect(() => {
-    document.body.style.overflow = isMegaMenuOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [isMegaMenuOpen]);
+    if (isMegaMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.removeProperty('overflow');
+      document.body.style.removeProperty('overflow-y');
+    }
+    return () => {
+      document.body.style.removeProperty('overflow');
+      document.body.style.removeProperty('overflow-y');
+    };
+}, [isMegaMenuOpen]);
+
 
   const handleNavClick = (href: string) => {
     setIsMegaMenuOpen(false);
