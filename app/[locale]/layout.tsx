@@ -85,7 +85,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://rivazegrzeapartamenty.pl",
     languages: {
-      pl: "https://rivazegrzeapartamenty.pl/pl",
+      pl: "https://rivazegrzeapartamenty.pl",
       en: "https://rivazegrzeapartamenty.pl/en",
     },
   },
