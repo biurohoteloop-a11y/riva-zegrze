@@ -79,7 +79,6 @@ export default function HomePage() {
 // ============================================
 // MEGA MENU - FINAL VERSION
 // ============================================
-
 function HeroSection() {
   const t = useTranslations('hero');
 
@@ -99,60 +98,40 @@ function HeroSection() {
   const bookingRef = useRef(null);
 
   // ============================================
-  // HOTRES — UKRYTY DO MOMENTU ZAŁADOWANIA
+  // HOTRES — PROSTY I DZIAŁA (jak na WordPress)
   // ============================================
   useEffect(() => {
-    let attempts = 0;
-    const maxAttempts = 5;
-    let retryTimer: ReturnType<typeof setTimeout>;
-    let checkTimer: ReturnType<typeof setTimeout>;
+    // Sprawdź czy skrypt już nie jest załadowany
+    const existing = document.querySelector('script[src*="hotres_popup"]');
+    if (existing) return;
 
-    const loadScript = () => {
-      const oldScripts = Array.from(document.querySelectorAll('script[src*="hotres_popup"]'));
-      oldScripts.forEach((s) => s.remove());
+    // Załaduj RAZ i nie ruszaj
+    const script = document.createElement('script');
+    script.src = 'https://panel.hotres.pl/public/api/hotres_popup.js';
+    script.async = true;
+    document.body.appendChild(script);
 
-      const script = document.createElement('script');
-      script.src = 'https://panel.hotres.pl/public/api/hotres_popup.js';
-      script.async = false;
+    // Czekaj aż HotRes wyrenderuje content, potem pokaż
+    let checkCount = 0;
+    const interval = setInterval(() => {
+      checkCount++;
+      const bars = Array.from(document.querySelectorAll('.hotresSearchBar'));
+      const hasContent = bars.some(
+        (bar) => bar.children.length > 0
+      );
 
-      script.onload = () => {
-        console.log('✅ HotRes script loaded');
-        // Sprawdzaj co 200ms czy HotRes wyrenderował content
-        let checks = 0;
-        const checkRendered = () => {
-          checks++;
-          const bars = Array.from(document.querySelectorAll('.hotresSearchBar'));
-          const hasContent = bars.some(
-            (bar) => bar.children.length > 0 || bar.innerHTML.trim().length > 50
-          );
+      if (hasContent) {
+        setHotresReady(true);
+        clearInterval(interval);
+      }
 
-          if (hasContent) {
-            console.log('✅ HotRes rendered — showing bar');
-            setHotresReady(true);
-          } else if (checks < 30) {
-            checkTimer = setTimeout(checkRendered, 200);
-          }
-        };
-        setTimeout(checkRendered, 200);
-      };
+      // Stop po 30s
+      if (checkCount > 150) {
+        clearInterval(interval);
+      }
+    }, 200);
 
-      script.onerror = () => {
-        attempts++;
-        if (attempts < maxAttempts) {
-          retryTimer = setTimeout(loadScript, 1000);
-        }
-      };
-
-      document.body.appendChild(script);
-    };
-
-    const initTimer = setTimeout(loadScript, 300);
-
-    return () => {
-      clearTimeout(initTimer);
-      clearTimeout(retryTimer);
-      clearTimeout(checkTimer);
-    };
+    return () => clearInterval(interval);
   }, []);
 
   // ============================================
@@ -236,28 +215,25 @@ function HeroSection() {
             {t('description')}
           </p>
 
-          {/* HOTRES DESKTOP — NIEWIDOCZNY dopóki nie gotowy */}
           {/* HOTRES DESKTOP */}
-<div
-  ref={bookingRef}
-  className="hidden lg:block max-w-5xl mx-auto"
-  style={{
-    opacity: hotresReady ? 1 : 0,
-    transform: hotresReady ? 'translateY(0)' : 'translateY(20px)',
-    transition: 'opacity 0.6s ease, transform 0.6s ease',
-    pointerEvents: hotresReady ? 'auto' : 'none',
-  }}
->
-  <div
-    className="hotresSearchBar showHotres"
-    data-button={t('checkDates')}
-    data-oid="5226"
-    data-lang="pl"
-    data-action="bookingbar"
-    suppressHydrationWarning
-  />
-</div>
-
+          <div
+            ref={bookingRef}
+            className="hidden lg:block max-w-5xl mx-auto hotres-wrapper"
+            style={{
+              opacity: hotresReady ? 1 : 0,
+              transform: hotresReady ? 'translateY(0)' : 'translateY(20px)',
+              transition: 'opacity 0.8s ease, transform 0.8s ease',
+            }}
+          >
+            <div
+              className="hotresSearchBar showHotres"
+              data-button={t('checkDates')}
+              data-oid="5226"
+              data-lang="pl"
+              data-action="bookingbar"
+              suppressHydrationWarning
+            />
+          </div>
 
         </div>
 
@@ -277,27 +253,25 @@ function HeroSection() {
       </section>
 
       {/* HOTRES MOBILE */}
-<section className="lg:hidden bg-[#f7f6f4] py-6 px-4">
-  <div
-    className="max-w-sm mx-auto"
-    style={{
-      opacity: hotresReady ? 1 : 0,
-      transform: hotresReady ? 'translateY(0)' : 'translateY(20px)',
-      transition: 'opacity 0.6s ease, transform 0.6s ease',
-      pointerEvents: hotresReady ? 'auto' : 'none',
-    }}
-  >
-    <div
-      className="hotresSearchBar showHotres"
-      data-button={t('checkDates')}
-      data-oid="5226"
-      data-lang="pl"
-      data-action="bookingbar"
-      suppressHydrationWarning
-    />
-  </div>
-</section>
-
+      <section className="lg:hidden bg-[#f7f6f4] py-6 px-4">
+        <div
+          className="max-w-sm mx-auto"
+          style={{
+            opacity: hotresReady ? 1 : 0,
+            transform: hotresReady ? 'translateY(0)' : 'translateY(20px)',
+            transition: 'opacity 0.8s ease, transform 0.8s ease',
+          }}
+        >
+          <div
+            className="hotresSearchBar showHotres"
+            data-button={t('checkDates')}
+            data-oid="5226"
+            data-lang="pl"
+            data-action="bookingbar"
+            suppressHydrationWarning
+          />
+        </div>
+      </section>
 
       <style jsx global>{`
         @keyframes kenBurns {
