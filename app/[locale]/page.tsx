@@ -98,41 +98,74 @@ function HeroSection() {
   const bookingRef = useRef(null);
 
   // ============================================
-  // HOTRES — PROSTY I DZIAŁA (jak na WordPress)
+  // HOTRES — Z REINICJALIZACJĄ PO NAWIGACJI
   // ============================================
   useEffect(() => {
-    // Sprawdź czy skrypt już nie jest załadowany
-    const existing = document.querySelector('script[src*="hotres_popup"]');
-    if (existing) return;
+    let interval: NodeJS.Timeout;
+    let mounted = true;
 
-    // Załaduj RAZ i nie ruszaj
-    const script = document.createElement('script');
-    script.src = 'https://panel.hotres.pl/public/api/hotres_popup.js';
-    script.async = true;
-    document.body.appendChild(script);
+    const initHotres = () => {
+      // Sprawdź czy skrypt istnieje
+      let script = document.querySelector('script[src*="hotres_popup"]') as HTMLScriptElement | null;
 
-    // Czekaj aż HotRes wyrenderuje content, potem pokaż
-    let checkCount = 0;
-    const interval = setInterval(() => {
-      checkCount++;
-      const bars = Array.from(document.querySelectorAll('.hotresSearchBar'));
-      const hasContent = bars.some(
-        (bar) => bar.children.length > 0
-      );
-
-      if (hasContent) {
-        setHotresReady(true);
-        clearInterval(interval);
+      if (!script) {
+        // Załaduj skrypt jeśli nie istnieje
+        script = document.createElement('script');
+        script.src = 'https://panel.hotres.pl/public/api/hotres_popup.js';
+        script.async = true;
+        script.id = 'hotres-popup-script';
+        document.body.appendChild(script);
       }
 
-      // Stop po 30s
-      if (checkCount > 150) {
-        clearInterval(interval);
-      }
-    }, 200);
+      // Wyczyść poprzednie search bary i wymuszaj reinicjalizację
+      const bars = document.querySelectorAll('.hotresSearchBar');
+      bars.forEach((bar) => {
+        // Nie czyść całego innerHTML, tylko usuń klasy i dodaj je ponownie
+        bar.classList.remove('showHotres');
+        setTimeout(() => {
+          bar.classList.add('showHotres');
+        }, 100);
+      });
 
-    return () => clearInterval(interval);
-  }, []);
+      // Czekaj aż HotRes wyrenderuje content
+      let checkCount = 0;
+      interval = setInterval(() => {
+        if (!mounted) {
+          clearInterval(interval);
+          return;
+        }
+
+        checkCount++;
+        const currentBars = Array.from(document.querySelectorAll('.hotresSearchBar'));
+        const hasContent = currentBars.some((bar) => bar.children.length > 0);
+
+        if (hasContent) {
+          setHotresReady(true);
+          clearInterval(interval);
+        }
+
+        // Stop po 15s
+        if (checkCount > 75) {
+          clearInterval(interval);
+          // Pokaż nawet jeśli nie załadowane
+          setHotresReady(true);
+        }
+      }, 200);
+    };
+
+    // Małe opóźnienie aby dać czas na odmontowanie poprzednich komponentów
+    const timeout = setTimeout(() => {
+      if (mounted) {
+        initHotres();
+      }
+    }, 100);
+
+    return () => {
+      mounted = false;
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
+  }, []); // Pusta tablica - uruchom przy każdym montowaniu komponentu
 
   // ============================================
   // GSAP ENTRY ANIMATION
@@ -532,7 +565,6 @@ function HeroSection() {
     </>
   );
 }
-
 
 
 
