@@ -90,7 +90,6 @@ function HeroSection() {
   ];
 
   const [current, setCurrent] = useState(0);
-  const [hotresLoaded, setHotresLoaded] = useState(false);
 
   const heroRef = useRef(null);
   const labelRef = useRef(null);
@@ -99,74 +98,39 @@ function HeroSection() {
   const bookingRef = useRef(null);
 
   // ============================================
-  // HOTRES — BULLETPROOF LOADING
+  // HOTRES — CLEAN LOADING (bez placeholdera)
   // ============================================
   useEffect(() => {
     let attempts = 0;
-    const maxAttempts = 10;
+    const maxAttempts = 5;
     let retryTimer: ReturnType<typeof setTimeout>;
 
-    const loadScript = (): Promise<void> => {
-      return new Promise((resolve, reject) => {
-        const old = document.querySelector('script[src*="hotres_popup"]');
-        if (old) old.remove();
+    const loadScript = () => {
+      // Usuń WSZYSTKIE stare skrypty hotres
+      const oldScripts = Array.from(document.querySelectorAll('script[src*="hotres_popup"]'));
+      oldScripts.forEach((s) => s.remove());
 
-        const script = document.createElement('script');
-        script.src = 'https://panel.hotres.pl/public/api/hotres_popup.js';
-        script.async = false;
-        script.onload = () => resolve();
-        script.onerror = () => reject(new Error('Script load failed'));
-        document.body.appendChild(script);
-      });
-    };
+      const script = document.createElement('script');
+      script.src = 'https://panel.hotres.pl/public/api/hotres_popup.js';
+      script.async = false;
 
-    const checkIfHotresRendered = (): boolean => {
-      const bars = Array.from(document.querySelectorAll('.hotresSearchBar'));
-      for (const bar of bars) {
-        if (bar.children.length > 0 || bar.innerHTML.trim().length > 50) {
-          return true;
-        }
-      }
-      return false;
-    };
+      script.onload = () => {
+        console.log('✅ HotRes script loaded');
+      };
 
-    const attemptLoad = async () => {
-      attempts++;
-      console.log(`🔄 HotRes attempt ${attempts}/${maxAttempts}`);
-
-      const divs = Array.from(document.querySelectorAll('.hotresSearchBar'));
-      if (divs.length === 0) {
+      script.onerror = () => {
+        console.error('❌ HotRes script failed');
+        attempts++;
         if (attempts < maxAttempts) {
-          retryTimer = setTimeout(attemptLoad, 500);
+          retryTimer = setTimeout(loadScript, 1000);
         }
-        return;
-      }
+      };
 
-      try {
-        await loadScript();
-
-        let renderChecks = 0;
-        const checkRender = () => {
-          renderChecks++;
-          if (checkIfHotresRendered()) {
-            console.log('✅ HotRes rendered!');
-            setHotresLoaded(true);
-          } else if (renderChecks < 20) {
-            setTimeout(checkRender, 300);
-          } else if (attempts < maxAttempts) {
-            retryTimer = setTimeout(attemptLoad, 1000);
-          }
-        };
-        setTimeout(checkRender, 200);
-      } catch (err) {
-        console.error('❌ HotRes error:', err);
-        if (attempts < maxAttempts) {
-          retryTimer = setTimeout(attemptLoad, 1000);
-        }
-      }
+      document.body.appendChild(script);
     };
 
-    const initTimer = setTimeout(attemptLoad, 200);
+    // Poczekaj aż React wyrenderuje divy, potem ładuj skrypt RAZ
+    const initTimer = setTimeout(loadScript, 300);
 
     return () => {
       clearTimeout(initTimer);
@@ -206,55 +170,6 @@ function HeroSection() {
     }, 6500);
     return () => clearInterval(interval);
   }, []);
-
-  // ============================================
-  // PLACEHOLDER (Glass nakładka)
-  // ============================================
-  const HotresPlaceholder = ({ variant }: { variant: 'desktop' | 'mobile' }) => {
-    if (hotresLoaded) return null;
-
-    if (variant === 'desktop') {
-      return (
-        <div className="hotres-placeholder-desktop">
-          <div className="hotres-placeholder-item">
-            <span className="hotres-placeholder-label">Przyjazd</span>
-            <span className="hotres-placeholder-value">—</span>
-          </div>
-          <div className="hotres-placeholder-arrow">
-            <svg width="20" height="12" viewBox="0 0 20 12" fill="none">
-              <path d="M1 6h18M13 1l6 5-6 5" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-          <div className="hotres-placeholder-item">
-            <span className="hotres-placeholder-label">Wyjazd</span>
-            <span className="hotres-placeholder-value">—</span>
-          </div>
-          <div className="hotres-placeholder-btn">
-            <div className="hotres-placeholder-spinner" />
-            <span>Ładowanie...</span>
-          </div>
-        </div>
-      );
-    }
-
-    return (
-      <div className="hotres-placeholder-mobile">
-        <div className="hotres-placeholder-mobile-row">
-          <span>Przyjazd</span>
-          <span className="hotres-placeholder-dash">—</span>
-        </div>
-        <div className="hotres-placeholder-mobile-divider" />
-        <div className="hotres-placeholder-mobile-row">
-          <span>Wyjazd</span>
-          <span className="hotres-placeholder-dash">—</span>
-        </div>
-        <div className="hotres-placeholder-btn-mobile">
-          <div className="hotres-placeholder-spinner" />
-          <span>Ładowanie...</span>
-        </div>
-      </div>
-    );
-  };
 
   return (
     <>
@@ -309,19 +224,16 @@ function HeroSection() {
           </p>
 
           {/* HOTRES DESKTOP */}
-<div ref={bookingRef} className="hidden lg:block max-w-5xl mx-auto relative">
-  {!hotresLoaded && <HotresPlaceholder variant="desktop" />}
-  <div
-    className={`hotresSearchBar showHotres transition-opacity duration-700 ${
-      hotresLoaded ? 'opacity-100 relative' : 'opacity-0 h-0 overflow-hidden'
-    }`}
-    data-button={t('checkDates')}
-    data-oid="5226"
-    data-lang="pl"
-    data-action="bookingbar"
-    suppressHydrationWarning
-  />
-</div>
+          <div ref={bookingRef} className="hidden lg:block max-w-5xl mx-auto">
+            <div
+              className="hotresSearchBar showHotres"
+              data-button={t('checkDates')}
+              data-oid="5226"
+              data-lang="pl"
+              data-action="bookingbar"
+              suppressHydrationWarning
+            />
+          </div>
 
         </div>
 
@@ -342,172 +254,24 @@ function HeroSection() {
       </section>
 
       {/* HOTRES MOBILE */}
-<section className="lg:hidden bg-[#f7f6f4] py-6 px-4">
-  <div className="max-w-sm mx-auto relative">
-    {!hotresLoaded && <HotresPlaceholder variant="mobile" />}
-    <div
-      className={`hotresSearchBar showHotres transition-opacity duration-700 ${
-        hotresLoaded ? 'opacity-100 relative' : 'opacity-0 h-0 overflow-hidden'
-      }`}
-      data-button={t('checkDates')}
-      data-oid="5226"
-      data-lang="pl"
-      data-action="bookingbar"
-      suppressHydrationWarning
-    />
-  </div>
-</section>
-
+      <section className="lg:hidden bg-[#f7f6f4] py-6 px-4">
+        <div className="max-w-sm mx-auto">
+          <div
+            className="hotresSearchBar showHotres"
+            data-button={t('checkDates')}
+            data-oid="5226"
+            data-lang="pl"
+            data-action="bookingbar"
+            suppressHydrationWarning
+          />
+        </div>
+      </section>
 
       {/* STYLES */}
       <style jsx global>{`
         @keyframes kenBurns {
           0% { transform: scale(1); }
           100% { transform: scale(1.1); }
-        }
-
-        /* ============================== */
-        /* PLACEHOLDER — Desktop          */
-        /* ============================== */
-        .hotres-placeholder-desktop {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 68px;
-          min-width: 420px;
-          max-width: 640px;
-          margin: 0 auto;
-          background: rgba(255, 255, 255, 0.12);
-          backdrop-filter: blur(24px) saturate(180%);
-          -webkit-backdrop-filter: blur(24px) saturate(180%);
-          border-radius: 14px;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          box-shadow:
-            0 8px 32px rgba(0, 0, 0, 0.12),
-            0 2px 8px rgba(0, 0, 0, 0.08),
-            inset 0 1px 0 rgba(255, 255, 255, 0.25);
-          overflow: hidden;
-          animation: placeholderPulse 2s ease-in-out infinite;
-        }
-
-        .hotres-placeholder-item {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 3px;
-          padding: 0 28px;
-        }
-
-        .hotres-placeholder-label {
-          font-size: 9px;
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-          color: rgba(255, 255, 255, 0.6);
-          font-weight: 400;
-        }
-
-        .hotres-placeholder-value {
-          font-size: 24px;
-          font-weight: 300;
-          color: rgba(255, 255, 255, 0.35);
-          line-height: 1;
-        }
-
-        .hotres-placeholder-arrow {
-          flex: 0 0 auto;
-          display: flex;
-          align-items: center;
-          padding: 0 8px;
-        }
-
-        .hotres-placeholder-btn {
-          flex: 0 0 160px;
-          height: 68px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 8px;
-          background: linear-gradient(135deg,
-            rgba(171, 138, 98, 0.7) 0%,
-            rgba(150, 116, 71, 0.7) 100%);
-          border-radius: 0 13px 13px 0;
-          color: rgba(255, 255, 255, 0.8);
-          font-size: 9px;
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-          font-weight: 500;
-        }
-
-        /* ============================== */
-        /* PLACEHOLDER — Mobile           */
-        /* ============================== */
-        .hotres-placeholder-mobile {
-          background: rgba(255, 255, 255, 0.98);
-          backdrop-filter: blur(30px);
-          border-radius: 18px;
-          padding: 24px;
-          border: 1px solid rgba(212, 214, 206, 0.25);
-          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-          animation: placeholderPulse 2s ease-in-out infinite;
-        }
-
-        .hotres-placeholder-mobile-row {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 16px 0;
-          font-size: 13px;
-          color: #6e7a73;
-          letter-spacing: 0.05em;
-        }
-
-        .hotres-placeholder-mobile-divider {
-          height: 1px;
-          background: rgba(212, 214, 206, 0.25);
-        }
-
-        .hotres-placeholder-dash {
-          color: rgba(0, 0, 0, 0.15);
-          font-size: 20px;
-        }
-
-        .hotres-placeholder-btn-mobile {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 8px;
-          height: 52px;
-          margin-top: 16px;
-          border-radius: 12px;
-          background: linear-gradient(135deg,
-            rgba(171, 138, 98, 0.6) 0%,
-            rgba(150, 116, 71, 0.6) 100%);
-          color: rgba(255, 255, 255, 0.85);
-          font-size: 10px;
-          text-transform: uppercase;
-          letter-spacing: 0.15em;
-          font-weight: 500;
-        }
-
-        /* Spinner & Pulse */
-        .hotres-placeholder-spinner {
-          width: 14px;
-          height: 14px;
-          border: 2px solid rgba(255, 255, 255, 0.3);
-          border-top-color: rgba(255, 255, 255, 0.9);
-          border-radius: 50%;
-          animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-          to { transform: rotate(360deg); }
-        }
-
-        @keyframes placeholderPulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.85; }
         }
 
         /* ============================== */
