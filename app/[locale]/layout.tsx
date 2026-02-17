@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     "apartamenty z widokiem na jezioro",
   ],
   verification: {
-    google: "TWOJ_KOD_Z_SEARCH_CONSOLE",
+    google: "IpC-wMFg0yEZ95SRuxh7pmFPLoZhWTBKG7cRWnrD3l0",
   },
   openGraph: {
     title: "Riva Zegrze | Apartamenty nad Jeziorem Zegrzyńskim",
