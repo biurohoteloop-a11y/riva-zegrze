@@ -1201,12 +1201,435 @@
       ]
     },
     "cta": {
+  "badge": "Oferta specjalna",
+  "title": "Zarezerwuj min. 3 noce",
+  "titleHighlight": "i zyskaj 40% rabatu",
+  "description": "Skorzystaj z naszej limitowanej promocji. Przy rezerwacji minimum 3 nocy otrzymasz",
+  "descriptionHighlight": "aż 40% zniżki",
+  "descriptionEnd": "na cały pobyt w Apartamencie C4.",
+  "bookButton": "Zarezerwuj apartament",
+  "phoneButton": "Zadzwoń: +48 510 038 038",
+  "trustBadges": {
+    "payment": "Bezpieczna płatność",
+    "cancellation": "Anulowanie do 48h",
+    "bestPrice": "Najlepsza cena",
+    "noCosts": "Brak ukrytych kosztów"
+  }
+},
+"footer": {
+      "brand": {
+        "description": "Kameralne apartamenty nad wodą. Spokój, komfort i bezpośrednia rezerwacja w wyjątkowej lokalizacji pod Warszawą.",
+        "rating": "5.0 • Booking.com"
+      },
+      "discover": {
+        "title": "Odkryj",
+        "apartments": "Apartamenty",
+        "specialOffer": "Oferta Specjalna",
+        "activities": "Aktywności",
+        "gallery": "Galeria",
+        "about": "O Nas"
+      },
+      "contact": {
+        "title": "Kontakt",
+        "address": "Riva Zegrze\nRybaki 11\n05-130 Zegrze Południowe",
+        "phone": "+48 510 038 038",
+        "email": "wynajem@rivazegrze.pl"
+      },
+      "newsletter": {
+        "title": "Newsletter",
+        "description": "Bądź na bieżąco z ofertami specjalnymi",
+        "placeholder": "Twój email",
+        "socialMedia": "Social Media"
+      },
+      "bottom": {
+        "copyright": "© {year} Riva Zegrze. Wszystkie prawa zastrzeżone.",
+        "privacy": "Polityka prywatności",
+        "terms": "Regulamin",
+        "cookies": "Cookies"
+      }
+    }
+  },
+     "apartmentC7": {
+    "hero": {
+      "breadcrumbs": {
+        "home": "Strona główna",
+        "apartments": "Apartamenty",
+        "current": "Apartament C7"
+      },
+      "badge": "Premium",
+      "name": "Apartament C7",
+      "tagline": "Nowoczesny apartament z balkonem",
+      "subtitle": "Położony bezpośrednio nad Jeziorem Zegrzyńskim",
+      "specs": {
+        "size": {
+          "label": "Rozmiar",
+          "value": "37 m²"
+        },
+        "guests": {
+          "label": "Goście",
+          "value": "4 Osoby"
+        },
+        "bedrooms": {
+          "label": "Sypialnie",
+          "value": "1 Sypialnia"
+        },
+        "bathrooms": {
+          "label": "Łazienki",
+          "value": "1 Łazienka"
+        }
+      },
+      "price": {
+        "from": "od",
+        "value": "600",
+        "currency": "zł",
+        "period": "noc",
+        "note": "* Cena obowiązuje przy rezerwacji minimum 3 dób."
+      },
+      "gallery": {
+        "imageAlt": "Apartament C7 - zdjęcie",
+        "thumbnailAlt": "Miniatura"
+      }
+    },
+    "details": {
+      "aboutApartment": {
+        "title": "O apartamencie",
+        "description": "Nowoczesny apartament z balkonem, położony bezpośrednio nad Jeziorem Zegrzyńskim. Komfortowy wybór na pobyt rodzinny, weekendowy lub dłuższy wypoczynek nad wodą.",
+        "fullDescription": "Apartament o powierzchni 37 m² przeznaczony jest dla maksymalnie czterech osób. Składa się z oddzielnej sypialni z łóżkiem podwójnym, salonu z rozkładaną sofą, funkcjonalnego aneksu kuchennego oraz prywatnej łazienki z prysznicem. Przemyślany układ wnętrza zapewnia wygodę zarówno podczas krótszego pobytu, jak i dłuższego wypoczynku. Do dyspozycji gości jest również balkon, który umożliwia relaks na świeżym powietrzu."
+      },
+      "highlights": {
+        "title": "Najważniejsze atuty",
+        "items": [
+          "Balkon z widokiem",
+          "Widok na jezioro",
+          "Kryty podgrzewany basen",
+          "Prywatna plaża",
+          "Siłownia",
+          "Marina"
+        ]
+      },
+      "amenities": {
+        "title": "Udogodnienia",
+        "items": {
+          "wifi": {
+            "label": "WiFi",
+            "description": "Szybki internet światłowodowy"
+          },
+          "tv": {
+            "label": "Smart TV",
+            "description": "55\" z Netflix i HBO"
+          },
+          "kitchen": {
+            "label": "Kuchnia",
+            "description": "W pełni wyposażona"
+          },
+          "ac": {
+            "label": "Klimatyzacja",
+            "description": "Chłodzenie i ogrzewanie"
+          },
+          "bathroom": {
+            "label": "Łazienka",
+            "description": "Premium kosmetyki"
+          },
+          "utensils": {
+            "label": "Naczynia",
+            "description": "Komplet sztućców i talerzy"
+          },
+          "terrace": {
+            "label": "Balkon",
+            "description": "Z widokiem na okolicę"
+          },
+          "garden": {
+            "label": "Widok",
+            "description": "Widok na jezioro"
+          }
+        }
+      },
+      "aboutProperty": {
+        "title": "O obiekcie",
+        "paragraphs": [
+          "Apartament znajduje się na terenie Riva Zegrze, obiektu stworzonego z myślą o wypoczynku nad wodą przez cały rok. Położenie bezpośrednio przy plaży nad Jeziorem Zegrzyńskim, w otoczeniu zieleni i terenów rekreacyjnych, sprzyja spokojnemu wypoczynkowi. Goście mogą korzystać z krytego, podgrzewanego basenu, siłowni, prywatnej plaży, mariny, a także miejsca na ognisko i grilla.",
+          "Riva Zegrze oferuje również szerokie możliwości aktywnego spędzania czasu. W okolicy dostępne są sporty wodne, kajaki, rowerki wodne, a także liczne trasy spacerowe i rowerowe. W niedalekiej odległości znajduje się pole golfowe w Rajszewie, co czyni lokalizację atrakcyjną również dla miłośników golfa. Dogodny dojazd z Warszawy sprawia, że apartament doskonale sprawdzi się zarówno na weekendowy wyjazd, jak i dłuższy pobyt wypoczynkowy."
+        ],
+        "features": {
+          "location": {
+            "title": "Lokalizacja",
+            "description": "Bezpośrednio przy plaży nad Jeziorem Zegrzyńskim, w otoczeniu zieleni i terenów rekreacyjnych."
+          },
+          "pool": {
+            "title": "Basen",
+            "description": "Dostęp do krytego, podgrzewanego basenu przez cały rok."
+          },
+          "gym": {
+            "title": "Siłownia",
+            "description": "W pełni wyposażona siłownia dla wszystkich gości obiektu."
+          }
+        }
+      },
+      "availability": {
+        "title": "Dostępność",
+        "loadingText": "Ładowanie kalendarza..."
+      }
+    },
+        "importantInfo": {
+      "subtitle": "Przed przyjazdem",
+      "title": "Ważne informacje",
+      "items": {
+        "checkIn": {
+          "label": "Zameldowanie",
+          "value": "15:00 - 22:00",
+          "note": "Samodzielne zameldowanie - kody dostępu przesyłane w dniu przyjazdu"
+        },
+        "checkOut": {
+          "label": "Wymeldowanie",
+          "value": "do 11:00",
+          "note": ""
+        },
+        "quietHours": {
+          "label": "Cisza nocna",
+          "value": "22:00 - 7:00",
+          "note": "Obowiązuje w godzinach nocnych"
+        },
+        "noParties": {
+          "label": "Zakaz imprez",
+          "value": "Brak imprez",
+          "note": "Zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich"
+        },
+        "parking": {
+          "label": "Parking",
+          "value": "Bezpłatne miejsca przed budynkiem",
+          "note": "Miejsce w garażu: 75 zł/doba (po wcześniejszej rezerwacji)"
+        }
+      },
+      "banner": {
+        "title": "Zakaz organizowania imprez",
+        "description": "W apartamencie obowiązuje całkowity zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich. Prosimy o zachowanie ciszy nocnej w godzinach 22:00–7:00 ze względu na komfort innych gości."
+      }
+    },
+    "surroundings": {
+  "subtitle": "Okolica",
+  "title": "Odkryj piękno Jeziora Zegrzyńskiego",
+  "imageAlt": "Okolica Riva Zegrze - zdjęcie",
+  "viewFull": "Zobacz pełny obraz",
+  "modal": {
+    "close": "Zamknij galerię",
+    "prev": "Poprzednie zdjęcie",
+    "next": "Następne zdjęcie",
+    "location": "Jezioro Zegrzyńskie - Riva Zegrze"
+  }
+},
+  "reviews": {
+    "subtitle": "OPINIE GOŚCI",
+    "title": "Co mówią nasi goście",
+    "basedOn": "• na podstawie {count} opinii",
+    "items": {
+      "review1": {
+        "avatar": "KM",
+        "name": "Karolina Mazur",
+        "date": "Wrzesień 2024",
+        "comment": "Piękny apartament na 3. piętrze! Zapierające dech widoki. Marina w pobliżu to dodatkowy plus!"
+      },
+      "review2": {
+        "avatar": "JK",
+        "name": "Jakub Kowalski",
+        "date": "Sierpień 2024",
+        "comment": "Świetne miejsce na rodzinne wakacje. Basen i plaża - dzieci były zachwycone. Na pewno wrócimy!"
+      },
+      "review3": {
+        "avatar": "AL",
+        "name": "Anna Lewandowska",
+        "date": "Lipiec 2024",
+        "comment": "Wygodny apartament, wszystko na miejscu. Balkon idealny na poranną kawę z widokiem!"
+      }
+    }
+  },
+  "cta": {
+    "badge": "Oferta Specjalna",
+    "title": "Zarezerwuj min. 3 noce",
+    "titleHighlight": "i zyskaj 40% rabatu",
+    "description": "Skorzystaj z naszej limitowanej promocji. Przy rezerwacji minimum 3 nocy otrzymasz",
+    "descriptionHighlight": "aż 40% zniżki",
+    "descriptionEnd": "na cały pobyt w Apartamencie C7.",
+    "bookButton": "Zarezerwuj apartament",
+    "phoneButton": "Zadzwoń: +48 510 038 038",
+    "trustBadges": {
+      "payment": "Bezpieczna płatność",
+      "cancellation": "Anulowanie do 48h",
+      "bestPrice": "Najlepsza cena",
+      "noCosts": "Brak ukrytych kosztów"
+    }
+  },
+  "footer": {
+  "brand": {
+    "description": "Kameralne apartamenty nad wodą. Spokój, komfort i bezpośrednia rezerwacja w wyjątkowej lokalizacji pod Warszawą.",
+    "rating": "5.0 • Booking.com"
+  },
+  "discover": {
+    "title": "Odkryj",
+    "apartments": "Apartamenty",
+    "specialOffer": "Oferta Specjalna",
+    "activities": "Aktywności",
+    "gallery": "Galeria",
+    "about": "O Nas"
+  },
+  "contact": {
+    "title": "Kontakt",
+    "address": "Riva Zegrze\nRybaki 11\n05-130 Zegrze Południowe",
+    "phone": "+48 510 038 038",
+    "email": "wynajem@rivazegrze.pl"
+  },
+  "newsletter": {
+    "title": "Newsletter",
+    "description": "Bądź na bieżąco z ofertami specjalnymi",
+    "placeholder": "Twój email",
+    "socialMedia": "Social Media"
+  },
+  "bottom": {
+    "copyright": "© {year} Riva Zegrze. Wszystkie prawa zastrzeżone.",
+    "privacy": "Polityka prywatności",
+    "terms": "Regulamin",
+    "cookies": "Cookies"
+  }
+}
+ },
+ "apartmentD1": {
+    "hero": {
+      "breadcrumb": {
+        "home": "Strona główna",
+        "apartments": "Apartamenty",
+        "current": "Apartament D1"
+      },
+      "badge": "Apartamenty Riva Zegrze",
+      "title": "Apartament D1",
+      "tagline": "Nowoczesny apartament z tarasem",
+      "subtitle": "Położony na 1 piętrze w bezpośrednim sąsiedztwie Jeziora Zegrzyńskiego",
+      "specs": {
+        "size": { "label": "Rozmiar", "value": "38 m²" },
+        "guests": { "label": "Goście", "value": "4 Osoby" },
+        "bedrooms": { "label": "Sypialnie", "value": "1 Sypialnia" },
+        "bathrooms": { "label": "Łazienki", "value": "1 Łazienka" }
+      },
+      "price": {
+        "from": "od",
+        "amount": "480",
+        "currency": "zł",
+        "period": "noc",
+        "note": "* Cena obowiązuje przy rezerwacji minimum 3 dób."
+      },
+      "thumbnailAlt": "Apartament D1 - miniatura"
+    },
+    "details": {
+      "aboutTitle": "O apartamencie",
+      "description": "Nowoczesny apartament z tarasem, położony na 1 piętrze w bezpośrednim sąsiedztwie Jeziora Zegrzyńskiego. Komfortowy wybór na spokojny wypoczynek nad wodą, blisko natury i strefy rekreacyjnej.",
+      "fullDescription": "Apartament o powierzchni 38 m² przeznaczony jest dla maksymalnie czterech osób. Składa się z oddzielnej sypialni z łóżkiem podwójnym, salonu z rozkładaną sofą, funkcjonalnego aneksu kuchennego oraz prywatnej łazienki z prysznicem. Przemyślany układ wnętrza zapewnia wygodę zarówno podczas krótszych pobytów, jak i dłuższego wypoczynku. Do dyspozycji gości jest taras, który stanowi idealne miejsce na poranną kawę lub chwilę relaksu po dniu spędzonym nad wodą. Apartament położony jest na 1 piętrze, co zapewnia łatwy dostęp do wszystkich udogodnień obiektu.",
+      "highlightsTitle": "Najważniejsze atuty",
+      "highlights": [
+        "Taras z meblami",
+        "1 piętro - łatwy dostęp",
+        "Kryty podgrzewany basen",
+        "Prywatna plaża",
+        "Siłownia",
+        "Marina"
+      ],
+      "aboutProperty": {
+        "title": "O obiekcie",
+        "paragraph1": "Apartament znajduje się na terenie Riva Zegrze, obiektu położonego bezpośrednio przy plaży nad Jeziorem Zegrzyńskim. Goście mają dostęp do krytego, podgrzewanego basenu, siłowni, prywatnej plaży, mariny oraz zaplecza do sportów wodnych, w tym kajaków i rowerków wodnych.",
+        "paragraph2": "Okolica oferuje liczne trasy spacerowe i rowerowe, a w niedalekiej odległości znajduje się pole golfowe w Rajszewie. Dogodny dojazd z Warszawy sprawia, że apartament doskonale sprawdzi się zarówno na weekendowy wyjazd, jak i dłuższy pobyt wypoczynkowy.",
+        "features": [
+          {
+            "title": "Lokalizacja",
+            "description": "Bezpośrednio przy plaży nad Jeziorem Zegrzyńskim, 1 piętro."
+          },
+          {
+            "title": "Basen",
+            "description": "Dostęp do krytego, podgrzewanego basenu przez cały rok."
+          },
+          {
+            "title": "Siłownia",
+            "description": "W pełni wyposażona siłownia dla wszystkich gości."
+          }
+        ]
+      },
+      "calendar": {
+        "title": "Dostępność"
+      }
+    },
+    "importantInfo": {
+      "subtitle": "Przed przyjazdem",
+      "title": "Ważne informacje",
+      "items": [
+        {
+          "label": "Zameldowanie",
+          "value": "15:00 - 22:00",
+          "note": "Samodzielne - kody dostępu przesyłane w dniu przyjazdu"
+        },
+        {
+          "label": "Wymeldowanie",
+          "value": "do 11:00",
+          "note": ""
+        },
+        {
+          "label": "Cisza nocna",
+          "value": "22:00 - 7:00",
+          "note": ""
+        },
+        {
+          "label": "Zakaz imprez",
+          "value": "Wieczory panieńskie/kawalerskie",
+          "note": ""
+        },
+        {
+          "label": "Parking",
+          "value": "Bezpłatny przed budynkiem",
+          "note": "Garaż: 75 zł/doba (rezerwacja)"
+        }
+      ],
+      "noParties": {
+        "title": "Zakaz organizowania imprez",
+        "description": "W apartamencie obowiązuje całkowity zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich. Prosimy o zachowanie ciszy nocnej w godzinach 22:00–7:00 ze względu na komfort innych gości."
+      }
+    },
+    "surroundings": {
+      "subtitle": "Okolica",
+      "title": "Odkryj piękno Jeziora Zegrzyńskiego",
+      "imageAlt": "Okolica Riva Zegrze",
+      "viewFull": "Zobacz pełny obraz",
+      "closeGallery": "Zamknij galerię",
+      "prevImage": "Poprzednie zdjęcie",
+      "nextImage": "Następne zdjęcie",
+      "location": "Riva Zegrze — Jezioro Zegrzyńskie, Zegrze Południowe"
+    },
+    "reviews": {
+      "subtitle": "Opinie gości",
+      "title": "Co mówią nasi goście",
+      "basedOn": "na podstawie 3 opinii",
+      "items": [
+        {
+          "name": "Monika Zielińska",
+          "date": "Październik 2024",
+          "comment": "Świetny apartament na 1 piętrze! Łatwy dostęp, piękny taras. Idealne miejsce na rodzinny wypoczynek!",
+          "avatar": "MZ"
+        },
+        {
+          "name": "Paweł Nowicki",
+          "date": "Wrzesień 2024",
+          "comment": "Komfortowy pobyt, wszystko na miejscu. Basen i plaża - dzieci zachwycone. Wrócimy!",
+          "avatar": "PN"
+        },
+        {
+          "name": "Ewa Kowalczyk",
+          "date": "Sierpień 2024",
+          "comment": "Apartament czysty, dobrze wyposażony. Taras idealny na wieczorne relaksowanie. Polecam!",
+          "avatar": "EK"
+        }
+      ]
+    },
+       "cta": {
       "badge": "Oferta specjalna",
       "title": "Zarezerwuj min. 3 noce",
       "titleHighlight": "i zyskaj 40% rabatu",
       "description": "Skorzystaj z naszej limitowanej promocji. Przy rezerwacji minimum 3 nocy otrzymasz",
       "descriptionHighlight": "aż 40% zniżki",
-      "descriptionEnd": "na cały pobyt w Apartamencie C4.",
+      "descriptionEnd": "na cały pobyt w Apartamencie D1.",
       "bookButton": "Zarezerwuj apartament",
       "phoneButton": "Zadzwoń: +48 510 038 038",
       "trustBadges": {
@@ -1238,7 +1661,563 @@
       "newsletter": {
         "title": "Newsletter",
         "description": "Bądź na bieżąco z ofertami specjalnymi",
+        "placeholder": "Twój e-mail",
+        "socialMedia": "Social Media"
+      },
+      "bottom": {
+        "copyright": "© {year} Riva Zegrze. Wszystkie prawa zastrzeżone.",
+        "privacy": "Polityka prywatności",
+        "terms": "Regulamin",
+        "cookies": "Cookies"
+      }
+    }
+  },
+ "apartmentD4": {
+    "hero": {
+      "breadcrumb": {
+        "home": "Strona główna",
+        "apartments": "Apartamenty",
+        "current": "Apartament D4"
+      },
+      "badge": "Komfort",
+      "title": "Apartament D4",
+      "tagline": "Komfortowy apartament z tarasem",
+      "subtitle": "Położony na 2 piętrze w obiekcie Riva Zegrze",
+      "specs": {
+        "size": { "label": "Powierzchnia", "value": "38 m²" },
+        "guests": { "label": "Goście", "value": "4 osoby" },
+        "bedrooms": { "label": "Sypialnie", "value": "1 sypialnia" },
+        "bathrooms": { "label": "Łazienki", "value": "1 łazienka" }
+      },
+      "price": {
+        "from": "od",
+        "amount": "510",
+        "currency": "zł",
+        "period": "noc",
+        "note": "* Cena obowiązuje przy rezerwacji minimum 3 dób."
+      },
+      "gallery": {
+        "imageAlt": "zdjęcie",
+        "thumbnailAlt": "Miniatura"
+      }
+    },
+    "details": {
+      "aboutTitle": "O apartamencie",
+      "description": "Komfortowy apartament z tarasem, położony na 2 piętrze w obiekcie Riva Zegrze. To doskonała propozycja na wypoczynek nad wodą, łącząca funkcjonalne wnętrze z dostępem do rozbudowanej strefy rekreacyjnej.",
+      "fullDescription": "Apartament o powierzchni 38 m² został zaprojektowany z myślą o wygodnym pobycie maksymalnie czterech osób. W jego skład wchodzi oddzielna sypialnia z łóżkiem podwójnym, przestronny salon z rozkładaną sofą, funkcjonalny aneks kuchenny oraz prywatna łazienka z prysznicem. Układ wnętrza sprzyja zarówno krótkim pobytom, jak i dłuższemu wypoczynkowi, zapewniając swobodę i komfort na co dzień.\n\nDo dyspozycji gości jest taras położony na 2 piętrze, który stanowi przyjemną przestrzeń do odpoczynku po dniu spędzonym nad wodą lub w strefie rekreacyjnej.",
+      "highlightsTitle": "Najważniejsze atuty",
+      "highlights": {
+        "terrace": {
+          "label": "Taras",
+          "description": "Prywatny taras na 2 piętrze"
+        },
+        "floor": {
+          "label": "2 piętro",
+          "description": "Dogodny dostęp"
+        },
+        "pool": {
+          "label": "Basen kryty",
+          "description": "Podgrzewany przez cały rok"
+        },
+        "gym": {
+          "label": "Siłownia",
+          "description": "W pełni wyposażona"
+        },
+        "beach": {
+          "label": "Prywatna plaża",
+          "description": "Bezpośredni dostęp"
+        },
+        "marina": {
+          "label": "Marina",
+          "description": "Dostęp do przystani"
+        },
+        "wifi": {
+          "label": "WiFi",
+          "description": "Szybki internet"
+        },
+        "kitchen": {
+          "label": "Kuchnia",
+          "description": "W pełni wyposażona"
+        }
+      },
+      "aboutProperty": {
+        "title": "O obiekcie",
+        "paragraph1": "Apartament znajduje się na terenie Riva Zegrze, obiektu położonego bezpośrednio przy plaży nad Jeziorem Zegrzyńskim. Goście mają dostęp do krytego, podgrzewanego basenu, siłowni, prywatnej plaży, mariny oraz zaplecza do sportów wodnych.",
+        "paragraph2": "Okolica oferuje liczne trasy spacerowe i rowerowe, możliwość aktywnego wypoczynku na świeżym powietrzu oraz pole golfowe w Rajszewie, położone w niewielkiej odległości. Dogodny dojazd z Warszawy sprawia, że apartament sprawdzi się zarówno na weekendowy wyjazd, jak i dłuższy pobyt wypoczynkowy.",
+        "features": [
+          {
+            "title": "Lokalizacja",
+            "description": "Bezpośrednio przy plaży nad Jeziorem Zegrzyńskim, 2 piętro."
+          },
+          {
+            "title": "Basen",
+            "description": "Dostęp do krytego, podgrzewanego basenu przez cały rok."
+          },
+          {
+            "title": "Siłownia",
+            "description": "W pełni wyposażona siłownia dla wszystkich gości."
+          }
+        ]
+      },
+      "calendar": {
+        "title": "Dostępność"
+      }
+    },
+    "importantInfo": {
+      "subtitle": "Przed przyjazdem",
+      "title": "Ważne informacje",
+      "items": {
+        "checkin": {
+          "label": "Zameldowanie",
+          "value": "15:00 - 22:00",
+          "note": "Samodzielne - kody dostępu przesyłane w dniu przyjazdu"
+        },
+        "checkout": {
+          "label": "Wymeldowanie",
+          "value": "do 11:00",
+          "note": ""
+        },
+        "quietHours": {
+          "label": "Cisza nocna",
+          "value": "22:00 - 7:00",
+          "note": ""
+        },
+        "noParties": {
+          "label": "Zakaz imprez",
+          "value": "Wieczory panieńskie/kawalerskie",
+          "note": ""
+        },
+        "parking": {
+          "label": "Parking",
+          "value": "Bezpłatny przed budynkiem",
+          "note": "Garaż: 75 zł/doba (rezerwacja)"
+        }
+      },
+      "noPartiesPolicy": {
+        "title": "Zakaz organizowania imprez",
+        "description": "W apartamencie obowiązuje całkowity zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich. Prosimy o zachowanie ciszy nocnej w godzinach 22:00–7:00 ze względu na komfort innych gości."
+      }
+    },
+    "surroundings": {
+      "subtitle": "Otoczenie",
+      "title": "Odkryj piękno Jeziora Zegrzyńskiego",
+      "imageAlt": "Otoczenie Riva Zegrze",
+      "viewFull": "Zobacz pełny obraz",
+      "closeGallery": "Zamknij galerię",
+      "prevImage": "Poprzednie zdjęcie",
+      "nextImage": "Następne zdjęcie",
+      "location": "Riva Zegrze — Jezioro Zegrzyńskie, Zegrze Południowe"
+    },
+    "reviews": {
+      "subtitle": "Opinie gości",
+      "title": "Co mówią nasi goście",
+      "basedOn": "na podstawie 3 opinii",
+      "items": [
+        {
+          "name": "Aleksandra Nowak",
+          "date": "Listopad 2024",
+          "comment": "Świetny apartament na 2 piętrze! Taras idealny na relaks. Wszystko czyste i dobrze wyposażone!",
+          "avatar": "AN"
+        },
+        {
+          "name": "Marcin Kowalski",
+          "date": "Październik 2024",
+          "comment": "Doskonałe miejsce na wypoczynek. Basen i siłownia to duży plus. Wrócimy na pewno!",
+          "avatar": "MK"
+        },
+        {
+          "name": "Joanna Wiśniewska",
+          "date": "Wrzesień 2024",
+          "comment": "Komfortowy pobyt, piękne widoki z tarasu. Polecam każdemu!",
+          "avatar": "JW"
+        }
+      ]
+    },
+    "cta": {
+      "badge": "Oferta specjalna",
+      "title": "Zarezerwuj 3+ noce",
+      "titleHighlight": "i odbierz 40% rabatu",
+      "description": "Skorzystaj z naszej limitowanej promocji. Przy rezerwacji minimum 3 nocy otrzymasz",
+      "descriptionHighlight": "nawet 40% zniżki",
+      "descriptionEnd": "na cały pobyt w Apartamencie D4.",
+      "bookButton": "Zarezerwuj apartament",
+      "phoneButton": "Zadzwoń: +48 510 038 038",
+      "trustBadges": {
+        "payment": "Bezpieczna płatność",
+        "cancellation": "Anuluj do 48h",
+        "bestPrice": "Najlepsza cena",
+        "noCosts": "Brak ukrytych kosztów"
+      }
+    },
+    "footer": {
+      "brand": {
+        "description": "Kameralne apartamenty nad wodą. Spokój, komfort i bezpośrednia rezerwacja w wyjątkowej lokalizacji niedaleko Warszawy.",
+        "rating": "5.0 • Booking.com"
+      },
+      "discover": {
+        "title": "Odkryj",
+        "apartments": "Apartamenty",
+        "specialOffer": "Oferta specjalna",
+        "activities": "Atrakcje",
+        "gallery": "Galeria",
+        "about": "O nas"
+      },
+      "contact": {
+        "title": "Kontakt",
+        "address": "Riva Zegrze\nRybaki 11\n05-130 Zegrze Południowe",
+        "phone": "+48 510 038 038",
+        "email": "wynajem@rivazegrze.pl"
+      },
+      "newsletter": {
+        "title": "Newsletter",
+        "description": "Bądź na bieżąco ze specjalnymi ofertami",
         "placeholder": "Twój email",
+        "socialMedia": "Social Media"
+      },
+      "bottom": {
+        "copyright": "© {year} Riva Zegrze. Wszelkie prawa zastrzeżone.",
+        "privacy": "Polityka prywatności",
+        "terms": "Regulamin",
+        "cookies": "Cookies"
+      }
+    }
+  },
+ "apartmentD7": {
+  "hero": {
+    "breadcrumb": {
+      "home": "Strona główna",
+      "apartments": "Apartamenty",
+      "current": "Apartament D7"
+    },
+    "badge": "Komfort",
+    "title": "Apartament D7",
+    "tagline": "Przestronny i funkcjonalny apartament z tarasem",
+    "subtitle": "Położony na 3 piętrze w obiekcie Riva Zegrze",
+    "specs": {
+      "size": { "label": "Powierzchnia", "value": "38 m²" },
+      "guests": { "label": "Goście", "value": "4 osoby" },
+      "bedrooms": { "label": "Sypialnie", "value": "1 sypialnia" },
+      "bathrooms": { "label": "Łazienki", "value": "1 łazienka" }
+    },
+    "price": {
+      "from": "od",
+      "amount": "540",
+      "currency": "zł",
+      "period": "noc",
+      "note": "* Cena obowiązuje przy rezerwacji minimum 3 dób."
+    },
+    "gallery": {
+      "imageAlt": "zdjęcie",
+      "thumbnailAlt": "Miniatura"
+    }
+  },
+  "details": {
+    "aboutTitle": "O apartamencie",
+    "description": "Przestronny i funkcjonalny apartament z tarasem, położony na 3 piętrze w obiekcie Riva Zegrze. Idealny wybór na komfortowy wypoczynek nad wodą, z dostępem do strefy rekreacyjnej i terenów zielonych.",
+    "fullDescription": "Apartament o powierzchni 38 m² przeznaczony jest dla maksymalnie czterech osób i zapewnia komfortowe warunki zarówno na krótki pobyt, jak i dłuższy wypoczynek. W apartamencie znajduje się oddzielna sypialnia z łóżkiem podwójnym, salon z rozkładaną sofą, praktyczny aneks kuchenny oraz prywatna łazienka z prysznicem. Wnętrze jest jasne, nowoczesne i zaprojektowane w sposób sprzyjający wygodnemu użytkowaniu.\n\nAtutem apartamentu jest taras położony na 3 piętrze, który pozwala odpocząć na świeżym powietrzu i cieszyć się spokojną atmosferą obiektu.",
+    "highlightsTitle": "Najważniejsze atuty",
+    "highlights": {
+      "terrace": { "label": "Taras", "description": "Prywatny taras na 3 piętrze" },
+      "floor": { "label": "3 piętro", "description": "Piękne widoki" },
+      "pool": { "label": "Basen kryty", "description": "Podgrzewany przez cały rok" },
+      "gym": { "label": "Siłownia", "description": "W pełni wyposażona" },
+      "beach": { "label": "Prywatna plaża", "description": "Bezpośredni dostęp" },
+      "marina": { "label": "Marina", "description": "Dostęp do przystani" },
+      "wifi": { "label": "WiFi", "description": "Szybki internet" },
+      "kitchen": { "label": "Kuchnia", "description": "W pełni wyposażona" }
+    },
+    "aboutProperty": {
+      "title": "O obiekcie",
+      "paragraph1": "Apartament znajduje się na terenie Riva Zegrze, kompleksu położonego bezpośrednio przy plaży nad Jeziorem Zegrzyńskim. Goście mogą korzystać z krytego, podgrzewanego basenu, siłowni, prywatnej plaży, mariny oraz zaplecza do sportów wodnych.",
+      "paragraph2": "Okolica sprzyja aktywnemu wypoczynkowi — dostępne są trasy spacerowe i rowerowe, kajaki, rowerki wodne, a w niewielkiej odległości znajduje się pole golfowe w Rajszewie. Dogodny dojazd z Warszawy sprawia, że apartament stanowi doskonałą bazę wypoczynkową nad wodą.",
+      "features": [
+        { "title": "Lokalizacja", "description": "Bezpośrednio przy plaży nad Jeziorem Zegrzyńskim, 3 piętro z widokiem." },
+        { "title": "Basen", "description": "Dostęp do krytego, podgrzewanego basenu przez cały rok." },
+        { "title": "Siłownia", "description": "W pełni wyposażona siłownia dla wszystkich gości." }
+      ]
+    },
+    "calendar": { "title": "Dostępność" }
+  },
+  "importantInfo": {
+    "subtitle": "Przed przyjazdem",
+    "title": "Ważne informacje",
+    "items": {
+      "checkin": {
+        "label": "Zameldowanie",
+        "value": "15:00 - 22:00",
+        "note": "Samodzielne - kody dostępu przesyłane w dniu przyjazdu"
+      },
+      "checkout": { "label": "Wymeldowanie", "value": "do 11:00", "note": "" },
+      "quietHours": { "label": "Cisza nocna", "value": "22:00 - 7:00", "note": "" },
+      "noParties": { "label": "Zakaz imprez", "value": "Wieczory panieńskie/kawalerskie", "note": "" },
+      "parking": {
+        "label": "Parking",
+        "value": "Bezpłatny przed budynkiem",
+        "note": "Garaż: 75 zł/doba (rezerwacja)"
+      }
+    },
+    "noPartiesPolicy": {
+      "title": "Zakaz organizowania imprez",
+      "description": "W apartamencie obowiązuje całkowity zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich. Prosimy o zachowanie ciszy nocnej w godzinach 22:00–7:00 ze względu na komfort innych gości."
+    }
+  },
+  "surroundings": {
+    "subtitle": "Okolica",
+    "title": "Odkryj piękno Jeziora Zegrzyńskiego",
+    "imageAlt": "Okolica Riva Zegrze",
+    "viewFull": "Zobacz pełny obraz",
+    "closeGallery": "Zamknij galerię",
+    "prevImage": "Poprzednie zdjęcie",
+    "nextImage": "Następne zdjęcie",
+    "location": "Jezioro Zegrzyńskie — Riva Zegrze"
+  },
+  "reviews": {
+    "subtitle": "Opinie gości",
+    "title": "Co mówią nasi goście",
+    "basedOn": "• na podstawie {count} opinii",
+    "items": [
+      {
+        "name": "Paulina Kowalczyk",
+        "date": "Grudzień 2024",
+        "comment": "Wspaniały apartament na 3 piętrze! Widoki niesamowite. Wszystko czyste i komfortowe. Polecamy!",
+        "avatar": "PK",
+        "rating": 5
+      },
+      {
+        "name": "Tomasz Lewandowski",
+        "date": "Listopad 2024",
+        "comment": "Świetne miejsce na wypoczynek. Basen, siłownia, marina - wszystko pod ręką. Wrócimy!",
+        "avatar": "TL",
+        "rating": 5
+      },
+      {
+        "name": "Monika Wójcik",
+        "date": "Październik 2024",
+        "comment": "Idealne na weekend! Taras piękny, apartament przestronny. Bardzo polecamy!",
+        "avatar": "MW",
+        "rating": 5
+      }
+    ]
+  },
+  "cta": {
+    "badge": "Oferta specjalna",
+    "title": "Zarezerwuj min. 3 noce",
+    "titleHighlight": "i zyskaj 40% rabatu",
+    "description": "Skorzystaj z naszej limitowanej promocji. Przy rezerwacji minimum 3 nocy otrzymasz",
+    "descriptionHighlight": "aż 40% zniżki",
+    "descriptionEnd": "na cały pobyt w Apartamencie D7.",
+    "bookButton": "Zarezerwuj apartament",
+    "phoneButton": "Zadzwoń: +48 510 038 038",
+    "trustBadges": {
+      "payment": "Bezpieczna płatność",
+      "cancellation": "Anulowanie do 48h",
+      "bestPrice": "Najlepsza cena",
+      "noCosts": "Brak ukrytych kosztów"
+    }
+  },
+  "footer": {
+    "brand": {
+      "description": "Kameralne apartamenty nad wodą. Spokój, komfort i bezpośrednia rezerwacja w wyjątkowej lokalizacji pod Warszawą.",
+      "rating": "5.0 • Booking.com"
+    },
+    "discover": {
+      "title": "Odkryj",
+      "apartments": "Apartamenty",
+      "specialOffer": "Oferta Specjalna",
+      "activities": "Aktywności",
+      "gallery": "Galeria",
+      "about": "O Nas"
+    },
+    "contact": {
+      "title": "Kontakt",
+      "address": "Riva Zegrze\nRybaki 11\n05-130 Zegrze Południowe",
+      "phone": "+48 510 038 038",
+      "email": "wynajem@rivazegrze.pl"
+    },
+    "newsletter": {
+      "title": "Newsletter",
+      "description": "Bądź na bieżąco z ofertami specjalnymi",
+      "placeholder": "Twój e-mail",
+      "socialMedia": "Social Media"
+    },
+    "bottom": {
+      "copyright": "© {year} Riva Zegrze. Wszystkie prawa zastrzeżone.",
+      "privacy": "Polityka prywatności",
+      "terms": "Regulamin",
+      "cookies": "Cookies"
+    }
+  }
+},
+ "apartmentB10": {
+    "hero": {
+      "breadcrumb": {
+        "home": "Strona główna",
+        "apartments": "Apartamenty",
+        "current": "Apartament B10 Deluxe"
+      },
+      "badge": "Komfort",
+      "title": "Apartament B10 Deluxe",
+      "tagline": "z 1 sypialnią, tarasem i widokiem na wodę",
+      "subtitle": "Przestronny apartament Deluxe z dużym tarasem i panoramicznym widokiem na Jezioro Zegrzyńskie, położony na 3 piętrze",
+      "specs": {
+        "size": { "label": "Rozmiar", "value": "68 m²" },
+        "guests": { "label": "Goście", "value": "4 Osoby" },
+        "bedrooms": { "label": "Sypialnie", "value": "1 Sypialnia" },
+        "bathrooms": { "label": "Łazienki", "value": "1 Łazienka" }
+      },
+      "price": {
+        "from": "od",
+        "amount": "900",
+        "currency": "zł",
+        "period": "noc",
+        "note": "* Cena obowiązuje przy rezerwacji minimum 3 dób. Przy pobytach krótszych (1–2 noce) obowiązuje dopłata zgodnie z cennikiem."
+      },
+      "gallery": {
+        "imageAlt": "zdjęcie",
+        "thumbnailAlt": "Miniatura"
+      }
+    },
+    "details": {
+      "aboutTitle": "O apartamencie",
+      "description": "Przestronny apartament Deluxe z dużym tarasem i panoramicznym widokiem na Jezioro Zegrzyńskie, położony na 3 piętrze. Idealna propozycja dla gości ceniących komfort, przestrzeń i wyjątkowe położenie nad wodą.",
+      "fullDescription": "Apartament B10 Deluxe o powierzchni 68 m² to największy apartament w ofercie, zapewniający wyjątkowy komfort i swobodę pobytu dla maksymalnie czterech osób. Układ apartamentu jest taki sam jak w pozostałych apartamentach – obejmuje oddzielną sypialnię, salon z rozkładaną sofą, funkcjonalny aneks kuchenny oraz prywatną łazienkę z prysznicem – jednak większy metraż daje znacznie więcej przestrzeni do wypoczynku i codziennego użytkowania.\n\nNajwiększym atutem apartamentu jest przestronny taras położony na 3 piętrze, z którego rozciąga się piękny widok na Jezioro Zegrzyńskie. To idealne miejsce na poranną kawę, relaks w ciągu dnia lub wieczorny odpoczynek z widokiem na wodę i zachody słońca.",
+      "highlightsTitle": "Najważniejsze atuty",
+      "highlights": {
+        "terrace": { "label": "Taras", "description": "Przestronny taras z widokiem na jezioro" },
+        "lakeView": { "label": "Widok na jezioro", "description": "Panoramiczny widok na Jezioro Zegrzyńskie" },
+        "floor": { "label": "3 piętro", "description": "Najwyższe piętro z najlepszymi widokami" },
+        "pool": { "label": "Basen kryty", "description": "Podgrzewany przez cały rok" },
+        "gym": { "label": "Siłownia", "description": "W pełni wyposażona" },
+        "beach": { "label": "Prywatna plaża", "description": "Bezpośredni dostęp" },
+        "marina": { "label": "Marina", "description": "Dostęp do przystani" },
+        "size": { "label": "68 m²", "description": "Największy apartament w ofercie" }
+      },
+      "aboutProperty": {
+        "title": "O obiekcie",
+        "paragraph1": "Apartament znajduje się na terenie Riva Zegrze, kompleksu położonego bezpośrednio przy plaży nad Jeziorem Zegrzyńskim. Goście mają dostęp do krytego, podgrzewanego basenu, siłowni, prywatnej plaży, mariny oraz zaplecza do sportów wodnych.",
+        "paragraph2": "Okolica sprzyja aktywnemu wypoczynkowi – dostępne są trasy spacerowe i rowerowe, kajaki, rowerki wodne, a w niedalekiej odległości znajduje się pole golfowe w Rajszewie. Dogodny dojazd z Warszawy sprawia, że apartament B10 Deluxe doskonale sprawdzi się zarówno na dłuższy wypoczynek, jak i wyjątkowy weekend nad wodą.",
+        "features": [
+          { "title": "Lokalizacja", "description": "Bezpośrednio przy plaży nad Jeziorem Zegrzyńskim, 3 piętro z widokiem na wodę." },
+          { "title": "Basen", "description": "Dostęp do krytego, podgrzewanego basenu przez cały rok." },
+          { "title": "Siłownia", "description": "W pełni wyposażona siłownia dla wszystkich gości." }
+        ]
+      },
+      "calendar": { "title": "Dostępność" }
+    },
+    "importantInfo": {
+      "subtitle": "Przed przyjazdem",
+      "title": "Ważne informacje",
+      "items": {
+        "checkin": {
+          "label": "Zameldowanie",
+          "value": "15:00 - 22:00",
+          "note": "Samodzielne zameldowanie - kody dostępu przesyłane w dniu przyjazdu"
+        },
+        "checkout": {
+          "label": "Wymeldowanie",
+          "value": "do 11:00",
+          "note": ""
+        },
+        "quietHours": {
+          "label": "Cisza nocna",
+          "value": "22:00 - 7:00",
+          "note": "Obowiązuje w godzinach nocnych"
+        },
+        "noParties": {
+          "label": "Zakaz imprez",
+          "value": "Brak imprez",
+          "note": "Zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich"
+        },
+        "parking": {
+          "label": "Parking",
+          "value": "Bezpłatne miejsca przed budynkiem",
+          "note": "Miejsce w garażu: 75 zł/doba (po wcześniejszej rezerwacji)"
+        }
+      },
+      "noPartiesPolicy": {
+        "title": "Zakaz organizowania imprez",
+        "description": "W apartamencie obowiązuje całkowity zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich. Prosimy o zachowanie ciszy nocnej w godzinach 22:00–7:00 ze względu na komfort innych gości."
+      }
+    },
+    "surroundingsGallery": {
+      "subtitle": "Okolica",
+      "title": "Odkryj piękno Jeziora Zegrzyńskiego",
+      "viewFullImage": "Zobacz pełny obraz",
+      "imageCounter": "{current} / {total}",
+      "imageAlt": "Okolica Riva Zegrze - zdjęcie {number}",
+      "closeGallery": "Zamknij galerię",
+      "previousPhoto": "Poprzednie zdjęcie",
+      "nextPhoto": "Następne zdjęcie",
+      "location": "Jezioro Zegrzyńskie - Riva Zegrze"
+    },
+    "reviews": {
+      "subtitle": "Opinie gości",
+      "title": "Co mówią nasi goście",
+      "rating": "5.0",
+      "basedOn": "• na podstawie {count} opinii",
+      "items": [
+        {
+          "name": "Magdalena Lewandowska",
+          "date": "Grudzień 2024",
+          "avatar": "ML",
+          "rating": 5,
+          "comment": "Apartament B10 to prawdziwa perła! Widoki zapierają dech, przestrzeń ogromna, a wyposażenie na najwyższym poziomie. Najlepszy wybór!"
+        },
+        {
+          "name": "Tomasz Wiśniewski",
+          "date": "Listopad 2024",
+          "avatar": "TW",
+          "rating": 5,
+          "comment": "Wyjątkowe miejsce na weekend. Taras z widokiem na Zegrze to coś niesamowitego. 68 m² to luksus, polecamy gorąco!"
+        },
+        {
+          "name": "Karolina Mazur",
+          "date": "Październik 2024",
+          "avatar": "KM",
+          "rating": 5,
+          "comment": "Przepiękny, przestronny apartament z najlepszymi widokami w całym kompleksie. Wszystko idealne - od lokalizacji po wyposażenie!"
+        }
+      ]
+    },
+    "cta": {
+      "badge": "Oferta specjalna",
+      "title": "Zarezerwuj min. 3 noce",
+      "titleHighlight": "i zyskaj 40% rabatu",
+      "description": "Skorzystaj z naszej limitowanej promocji. Przy rezerwacji minimum 3 nocy otrzymasz",
+      "descriptionHighlight": "aż 40% zniżki",
+      "descriptionEnd": "na cały pobyt w Apartamencie B10 Deluxe.",
+      "bookButton": "Zarezerwuj apartament",
+      "phoneButton": "Zadzwoń: +48 510 038 038",
+      "trustBadges": {
+        "payment": "Bezpieczna płatność",
+        "cancellation": "Anulowanie do 48h",
+        "bestPrice": "Najlepsza cena",
+        "noCosts": "Brak ukrytych kosztów"
+      }
+    },
+    "footer": {
+      "brand": {
+        "description": "Kameralne apartamenty nad wodą. Spokój, komfort i bezpośrednia rezerwacja w wyjątkowej lokalizacji pod Warszawą.",
+        "rating": "5.0 • Booking.com"
+      },
+      "discover": {
+        "title": "Odkryj",
+        "apartments": "Apartamenty",
+        "specialOffer": "Oferta Specjalna",
+        "activities": "Aktywności",
+        "gallery": "Galeria",
+        "about": "O Nas"
+      },
+      "contact": {
+        "title": "Kontakt",
+        "address": "Riva Zegrze\nRybaki 11\n05-130 Zegrze Południowe",
+        "phone": "+48 510 038 038",
+        "email": "wynajem@rivazegrze.pl"
+      },
+      "newsletter": {
+        "title": "Newsletter",
+        "description": "Bądź na bieżąco z ofertami specjalnymi",
+        "placeholder": "Twój e-mail",
         "socialMedia": "Social Media"
       },
       "bottom": {

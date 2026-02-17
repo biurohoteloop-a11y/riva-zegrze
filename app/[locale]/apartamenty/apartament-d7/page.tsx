@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Navigation from '../../../components/layout/Navigation';
+import { useTranslations } from 'next-intl';
 import { 
   Navigation as SwiperNavigation, 
   Pagination, 
@@ -164,8 +165,11 @@ export default function ApartmentD7Page() {
   );
 }
 
-// HeroGallery (identyczna - zmień tylko breadcrumb na D4)
+// ============================================
+// 1. HERO + GALLERY
+// ============================================
 function HeroGallery() {
+  const t = useTranslations('apartmentD7.hero');
   const [activeIndex, setActiveIndex] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
 
@@ -198,68 +202,76 @@ function HeroGallery() {
     <section ref={heroRef} className="relative pt-20 bg-gradient-to-b from-[#f1f1ed] to-[#f7f6f4]">
       <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-16 lg:py-24">
         
+        {/* Breadcrumbs */}
         <div className="flex items-center gap-2 text-xs text-[#8a968f] mb-8">
-          <a href="/" className="hover:text-[#4a6b5e] transition-colors">Strona główna</a>
+          <a href="/" className="hover:text-[#4a6b5e] transition-colors">{t('breadcrumb.home')}</a>
           <span>/</span>
-          <a href="/apartamenty" className="hover:text-[#4a6b5e] transition-colors">Apartamenty</a>
+          <a href="/apartamenty" className="hover:text-[#4a6b5e] transition-colors">{t('breadcrumb.apartments')}</a>
           <span>/</span>
-          <span className="text-[#4a6b5e]">Apartament D4</span>
+          <span className="text-[#4a6b5e]">{t('breadcrumb.current')}</span>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
           <div className="order-2 lg:order-1">
             
+            {/* Badge */}
             <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 bg-white border border-[#d4d6ce] rounded-full mb-6">
               <Sparkles className="w-4 h-4 text-[#4a6b5e]" strokeWidth={1.5} />
-              <span className="text-xs tracking-[0.2em] text-[#4a6b5e] uppercase">Komfort</span>
+              <span className="text-xs tracking-[0.2em] text-[#4a6b5e] uppercase">{t('badge')}</span>
             </div>
 
+            {/* Title */}
             <h1 
               className="hero-title text-5xl lg:text-6xl xl:text-7xl font-light text-[#4a6b5e] mb-4 leading-tight" 
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
-              {apartmentData.name}
+              {t('title')}
             </h1>
 
+            {/* Tagline */}
             <p className="hero-tagline text-xl text-[#4a6b5e] font-light mb-2 leading-relaxed">
-              {apartmentData.tagline}
+              {t('tagline')}
             </p>
 
+            {/* Subtitle */}
             <p className="hero-subtitle text-base text-[#8a968f] font-light mb-8 leading-relaxed">
-              {apartmentData.subtitle}
+              {t('subtitle')}
             </p>
 
+            {/* Specs Grid */}
             <div className="grid grid-cols-2 gap-4 mb-8">
               {[
-                { icon: Maximize, label: 'Rozmiar', value: apartmentData.specs.size },
-                { icon: Users, label: 'Goście', value: `${apartmentData.specs.guests} Osoby` },
-                { icon: Bed, label: 'Sypialnie', value: `${apartmentData.specs.bedrooms} Sypialnia` },
-                { icon: Bath, label: 'Łazienki', value: `${apartmentData.specs.bathrooms} Łazienka` },
+                { icon: Maximize, key: 'size' },
+                { icon: Users, key: 'guests' },
+                { icon: Bed, key: 'bedrooms' },
+                { icon: Bath, key: 'bathrooms' },
               ].map((spec, idx) => (
                 <div key={idx} className="spec-card flex items-center gap-3 p-4 bg-white border border-[#d4d6ce] group hover:border-[#4a6b5e] transition-all duration-300">
                   <spec.icon className="w-5 h-5 text-[#4a6b5e] group-hover:scale-110 transition-transform" strokeWidth={1.5} />
                   <div className="flex flex-col">
-                    <span className="text-xs text-[#8a968f] uppercase tracking-wide">{spec.label}</span>
-                    <span className="text-sm text-[#4a6b5e] font-medium">{spec.value}</span>
+                    <span className="text-xs text-[#8a968f] uppercase tracking-wide">{t(`specs.${spec.key}.label`)}</span>
+                    <span className="text-sm text-[#4a6b5e] font-medium">{t(`specs.${spec.key}.value`)}</span>
                   </div>
                 </div>
               ))}
             </div>
 
+            {/* Price Box */}
             <div className="price-box flex flex-col gap-2 mb-8 p-6 bg-white border-l-4 border-[#4a6b5e]">
               <div className="flex items-baseline gap-3">
-                <span className="text-sm tracking-[0.2em] text-[#8a968f] uppercase">od</span>
+                <span className="text-sm tracking-[0.2em] text-[#8a968f] uppercase">{t('price.from')}</span>
                 <span className="text-4xl lg:text-5xl font-light text-[#4a6b5e]" style={{ fontFamily: 'Playfair Display, serif' }}>
-                  {apartmentData.price.from}
+                  {t('price.amount')}
                 </span>
-                <span className="text-lg text-[#6e7a73]">{apartmentData.price.currency} / {apartmentData.price.period}</span>
+                <span className="text-lg text-[#6e7a73]">{t('price.currency')} / {t('price.period')}</span>
               </div>
-              <p className="text-xs text-[#8a968f] italic">{apartmentData.price.note}</p>
+              <p className="text-xs text-[#8a968f] italic">{t('price.note')}</p>
             </div>
 
           </div>
 
+          {/* Gallery */}
           <div className="order-1 lg:order-2">
             <PhotoProvider>
               <div className="space-y-4">
@@ -286,7 +298,7 @@ function HeroGallery() {
                         <div className="relative h-full cursor-pointer group">
                           <img
                             src={img}
-                            alt={`${apartmentData.name} - zdjęcie ${idx + 1}`}
+                            alt={`${t('title')} - ${t('gallery.imageAlt')} ${idx + 1}`}
                             className="w-full h-full object-cover"
                           />
                           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
@@ -321,7 +333,7 @@ function HeroGallery() {
                     >
                       <img
                         src={img}
-                        alt={`Miniatura ${idx + 1}`}
+                        alt={`${t('gallery.thumbnailAlt')} ${idx + 1}`}
                         className="w-full h-full object-cover"
                       />
                     </div>
@@ -336,13 +348,12 @@ function HeroGallery() {
     </section>
   );
 }
+
 // ============================================
 // ============================================
 
-// ============================================
-// 2. APARTMENT DETAILS WITH CALENDAR
-// ============================================
 function ApartmentDetails() {
+  const t = useTranslations('apartmentD7.details');
   const sectionRef = useRef<HTMLElement>(null);
   const [calendarLoaded, setCalendarLoaded] = useState(false);
 
@@ -350,7 +361,7 @@ function ApartmentDetails() {
   useEffect(() => {
     const loadHotresScripts = async () => {
       const win = window as any;
-      
+
       // jQuery
       if (!win.jQuery) {
         const jqueryScript = document.createElement('script');
@@ -374,7 +385,7 @@ function ApartmentDetails() {
           win.createHotres({
             oid: 5226,
             lang: 'pl',
-            tid: '43219',
+            tid: '43219', // ✅ D7 apartment ID (wg Twojego wcześniejszego kodu)
             action: 'room/calendar'
           });
           setCalendarLoaded(true);
@@ -385,11 +396,11 @@ function ApartmentDetails() {
     loadHotresScripts();
 
     return () => {
-      const scripts = document.querySelectorAll('script[src*="hotres"], script[src*="jquery"]');
-      scripts.forEach(script => {
-        if (script.parentNode) {
-          script.parentNode.removeChild(script);
-        }
+      const scripts = document.querySelectorAll(
+        'script[src*="hotres"], script[src*="jquery"]'
+      );
+      scripts.forEach((script) => {
+        if (script.parentNode) script.parentNode.removeChild(script);
       });
     };
   }, []);
@@ -401,13 +412,46 @@ function ApartmentDetails() {
         try {
           const { gsap } = await import('gsap');
           const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-          
+
           gsap.registerPlugin(ScrollTrigger);
 
-          gsap.fromTo('.section-heading', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' } });
-          gsap.fromTo('.highlight-item', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out', scrollTrigger: { trigger: sectionRef.current, start: 'top 70%' } });
-          gsap.fromTo('.feature-card', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: 'power2.out', scrollTrigger: { trigger: '.features-grid', start: 'top 75%' } });
+          gsap.fromTo(
+            '.section-heading',
+            { opacity: 0, y: 30 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              ease: 'power2.out',
+              scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' }
+            }
+          );
 
+          gsap.fromTo(
+            '.highlight-item',
+            { opacity: 0, y: 30 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              stagger: 0.1,
+              ease: 'power2.out',
+              scrollTrigger: { trigger: sectionRef.current, start: 'top 70%' }
+            }
+          );
+
+          gsap.fromTo(
+            '.feature-card',
+            { opacity: 0, y: 30 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              stagger: 0.15,
+              ease: 'power2.out',
+              scrollTrigger: { trigger: '.features-grid', start: 'top 75%' }
+            }
+          );
         } catch (error) {
           console.error('GSAP error:', error);
         }
@@ -417,113 +461,127 @@ function ApartmentDetails() {
     initGSAP();
   }, []);
 
+  const highlights = [
+    { icon: Home, key: 'terrace' },
+    { icon: MapPin, key: 'floor' },
+    { icon: Droplets, key: 'pool' },
+    { icon: Dumbbell, key: 'gym' },
+    { icon: Sparkles, key: 'beach' },
+    { icon: Anchor, key: 'marina' },
+    { icon: Wifi, key: 'wifi' },
+    { icon: Coffee, key: 'kitchen' }
+  ] as const;
+
   return (
     <section ref={sectionRef} className="py-20 lg:py-28 bg-white">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-        
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
-          
           {/* LEFT - Description */}
           <div className="lg:col-span-2 space-y-12">
-            
-            {/* O apartamencie */}
+            {/* About */}
             <div>
-              <h2 
-                className="section-heading text-3xl lg:text-4xl font-light text-[#4a6b5e] mb-6" 
+              <h2
+                className="section-heading text-3xl lg:text-4xl font-light text-[#4a6b5e] mb-6"
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
-                O apartamencie
+                {t('aboutTitle')}
               </h2>
               <p className="text-base text-[#6e7a73] leading-relaxed font-light mb-6">
-                {apartmentData.description}
+                {t('description')}
               </p>
-              <p className="text-base text-[#6e7a73] leading-relaxed font-light">
-                {apartmentData.fullDescription}
+              <p className="text-base text-[#6e7a73] leading-relaxed font-light whitespace-pre-line">
+                {t('fullDescription')}
               </p>
             </div>
 
-            {/* Najważniejsze atuty Z IKONAMI */}
+            {/* Highlights */}
             <div>
               <h3 className="text-xl font-light text-[#0f0e0f] mb-6">
-                Najważniejsze atuty
+                {t('highlightsTitle')}
               </h3>
+
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                {apartmentData.highlights.map((highlight, idx) => (
-                  <div 
-                    key={idx} 
+                {highlights.map((h, idx) => (
+                  <div
+                    key={idx}
                     className="highlight-item group flex flex-col items-center text-center gap-3 p-4 bg-[#f7f6f4] border border-[#d4d6ce] hover:border-[#4a6b5e] transition-all duration-300"
                   >
-                    <highlight.icon 
-                      className="w-10 h-10 text-[#AB8A62] group-hover:scale-110 transition-transform" 
+                    <h.icon
+                      className="w-10 h-10 text-[#AB8A62] group-hover:scale-110 transition-transform"
                       strokeWidth={1}
                     />
                     <h4 className="text-sm font-light text-[#0f0e0f] tracking-wide group-hover:text-[#AB8A62] transition-colors">
-                      {highlight.label}
+                      {t(`highlights.${h.key}.label`)}
                     </h4>
                     <p className="text-xs text-[#8a968f] font-light leading-relaxed">
-                      {highlight.description}
+                      {t(`highlights.${h.key}.description`)}
                     </p>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* O Obiekcie */}
+            {/* About property */}
             <div className="pt-8 border-t border-[#d4d6ce]">
-              <h2 
-                className="section-heading text-3xl lg:text-4xl font-light text-[#4a6b5e] mb-6" 
+              <h2
+                className="section-heading text-3xl lg:text-4xl font-light text-[#4a6b5e] mb-6"
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
-                {apartmentData.aboutProperty.title}
+                {t('aboutProperty.title')}
               </h2>
-              
+
               <div className="space-y-4 mb-8">
-                {apartmentData.aboutProperty.paragraphs.map((paragraph, idx) => (
-                  <p key={idx} className="text-base text-[#6e7a73] leading-relaxed font-light">
-                    {paragraph}
-                  </p>
-                ))}
+                <p className="text-base text-[#6e7a73] leading-relaxed font-light">
+                  {t('aboutProperty.paragraph1')}
+                </p>
+                <p className="text-base text-[#6e7a73] leading-relaxed font-light">
+                  {t('aboutProperty.paragraph2')}
+                </p>
               </div>
 
               <div className="features-grid grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                {apartmentData.aboutProperty.features.map((feature, idx) => (
-                  <div 
-                    key={idx} 
+                {[
+                  { icon: MapPin, i: 0 },
+                  { icon: Droplets, i: 1 },
+                  { icon: Dumbbell, i: 2 }
+                ].map((f, idx) => (
+                  <div
+                    key={idx}
                     className="feature-card group bg-[#f7f6f4] p-6 border border-[#d4d6ce] hover:border-[#4a6b5e] transition-all duration-300"
                   >
                     <div className="w-12 h-12 rounded-full bg-white border border-[#d4d6ce] flex items-center justify-center mb-4 group-hover:border-[#AB8A62] group-hover:bg-gradient-to-br group-hover:from-[#f4e4c1] group-hover:to-[#AB8A62] transition-all">
-                      <feature.icon className="w-6 h-6 text-[#4a6b5e] group-hover:text-[#8b6914] transition-colors" strokeWidth={1} />
+                      <f.icon
+                        className="w-6 h-6 text-[#4a6b5e] group-hover:text-[#8b6914] transition-colors"
+                        strokeWidth={1}
+                      />
                     </div>
                     <h4 className="text-base font-medium text-[#0f0e0f] mb-2">
-                      {feature.title}
+                      {t(`aboutProperty.features.${f.i}.title`)}
                     </h4>
                     <p className="text-sm text-[#6e7a73] leading-relaxed font-light">
-                      {feature.description}
+                      {t(`aboutProperty.features.${f.i}.description`)}
                     </p>
                   </div>
                 ))}
               </div>
             </div>
-
           </div>
 
-          {/* ✅ RIGHT - KALENDARZ DOSTĘPNOŚCI D7 */}
+          {/* RIGHT - Calendar */}
           <div className="lg:col-span-1">
             <div className="sticky top-24 bg-gradient-to-br from-white to-[#f7f6f4] p-8 border border-[#d4d6ce] shadow-xl rounded-lg">
-              
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#4a6b5e] to-[#8a968f] flex items-center justify-center">
                   <Calendar className="w-5 h-5 text-white" strokeWidth={1.5} />
                 </div>
-                <h3 
-                  className="text-2xl font-light text-[#4a6b5e]" 
+                <h3
+                  className="text-2xl font-light text-[#4a6b5e]"
                   style={{ fontFamily: 'Playfair Display, serif' }}
                 >
-                  Dostępność
+                  {t('calendar.title')}
                 </h3>
               </div>
 
-              {/* Loading State */}
               {!calendarLoaded && (
                 <div className="calendar-skeleton">
                   <div className="skeleton-header"></div>
@@ -535,9 +593,8 @@ function ApartmentDetails() {
                 </div>
               )}
 
-              {/* ✅ Hotres Calendar Container */}
-              <div 
-                id="hotresContainer" 
+              <div
+                id="hotresContainer"
                 className="hotres-calendar-wrapper"
                 style={{
                   opacity: calendarLoaded ? 1 : 0,
@@ -545,14 +602,12 @@ function ApartmentDetails() {
                 }}
                 suppressHydrationWarning
               ></div>
-
             </div>
           </div>
-
         </div>
       </div>
 
-      {/* ✅ PREMIUM CALENDAR STYLES */}
+      {/* Premium calendar styles (bez zmian) */}
       <style jsx global>{`
         .hotres-calendar-wrapper {
           min-height: 400px;
@@ -564,7 +619,12 @@ function ApartmentDetails() {
 
         .skeleton-header {
           height: 40px;
-          background: linear-gradient(90deg, #e0e0e0 0%, #f0f0f0 50%, #e0e0e0 100%);
+          background: linear-gradient(
+            90deg,
+            #e0e0e0 0%,
+            #f0f0f0 50%,
+            #e0e0e0 100%
+          );
           background-size: 200% 100%;
           animation: shimmer 1.5s infinite;
           margin-bottom: 16px;
@@ -579,20 +639,33 @@ function ApartmentDetails() {
 
         .skeleton-day {
           height: 40px;
-          background: linear-gradient(90deg, #e0e0e0 0%, #f0f0f0 50%, #e0e0e0 100%);
+          background: linear-gradient(
+            90deg,
+            #e0e0e0 0%,
+            #f0f0f0 50%,
+            #e0e0e0 100%
+          );
           background-size: 200% 100%;
           animation: shimmer 1.5s infinite;
           border-radius: 4px;
         }
 
         @keyframes shimmer {
-          0% { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
+          0% {
+            background-position: 200% 0;
+          }
+          100% {
+            background-position: -200% 0;
+          }
         }
 
         @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
         }
 
         #hotresContainer table {
@@ -690,12 +763,10 @@ function ApartmentDetails() {
   );
 }
 
-
-// ============================================
-// 3. IMPORTANT INFO SECTION - POPRAWIONY GRID DLA 5 ELEMENTÓW
 // ============================================
 function ImportantInfoSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const t = useTranslations('apartmentD7.importantInfo');
 
   useEffect(() => {
     const initGSAP = async () => {
@@ -703,11 +774,11 @@ function ImportantInfoSection() {
         try {
           const { gsap } = await import('gsap');
           const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-          
+
           gsap.registerPlugin(ScrollTrigger);
 
           const items = sectionRef.current.querySelectorAll('.info-item');
-          
+
           gsap.fromTo(
             items,
             { opacity: 0, x: -30 },
@@ -717,13 +788,9 @@ function ImportantInfoSection() {
               duration: 0.6,
               stagger: 0.1,
               ease: 'power2.out',
-              scrollTrigger: {
-                trigger: sectionRef.current,
-                start: 'top 70%',
-              }
+              scrollTrigger: { trigger: sectionRef.current, start: 'top 70%' }
             }
           );
-
         } catch (error) {
           console.error('GSAP error:', error);
         }
@@ -733,28 +800,34 @@ function ImportantInfoSection() {
     initGSAP();
   }, []);
 
+  const infoItems = [
+    { icon: Clock, key: 'checkin' },
+    { icon: Clock, key: 'checkout' },
+    { icon: Star, key: 'quietHours' },
+    { icon: Check, key: 'noParties' },
+    { icon: CarFront, key: 'parking' }
+  ] as const;
+
   return (
     <section ref={sectionRef} className="py-20 lg:py-28 bg-[#f7f6f4]">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-        
         <div className="text-center mb-16">
           <span className="text-xs tracking-[0.3em] uppercase text-[#555e59] font-light block mb-4">
-            Przed przyjazdem
+            {t('subtitle')}
           </span>
-          <h2 
-            className="text-4xl lg:text-5xl font-light text-[#4a6b5e]" 
+          <h2
+            className="text-4xl lg:text-5xl font-light text-[#4a6b5e]"
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
-            Ważne informacje
+            {t('title')}
           </h2>
         </div>
 
-        {/* GRID 3+2 DLA 5 ELEMENTÓW */}
+        {/* GRID 3+2 */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-          {/* Pierwsze 3 elementy w jednym rzędzie (desktop) */}
-          {apartmentData.importantInfo.slice(0, 3).map((info, idx) => (
-            <div 
-              key={idx} 
+          {infoItems.slice(0, 3).map((info, idx) => (
+            <div
+              key={idx}
               className="info-item bg-white p-6 border border-[#d4d6ce] hover:border-[#4a6b5e] transition-all duration-300"
             >
               <div className="flex items-start gap-4">
@@ -763,14 +836,14 @@ function ImportantInfoSection() {
                 </div>
                 <div className="flex-1">
                   <h3 className="text-base font-medium text-[#0f0e0f] mb-2">
-                    {info.label}
+                    {t(`items.${info.key}.label`)}
                   </h3>
                   <p className="text-sm text-[#4a6b5e] font-medium mb-1">
-                    {info.value}
+                    {t(`items.${info.key}.value`)}
                   </p>
-                  {info.note && (
+                  {t(`items.${info.key}.note`) && (
                     <p className="text-xs text-[#8a968f] font-light leading-relaxed">
-                      {info.note}
+                      {t(`items.${info.key}.note`)}
                     </p>
                   )}
                 </div>
@@ -779,11 +852,10 @@ function ImportantInfoSection() {
           ))}
         </div>
 
-        {/* Ostatnie 2 elementy wycentrowane */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {apartmentData.importantInfo.slice(3).map((info, idx) => (
-            <div 
-              key={idx + 3} 
+          {infoItems.slice(3).map((info, idx) => (
+            <div
+              key={idx + 3}
               className="info-item bg-white p-6 border border-[#d4d6ce] hover:border-[#4a6b5e] transition-all duration-300"
             >
               <div className="flex items-start gap-4">
@@ -792,14 +864,14 @@ function ImportantInfoSection() {
                 </div>
                 <div className="flex-1">
                   <h3 className="text-base font-medium text-[#0f0e0f] mb-2">
-                    {info.label}
+                    {t(`items.${info.key}.label`)}
                   </h3>
                   <p className="text-sm text-[#4a6b5e] font-medium mb-1">
-                    {info.value}
+                    {t(`items.${info.key}.value`)}
                   </p>
-                  {info.note && (
+                  {t(`items.${info.key}.note`) && (
                     <p className="text-xs text-[#8a968f] font-light leading-relaxed">
-                      {info.note}
+                      {t(`items.${info.key}.note`)}
                     </p>
                   )}
                 </div>
@@ -808,33 +880,31 @@ function ImportantInfoSection() {
           ))}
         </div>
 
-        {/* Zakaz imprez - pełna szerokość */}
+        {/* No parties policy box */}
         <div className="mt-8 p-6 bg-white border-l-4 border-[#AB8A62]">
           <div className="flex items-start gap-4">
             <Star className="w-6 h-6 text-[#AB8A62] flex-shrink-0 mt-1" strokeWidth={1.5} />
             <div>
               <h4 className="text-base font-medium text-[#0f0e0f] mb-2">
-                Zakaz organizowania imprez
+                {t('noPartiesPolicy.title')}
               </h4>
               <p className="text-sm text-[#6e7a73] leading-relaxed font-light">
-                W apartamencie obowiązuje całkowity zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich. 
-                Prosimy o zachowanie ciszy nocnej w godzinach 22:00–7:00 ze względu na komfort innych gości.
+                {t('noPartiesPolicy.description')}
               </p>
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );
 }
 
-// ============================================
-// 4. SURROUNDINGS GALLERY
+
 // ============================================
 function SurroundingsGallery() {
   const sectionRef = useRef<HTMLElement>(null);
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const t = useTranslations('apartmentD7.surroundings');
 
   useEffect(() => {
     const initGSAP = async () => {
@@ -842,11 +912,12 @@ function SurroundingsGallery() {
         try {
           const { gsap } = await import('gsap');
           const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-          
+
           gsap.registerPlugin(ScrollTrigger);
 
-          const galleryItems = sectionRef.current.querySelectorAll('.surroundings-item');
-          
+          const galleryItems =
+            sectionRef.current.querySelectorAll('.surroundings-item');
+
           gsap.fromTo(
             galleryItems,
             { opacity: 0, scale: 0.9, y: 30 },
@@ -857,17 +928,13 @@ function SurroundingsGallery() {
               duration: 0.8,
               stagger: {
                 amount: 0.6,
-                from: "start",
-                ease: "power2.out"
+                from: 'start',
+                ease: 'power2.out'
               },
               ease: 'power3.out',
-              scrollTrigger: {
-                trigger: sectionRef.current,
-                start: 'top 75%',
-              }
+              scrollTrigger: { trigger: sectionRef.current, start: 'top 75%' }
             }
           );
-
         } catch (error) {
           console.error('GSAP error:', error);
         }
@@ -896,8 +963,8 @@ function SurroundingsGallery() {
   const prevImage = () => {
     if (selectedImage !== null) {
       setSelectedImage(
-        selectedImage === 0 
-          ? apartmentData.surroundingsGallery.length - 1 
+        selectedImage === 0
+          ? apartmentData.surroundingsGallery.length - 1
           : selectedImage - 1
       );
     }
@@ -906,7 +973,6 @@ function SurroundingsGallery() {
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (selectedImage === null) return;
-      
       if (e.key === 'Escape') closeModal();
       if (e.key === 'ArrowRight') nextImage();
       if (e.key === 'ArrowLeft') prevImage();
@@ -918,18 +984,21 @@ function SurroundingsGallery() {
 
   return (
     <>
-      <section ref={sectionRef} className="py-20 lg:py-28" style={{ backgroundColor: '#d4d5cf' }}>
+      <section
+        ref={sectionRef}
+        className="py-20 lg:py-28"
+        style={{ backgroundColor: '#d4d5cf' }}
+      >
         <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
-          
           <div className="text-center mb-16">
             <span className="text-xs tracking-[0.3em] uppercase text-[#6e7a73] font-light block mb-4">
-              Okolica
+              {t('subtitle')}
             </span>
-            <h2 
-              className="text-4xl lg:text-5xl font-light text-[#4a6b5e]" 
+            <h2
+              className="text-4xl lg:text-5xl font-light text-[#4a6b5e]"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
-              Odkryj piękno Jeziora Zegrzyńskiego
+              {t('title')}
             </h2>
           </div>
 
@@ -943,13 +1012,13 @@ function SurroundingsGallery() {
                 <div className="relative w-full h-full overflow-hidden">
                   <img
                     src={img}
-                    alt={`Okolica Riva Zegrze - zdjęcie ${idx + 1}`}
+                    alt={`${t('imageAlt')} - ${idx + 1}`}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute bottom-3 left-3 flex items-center gap-2 text-white">
                       <Eye className="w-5 h-5" strokeWidth={1.5} />
-                      <span className="text-sm font-light">Zobacz pełny obraz</span>
+                      <span className="text-sm font-light">{t('viewFull')}</span>
                     </div>
                     <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs text-[#4a6b5e] font-medium">
                       {idx + 1} / {apartmentData.surroundingsGallery.length}
@@ -967,10 +1036,10 @@ function SurroundingsGallery() {
       </section>
 
       {selectedImage !== null && (
-        <div 
+        <div
           className="fixed inset-0 flex items-center justify-center"
-          style={{ 
-            zIndex: 100, 
+          style={{
+            zIndex: 100,
             backgroundColor: 'rgba(0, 0, 0, 0.95)',
             backdropFilter: 'blur(8px)',
             animation: 'modalFadeIn 0.3s ease-out'
@@ -981,61 +1050,85 @@ function SurroundingsGallery() {
             onClick={closeModal}
             className="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all group"
             style={{ zIndex: 50 }}
-            aria-label="Zamknij galerię"
+            aria-label={t('closeGallery')}
           >
-            <svg className="w-6 h-6 text-white group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+            <svg
+              className="w-6 h-6 text-white group-hover:scale-110 transition-transform"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              viewBox="0 0 24 24"
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
 
           <button
-            onClick={(e) => { e.stopPropagation(); prevImage(); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              prevImage();
+            }}
             className="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all group"
             style={{ zIndex: 50 }}
-            aria-label="Poprzednie zdjęcie"
+            aria-label={t('prevImage')}
           >
-            <svg className="w-7 h-7 text-white group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+            <svg
+              className="w-7 h-7 text-white group-hover:scale-110 transition-transform"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              viewBox="0 0 24 24"
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
             </svg>
           </button>
 
           <button
-            onClick={(e) => { e.stopPropagation(); nextImage(); }}
-            className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all group"
+            onClick={(e) => {
+              e.stopPropagation();
+              nextImage();
+            }}
+            className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-content-center transition-all group"
             style={{ zIndex: 50 }}
-            aria-label="Następne zdjęcie"
+            aria-label={t('nextImage')}
           >
-            <svg className="w-7 h-7 text-white group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+            <svg
+              className="w-7 h-7 text-white group-hover:scale-110 transition-transform"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              viewBox="0 0 24 24"
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
             </svg>
           </button>
 
-          <div 
+          <div
             className="absolute top-6 left-1/2 -translate-x-1/2 px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-light"
             style={{ zIndex: 50 }}
           >
             {selectedImage + 1} / {apartmentData.surroundingsGallery.length}
           </div>
 
-          <div 
+          <div
             className="relative max-w-7xl max-h-[90vh] mx-auto px-20"
             onClick={(e) => e.stopPropagation()}
           >
             <img
               key={selectedImage}
               src={apartmentData.surroundingsGallery[selectedImage]}
-              alt={`Okolica Riva Zegrze - zdjęcie ${selectedImage + 1}`}
+              alt={`${t('imageAlt')} - ${selectedImage + 1}`}
               className="max-w-full max-h-[90vh] object-contain shadow-2xl"
               style={{ animation: 'imageScaleIn 0.4s ease-out' }}
             />
           </div>
 
-          <div 
+          <div
             className="absolute bottom-6 left-1/2 -translate-x-1/2 px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-light max-w-2xl text-center"
             style={{ zIndex: 50 }}
           >
             <MapPin className="w-4 h-4 inline-block mr-2" strokeWidth={1.5} />
-            Jezioro Zegrzyńskie - Riva Zegrze
+            {t('location')}
           </div>
         </div>
       )}
@@ -1047,14 +1140,8 @@ function SurroundingsGallery() {
         }
 
         @keyframes imageScaleIn {
-          from {
-            opacity: 0;
-            transform: scale(0.95);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
         }
       `}</style>
     </>
@@ -1062,10 +1149,16 @@ function SurroundingsGallery() {
 }
 
 // ============================================
-// 5. REVIEWS SECTION
-// ============================================
 function ReviewsSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const t = useTranslations('apartmentD7.reviews');
+  const reviews = t.raw('items') as Array<{
+    name: string;
+    date: string;
+    rating: number;
+    comment: string;
+    avatar: string;
+  }>;
 
   useEffect(() => {
     const initGSAP = async () => {
@@ -1073,11 +1166,11 @@ function ReviewsSection() {
         try {
           const { gsap } = await import('gsap');
           const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-          
+
           gsap.registerPlugin(ScrollTrigger);
 
           const reviewCards = sectionRef.current.querySelectorAll('.review-card');
-          
+
           gsap.fromTo(
             reviewCards,
             { opacity: 0, y: 40 },
@@ -1087,13 +1180,9 @@ function ReviewsSection() {
               duration: 0.7,
               stagger: 0.2,
               ease: 'power2.out',
-              scrollTrigger: {
-                trigger: sectionRef.current,
-                start: 'top 70%',
-              }
+              scrollTrigger: { trigger: sectionRef.current, start: 'top 70%' }
             }
           );
-
         } catch (error) {
           console.error('GSAP error:', error);
         }
@@ -1106,18 +1195,18 @@ function ReviewsSection() {
   return (
     <section ref={sectionRef} className="py-20 lg:py-28 bg-white">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-        
         <div className="text-center mb-16">
           <span className="text-xs tracking-[0.3em] uppercase text-[#555e59] font-light block mb-4">
-            Opinie gości
+            {t('subtitle')}
           </span>
-          <h2 
-            className="text-4xl lg:text-5xl font-light text-[#4a6b5e] mb-4" 
+
+          <h2
+            className="text-4xl lg:text-5xl font-light text-[#4a6b5e] mb-4"
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
-            Co mówią nasi goście
+            {t('title')}
           </h2>
-          
+
           <div className="flex items-center justify-center gap-4 mt-6">
             <div className="flex items-center gap-1">
               {[...Array(5)].map((_, i) => (
@@ -1125,18 +1214,20 @@ function ReviewsSection() {
               ))}
             </div>
             <span className="text-2xl font-light text-[#0f0e0f]">5.0</span>
-            <span className="text-sm text-[#8a968f]">• na podstawie {apartmentData.reviews.length} opinii</span>
+            <span className="text-sm text-[#8a968f]">
+              {t('basedOn', { count: reviews.length })}
+            </span>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {apartmentData.reviews.map((review, idx) => (
-            <div 
-              key={idx} 
+          {reviews.map((review, idx) => (
+            <div
+              key={idx}
               className="review-card bg-[#f7f6f4] p-8 border border-[#d4d6ce] relative group hover:border-[#8a968f] transition-all duration-300"
             >
               <Quote className="w-10 h-10 text-[#AB8A62] opacity-20 absolute top-6 right-6" strokeWidth={1} />
-              
+
               <div className="relative">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#4a6b5e] to-[#6c7a72] flex items-center justify-center text-white font-medium">
@@ -1161,7 +1252,6 @@ function ReviewsSection() {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );
@@ -1171,6 +1261,7 @@ function ReviewsSection() {
 // 6. CTA + FOOTER
 // ============================================
 function CTAWithFooter() {
+  const t = useTranslations('apartmentD7');
   const sectionRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -1229,35 +1320,42 @@ function CTAWithFooter() {
             
             <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 backdrop-blur-md rounded-full mb-8 border border-white/20">
               <Sparkles className="w-4 h-4 text-[#AB8A62]" strokeWidth={1} />
-              <span className="text-xs tracking-[0.25em] uppercase text-white/90 font-light">Oferta specjalna</span>
+              <span className="text-xs tracking-[0.25em] uppercase text-white/90 font-light">
+                {t('cta.badge')}
+              </span>
             </div>
 
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-light mb-6 leading-tight text-white drop-shadow-lg" style={{ fontFamily: 'Playfair Display, serif' }}>
-              Zarezerwuj min. 3 noce <br />
-              <span className="text-[#AB8A62]">i zyskaj 40% rabatu</span>
+              {t('cta.title')} <br />
+              <span className="text-[#AB8A62]">{t('cta.titleHighlight')}</span>
             </h2>
 
             <p className="text-base md:text-lg font-light mb-12 max-w-2xl mx-auto text-white/90 leading-relaxed">
-              Skorzystaj z naszej limitowanej promocji. Przy rezerwacji minimum 3 nocy otrzymasz 
-              <strong className="font-medium text-white"> aż 40% zniżki</strong> na cały pobyt w Apartamencie D4.
+              {t('cta.description')}
+              <strong className="font-medium text-white"> {t('cta.descriptionHighlight')}</strong> {t('cta.descriptionEnd')}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
               
               <button className="flex items-center gap-3 px-10 py-5 bg-white text-[#2a3d35] hover:bg-[#AB8A62] hover:text-white transition-all duration-300 text-sm tracking-[0.15em] uppercase group shadow-2xl font-light">
                 <Calendar className="w-5 h-5 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
-                <span>Zarezerwuj apartament</span>
+                <span>{t('cta.bookButton')}</span>
               </button>
 
               <a href="tel:+48510038038" className="flex items-center gap-3 px-10 py-5 bg-white/10 backdrop-blur-md border-2 border-white/30 text-white hover:bg-white/20 hover:border-white/50 transition-all duration-300 text-sm tracking-[0.15em] uppercase group font-light">
                 <Phone className="w-5 h-5 group-hover:rotate-12 transition-transform" strokeWidth={1.5} />
-                <span>Zadzwoń: +48 510 038 038</span>
+                <span>{t('cta.phoneButton')}</span>
               </a>
 
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 text-white/70">
-              {['Bezpieczna płatność', 'Anulowanie do 48h', 'Najlepsza cena', 'Brak ukrytych kosztów'].map((badge, idx) => (
+              {[
+                t('cta.trustBadges.payment'),
+                t('cta.trustBadges.cancellation'),
+                t('cta.trustBadges.bestPrice'),
+                t('cta.trustBadges.noCosts')
+              ].map((badge, idx) => (
                 <div key={idx} className="flex items-center gap-2 text-xs tracking-wide">
                   <Check className="w-4 h-4 text-[#AB8A62]" strokeWidth={2} />
                   <span>{badge}</span>
@@ -1286,8 +1384,7 @@ function CTAWithFooter() {
                   </span>
                 </div>
                 <p className="text-sm text-white/70 leading-relaxed font-light mb-6">
-                  Kameralne apartamenty nad wodą. Spokój, komfort i bezpośrednia
-                  rezerwacja w wyjątkowej lokalizacji pod Warszawą.
+                  {t('footer.brand.description')}
                 </p>
                 
                 <div className="flex items-center gap-3 pt-4">
@@ -1296,21 +1393,21 @@ function CTAWithFooter() {
                       <Star key={i} className="w-4 h-4 text-[#AB8A62] fill-[#AB8A62]" strokeWidth={0} />
                     ))}
                   </div>
-                  <span className="text-xs text-white/50 font-light">5.0 • Booking.com</span>
+                  <span className="text-xs text-white/50 font-light">{t('footer.brand.rating')}</span>
                 </div>
               </div>
 
               <div>
                 <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
-                  Odkryj
+                  {t('footer.discover.title')}
                 </h4>
                 <ul className="space-y-3">
                   {[
-                    { label: 'Apartamenty', href: '/apartamenty' },
-                    { label: 'Oferta Specjalna', href: '/offers' },
-                    { label: 'Aktywności', href: '/activities' },
-                    { label: 'Galeria', href: '/galeria' },
-                    { label: 'O Nas', href: '/about' },
+                    { label: t('footer.discover.apartments'), href: '/apartamenty' },
+                    { label: t('footer.discover.specialOffer'), href: '/offers' },
+                    { label: t('footer.discover.activities'), href: '/activities' },
+                    { label: t('footer.discover.gallery'), href: '/galeria' },
+                    { label: t('footer.discover.about'), href: '/about' },
                   ].map((item) => (
                     <li key={item.label}>
                       <a href={item.href} className="text-sm text-white/70 hover:text-white transition-colors font-light inline-flex items-center gap-2 group">
@@ -1324,27 +1421,25 @@ function CTAWithFooter() {
 
               <div>
                 <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
-                  Kontakt
+                  {t('footer.contact.title')}
                 </h4>
                 <ul className="space-y-4">
                   <li className="flex items-start gap-3 text-sm text-white/70 font-light">
                     <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0 text-[#AB8A62]" strokeWidth={1} />
-                    <span>
-                      Riva Zegrze<br />
-                      Rybaki 11<br />
-                      05-130 Zegrze Południowe
+                    <span style={{ whiteSpace: 'pre-line' }}>
+                      {t('footer.contact.address')}
                     </span>
                   </li>
                   <li>
-                    <a href="tel:+48510038038" className="flex items-center gap-3 text-sm text-white/70 font-light hover:text-white transition-colors group">
+                    <a href={`tel:${t('footer.contact.phone')}`} className="flex items-center gap-3 text-sm text-white/70 font-light hover:text-white transition-colors group">
                       <Phone className="w-5 h-5 text-[#AB8A62] group-hover:scale-110 transition-transform" strokeWidth={1} />
-                      <span>+48 510 038 038</span>
+                      <span>{t('footer.contact.phone')}</span>
                     </a>
                   </li>
                   <li>
-                    <a href="mailto:wynajem@rivazegrze.pl" className="flex items-center gap-3 text-sm text-white/70 font-light hover:text-white transition-colors group">
+                    <a href={`mailto:${t('footer.contact.email')}`} className="flex items-center gap-3 text-sm text-white/70 font-light hover:text-white transition-colors group">
                       <Mail className="w-5 h-5 text-[#AB8A62] group-hover:scale-110 transition-transform" strokeWidth={1} />
-                      <span>wynajem@rivazegrze.pl</span>
+                      <span>{t('footer.contact.email')}</span>
                     </a>
                   </li>
                 </ul>
@@ -1352,17 +1447,17 @@ function CTAWithFooter() {
 
               <div>
                 <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
-                  Newsletter
+                  {t('footer.newsletter.title')}
                 </h4>
                 <p className="text-sm text-white/70 mb-4 font-light">
-                  Bądź na bieżąco z ofertami specjalnymi
+                  {t('footer.newsletter.description')}
                 </p>
                 
                 <form className="mb-8">
                   <div className="flex gap-2">
                     <input
                       type="email"
-                      placeholder="Twój e-mail"
+                      placeholder={t('footer.newsletter.placeholder')}
                       className="flex-1 px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-[#AB8A62] focus:bg-white/15 transition-all font-light"
                     />
                     <button type="submit" className="px-6 py-3 bg-[#AB8A62] text-white hover:bg-[#8b6914] transition-colors">
@@ -1373,7 +1468,7 @@ function CTAWithFooter() {
 
                 <div className="space-y-3">
                   <h5 className="text-xs tracking-[0.2em] uppercase font-light text-white/60">
-                    Social Media
+                    {t('footer.newsletter.socialMedia')}
                   </h5>
                   <div className="flex gap-3">
                     {[
@@ -1396,13 +1491,13 @@ function CTAWithFooter() {
 
             <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-xs text-white/50 font-light">
-                © {new Date().getFullYear()} Riva Zegrze. Wszystkie prawa zastrzeżone.
+                {t('footer.bottom.copyright', { year: new Date().getFullYear() })}
               </p>
               <div className="flex gap-8">
                 {[
-                  { label: 'Polityka prywatności', href: '/privacy' },
-                  { label: 'Regulamin', href: '/terms' },
-                  { label: 'Cookies', href: '/cookies' },
+                  { label: t('footer.bottom.privacy'), href: '/privacy' },
+                  { label: t('footer.bottom.terms'), href: '/terms' },
+                  { label: t('footer.bottom.cookies'), href: '/cookies' },
                 ].map((item) => (
                   <a key={item.label} href={item.href} className="text-xs text-white/50 hover:text-white/80 transition-colors font-light">
                     {item.label}

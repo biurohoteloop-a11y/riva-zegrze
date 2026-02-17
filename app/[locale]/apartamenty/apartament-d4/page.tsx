@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useTranslations } from 'next-intl';
 import Navigation from '../../../components/layout/Navigation';
 import { 
   Navigation as SwiperNavigation, 
@@ -165,9 +166,8 @@ export default function ApartmentD4Page() {
   );
 }
 
-
-// HeroGallery (identyczna - zmień tylko breadcrumb na D4)
 function HeroGallery() {
+  const t = useTranslations('apartmentD4.hero');
   const [activeIndex, setActiveIndex] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
 
@@ -200,68 +200,76 @@ function HeroGallery() {
     <section ref={heroRef} className="relative pt-20 bg-gradient-to-b from-[#f1f1ed] to-[#f7f6f4]">
       <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-16 lg:py-24">
         
+        {/* Breadcrumbs */}
         <div className="flex items-center gap-2 text-xs text-[#8a968f] mb-8">
-          <a href="/" className="hover:text-[#4a6b5e] transition-colors">Strona główna</a>
+          <a href="/" className="hover:text-[#4a6b5e] transition-colors">{t('breadcrumb.home')}</a>
           <span>/</span>
-          <a href="/apartamenty" className="hover:text-[#4a6b5e] transition-colors">Apartamenty</a>
+          <a href="/apartamenty" className="hover:text-[#4a6b5e] transition-colors">{t('breadcrumb.apartments')}</a>
           <span>/</span>
-          <span className="text-[#4a6b5e]">Apartament D4</span>
+          <span className="text-[#4a6b5e]">{t('breadcrumb.current')}</span>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
           <div className="order-2 lg:order-1">
             
+            {/* Badge */}
             <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 bg-white border border-[#d4d6ce] rounded-full mb-6">
               <Sparkles className="w-4 h-4 text-[#4a6b5e]" strokeWidth={1.5} />
-              <span className="text-xs tracking-[0.2em] text-[#4a6b5e] uppercase">Komfort</span>
+              <span className="text-xs tracking-[0.2em] text-[#4a6b5e] uppercase">{t('badge')}</span>
             </div>
 
+            {/* Title */}
             <h1 
               className="hero-title text-5xl lg:text-6xl xl:text-7xl font-light text-[#4a6b5e] mb-4 leading-tight" 
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
-              {apartmentData.name}
+              {t('title')}
             </h1>
 
+            {/* Tagline */}
             <p className="hero-tagline text-xl text-[#4a6b5e] font-light mb-2 leading-relaxed">
-              {apartmentData.tagline}
+              {t('tagline')}
             </p>
 
+            {/* Subtitle */}
             <p className="hero-subtitle text-base text-[#8a968f] font-light mb-8 leading-relaxed">
-              {apartmentData.subtitle}
+              {t('subtitle')}
             </p>
 
+            {/* Specs Grid */}
             <div className="grid grid-cols-2 gap-4 mb-8">
               {[
-                { icon: Maximize, label: 'Rozmiar', value: apartmentData.specs.size },
-                { icon: Users, label: 'Goście', value: `${apartmentData.specs.guests} Osoby` },
-                { icon: Bed, label: 'Sypialnie', value: `${apartmentData.specs.bedrooms} Sypialnia` },
-                { icon: Bath, label: 'Łazienki', value: `${apartmentData.specs.bathrooms} Łazienka` },
+                { icon: Maximize, key: 'size' },
+                { icon: Users, key: 'guests' },
+                { icon: Bed, key: 'bedrooms' },
+                { icon: Bath, key: 'bathrooms' },
               ].map((spec, idx) => (
                 <div key={idx} className="spec-card flex items-center gap-3 p-4 bg-white border border-[#d4d6ce] group hover:border-[#4a6b5e] transition-all duration-300">
                   <spec.icon className="w-5 h-5 text-[#4a6b5e] group-hover:scale-110 transition-transform" strokeWidth={1.5} />
                   <div className="flex flex-col">
-                    <span className="text-xs text-[#8a968f] uppercase tracking-wide">{spec.label}</span>
-                    <span className="text-sm text-[#4a6b5e] font-medium">{spec.value}</span>
+                    <span className="text-xs text-[#8a968f] uppercase tracking-wide">{t(`specs.${spec.key}.label`)}</span>
+                    <span className="text-sm text-[#4a6b5e] font-medium">{t(`specs.${spec.key}.value`)}</span>
                   </div>
                 </div>
               ))}
             </div>
 
+            {/* Price Box */}
             <div className="price-box flex flex-col gap-2 mb-8 p-6 bg-white border-l-4 border-[#4a6b5e]">
               <div className="flex items-baseline gap-3">
-                <span className="text-sm tracking-[0.2em] text-[#8a968f] uppercase">od</span>
+                <span className="text-sm tracking-[0.2em] text-[#8a968f] uppercase">{t('price.from')}</span>
                 <span className="text-4xl lg:text-5xl font-light text-[#4a6b5e]" style={{ fontFamily: 'Playfair Display, serif' }}>
-                  {apartmentData.price.from}
+                  {t('price.amount')}
                 </span>
-                <span className="text-lg text-[#6e7a73]">{apartmentData.price.currency} / {apartmentData.price.period}</span>
+                <span className="text-lg text-[#6e7a73]">{t('price.currency')} / {t('price.period')}</span>
               </div>
-              <p className="text-xs text-[#8a968f] italic">{apartmentData.price.note}</p>
+              <p className="text-xs text-[#8a968f] italic">{t('price.note')}</p>
             </div>
 
           </div>
 
+          {/* Gallery */}
           <div className="order-1 lg:order-2">
             <PhotoProvider>
               <div className="space-y-4">
@@ -288,7 +296,7 @@ function HeroGallery() {
                         <div className="relative h-full cursor-pointer group">
                           <img
                             src={img}
-                            alt={`${apartmentData.name} - zdjęcie ${idx + 1}`}
+                            alt={`${t('title')} - ${t('gallery.imageAlt')} ${idx + 1}`}
                             className="w-full h-full object-cover"
                           />
                           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
@@ -323,7 +331,7 @@ function HeroGallery() {
                     >
                       <img
                         src={img}
-                        alt={`Miniatura ${idx + 1}`}
+                        alt={`${t('gallery.thumbnailAlt')} ${idx + 1}`}
                         className="w-full h-full object-cover"
                       />
                     </div>
@@ -338,11 +346,13 @@ function HeroGallery() {
     </section>
   );
 }
+
 // ============================================
 // ============================================
 // 2. APARTMENT DETAILS WITH CALENDAR
 // ============================================
 function ApartmentDetails() {
+  const t = useTranslations('apartmentD4.details');
   const sectionRef = useRef<HTMLElement>(null);
   const [calendarLoaded, setCalendarLoaded] = useState(false);
 
@@ -432,23 +442,32 @@ function ApartmentDetails() {
                 className="section-heading text-3xl lg:text-4xl font-light text-[#4a6b5e] mb-6" 
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
-                O apartamencie
+                {t('aboutTitle')}
               </h2>
               <p className="text-base text-[#6e7a73] leading-relaxed font-light mb-6">
-                {apartmentData.description}
+                {t('description')}
               </p>
               <p className="text-base text-[#6e7a73] leading-relaxed font-light">
-                {apartmentData.fullDescription}
+                {t('fullDescription')}
               </p>
             </div>
 
             {/* Najważniejsze atuty Z IKONAMI */}
             <div>
               <h3 className="text-xl font-light text-[#0f0e0f] mb-6">
-                Najważniejsze atuty
+                {t('highlightsTitle')}
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                {apartmentData.highlights.map((highlight, idx) => (
+                {[
+                  { icon: Home, key: 'terrace' },
+                  { icon: MapPin, key: 'floor' },
+                  { icon: Droplets, key: 'pool' },
+                  { icon: Dumbbell, key: 'gym' },
+                  { icon: Sparkles, key: 'beach' },
+                  { icon: Anchor, key: 'marina' },
+                  { icon: Wifi, key: 'wifi' },
+                  { icon: Coffee, key: 'kitchen' },
+                ].map((highlight, idx) => (
                   <div 
                     key={idx} 
                     className="highlight-item group flex flex-col items-center text-center gap-3 p-4 bg-[#f7f6f4] border border-[#d4d6ce] hover:border-[#4a6b5e] transition-all duration-300"
@@ -458,10 +477,10 @@ function ApartmentDetails() {
                       strokeWidth={1}
                     />
                     <h4 className="text-sm font-light text-[#0f0e0f] tracking-wide group-hover:text-[#AB8A62] transition-colors">
-                      {highlight.label}
+                      {t(`highlights.${highlight.key}.label`)}
                     </h4>
                     <p className="text-xs text-[#8a968f] font-light leading-relaxed">
-                      {highlight.description}
+                      {t(`highlights.${highlight.key}.description`)}
                     </p>
                   </div>
                 ))}
@@ -474,19 +493,24 @@ function ApartmentDetails() {
                 className="section-heading text-3xl lg:text-4xl font-light text-[#4a6b5e] mb-6" 
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
-                {apartmentData.aboutProperty.title}
+                {t('aboutProperty.title')}
               </h2>
               
               <div className="space-y-4 mb-8">
-                {apartmentData.aboutProperty.paragraphs.map((paragraph, idx) => (
-                  <p key={idx} className="text-base text-[#6e7a73] leading-relaxed font-light">
-                    {paragraph}
-                  </p>
-                ))}
+                <p className="text-base text-[#6e7a73] leading-relaxed font-light">
+                  {t('aboutProperty.paragraph1')}
+                </p>
+                <p className="text-base text-[#6e7a73] leading-relaxed font-light">
+                  {t('aboutProperty.paragraph2')}
+                </p>
               </div>
 
               <div className="features-grid grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                {apartmentData.aboutProperty.features.map((feature, idx) => (
+                {[
+                  { icon: MapPin, key: 0 },
+                  { icon: Droplets, key: 1 },
+                  { icon: Dumbbell, key: 2 }
+                ].map((feature, idx) => (
                   <div 
                     key={idx} 
                     className="feature-card group bg-[#f7f6f4] p-6 border border-[#d4d6ce] hover:border-[#4a6b5e] transition-all duration-300"
@@ -495,10 +519,10 @@ function ApartmentDetails() {
                       <feature.icon className="w-6 h-6 text-[#4a6b5e] group-hover:text-[#8b6914] transition-colors" strokeWidth={1} />
                     </div>
                     <h4 className="text-base font-medium text-[#0f0e0f] mb-2">
-                      {feature.title}
+                      {t(`aboutProperty.features.${feature.key}.title`)}
                     </h4>
                     <p className="text-sm text-[#6e7a73] leading-relaxed font-light">
-                      {feature.description}
+                      {t(`aboutProperty.features.${feature.key}.description`)}
                     </p>
                   </div>
                 ))}
@@ -519,7 +543,7 @@ function ApartmentDetails() {
                   className="text-2xl font-light text-[#4a6b5e]" 
                   style={{ fontFamily: 'Playfair Display, serif' }}
                 >
-                  Dostępność
+                  {t('calendar.title')}
                 </h3>
               </div>
 
@@ -703,10 +727,13 @@ function ApartmentDetails() {
 
 
 // ============================================
-// 3. IMPORTANT INFO SECTION - POPRAWIONY GRID DLA 5 ELEMENTÓW
+
 // ============================================
 function ImportantInfoSection() {
+  const t = useTranslations('apartmentC7');
   const sectionRef = useRef<HTMLElement>(null);
+
+  const infoIcons = [Clock, Clock, Star, Check, CarFront];
 
   useEffect(() => {
     const initGSAP = async () => {
@@ -744,79 +771,86 @@ function ImportantInfoSection() {
     initGSAP();
   }, []);
 
+  const infoKeys = ['checkIn', 'checkOut', 'quietHours', 'noParties', 'parking'];
+
   return (
     <section ref={sectionRef} className="py-20 lg:py-28 bg-[#f7f6f4]">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         
         <div className="text-center mb-16">
           <span className="text-xs tracking-[0.3em] uppercase text-[#555e59] font-light block mb-4">
-            Przed przyjazdem
+            {t('importantInfo.subtitle')}
           </span>
           <h2 
             className="text-4xl lg:text-5xl font-light text-[#4a6b5e]" 
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
-            Ważne informacje
+            {t('importantInfo.title')}
           </h2>
         </div>
 
         {/* GRID 3+2 DLA 5 ELEMENTÓW */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-          {/* Pierwsze 3 elementy w jednym rzędzie (desktop) */}
-          {apartmentData.importantInfo.slice(0, 3).map((info, idx) => (
-            <div 
-              key={idx} 
-              className="info-item bg-white p-6 border border-[#d4d6ce] hover:border-[#4a6b5e] transition-all duration-300"
-            >
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#f7f6f4] border border-[#d4d6ce] flex items-center justify-center flex-shrink-0">
-                  <info.icon className="w-6 h-6 text-[#4a6b5e]" strokeWidth={1.5} />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-base font-medium text-[#0f0e0f] mb-2">
-                    {info.label}
-                  </h3>
-                  <p className="text-sm text-[#4a6b5e] font-medium mb-1">
-                    {info.value}
-                  </p>
-                  {info.note && (
-                    <p className="text-xs text-[#8a968f] font-light leading-relaxed">
-                      {info.note}
+          {infoKeys.slice(0, 3).map((key, idx) => {
+            const Icon = infoIcons[idx];
+            return (
+              <div 
+                key={idx} 
+                className="info-item bg-white p-6 border border-[#d4d6ce] hover:border-[#4a6b5e] transition-all duration-300"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-[#f7f6f4] border border-[#d4d6ce] flex items-center justify-center flex-shrink-0">
+                    <Icon className="w-6 h-6 text-[#4a6b5e]" strokeWidth={1.5} />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-base font-medium text-[#0f0e0f] mb-2">
+                      {t(`importantInfo.items.${key}.label`)}
+                    </h3>
+                    <p className="text-sm text-[#4a6b5e] font-medium mb-1">
+                      {t(`importantInfo.items.${key}.value`)}
                     </p>
-                  )}
+                    {t(`importantInfo.items.${key}.note`) && (
+                      <p className="text-xs text-[#8a968f] font-light leading-relaxed">
+                        {t(`importantInfo.items.${key}.note`)}
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Ostatnie 2 elementy wycentrowane */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {apartmentData.importantInfo.slice(3).map((info, idx) => (
-            <div 
-              key={idx + 3} 
-              className="info-item bg-white p-6 border border-[#d4d6ce] hover:border-[#4a6b5e] transition-all duration-300"
-            >
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#f7f6f4] border border-[#d4d6ce] flex items-center justify-center flex-shrink-0">
-                  <info.icon className="w-6 h-6 text-[#4a6b5e]" strokeWidth={1.5} />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-base font-medium text-[#0f0e0f] mb-2">
-                    {info.label}
-                  </h3>
-                  <p className="text-sm text-[#4a6b5e] font-medium mb-1">
-                    {info.value}
-                  </p>
-                  {info.note && (
-                    <p className="text-xs text-[#8a968f] font-light leading-relaxed">
-                      {info.note}
+          {infoKeys.slice(3).map((key, idx) => {
+            const Icon = infoIcons[idx + 3];
+            return (
+              <div 
+                key={idx + 3} 
+                className="info-item bg-white p-6 border border-[#d4d6ce] hover:border-[#4a6b5e] transition-all duration-300"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-[#f7f6f4] border border-[#d4d6ce] flex items-center justify-center flex-shrink-0">
+                    <Icon className="w-6 h-6 text-[#4a6b5e]" strokeWidth={1.5} />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-base font-medium text-[#0f0e0f] mb-2">
+                      {t(`importantInfo.items.${key}.label`)}
+                    </h3>
+                    <p className="text-sm text-[#4a6b5e] font-medium mb-1">
+                      {t(`importantInfo.items.${key}.value`)}
                     </p>
-                  )}
+                    {t(`importantInfo.items.${key}.note`) && (
+                      <p className="text-xs text-[#8a968f] font-light leading-relaxed">
+                        {t(`importantInfo.items.${key}.note`)}
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Zakaz imprez - pełna szerokość */}
@@ -825,11 +859,10 @@ function ImportantInfoSection() {
             <Star className="w-6 h-6 text-[#AB8A62] flex-shrink-0 mt-1" strokeWidth={1.5} />
             <div>
               <h4 className="text-base font-medium text-[#0f0e0f] mb-2">
-                Zakaz organizowania imprez
+                {t('importantInfo.banner.title')}
               </h4>
               <p className="text-sm text-[#6e7a73] leading-relaxed font-light">
-                W apartamencie obowiązuje całkowity zakaz organizowania imprez, w tym wieczorów panieńskich i kawalerskich. 
-                Prosimy o zachowanie ciszy nocnej w godzinach 22:00–7:00 ze względu na komfort innych gości.
+                {t('importantInfo.banner.description')}
               </p>
             </div>
           </div>
@@ -844,6 +877,7 @@ function ImportantInfoSection() {
 // 4. SURROUNDINGS GALLERY
 // ============================================
 function SurroundingsGallery() {
+  const t = useTranslations('apartmentD4.surroundings');
   const sectionRef = useRef<HTMLElement>(null);
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
@@ -934,13 +968,13 @@ function SurroundingsGallery() {
           
           <div className="text-center mb-16">
             <span className="text-xs tracking-[0.3em] uppercase text-[#6e7a73] font-light block mb-4">
-              Okolica
+              {t('subtitle')}
             </span>
             <h2 
               className="text-4xl lg:text-5xl font-light text-[#4a6b5e]" 
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
-              Odkryj piękno Jeziora Zegrzyńskiego
+              {t('title')}
             </h2>
           </div>
 
@@ -954,13 +988,13 @@ function SurroundingsGallery() {
                 <div className="relative w-full h-full overflow-hidden">
                   <img
                     src={img}
-                    alt={`Okolica Riva Zegrze - zdjęcie ${idx + 1}`}
+                    alt={`${t('imageAlt')} - ${idx + 1}`}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute bottom-3 left-3 flex items-center gap-2 text-white">
                       <Eye className="w-5 h-5" strokeWidth={1.5} />
-                      <span className="text-sm font-light">Zobacz pełny obraz</span>
+                      <span className="text-sm font-light">{t('viewFull')}</span>
                     </div>
                     <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs text-[#4a6b5e] font-medium">
                       {idx + 1} / {apartmentData.surroundingsGallery.length}
@@ -992,7 +1026,7 @@ function SurroundingsGallery() {
             onClick={closeModal}
             className="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all group"
             style={{ zIndex: 50 }}
-            aria-label="Zamknij galerię"
+            aria-label={t('closeGallery')}
           >
             <svg className="w-6 h-6 text-white group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -1003,7 +1037,7 @@ function SurroundingsGallery() {
             onClick={(e) => { e.stopPropagation(); prevImage(); }}
             className="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all group"
             style={{ zIndex: 50 }}
-            aria-label="Poprzednie zdjęcie"
+            aria-label={t('prevImage')}
           >
             <svg className="w-7 h-7 text-white group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -1014,7 +1048,7 @@ function SurroundingsGallery() {
             onClick={(e) => { e.stopPropagation(); nextImage(); }}
             className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all group"
             style={{ zIndex: 50 }}
-            aria-label="Następne zdjęcie"
+            aria-label={t('nextImage')}
           >
             <svg className="w-7 h-7 text-white group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
@@ -1035,7 +1069,7 @@ function SurroundingsGallery() {
             <img
               key={selectedImage}
               src={apartmentData.surroundingsGallery[selectedImage]}
-              alt={`Okolica Riva Zegrze - zdjęcie ${selectedImage + 1}`}
+              alt={`${t('imageAlt')} - ${selectedImage + 1}`}
               className="max-w-full max-h-[90vh] object-contain shadow-2xl"
               style={{ animation: 'imageScaleIn 0.4s ease-out' }}
             />
@@ -1046,7 +1080,7 @@ function SurroundingsGallery() {
             style={{ zIndex: 50 }}
           >
             <MapPin className="w-4 h-4 inline-block mr-2" strokeWidth={1.5} />
-            Jezioro Zegrzyńskie - Riva Zegrze
+            {t('location')}
           </div>
         </div>
       )}
@@ -1072,10 +1106,10 @@ function SurroundingsGallery() {
   );
 }
 
-// ============================================
 // 5. REVIEWS SECTION
 // ============================================
 function ReviewsSection() {
+  const t = useTranslations('apartmentD4.reviews');
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -1114,19 +1148,44 @@ function ReviewsSection() {
     initGSAP();
   }, []);
 
+  // Dane opinii z tłumaczeń
+  const reviews = [
+    {
+      name: t('items.0.name'),
+      date: t('items.0.date'),
+      rating: 5,
+      comment: t('items.0.comment'),
+      avatar: t('items.0.avatar')
+    },
+    {
+      name: t('items.1.name'),
+      date: t('items.1.date'),
+      rating: 5,
+      comment: t('items.1.comment'),
+      avatar: t('items.1.avatar')
+    },
+    {
+      name: t('items.2.name'),
+      date: t('items.2.date'),
+      rating: 5,
+      comment: t('items.2.comment'),
+      avatar: t('items.2.avatar')
+    }
+  ];
+
   return (
     <section ref={sectionRef} className="py-20 lg:py-28 bg-white">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         
         <div className="text-center mb-16">
           <span className="text-xs tracking-[0.3em] uppercase text-[#555e59] font-light block mb-4">
-            Opinie gości
+            {t('subtitle')}
           </span>
           <h2 
             className="text-4xl lg:text-5xl font-light text-[#4a6b5e] mb-4" 
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
-            Co mówią nasi goście
+            {t('title')}
           </h2>
           
           <div className="flex items-center justify-center gap-4 mt-6">
@@ -1136,12 +1195,12 @@ function ReviewsSection() {
               ))}
             </div>
             <span className="text-2xl font-light text-[#0f0e0f]">5.0</span>
-            <span className="text-sm text-[#8a968f]">• na podstawie {apartmentData.reviews.length} opinii</span>
+            <span className="text-sm text-[#8a968f]">• {t('basedOn')}</span>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {apartmentData.reviews.map((review, idx) => (
+          {reviews.map((review, idx) => (
             <div 
               key={idx} 
               className="review-card bg-[#f7f6f4] p-8 border border-[#d4d6ce] relative group hover:border-[#8a968f] transition-all duration-300"
@@ -1178,10 +1237,12 @@ function ReviewsSection() {
   );
 }
 
+
 // ============================================
 // 6. CTA + FOOTER
 // ============================================
 function CTAWithFooter() {
+  const t = useTranslations('apartmentD4');
   const sectionRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -1207,6 +1268,8 @@ function CTAWithFooter() {
     
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const currentYear = new Date().getFullYear();
 
   return (
     <section ref={sectionRef} className="relative text-white overflow-hidden">
@@ -1234,44 +1297,46 @@ function CTAWithFooter() {
 
       <div className="relative" style={{ zIndex: 20 }}>
         
+        {/* CTA Content */}
         <div className="cta-content max-w-[1000px] mx-auto px-6 lg:px-12 text-center py-24 lg:py-32">
           
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
             
             <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 backdrop-blur-md rounded-full mb-8 border border-white/20">
               <Sparkles className="w-4 h-4 text-[#AB8A62]" strokeWidth={1} />
-              <span className="text-xs tracking-[0.25em] uppercase text-white/90 font-light">Oferta specjalna</span>
+              <span className="text-xs tracking-[0.25em] uppercase text-white/90 font-light">{t('cta.badge')}</span>
             </div>
 
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-light mb-6 leading-tight text-white drop-shadow-lg" style={{ fontFamily: 'Playfair Display, serif' }}>
-              Zarezerwuj min. 3 noce <br />
-              <span className="text-[#AB8A62]">i zyskaj 40% rabatu</span>
+              {t('cta.title')} <br />
+              <span className="text-[#AB8A62]">{t('cta.titleHighlight')}</span>
             </h2>
 
             <p className="text-base md:text-lg font-light mb-12 max-w-2xl mx-auto text-white/90 leading-relaxed">
-              Skorzystaj z naszej limitowanej promocji. Przy rezerwacji minimum 3 nocy otrzymasz 
-              <strong className="font-medium text-white"> aż 40% zniżki</strong> na cały pobyt w Apartamencie D4.
+              {t('cta.description')}{' '}
+              <strong className="font-medium text-white">{t('cta.descriptionHighlight')}</strong>{' '}
+              {t('cta.descriptionEnd')}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
               
               <button className="flex items-center gap-3 px-10 py-5 bg-white text-[#2a3d35] hover:bg-[#AB8A62] hover:text-white transition-all duration-300 text-sm tracking-[0.15em] uppercase group shadow-2xl font-light">
                 <Calendar className="w-5 h-5 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
-                <span>Zarezerwuj apartament</span>
+                <span>{t('cta.bookButton')}</span>
               </button>
 
               <a href="tel:+48510038038" className="flex items-center gap-3 px-10 py-5 bg-white/10 backdrop-blur-md border-2 border-white/30 text-white hover:bg-white/20 hover:border-white/50 transition-all duration-300 text-sm tracking-[0.15em] uppercase group font-light">
                 <Phone className="w-5 h-5 group-hover:rotate-12 transition-transform" strokeWidth={1.5} />
-                <span>Zadzwoń: +48 510 038 038</span>
+                <span>{t('cta.phoneButton')}</span>
               </a>
 
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 text-white/70">
-              {['Bezpieczna płatność', 'Anulowanie do 48h', 'Najlepsza cena', 'Brak ukrytych kosztów'].map((badge, idx) => (
-                <div key={idx} className="flex items-center gap-2 text-xs tracking-wide">
+              {['payment', 'cancellation', 'bestPrice', 'noCosts'].map((badge) => (
+                <div key={badge} className="flex items-center gap-2 text-xs tracking-wide">
                   <Check className="w-4 h-4 text-[#AB8A62]" strokeWidth={2} />
-                  <span>{badge}</span>
+                  <span>{t(`cta.trustBadges.${badge}`)}</span>
                 </div>
               ))}
             </div>
@@ -1284,11 +1349,13 @@ function CTAWithFooter() {
           <motion.div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 1.2, ease: 'easeInOut' }} />
         </div>
 
+        {/* Footer */}
         <footer className="footer-content py-16 lg:py-20">
           <div className="max-w-[1800px] mx-auto px-8 lg:px-12">
             
             <div className="grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-16 mb-16">
               
+              {/* Brand */}
               <div>
                 <div className="flex items-center gap-3 mb-6">
                   <Waves className="w-8 h-8 text-[#AB8A62]" strokeWidth={1} />
@@ -1297,8 +1364,7 @@ function CTAWithFooter() {
                   </span>
                 </div>
                 <p className="text-sm text-white/70 leading-relaxed font-light mb-6">
-                  Kameralne apartamenty nad wodą. Spokój, komfort i bezpośrednia
-                  rezerwacja w wyjątkowej lokalizacji pod Warszawą.
+                  {t('footer.brand.description')}
                 </p>
                 
                 <div className="flex items-center gap-3 pt-4">
@@ -1307,73 +1373,72 @@ function CTAWithFooter() {
                       <Star key={i} className="w-4 h-4 text-[#AB8A62] fill-[#AB8A62]" strokeWidth={0} />
                     ))}
                   </div>
-                  <span className="text-xs text-white/50 font-light">5.0 • Booking.com</span>
+                  <span className="text-xs text-white/50 font-light">{t('footer.brand.rating')}</span>
                 </div>
               </div>
 
+              {/* Discover */}
               <div>
                 <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
-                  Odkryj
+                  {t('footer.discover.title')}
                 </h4>
                 <ul className="space-y-3">
                   {[
-                    { label: 'Apartamenty', href: '/apartamenty' },
-                    { label: 'Oferta Specjalna', href: '/offers' },
-                    { label: 'Aktywności', href: '/activities' },
-                    { label: 'Galeria', href: '/galeria' },
-                    { label: 'O Nas', href: '/about' },
+                    { key: 'apartments', href: '/apartamenty' },
+                    { key: 'specialOffer', href: '/offers' },
+                    { key: 'activities', href: '/activities' },
+                    { key: 'gallery', href: '/galeria' },
+                    { key: 'about', href: '/about' },
                   ].map((item) => (
-                    <li key={item.label}>
+                    <li key={item.key}>
                       <a href={item.href} className="text-sm text-white/70 hover:text-white transition-colors font-light inline-flex items-center gap-2 group">
                         <span className="w-0 group-hover:w-4 h-px bg-[#AB8A62] transition-all duration-300"></span>
-                        {item.label}
+                        {t(`footer.discover.${item.key}`)}
                       </a>
                     </li>
                   ))}
                 </ul>
               </div>
 
+              {/* Contact */}
               <div>
                 <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
-                  Kontakt
+                  {t('footer.contact.title')}
                 </h4>
                 <ul className="space-y-4">
                   <li className="flex items-start gap-3 text-sm text-white/70 font-light">
                     <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0 text-[#AB8A62]" strokeWidth={1} />
-                    <span>
-                      Riva Zegrze<br />
-                      Rybaki 11<br />
-                      05-130 Zegrze Południowe
-                    </span>
+                    <span dangerouslySetInnerHTML={{ __html: t('footer.contact.address').replace(/\n/g, '<br />') }} />
                   </li>
                   <li>
-                    <a href="tel:+48510038038" className="flex items-center gap-3 text-sm text-white/70 font-light hover:text-white transition-colors group">
+                    <a href={`tel:${t('footer.contact.phone')}`} className="flex items-center gap-3 text-sm text-white/70 font-light hover:text-white transition-colors group">
                       <Phone className="w-5 h-5 text-[#AB8A62] group-hover:scale-110 transition-transform" strokeWidth={1} />
-                      <span>+48 510 038 038</span>
+                      <span>{t('footer.contact.phone')}</span>
                     </a>
                   </li>
                   <li>
-                    <a href="mailto:wynajem@rivazegrze.pl" className="flex items-center gap-3 text-sm text-white/70 font-light hover:text-white transition-colors group">
+                    <a href={`mailto:${t('footer.contact.email')}`} className="flex items-center gap-3 text-sm text-white/70 font-light hover:text-white transition-colors group">
                       <Mail className="w-5 h-5 text-[#AB8A62] group-hover:scale-110 transition-transform" strokeWidth={1} />
-                      <span>wynajem@rivazegrze.pl</span>
+                      <span>{t('footer.contact.email')}</span>
                     </a>
                   </li>
                 </ul>
               </div>
 
+              {/* Newsletter */}
               <div>
                 <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
-                  Newsletter
+                  {t('footer.newsletter.title')}
                 </h4>
                 <p className="text-sm text-white/70 mb-4 font-light">
-                  Bądź na bieżąco z ofertami specjalnymi
+                  {t('footer.newsletter.description')}
                 </p>
                 
                 <form className="mb-8">
                   <div className="flex gap-2">
                     <input
                       type="email"
-                      placeholder="Twój e-mail"
+                      placeholder={t('footer.newsletter.placeholder')}
                       className="flex-1 px-4 py-3 bg-white/10 backdrop-blur-md border border-white/20 text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-[#AB8A62] focus:bg-white/15 transition-all font-light"
                     />
                     <button type="submit" className="px-6 py-3 bg-[#AB8A62] text-white hover:bg-[#8b6914] transition-colors">
@@ -1384,7 +1449,7 @@ function CTAWithFooter() {
 
                 <div className="space-y-3">
                   <h5 className="text-xs tracking-[0.2em] uppercase font-light text-white/60">
-                    Social Media
+                    {t('footer.newsletter.socialMedia')}
                   </h5>
                   <div className="flex gap-3">
                     {[
@@ -1405,18 +1470,19 @@ function CTAWithFooter() {
               </div>
             </div>
 
+            {/* Footer Bottom */}
             <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-xs text-white/50 font-light">
-                © {new Date().getFullYear()} Riva Zegrze. Wszystkie prawa zastrzeżone.
+                {t('footer.bottom.copyright', { year: currentYear })}
               </p>
               <div className="flex gap-8">
                 {[
-                  { label: 'Polityka prywatności', href: '/privacy' },
-                  { label: 'Regulamin', href: '/terms' },
-                  { label: 'Cookies', href: '/cookies' },
+                  { key: 'privacy', href: '/privacy' },
+                  { key: 'terms', href: '/terms' },
+                  { key: 'cookies', href: '/cookies' },
                 ].map((item) => (
-                  <a key={item.label} href={item.href} className="text-xs text-white/50 hover:text-white/80 transition-colors font-light">
-                    {item.label}
+                  <a key={item.key} href={item.href} className="text-xs text-white/50 hover:text-white/80 transition-colors font-light">
+                    {t(`footer.bottom.${item.key}`)}
                   </a>
                 ))}
               </div>
@@ -1428,5 +1494,3 @@ function CTAWithFooter() {
     </section>
   );
 }
-
-
