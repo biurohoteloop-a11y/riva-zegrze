@@ -309,19 +309,19 @@ function HeroSection() {
           </p>
 
           {/* HOTRES DESKTOP */}
-          <div ref={bookingRef} className="hidden lg:block max-w-5xl mx-auto relative">
-            <HotresPlaceholder variant="desktop" />
-            <div
-              className={`hotresSearchBar showHotres transition-opacity duration-500 ${
-                hotresLoaded ? 'opacity-100' : 'opacity-0 absolute inset-0'
-              }`}
-              data-button={t('checkDates')}
-              data-oid="5226"
-              data-lang="pl"
-              data-action="bookingbar"
-              suppressHydrationWarning
-            />
-          </div>
+<div ref={bookingRef} className="hidden lg:block max-w-5xl mx-auto relative">
+  {!hotresLoaded && <HotresPlaceholder variant="desktop" />}
+  <div
+    className={`hotresSearchBar showHotres transition-opacity duration-700 ${
+      hotresLoaded ? 'opacity-100 relative' : 'opacity-0 h-0 overflow-hidden'
+    }`}
+    data-button={t('checkDates')}
+    data-oid="5226"
+    data-lang="pl"
+    data-action="bookingbar"
+    suppressHydrationWarning
+  />
+</div>
 
         </div>
 
@@ -342,21 +342,22 @@ function HeroSection() {
       </section>
 
       {/* HOTRES MOBILE */}
-      <section className="lg:hidden bg-[#f7f6f4] py-6 px-4">
-        <div className="max-w-sm mx-auto relative">
-          <HotresPlaceholder variant="mobile" />
-          <div
-            className={`hotresSearchBar showHotres transition-opacity duration-500 ${
-              hotresLoaded ? 'opacity-100' : 'opacity-0 absolute inset-0'
-            }`}
-            data-button={t('checkDates')}
-            data-oid="5226"
-            data-lang="pl"
-            data-action="bookingbar"
-            suppressHydrationWarning
-          />
-        </div>
-      </section>
+<section className="lg:hidden bg-[#f7f6f4] py-6 px-4">
+  <div className="max-w-sm mx-auto relative">
+    {!hotresLoaded && <HotresPlaceholder variant="mobile" />}
+    <div
+      className={`hotresSearchBar showHotres transition-opacity duration-700 ${
+        hotresLoaded ? 'opacity-100 relative' : 'opacity-0 h-0 overflow-hidden'
+      }`}
+      data-button={t('checkDates')}
+      data-oid="5226"
+      data-lang="pl"
+      data-action="bookingbar"
+      suppressHydrationWarning
+    />
+  </div>
+</section>
+
 
       {/* STYLES */}
       <style jsx global>{`
