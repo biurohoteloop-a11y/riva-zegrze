@@ -111,8 +111,7 @@ export default function Navigation() {
       document.body.style.removeProperty('overflow');
       document.body.style.removeProperty('overflow-y');
     };
-}, [isMegaMenuOpen]);
-
+  }, [isMegaMenuOpen]);
 
   const handleNavClick = (href: string) => {
     setIsMegaMenuOpen(false);
@@ -134,9 +133,13 @@ export default function Navigation() {
         <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12">
           <div className="flex justify-between items-center h-16 sm:h-20">
 
-            {/* Logo */}
-            <Link
+            {/* Logo — pełne przeładowanie zamiast client-side routing */}
+            <a
               href={`/${locale}`}
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href = `/${locale}`;
+              }}
               className="flex items-center gap-2 sm:gap-3 group z-50"
             >
               <Waves
@@ -153,7 +156,7 @@ export default function Navigation() {
               >
                 RIVA ZEGRZE
               </span>
-            </Link>
+            </a>
 
             {/* Desktop: LANGUAGE + MENU + CTA */}
             <div className="hidden lg:flex items-center gap-4 xl:gap-6">
@@ -183,8 +186,12 @@ export default function Navigation() {
                 )}
               </button>
 
-              <Link
+              <a
                 href={`/${locale}/rezerwacja`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.location.href = `/${locale}/rezerwacja`;
+                }}
                 className={`flex items-center gap-2 text-[10px] xl:text-xs tracking-[0.2em] px-4 xl:px-6 py-2.5 xl:py-3 transition-all duration-300 ${
                   isScrolled
                     ? 'bg-[#AB8A62] text-white hover:bg-[#967447]'
@@ -193,7 +200,7 @@ export default function Navigation() {
               >
                 <Calendar className="w-3.5 h-3.5 xl:w-4 xl:h-4" strokeWidth={1.5} />
                 <span>{t('book')}</span>
-              </Link>
+              </a>
             </div>
 
             {/* Mobile: Hamburger */}
@@ -320,14 +327,20 @@ export default function Navigation() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 mt-12 lg:mt-16 pt-8 border-t border-[#e8e9e4]">
-                  <Link
+                  <a
                     href={`/${locale}/rezerwacja`}
-                    onClick={() => setIsMegaMenuOpen(false)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsMegaMenuOpen(false);
+                      setTimeout(() => {
+                        window.location.href = `/${locale}/rezerwacja`;
+                      }, 150);
+                    }}
                     className="flex items-center gap-3 text-xs tracking-[0.25em] px-8 py-4 bg-[#AB8A62] text-white hover:bg-[#967447] transition-all"
                   >
                     <Calendar className="w-4 h-4" strokeWidth={1.5} />
                     <span>{t('bookStay')}</span>
-                  </Link>
+                  </a>
                   <a
                     href="tel:+48510038038"
                     className="flex items-center gap-2 text-sm text-[#6e7a73] hover:text-[#AB8A62] transition-colors"
