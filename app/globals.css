@@ -142,6 +142,7 @@ h1, h2, h3, h4, h5, h6 {
   transform: scale(1.05);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
+
 /* Smooth scrolling dla mobile testimonials */
 @media (max-width: 1024px) {
   .testimonials-mobile-scroll {
@@ -160,12 +161,310 @@ h1, h2, h3, h4, h5, h6 {
     scroll-snap-align: center;
   }
 }
+
 @layer utilities {
   .scrollbar-hide::-webkit-scrollbar {
-    display: none;  /* Ukrywa scrollbar w Chrome/Safari */
+    display: none;
   }
   .scrollbar-hide {
-    -ms-overflow-style: none;  /* Ukrywa scrollbar w IE/Edge */
-    scrollbar-width: none;      /* Ukrywa scrollbar w Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
+}
+
+/* ============================================
+   HOTRES BOOKING ENGINE STYLES
+   ============================================ */
+
+.hotres-container {
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 30;
+}
+
+.hotresSearchBar {
+  background: rgba(241, 241, 237, 0.98) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-radius: 16px !important;
+  padding: 24px 32px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid rgba(182, 185, 175, 0.5) !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.hotresSearchBar:hover {
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5) !important;
+  transform: translateY(-2px);
+  border-color: rgba(138, 150, 143, 0.6) !important;
+}
+
+/* Override wszystkich możliwych elementów formularza */
+.hotresSearchBar *,
+.hotresSearchBar input,
+.hotresSearchBar select,
+.hotresSearchBar button,
+.hotresSearchBar textarea {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+/* Input fields */
+.hotresSearchBar input[type="text"],
+.hotresSearchBar input[type="date"],
+.hotresSearchBar input[type="number"],
+.hotresSearchBar input[type="email"],
+.hotresSearchBar input[type="tel"],
+.hotresSearchBar select,
+.hotresSearchBar textarea {
+  background: white !important;
+  border: 1px solid #d4d6ce !important;
+  padding: 12px 16px !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  color: #6e7a73 !important;
+  transition: all 0.3s ease !important;
+  min-height: 44px !important;
+  width: 100% !important;
+}
+
+.hotresSearchBar input:hover,
+.hotresSearchBar select:hover,
+.hotresSearchBar textarea:hover {
+  border-color: #b6b9af !important;
+  background: #f7f6f4 !important;
+}
+
+.hotresSearchBar input:focus,
+.hotresSearchBar select:focus,
+.hotresSearchBar textarea:focus {
+  border-color: #8a968f !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(138, 150, 143, 0.15) !important;
+  background: white !important;
+}
+
+/* Placeholder */
+.hotresSearchBar input::placeholder,
+.hotresSearchBar textarea::placeholder {
+  color: #b6b9af !important;
+  opacity: 1 !important;
+}
+
+/* Labels */
+.hotresSearchBar label {
+  color: #6e7a73 !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  margin-bottom: 6px !important;
+  display: block !important;
+}
+
+/* Primary Button - wszystkie możliwe warianty */
+.hotresSearchBar button[type="submit"],
+.hotresSearchBar button[data-button],
+.hotresSearchBar .btn,
+.hotresSearchBar .btn-primary,
+.hotresSearchBar a.btn,
+.hotresSearchBar input[type="submit"],
+.hotresSearchBar .hotres-submit,
+.hotresSearchBar .submit-button {
+  background: linear-gradient(135deg, #8a968f 0%, #71847b 100%) !important;
+  color: #f1f1ed !important;
+  border: none !important;
+  padding: 14px 36px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  font-size: 14px !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 15px rgba(138, 150, 143, 0.3) !important;
+  min-height: 48px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+}
+
+.hotresSearchBar button[type="submit"]:hover,
+.hotresSearchBar button[data-button]:hover,
+.hotresSearchBar .btn:hover,
+.hotresSearchBar .btn-primary:hover,
+.hotresSearchBar a.btn:hover,
+.hotresSearchBar input[type="submit"]:hover {
+  background: linear-gradient(135deg, #7d8a83 0%, #6e7a73 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(138, 150, 143, 0.4) !important;
+  color: white !important;
+}
+
+.hotresSearchBar button[type="submit"]:active,
+.hotresSearchBar button[data-button]:active,
+.hotresSearchBar .btn:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 10px rgba(138, 150, 143, 0.3) !important;
+}
+
+/* Secondary buttons */
+.hotresSearchBar button:not([type="submit"]):not([data-button]),
+.hotresSearchBar .btn-secondary {
+  background: #d4d5cf !important;
+  color: #6e7a73 !important;
+  border: 1px solid #b6b9af !important;
+  padding: 10px 20px !important;
+}
+
+.hotresSearchBar button:not([type="submit"]):not([data-button]):hover,
+.hotresSearchBar .btn-secondary:hover {
+  background: #c8cabe !important;
+  border-color: #8a968f !important;
+  color: #555e59 !important;
+}
+
+/* Select dropdown arrow */
+.hotresSearchBar select {
+  appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236e7a73' d='M6 9L1 4h10z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  padding-right: 36px !important;
+}
+
+/* Grid layout */
+.hotresSearchBar > div,
+.hotresSearchBar > form,
+.hotresSearchBar form > div {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 16px !important;
+  align-items: flex-end !important;
+}
+
+.hotresSearchBar .field,
+.hotresSearchBar .form-group,
+.hotresSearchBar .hotres-field {
+  flex: 1 1 200px !important;
+  min-width: 180px !important;
+}
+
+/* Popup overlay */
+.hotres-popup,
+.hotres-overlay,
+div[class*="hotres"][class*="popup"],
+div[class*="hotres"][class*="overlay"] {
+  z-index: 9999 !important;
+}
+
+.hotres-popup {
+  background: rgba(241, 241, 237, 0.98) !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(182, 185, 175, 0.5) !important;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5) !important;
+  padding: 24px !important;
+}
+
+/* Date picker styling */
+.hotresSearchBar .datepicker,
+.hotresSearchBar [class*="date"],
+.hotresSearchBar [class*="calendar"] {
+  background: white !important;
+  border: 1px solid #d4d6ce !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.hotresSearchBar .datepicker td.active,
+.hotresSearchBar .datepicker td.selected {
+  background: #8a968f !important;
+  color: white !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .hotres-container {
+    padding: 0 16px;
+  }
+
+  .hotresSearchBar {
+    padding: 20px !important;
+    border-radius: 12px !important;
+  }
+
+  .hotresSearchBar button[type="submit"],
+  .hotresSearchBar .btn,
+  .hotresSearchBar input[type="submit"] {
+    width: 100% !important;
+    padding: 16px 24px !important;
+    margin-top: 12px !important;
+  }
+
+  .hotresSearchBar input,
+  .hotresSearchBar select {
+    font-size: 16px !important; /* Zapobiega zoom na iOS */
+  }
+
+  .hotresSearchBar .field,
+  .hotresSearchBar .form-group,
+  .hotresSearchBar .hotres-field {
+    flex: 1 1 100% !important;
+    min-width: 100% !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .hotresSearchBar {
+    padding: 16px !important;
+  }
+}
+
+/* Animation dla bookingu */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hotres-container {
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+/* Loading states */
+.hotresSearchBar.loading,
+.hotresSearchBar[data-loading="true"] {
+  opacity: 0.7 !important;
+  pointer-events: none !important;
+}
+
+/* Error/Success messages */
+.hotresSearchBar .error,
+.hotresSearchBar .alert-error {
+  color: #d64545 !important;
+  background: #ffe5e5 !important;
+  border: 1px solid #d64545 !important;
+  padding: 10px 14px !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  margin-top: 8px !important;
+}
+
+.hotresSearchBar .success,
+.hotresSearchBar .alert-success {
+  color: #71847b !important;
+  background: #e8f5e9 !important;
+  border: 1px solid #8a968f !important;
+  padding: 10px 14px !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  margin-top: 8px !important;
 }
