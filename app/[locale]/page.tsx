@@ -1302,7 +1302,7 @@ function ExperienceParallax() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <a 
-              href="#booking"
+              href="/rezerwacja"
               className="w-full sm:w-auto px-10 py-5 bg-[#8a968f] text-[#e8e9e4] text-[10px] font-bold tracking-[0.3em] uppercase transition-all duration-500 hover:bg-[#7d8a83] hover:scale-105 shadow-xl"
             >
               {t('experience.bookDirect')}
@@ -1321,22 +1321,70 @@ function ExperienceParallax() {
   );
 }
 
-// Premium Features Section - WITH TRANSLATIONS
+
+
 function FeaturesSection() {
   const t = useTranslations();
   const [activeHover, setActiveHover] = useState<string>('view');
+  const sectionRef = useRef<HTMLElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const rightColRef = useRef<HTMLDivElement>(null);
 
-  // Initialize AOS
   useEffect(() => {
     const initAOS = async () => {
       const AOS = (await import('aos')).default;
-      AOS.init({
-        duration: 800,
-        once: true,
-        easing: 'ease-out-cubic',
-      });
+      AOS.init({ duration: 800, once: true, easing: 'ease-out-cubic' });
     };
     initAOS();
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (window.innerWidth < 1024) return;
+
+    const section = sectionRef.current;
+    const image = imageRef.current;
+    const rightCol = rightColRef.current;
+    if (!section || !image || !rightCol) return;
+
+    const update = () => {
+      const sRect = section.getBoundingClientRect();
+      const colRect = rightCol.getBoundingClientRect();
+      const imgH = image.offsetHeight;
+      const pad = 80;
+
+      if (sRect.top > pad) {
+        image.style.position = 'absolute';
+        image.style.top = '0';
+        image.style.bottom = 'auto';
+        image.style.left = '0';
+        image.style.right = '0';
+        image.style.width = '100%';
+      } else if (sRect.bottom - pad < imgH) {
+        image.style.position = 'absolute';
+        image.style.top = 'auto';
+        image.style.bottom = '0';
+        image.style.left = '0';
+        image.style.right = '0';
+        image.style.width = '100%';
+      } else {
+        image.style.position = 'fixed';
+        image.style.top = `${pad}px`;
+        image.style.left = `${colRect.left}px`;
+        image.style.width = `${colRect.width}px`;
+        image.style.bottom = 'auto';
+        image.style.right = 'auto';
+      }
+    };
+
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+
+    return () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
   }, []);
 
   const featureIds = ['view', 'pool', 'gym', 'apartments'] as const;
@@ -1357,16 +1405,13 @@ function FeaturesSection() {
   const activeFeature = features.find(f => f.id === activeHover);
 
   return (
-    <section className="relative bg-[#f1f1ed] py-32 lg:py-40">
-      {/* Simple Vertical Line Divider */}
+    <section ref={sectionRef} className="relative bg-[#f1f1ed] py-32 lg:py-40">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-16 bg-[#d4d6ce]"></div>
 
-      {/* Desktop Layout */}
-      <div className="hidden lg:grid lg:grid-cols-2 gap-20 px-12 lg:px-24 items-start">
-        
-        {/* LEFT SIDE - Content */}
+      <div className="hidden lg:grid lg:grid-cols-2 gap-20 px-12 lg:px-24">
+
+        {/* LEFT - scrolling text */}
         <div>
-          {/* Header */}
           <div className="mb-20" data-aos="fade-up">
             <span className="text-xs tracking-[0.4em] uppercase text-[#8a968f] mb-6 block font-light">
               {t('features.label')}
@@ -1382,7 +1427,6 @@ function FeaturesSection() {
             </p>
           </div>
 
-          {/* Features List */}
           <div className="space-y-0" data-aos="fade-up" data-aos-delay="100">
             {features.map((feature, index) => (
               <div
@@ -1393,7 +1437,7 @@ function FeaturesSection() {
                 }`}
               >
                 <div className="flex items-start gap-8">
-                  <span 
+                  <span
                     className={`text-5xl lg:text-6xl font-light transition-all duration-500 flex-shrink-0 ${
                       activeHover === feature.id ? 'text-[#AB8A62]' : 'text-[#d4d6ce]'
                     }`}
@@ -1401,13 +1445,11 @@ function FeaturesSection() {
                   >
                     0{index + 1}
                   </span>
-
                   <div className="flex-1 pt-2">
                     <span className="text-xs tracking-[0.3em] uppercase text-[#8a968f] font-light block mb-3">
                       {feature.label}
                     </span>
-
-                    <h3 
+                    <h3
                       className={`text-3xl lg:text-4xl font-light mb-2 transition-colors duration-300 ${
                         activeHover === feature.id ? 'text-[#4A6B5E]' : 'text-[#6E7A73]'
                       }`}
@@ -1415,7 +1457,6 @@ function FeaturesSection() {
                     >
                       {feature.title}
                     </h3>
-
                     <p className={`text-[#8a968f] text-base leading-relaxed transition-all duration-300 ${
                       activeHover === feature.id ? 'opacity-100' : 'opacity-70'
                     }`}>
@@ -1427,7 +1468,6 @@ function FeaturesSection() {
             ))}
           </div>
 
-          {/* CTA Button */}
           <div className="mt-16" data-aos="fade-up" data-aos-delay="300">
             <a
               href="/apartamenty"
@@ -1438,9 +1478,9 @@ function FeaturesSection() {
           </div>
         </div>
 
-        {/* RIGHT SIDE - Static Image */}
-        <div className="sticky top-32" data-aos="fade-left" data-aos-delay="200">
-          <div className="relative">
+        {/* RIGHT - image managed by JS scroll */}
+        <div ref={rightColRef} className="relative" style={{ minHeight: 640 }}>
+          <div ref={imageRef} className="absolute top-0 left-0 right-0" data-aos="fade-left" data-aos-delay="200">
             <div className="relative bg-white shadow-2xl p-4">
               <div className="relative w-full h-[600px] overflow-hidden">
                 {features.map((feature) => (
@@ -1454,16 +1494,14 @@ function FeaturesSection() {
                   />
                 ))}
               </div>
-
               <div className="absolute top-2 left-2 w-10 h-10 border-t-2 border-l-2 border-[#AB8A62]" />
               <div className="absolute top-2 right-2 w-10 h-10 border-t-2 border-r-2 border-[#AB8A62]" />
               <div className="absolute bottom-2 left-2 w-10 h-10 border-b-2 border-l-2 border-[#AB8A62]" />
               <div className="absolute bottom-2 right-2 w-10 h-10 border-b-2 border-r-2 border-[#AB8A62]" />
             </div>
-
             {activeFeature && (
               <div className="absolute bottom-8 left-8 bg-white/95 px-6 py-3 backdrop-blur-sm shadow-lg transition-all duration-500">
-                <span 
+                <span
                   className="text-[#4A6B5E] text-sm tracking-[0.2em] uppercase font-light"
                   style={{ fontFamily: 'Playfair Display, serif' }}
                 >
@@ -1475,7 +1513,7 @@ function FeaturesSection() {
         </div>
       </div>
 
-      {/* Mobile Layout */}
+      {/* Mobile */}
       <div className="lg:hidden px-6">
         <div className="mb-12" data-aos="fade-up">
           <span className="text-xs tracking-[0.4em] uppercase text-[#8a968f] mb-4 block font-light">
@@ -1488,7 +1526,6 @@ function FeaturesSection() {
             {t('features.title')}
           </h2>
         </div>
-
         <div className="space-y-8">
           {features.map((feature, index) => (
             <div
@@ -1498,38 +1535,18 @@ function FeaturesSection() {
               data-aos-delay={index * 100}
             >
               <div className="flex items-start gap-6 mb-4">
-                <span 
-                  className="text-4xl font-light text-[#d4d6ce] flex-shrink-0"
-                  style={{ fontFamily: 'Playfair Display, serif' }}
-                >
+                <span className="text-4xl font-light text-[#d4d6ce] flex-shrink-0" style={{ fontFamily: 'Playfair Display, serif' }}>
                   0{index + 1}
                 </span>
-
                 <div className="flex-1">
-                  <span className="text-xs tracking-[0.3em] uppercase text-[#8a968f] font-light block mb-2">
-                    {feature.label}
-                  </span>
-
-                  <h3 
-                    className="text-2xl font-light mb-2 text-[#6E7A73]"
-                    style={{ fontFamily: 'Playfair Display, serif' }}
-                  >
-                    {feature.title}
-                  </h3>
-
-                  <p className="text-[#8a968f] text-sm leading-relaxed">
-                    {feature.description}
-                  </p>
+                  <span className="text-xs tracking-[0.3em] uppercase text-[#8a968f] font-light block mb-2">{feature.label}</span>
+                  <h3 className="text-2xl font-light mb-2 text-[#6E7A73]" style={{ fontFamily: 'Playfair Display, serif' }}>{feature.title}</h3>
+                  <p className="text-[#8a968f] text-sm leading-relaxed">{feature.description}</p>
                 </div>
               </div>
-
               <div className="relative w-full h-48 mt-4">
                 <div className="relative bg-white shadow-lg p-2 h-full">
-                  <img
-                    src={feature.image}
-                    alt={feature.title}
-                    className="w-full h-full object-cover"
-                  />
+                  <img src={feature.image} alt={feature.title} className="w-full h-full object-cover" />
                   <div className="absolute top-1 left-1 w-6 h-6 border-t border-l border-[#AB8A62]" />
                   <div className="absolute top-1 right-1 w-6 h-6 border-t border-r border-[#AB8A62]" />
                   <div className="absolute bottom-1 left-1 w-6 h-6 border-b border-l border-[#AB8A62]" />
@@ -1539,13 +1556,8 @@ function FeaturesSection() {
             </div>
           ))}
         </div>
-
-        {/* CTA Button Mobile */}
         <div className="mt-12 text-center">
-          <a
-            href="/apartamenty"
-            className="inline-block px-8 py-3 border-2 border-[#8a968f] text-[#6e7a73] text-xs tracking-[0.2em] uppercase font-light hover:bg-[#6E7A73] hover:text-white hover:border-[#6E7A73] transition-all duration-500"
-          >
+          <a href="/apartamenty" className="inline-block px-8 py-3 border-2 border-[#8a968f] text-[#6e7a73] text-xs tracking-[0.2em] uppercase font-light hover:bg-[#6E7A73] hover:text-white hover:border-[#6E7A73] transition-all duration-500">
             {t('features.viewApartments')}
           </a>
         </div>
@@ -1553,7 +1565,6 @@ function FeaturesSection() {
     </section>
   );
 }
-
 
 function InstagramGallery() {
   const sectionRef = useRef<HTMLElement>(null);

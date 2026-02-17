@@ -13,28 +13,10 @@ export default function RezerwacjaPage() {
         strategy="beforeInteractive"
       />
       
-      {/* HotRes API */}
+      {/* HotRes API - BEZ onLoad, bo inicjalizacja jest w useEffect */}
       <Script
         src="https://panel.hotres.pl/public/api/hotres_v4.js"
         strategy="afterInteractive"
-        onLoad={() => {
-          console.log('✅ HotRes API załadowane');
-          // Wywołaj NATYCHMIAST po załadowaniu API
-          if (typeof (window as any).createHotres === 'function') {
-            setTimeout(() => {
-              try {
-                console.log('🚀 Inicjalizacja HotRes...');
-                (window as any).createHotres({
-                  oid: 5226,
-                  lang: "pl"
-                });
-                console.log('✅ HotRes widget utworzony!');
-              } catch (error) {
-                console.error('❌ Błąd:', error);
-              }
-            }, 500);
-          }
-        }}
       />
 
       <Navigation />
@@ -149,6 +131,38 @@ function ReservationContent() {
 
     initAnimations();
 
+    // Inicjalizacja HotRes - TYLKO TUTAJ
+    const initHotres = () => {
+      console.log('🔄 Próba inicjalizacji HotRes...');
+      
+      if (typeof (window as any).createHotres === 'function') {
+        // Wyczyść poprzedni widget
+        const container = document.getElementById('hotresContainer');
+        if (container) {
+          container.innerHTML = '';
+        }
+        
+        // Inicjalizuj
+        setTimeout(() => {
+          try {
+            (window as any).createHotres({
+              oid: 5226,
+              lang: "pl"
+            });
+            console.log('✅ HotRes zainicjalizowany!');
+          } catch (error) {
+            console.error('❌ Błąd inicjalizacji:', error);
+          }
+        }, 500);
+      } else {
+        // Jeśli API nie jest jeszcze załadowane, czekaj i spróbuj ponownie
+        console.log('⏳ API HotRes jeszcze się ładuje...');
+        setTimeout(initHotres, 500);
+      }
+    };
+
+    initHotres();
+
     return () => {
       if (typeof window !== 'undefined') {
         const ScrollTrigger = require('gsap/ScrollTrigger').ScrollTrigger;
@@ -181,6 +195,7 @@ function ReservationContent() {
     </section>
   );
 }
+
 // Minimal Footer – Riva Zegrze - Professional Pastel Version
 function MinimalFooter() {
   return (
