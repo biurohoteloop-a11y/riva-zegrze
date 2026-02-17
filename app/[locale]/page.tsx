@@ -62,57 +62,56 @@ const testimonialKeys = [
 function HotresSearchBar() {
   const containerRef = useRef<HTMLDivElement>(null);
   const retryRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const observerRef = useRef<MutationObserver | null>(null);
 
   useEffect(() => {
-    const existingScript = document.querySelector('script[src*="hotres_popup.js"]');
-    if (existingScript) {
-      existingScript.remove();
-    }
+    document.querySelectorAll('script[src*="hotres_popup.js"]').forEach((s) => s.remove());
+    try { (window as any).showHotres = undefined; } catch (_e) {}
+    try { (window as any).HotresPopup = undefined; } catch (_e) {}
+
+    const forceScroll = () => {
+      document.body.style.setProperty("overflow-y", "auto", "important");
+      document.body.style.setProperty("overflow-x", "hidden", "important");
+      document.documentElement.style.setProperty("overflow-y", "auto", "important");
+    };
+    forceScroll();
+
+    observerRef.current = new MutationObserver(() => {
+      const bodyOverflow = document.body.style.overflow || document.body.style.overflowY;
+      const htmlOverflow = document.documentElement.style.overflow || document.documentElement.style.overflowY;
+      if (bodyOverflow === "hidden" || htmlOverflow === "hidden") {
+        forceScroll();
+      }
+    });
+    observerRef.current.observe(document.body, { attributes: true, attributeFilter: ["style"] });
+    observerRef.current.observe(document.documentElement, { attributes: true, attributeFilter: ["style"] });
 
     const script = document.createElement("script");
-    script.src = "https://panel.hotres.pl/public/api/hotres_popup.js";
+    script.src = "https://panel.hotres.pl/public/api/hotres_popup.js?_t=" + Date.now();
     script.async = true;
     document.body.appendChild(script);
 
-    const fixScroll = () => {
-      document.body.style.overflow = '';
-      document.body.style.overflowY = '';
-      document.documentElement.style.overflow = '';
-      document.documentElement.style.overflowY = '';
-    };
-
     retryRef.current = setInterval(() => {
-      fixScroll();
       const bar = containerRef.current;
       if (!bar) return;
       const hasContent = bar.querySelector(".hotresSearchBar .day") ||
                          bar.querySelector(".hotresSearchBar button");
       if (hasContent) {
         if (retryRef.current) clearInterval(retryRef.current);
-        fixScroll();
         return;
       }
       if ((window as any).showHotres) {
         try {
           (window as any).showHotres();
-        } catch (e) {}
-        fixScroll();
+        } catch (_e) {}
       }
     }, 800);
 
-    const scrollObserver = new MutationObserver(() => {
-      const bodyStyle = document.body.style.overflow;
-      const htmlStyle = document.documentElement.style.overflow;
-      if (bodyStyle === 'hidden' || htmlStyle === 'hidden') {
-        fixScroll();
-      }
-    });
-    scrollObserver.observe(document.body, { attributes: true, attributeFilter: ['style'] });
-    scrollObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['style'] });
-
     return () => {
       if (retryRef.current) clearInterval(retryRef.current);
-      scrollObserver.disconnect();
+      if (observerRef.current) observerRef.current.disconnect();
+      document.querySelectorAll('script[src*="hotres_popup.js"]').forEach((s) => s.remove());
+      forceScroll();
     };
   }, []);
 
