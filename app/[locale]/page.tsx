@@ -93,6 +93,7 @@ function HeroSection() {
   const titleRef = useRef(null);
   const descRef = useRef(null);
   const bookingRef = useRef(null);
+
   // ============================================
   // HOTRES — PEŁNA REINICJALIZACJA
   // ============================================
@@ -181,6 +182,7 @@ function HeroSection() {
       forceScroll();
     };
   }, []);
+
   // ============================================
   // GSAP ENTRY ANIMATION
   // ============================================
@@ -202,6 +204,7 @@ function HeroSection() {
     };
     initAnimations();
   }, []);
+
   // ============================================
   // SLIDER
   // ============================================
@@ -211,6 +214,7 @@ function HeroSection() {
     }, 6500);
     return () => clearInterval(interval);
   }, []);
+
   return (
     <>
       {/* HERO BANNER */}
@@ -233,31 +237,50 @@ function HeroSection() {
             />
           </div>
         ))}
+
         {/* Overlay */}
-        <div className="hero-overlay absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40" />
+        <div className="hero-overlay absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/50" />
+
         {/* CONTENT */}
         <div className="relative z-10 text-center px-6 max-w-6xl mx-auto w-full">
           <span
             ref={labelRef}
-            className="inline-block text-xs tracking-[0.4em] uppercase font-light text-white/90 mb-6"
+            className="inline-block text-[10px] sm:text-xs tracking-[0.5em] uppercase font-light text-white/80 mb-4 sm:mb-6"
+            style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
             {t('label')}
           </span>
+
           <h1
             ref={titleRef}
-            className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-light mb-8 tracking-[0.1em] leading-none text-white drop-shadow-2xl"
-            style={{ fontFamily: 'Playfair Display, serif' }}
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-extralight mb-6 sm:mb-8 tracking-[0.08em] leading-[0.9] text-white"
+            style={{
+              fontFamily: 'Playfair Display, serif',
+              textShadow: '0 4px 30px rgba(0,0,0,0.3)',
+            }}
           >
             {t('title')}
           </h1>
+
           <p
             ref={descRef}
-            className="text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto mb-16 text-white/85 drop-shadow-lg"
+            className="text-sm sm:text-base md:text-lg font-light leading-relaxed max-w-xl mx-auto mb-12 sm:mb-16 text-white/75"
+            style={{
+              fontFamily: 'DM Sans, sans-serif',
+              textShadow: '0 2px 10px rgba(0,0,0,0.2)',
+            }}
           >
             {t('description')}
           </p>
+
           {/* HOTRES DESKTOP */}
           <div ref={bookingRef} className="hidden lg:block max-w-5xl mx-auto">
+            <p
+              className="text-[9px] tracking-[0.5em] uppercase text-white/50 mb-4"
+              style={{ fontFamily: 'DM Sans, sans-serif' }}
+            >
+              {t('checkDates')}
+            </p>
             <div
               className="hotresSearchBar showHotres"
               data-button={t('checkDates')}
@@ -268,23 +291,33 @@ function HeroSection() {
             />
           </div>
         </div>
+
         {/* Slide indicators */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrent(index)}
-              className={`h-1 rounded-full transition-all duration-300 ${
-                index === current ? 'w-12 bg-white' : 'w-8 bg-white/40 hover:bg-white/60'
+              className={`rounded-full transition-all duration-500 ${
+                index === current
+                  ? 'w-10 h-1.5 bg-white'
+                  : 'w-6 h-1 bg-white/30 hover:bg-white/50'
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
       </section>
+
       {/* HOTRES MOBILE */}
-      <section className="lg:hidden bg-[#f7f6f4] py-6 px-4">
-        <div className="max-w-sm mx-auto">
+      <section className="lg:hidden bg-gradient-to-b from-[#f5f4f0] to-[#efeee9] py-8 px-5">
+        <div className="max-w-md mx-auto">
+          <p
+            className="text-[9px] tracking-[0.5em] uppercase text-[#8a968f] mb-4 text-center"
+            style={{ fontFamily: 'DM Sans, sans-serif' }}
+          >
+            {t('checkDates')}
+          </p>
           <div
             className="hotresSearchBar showHotres"
             data-button={t('checkDates')}
@@ -295,148 +328,174 @@ function HeroSection() {
           />
         </div>
       </section>
+
       {/* STYLES */}
       <style jsx global>{`
         @keyframes kenBurns {
           0% { transform: scale(1); }
-          100% { transform: scale(1.1); }
+          100% { transform: scale(1.08); }
         }
+
+        /* ============================== */
+        /* HOTRES BAR — Desktop           */
+        /* ============================== */
         .hotresSearchBar {
-          background: rgba(255, 255, 255, 0.12);
-          backdrop-filter: blur(24px) saturate(180%);
-          -webkit-backdrop-filter: blur(24px) saturate(180%);
+          background: rgba(255, 255, 255, 0.08);
+          backdrop-filter: blur(30px) saturate(200%);
+          -webkit-backdrop-filter: blur(30px) saturate(200%);
           cursor: pointer;
           box-shadow:
-            0 8px 32px rgba(0, 0, 0, 0.12),
-            0 2px 8px rgba(0, 0, 0, 0.08),
-            inset 0 1px 0 rgba(255, 255, 255, 0.25);
-          border-radius: 14px;
-          height: 68px;
+            0 8px 40px rgba(0, 0, 0, 0.15),
+            0 1px 3px rgba(0, 0, 0, 0.08),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+          border-radius: 16px;
+          height: 72px;
           overflow: hidden;
-          min-width: 420px;
-          max-width: 640px;
+          min-width: 480px;
+          max-width: 780px;
           margin: 0 auto;
           display: flex;
           align-items: center;
           justify-content: space-between;
           gap: 0;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
           position: relative;
         }
+
         .hotresSearchBar::before {
           content: '';
           position: absolute;
           inset: 0;
-          border-radius: 14px;
+          border-radius: 16px;
           padding: 1px;
-          background: linear-gradient(135deg,
-            rgba(255, 255, 255, 0.3) 0%,
-            rgba(255, 255, 255, 0.05) 50%,
-            rgba(255, 255, 255, 0.15) 100%);
+          background: linear-gradient(160deg,
+            rgba(255, 255, 255, 0.35) 0%,
+            rgba(255, 255, 255, 0) 40%,
+            rgba(255, 255, 255, 0.1) 100%);
           -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
           -webkit-mask-composite: xor;
           mask-composite: exclude;
           pointer-events: none;
         }
+
         .hotresSearchBar:hover {
-          background: rgba(255, 255, 255, 0.18);
+          background: rgba(255, 255, 255, 0.14);
           box-shadow:
-            0 12px 40px rgba(0, 0, 0, 0.15),
-            0 4px 12px rgba(0, 0, 0, 0.1),
-            inset 0 1px 0 rgba(255, 255, 255, 0.3);
-          transform: translateY(-2px);
-          border-color: rgba(255, 255, 255, 0.28);
+            0 16px 56px rgba(0, 0, 0, 0.2),
+            0 4px 16px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.25);
+          transform: translateY(-3px);
+          border-color: rgba(255, 255, 255, 0.25);
         }
+
         .hotresSearchBar > div {
           flex: 1;
-          padding: 0 24px;
+          padding: 0 28px;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          gap: 3px;
+          gap: 2px;
           color: #ffffff;
-          transition: background 0.3s ease;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           height: 100%;
           position: relative;
         }
+
         .hotresSearchBar > div:not(:last-child) {
-          border-right: 1px solid rgba(255, 255, 255, 0.15);
+          border-right: 1px solid rgba(255, 255, 255, 0.1);
         }
+
         .hotresSearchBar > div:not(:last-child):hover {
           background: rgba(255, 255, 255, 0.06);
         }
+
         .hotresSearchBar > div:last-child {
           flex: 0 0 auto;
           padding: 0;
           border-right: none;
         }
+
         .hotresSearchBar .arrival {
           position: relative;
         }
+
         .hotresSearchBar .arrival::after,
         .hotresSearchBar .arrival::before {
           content: '';
           position: absolute;
-          right: -11px;
-          width: 6px;
-          height: 6px;
-          border-right: 1.5px solid rgba(255, 255, 255, 0.5);
-          border-bottom: 1.5px solid rgba(255, 255, 255, 0.5);
+          right: -12px;
+          width: 5px;
+          height: 5px;
+          border-right: 1.5px solid rgba(255, 255, 255, 0.4);
+          border-bottom: 1.5px solid rgba(255, 255, 255, 0.4);
         }
+
         .hotresSearchBar .arrival::after {
           top: calc(50% - 7px);
           transform: rotate(-45deg);
         }
+
         .hotresSearchBar .arrival::before {
           top: calc(50% + 1px);
           transform: rotate(135deg);
         }
+
         .hotresSearchBar .day {
-          font-size: 26px;
+          font-family: 'Playfair Display', serif;
+          font-size: 28px;
           font-weight: 300;
           color: #ffffff;
           line-height: 1;
-          letter-spacing: -0.01em;
-          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+          letter-spacing: 0.02em;
+          text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
         }
+
         .hotresSearchBar .month {
-          font-size: 10px;
-          line-height: 1.2;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 9px;
+          line-height: 1.3;
           font-weight: 400;
-          color: rgba(255, 255, 255, 0.8);
+          color: rgba(255, 255, 255, 0.65);
           text-transform: uppercase;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.15em;
           text-align: center;
         }
+
         .hotresSearchBar .month small {
-          font-size: 9px;
-          color: rgba(255, 255, 255, 0.6);
+          font-size: 8px;
+          color: rgba(255, 255, 255, 0.45);
           display: block;
-          letter-spacing: 0.08em;
+          letter-spacing: 0.1em;
           margin-top: 1px;
         }
+
         .hotresSearchBar button {
-          height: 68px;
-          width: 160px;
-          border-radius: 0 13px 13px 0;
+          height: 72px;
+          width: 180px;
+          border-radius: 0 15px 15px 0;
           text-transform: uppercase;
+          font-family: 'DM Sans', sans-serif;
           font-size: 9px;
-          letter-spacing: 0.12em;
+          letter-spacing: 0.2em;
           font-weight: 500;
-          background: linear-gradient(135deg,
-            rgba(171, 138, 98, 0.92) 0%,
-            rgba(150, 116, 71, 0.92) 100%);
+          background: linear-gradient(145deg,
+            #AB8A62 0%,
+            #967447 100%);
           color: #ffffff;
           border: none;
           cursor: pointer;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
           padding: 0;
           position: relative;
           overflow: hidden;
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+          box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.15),
+            -1px 0 0 rgba(171, 138, 98, 0.3);
         }
+
         .hotresSearchBar button::before {
           content: '';
           position: absolute;
@@ -446,80 +505,122 @@ function HeroSection() {
           height: 100%;
           background: linear-gradient(90deg,
             transparent,
-            rgba(255, 255, 255, 0.2),
+            rgba(255, 255, 255, 0.15),
             transparent);
-          transition: left 0.6s ease;
+          transition: left 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
         .hotresSearchBar button:hover {
-          background: linear-gradient(135deg,
-            rgba(150, 116, 71, 0.98) 0%,
-            rgba(171, 138, 98, 0.98) 100%);
+          background: linear-gradient(145deg,
+            #967447 0%,
+            #AB8A62 100%);
           box-shadow:
-            0 3px 12px rgba(171, 138, 98, 0.35),
+            0 4px 20px rgba(171, 138, 98, 0.4),
             inset 0 1px 0 rgba(255, 255, 255, 0.2);
-          transform: translateX(1px);
+          letter-spacing: 0.25em;
         }
+
         .hotresSearchBar button:hover::before {
           left: 100%;
         }
+
         .hotresSearchBar button:active {
-          transform: translateX(0) scale(0.98);
+          transform: scale(0.98);
+          box-shadow:
+            0 2px 8px rgba(171, 138, 98, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
+
+        /* ============================== */
+        /* HOTRES BAR — Mobile            */
+        /* ============================== */
         @media (max-width: 1024px) {
           .hotresSearchBar {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(30px);
-            border-radius: 18px;
+            background: #ffffff;
+            backdrop-filter: none;
+            border-radius: 20px;
             height: auto;
             flex-direction: column;
-            padding: 24px;
-            gap: 16px;
+            padding: 0;
+            gap: 0;
             max-width: 100%;
-            border: 1px solid rgba(212, 214, 206, 0.25);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            min-width: unset;
+            border: 1px solid rgba(212, 214, 206, 0.3);
+            box-shadow:
+              0 4px 24px rgba(0, 0, 0, 0.06),
+              0 1px 3px rgba(0, 0, 0, 0.04);
           }
+
           .hotresSearchBar::before {
             display: none;
           }
+
+          .hotresSearchBar:hover {
+            transform: none;
+            box-shadow:
+              0 4px 24px rgba(0, 0, 0, 0.06),
+              0 1px 3px rgba(0, 0, 0, 0.04);
+          }
+
           .hotresSearchBar > div {
             width: 100%;
             flex: none;
-            padding: 18px;
+            padding: 20px 24px;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
             border-right: none;
-            border-bottom: 1px solid rgba(212, 214, 206, 0.2);
-            color: #0f0e0f;
+            border-bottom: 1px solid rgba(212, 214, 206, 0.15);
+            color: #1a4d2e;
           }
+
           .hotresSearchBar > div:not(:last-child):hover {
-            background: rgba(212, 214, 206, 0.12);
+            background: rgba(171, 138, 98, 0.04);
           }
+
           .hotresSearchBar > div:last-child {
             border-bottom: none;
             padding: 0;
             width: 100%;
           }
+
           .hotresSearchBar .arrival::after,
           .hotresSearchBar .arrival::before {
             display: none;
           }
+
           .hotresSearchBar .day {
-            font-size: 32px;
-            color: #0f0e0f;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 300;
+            color: #1a4d2e;
             text-shadow: none;
           }
+
           .hotresSearchBar .month {
-            font-size: 11px;
-            color: #6e7a73;
-          }
-          .hotresSearchBar .month small {
+            font-family: 'DM Sans', sans-serif;
             font-size: 10px;
+            color: #8a968f;
+            letter-spacing: 0.12em;
+          }
+
+          .hotresSearchBar .month small {
+            font-size: 9px;
             color: #AB8A62;
           }
+
           .hotresSearchBar button {
             width: 100%;
-            height: 52px;
-            border-radius: 12px;
+            height: 56px;
+            border-radius: 0 0 19px 19px;
             font-size: 10px;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.2em;
+            font-weight: 500;
+          }
+
+          .hotresSearchBar button:hover {
+            letter-spacing: 0.2em;
           }
         }
       `}</style>
