@@ -2229,5 +2229,46 @@
         "cookies": "Cookies"
       }
     }
+ },
+     "footer": {
+    "brand": {
+      "tagline": "Intimate waterfront apartments. Peace, comfort and direct booking in a unique location near Warsaw.",
+      "bookingRating": "Booking.com"
+    },
+    "navigation": {
+      "title": "Discover",
+      "apartments": "Apartments",
+      "reservationInfo": "Reservation Information",
+      "wellness": "Wellness & Spa",
+      "gallery": "Gallery",
+      "about": "About Us"
+    },
+    "contact": {
+      "title": "Contact",
+      "addressName": "Apartamenty Riva Zegrze",
+      "addressStreet": "Rybaki 11",
+      "addressCity": "05-130 Zegrze Południowe",
+      "phone": "+48 510 038 038",
+      "email": "wynajem@rivazegrze.pl"
+    },
+    "newsletter": {
+      "title": "Newsletter",
+      "description": "Stay up to date with special offers",
+      "emailPlaceholder": "Your email",
+      "socialTitle": "Social Media",
+      "instagram": "Instagram",
+      "facebook": "Facebook"
+    },
+    "legal": {
+      "copyright": "© {year} Riva Zegrze. All rights reserved.",
+      "madeWith": "Made with",
+      "by": "by Hoteler",
+      "privacy": "Privacy Policy",
+      "terms": "Terms & Conditions",
+      "reservationInfo": "Reservation Information",
+      "companyName": "Open One Sp. z o.o. S.k.",
+      "nip": "Tax ID:",
+      "nipNumber": "5242877732"
+    }
   }
 }

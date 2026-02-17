@@ -2227,5 +2227,46 @@
         "cookies": "Cookies"
       }
     }
+  },
+  "footer": {
+    "brand": {
+      "tagline": "Kameralne apartamenty nad wodą. Spokój, komfort i bezpośrednia rezerwacja w wyjątkowej lokalizacji pod Warszawą.",
+      "bookingRating": "Booking.com"
+    },
+    "navigation": {
+      "title": "Odkryj",
+      "apartments": "Apartamenty",
+      "reservationInfo": "Informacje o rezerwacji",
+      "wellness": "Wellness & Spa",
+      "gallery": "Galeria",
+      "about": "O Nas"
+    },
+    "contact": {
+      "title": "Kontakt",
+      "addressName": "Apartamenty Riva Zegrze",
+      "addressStreet": "Rybaki 11",
+      "addressCity": "05-130 Zegrze Południowe",
+      "phone": "+48 510 038 038",
+      "email": "wynajem@rivazegrze.pl"
+    },
+    "newsletter": {
+      "title": "Newsletter",
+      "description": "Bądź na bieżąco z ofertami specjalnymi",
+      "emailPlaceholder": "Twój e-mail",
+      "socialTitle": "Social Media",
+      "instagram": "Instagram",
+      "facebook": "Facebook"
+    },
+    "legal": {
+      "copyright": "© {year} Riva Zegrze. Wszystkie prawa zastrzeżone.",
+      "madeWith": "Made with",
+      "by": "by Hoteler",
+      "privacy": "Polityka prywatności",
+      "terms": "Regulamin",
+      "reservationInfo": "Informacje o rezerwacji",
+      "companyName": "Open One Sp. z o.o. S.k.",
+      "nip": "NIP:",
+      "nipNumber": "5242877732"
+    }
   }
 }

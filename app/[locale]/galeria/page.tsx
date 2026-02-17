@@ -351,8 +351,9 @@ function GalleryGrid() {
   );
 }
 
-// Minimal Footer – Riva Zegrze - Professional Pastel Version - MOBILE OPTIMIZED
 function MinimalFooter() {
+  const t = useTranslations('footer');
+  
   return (
     <footer className="bg-[#f1f1ed] text-[#1a4d2e] py-20 border-t border-[#d4d6ce]">
       <div className="max-w-[1800px] mx-auto px-8 lg:px-12">
@@ -374,8 +375,7 @@ function MinimalFooter() {
               </span>
             </div>
             <p className="text-sm text-[#6e7a73] leading-relaxed font-light mb-6">
-              Kameralne apartamenty nad wodą. Spokój, komfort i bezpośrednia
-              rezerwacja w wyjątkowej lokalizacji pod Warszawą.
+              {t('brand.tagline')}
             </p>
             
             {/* Awards/Certifications */}
@@ -387,22 +387,22 @@ function MinimalFooter() {
                   </svg>
                 ))}
               </div>
-              <span className="text-xs text-[#8a968f]">Booking.com</span>
+              <span className="text-xs text-[#8a968f]">{t('brand.bookingRating')}</span>
             </div>
           </div>
 
           {/* NAVIGATION */}
           <div>
             <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
-              Odkryj
+              {t('navigation.title')}
             </h4>
             <ul className="space-y-3">
               {[
-                { label: 'Apartamenty', href: '/rooms' },
-                { label: 'Informacje o rezerwacji', href: '/informacje-o-rezerwacji' },
-                { label: 'Wellness & Spa', href: '/activities' },
-                { label: 'Galeria', href: '/galeria' },
-                { label: 'O Nas', href: '/about' },
+                { label: t('navigation.apartments'), href: '/rooms' },
+                { label: t('navigation.reservationInfo'), href: '/informacje-o-rezerwacji' },
+                { label: t('navigation.wellness'), href: '/activities' },
+                { label: t('navigation.gallery'), href: '/galeria' },
+                { label: t('navigation.about'), href: '/about' },
               ].map((item) => (
                 <li key={item.label}>
                   <a
@@ -415,12 +415,12 @@ function MinimalFooter() {
                 </li>
               ))}
             </ul>
-          </div> 
+          </div>
 
           {/* CONTACT */}
           <div>
             <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
-              Kontakt
+              {t('contact.title')}
             </h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-sm text-[#6e7a73] font-light group">
@@ -429,25 +429,25 @@ function MinimalFooter() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                 </svg>
                 <span className="group-hover:text-[#1a4d2e] transition-colors">
-                  Riva Zegrze<br />
-                  Rybaki 11<br />
-                  05-130 Zegrze Południowe
+                  {t('contact.addressName')}<br />
+                  {t('contact.addressStreet')}<br />
+                  {t('contact.addressCity')}
                 </span>
               </li>
               <li>
-                <a href="tel:+48510038038" className="flex items-center gap-3 text-sm text-[#6e7a73] font-light hover:text-[#1a4d2e] transition-colors group">
+                <a href={`tel:${t('contact.phone')}`} className="flex items-center gap-3 text-sm text-[#6e7a73] font-light hover:text-[#1a4d2e] transition-colors group">
                   <svg className="w-5 h-5 text-[#AB8A62]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
                   </svg>
-                  <span>+48 510 038 038</span>
+                  <span>{t('contact.phone')}</span>
                 </a>
               </li>
               <li>
-                <a href="mailto:wynajem@rivazegrze.pl" className="flex items-center gap-3 text-sm text-[#6e7a73] font-light hover:text-[#1a4d2e] transition-colors group">
+                <a href={`mailto:${t('contact.email')}`} className="flex items-center gap-3 text-sm text-[#6e7a73] font-light hover:text-[#1a4d2e] transition-colors group">
                   <svg className="w-5 h-5 text-[#AB8A62]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                   </svg>
-                  <span>wynajem@rivazegrze.pl</span>
+                  <span>{t('contact.email')}</span>
                 </a>
               </li>
             </ul>
@@ -456,10 +456,10 @@ function MinimalFooter() {
           {/* NEWSLETTER & SOCIAL */}
           <div>
             <h4 className="text-xs tracking-[0.3em] uppercase mb-6 font-light text-[#AB8A62]">
-              Newsletter
+              {t('newsletter.title')}
             </h4>
             <p className="text-sm text-[#6e7a73] mb-4 font-light">
-              Bądź na bieżąco z ofertami specjalnymi
+              {t('newsletter.description')}
             </p>
             
             {/* Newsletter Form */}
@@ -467,7 +467,7 @@ function MinimalFooter() {
               <div className="flex gap-2">
                 <input
                   type="email"
-                  placeholder="Twój e-mail"
+                  placeholder={t('newsletter.emailPlaceholder')}
                   className="flex-1 px-4 py-3 bg-white border border-[#d4d6ce] text-sm text-[#6e7a73] placeholder:text-[#b6b9af] focus:outline-none focus:border-[#AB8A62] transition-colors"
                 />
                 <button
@@ -484,12 +484,12 @@ function MinimalFooter() {
             {/* Social */}
             <div className="space-y-3">
               <h5 className="text-xs tracking-[0.2em] uppercase font-light text-[#8a968f]">
-                Social Media
+                {t('newsletter.socialTitle')}
               </h5>
               <div className="flex gap-3">
                 {[
-                  { icon: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z', label: 'Instagram' },
-                  { icon: 'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z', label: 'Facebook' }
+                  { icon: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z', label: t('newsletter.instagram') },
+                  { icon: 'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z', label: t('newsletter.facebook') }
                 ].map((social, idx) => (
                   <a
                     key={idx}
@@ -507,13 +507,12 @@ function MinimalFooter() {
           </div>
         </div>
 
-        {/* BOTTOM BAR - ✅ MOBILE OPTIMIZED */}
+        {/* BOTTOM BAR */}
         <div className="border-t border-[#d4d6ce] pt-8">
           
-          {/* Copyright i Made by - zawsze na górze */}
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mb-6">
             <p className="text-xs text-[#8a968f] font-light text-center sm:text-left">
-              © {new Date().getFullYear()} Riva Zegrze. Wszystkie prawa zastrzeżone.
+              {t('legal.copyright', { year: new Date().getFullYear() })}
             </p>
             <a 
               href="https://hoteler.pro" 
@@ -521,20 +520,19 @@ function MinimalFooter() {
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-xs text-[#8a968f] hover:text-[#AB8A62] transition-colors font-light group"
             >
-              <span>Made with</span>
+              <span>{t('legal.madeWith')}</span>
               <svg className="w-3 h-3 text-[#AB8A62] group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
               </svg>
-              <span className="font-medium">by Hoteler</span>
+              <span className="font-medium">{t('legal.by')}</span>
             </a>
           </div>
 
-          {/* Linki prawne - stack na mobile, row na desktop */}
           <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-4 sm:gap-6 mb-6">
             {[
-              { label: 'Polityka prywatności', href: '/polityka-prywatnosci' },
-              { label: 'Regulamin', href: '/regulamin' },
-              { label: 'Informacje o rezerwacji', href: '/informacje-o-rezerwacji' },
+              { label: t('legal.privacy'), href: '/polityka-prywatnosci' },
+              { label: t('legal.terms'), href: '/regulamin' },
+              { label: t('legal.reservationInfo'), href: '/informacje-o-rezerwacji' },
             ].map((item) => (
               <a
                 key={item.label}
@@ -547,13 +545,12 @@ function MinimalFooter() {
             ))}
           </div>
 
-          {/* NIP - osobna linia na dole, wyśrodkowana */}
           <div className="text-center pt-4 border-t border-[#d4d6ce]/50">
             <p className="text-xs text-[#8a968f] font-light">
-              <span className="font-medium text-[#6e7a73]">Open One Sp. z o.o. S.k.</span>
+              <span className="font-medium text-[#6e7a73]">{t('legal.companyName')}</span>
               <span className="hidden sm:inline mx-2">•</span>
               <span className="block sm:inline mt-1 sm:mt-0">
-                <span className="font-medium text-[#6e7a73]">NIP:</span> 5242877732
+                <span className="font-medium text-[#6e7a73]">{t('legal.nip')}</span> {t('legal.nipNumber')}
               </span>
             </p>
           </div>
