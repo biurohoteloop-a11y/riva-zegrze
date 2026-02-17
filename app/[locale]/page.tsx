@@ -237,21 +237,27 @@ function HeroSection() {
           </p>
 
           {/* HOTRES DESKTOP — NIEWIDOCZNY dopóki nie gotowy */}
-          <div ref={bookingRef} className="hidden lg:block max-w-5xl mx-auto">
-            <div
-              className="hotresSearchBar showHotres"
-              data-button={t('checkDates')}
-              data-oid="5226"
-              data-lang="pl"
-              data-action="bookingbar"
-              suppressHydrationWarning
-              style={{
-                opacity: hotresReady ? 1 : 0,
-                transform: hotresReady ? 'translateY(0)' : 'translateY(20px)',
-                transition: 'opacity 0.6s ease, transform 0.6s ease',
-              }}
-            />
-          </div>
+          {/* HOTRES DESKTOP */}
+<div
+  ref={bookingRef}
+  className="hidden lg:block max-w-5xl mx-auto"
+  style={{
+    opacity: hotresReady ? 1 : 0,
+    transform: hotresReady ? 'translateY(0)' : 'translateY(20px)',
+    transition: 'opacity 0.6s ease, transform 0.6s ease',
+    pointerEvents: hotresReady ? 'auto' : 'none',
+  }}
+>
+  <div
+    className="hotresSearchBar showHotres"
+    data-button={t('checkDates')}
+    data-oid="5226"
+    data-lang="pl"
+    data-action="bookingbar"
+    suppressHydrationWarning
+  />
+</div>
+
 
         </div>
 
@@ -270,24 +276,28 @@ function HeroSection() {
 
       </section>
 
-      {/* HOTRES MOBILE — NIEWIDOCZNY dopóki nie gotowy */}
-      <section className="lg:hidden bg-[#f7f6f4] py-6 px-4">
-        <div className="max-w-sm mx-auto">
-          <div
-            className="hotresSearchBar showHotres"
-            data-button={t('checkDates')}
-            data-oid="5226"
-            data-lang="pl"
-            data-action="bookingbar"
-            suppressHydrationWarning
-            style={{
-              opacity: hotresReady ? 1 : 0,
-              transform: hotresReady ? 'translateY(0)' : 'translateY(20px)',
-              transition: 'opacity 0.6s ease, transform 0.6s ease',
-            }}
-          />
-        </div>
-      </section>
+      {/* HOTRES MOBILE */}
+<section className="lg:hidden bg-[#f7f6f4] py-6 px-4">
+  <div
+    className="max-w-sm mx-auto"
+    style={{
+      opacity: hotresReady ? 1 : 0,
+      transform: hotresReady ? 'translateY(0)' : 'translateY(20px)',
+      transition: 'opacity 0.6s ease, transform 0.6s ease',
+      pointerEvents: hotresReady ? 'auto' : 'none',
+    }}
+  >
+    <div
+      className="hotresSearchBar showHotres"
+      data-button={t('checkDates')}
+      data-oid="5226"
+      data-lang="pl"
+      data-action="bookingbar"
+      suppressHydrationWarning
+    />
+  </div>
+</section>
+
 
       <style jsx global>{`
         @keyframes kenBurns {
