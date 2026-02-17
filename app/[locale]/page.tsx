@@ -90,6 +90,7 @@ function HeroSection() {
   ];
 
   const [current, setCurrent] = useState(0);
+  const [hotresReady, setHotresReady] = useState(false);
 
   const heroRef = useRef(null);
   const labelRef = useRef(null);
@@ -98,15 +99,15 @@ function HeroSection() {
   const bookingRef = useRef(null);
 
   // ============================================
-  // HOTRES — CLEAN LOADING (bez placeholdera)
+  // HOTRES — UKRYTY DO MOMENTU ZAŁADOWANIA
   // ============================================
   useEffect(() => {
     let attempts = 0;
     const maxAttempts = 5;
     let retryTimer: ReturnType<typeof setTimeout>;
+    let checkTimer: ReturnType<typeof setTimeout>;
 
     const loadScript = () => {
-      // Usuń WSZYSTKIE stare skrypty hotres
       const oldScripts = Array.from(document.querySelectorAll('script[src*="hotres_popup"]'));
       oldScripts.forEach((s) => s.remove());
 
@@ -116,10 +117,26 @@ function HeroSection() {
 
       script.onload = () => {
         console.log('✅ HotRes script loaded');
+        // Sprawdzaj co 200ms czy HotRes wyrenderował content
+        let checks = 0;
+        const checkRendered = () => {
+          checks++;
+          const bars = Array.from(document.querySelectorAll('.hotresSearchBar'));
+          const hasContent = bars.some(
+            (bar) => bar.children.length > 0 || bar.innerHTML.trim().length > 50
+          );
+
+          if (hasContent) {
+            console.log('✅ HotRes rendered — showing bar');
+            setHotresReady(true);
+          } else if (checks < 30) {
+            checkTimer = setTimeout(checkRendered, 200);
+          }
+        };
+        setTimeout(checkRendered, 200);
       };
 
       script.onerror = () => {
-        console.error('❌ HotRes script failed');
         attempts++;
         if (attempts < maxAttempts) {
           retryTimer = setTimeout(loadScript, 1000);
@@ -129,12 +146,12 @@ function HeroSection() {
       document.body.appendChild(script);
     };
 
-    // Poczekaj aż React wyrenderuje divy, potem ładuj skrypt RAZ
     const initTimer = setTimeout(loadScript, 300);
 
     return () => {
       clearTimeout(initTimer);
       clearTimeout(retryTimer);
+      clearTimeout(checkTimer);
     };
   }, []);
 
@@ -173,10 +190,8 @@ function HeroSection() {
 
   return (
     <>
-      {/* HERO BANNER */}
       <section ref={heroRef} className="relative h-screen overflow-hidden flex items-center justify-center">
 
-        {/* SLIDES */}
         {slides.map((src, index) => (
           <div
             key={index}
@@ -195,10 +210,8 @@ function HeroSection() {
           </div>
         ))}
 
-        {/* Overlay */}
         <div className="hero-overlay absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40" />
 
-        {/* CONTENT */}
         <div className="relative z-10 text-center px-6 max-w-6xl mx-auto w-full">
 
           <span
@@ -223,7 +236,7 @@ function HeroSection() {
             {t('description')}
           </p>
 
-          {/* HOTRES DESKTOP */}
+          {/* HOTRES DESKTOP — NIEWIDOCZNY dopóki nie gotowy */}
           <div ref={bookingRef} className="hidden lg:block max-w-5xl mx-auto">
             <div
               className="hotresSearchBar showHotres"
@@ -232,12 +245,16 @@ function HeroSection() {
               data-lang="pl"
               data-action="bookingbar"
               suppressHydrationWarning
+              style={{
+                opacity: hotresReady ? 1 : 0,
+                transform: hotresReady ? 'translateY(0)' : 'translateY(20px)',
+                transition: 'opacity 0.6s ease, transform 0.6s ease',
+              }}
             />
           </div>
 
         </div>
 
-        {/* Slide indicators */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
           {slides.map((_, index) => (
             <button
@@ -253,7 +270,7 @@ function HeroSection() {
 
       </section>
 
-      {/* HOTRES MOBILE */}
+      {/* HOTRES MOBILE — NIEWIDOCZNY dopóki nie gotowy */}
       <section className="lg:hidden bg-[#f7f6f4] py-6 px-4">
         <div className="max-w-sm mx-auto">
           <div
@@ -263,20 +280,21 @@ function HeroSection() {
             data-lang="pl"
             data-action="bookingbar"
             suppressHydrationWarning
+            style={{
+              opacity: hotresReady ? 1 : 0,
+              transform: hotresReady ? 'translateY(0)' : 'translateY(20px)',
+              transition: 'opacity 0.6s ease, transform 0.6s ease',
+            }}
           />
         </div>
       </section>
 
-      {/* STYLES */}
       <style jsx global>{`
         @keyframes kenBurns {
           0% { transform: scale(1); }
           100% { transform: scale(1.1); }
         }
 
-        /* ============================== */
-        /* HOTRES BAR — Desktop           */
-        /* ============================== */
         .hotresSearchBar {
           background: rgba(255, 255, 255, 0.12);
           backdrop-filter: blur(24px) saturate(180%);
@@ -460,9 +478,6 @@ function HeroSection() {
           transform: translateX(0) scale(0.98);
         }
 
-        /* ============================== */
-        /* HOTRES BAR — Mobile            */
-        /* ============================== */
         @media (max-width: 1024px) {
           .hotresSearchBar {
             background: rgba(255, 255, 255, 0.98);
@@ -533,6 +548,7 @@ function HeroSection() {
     </>
   );
 }
+
 
 
 
