@@ -10,6 +10,7 @@ import LanguageSwitcher from '../components/LanguageSwitcher';
 import Navigation from '../components/layout/Navigation';
 import Link from 'next/link';
 import { useLocale } from 'next-intl';
+import Script from 'next/script'; // 
 
 
 
@@ -89,83 +90,13 @@ function HeroSection() {
   ];
 
   const [current, setCurrent] = useState(0);
-  const [hotresReady, setHotresReady] = useState(false);
 
   const heroRef = useRef(null);
   const labelRef = useRef(null);
   const titleRef = useRef(null);
   const descRef = useRef(null);
   const bookingRef = useRef(null);
-
-  // ============================================
-  // HOTRES — Z REINICJALIZACJĄ PO NAWIGACJI
-  // ============================================
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    let mounted = true;
-
-    const initHotres = () => {
-      // Sprawdź czy skrypt istnieje
-      let script = document.querySelector('script[src*="hotres_popup"]') as HTMLScriptElement | null;
-
-      if (!script) {
-        // Załaduj skrypt jeśli nie istnieje
-        script = document.createElement('script');
-        script.src = 'https://panel.hotres.pl/public/api/hotres_popup.js';
-        script.async = true;
-        script.id = 'hotres-popup-script';
-        document.body.appendChild(script);
-      }
-
-      // Wyczyść poprzednie search bary i wymuszaj reinicjalizację
-      const bars = document.querySelectorAll('.hotresSearchBar');
-      bars.forEach((bar) => {
-        // Nie czyść całego innerHTML, tylko usuń klasy i dodaj je ponownie
-        bar.classList.remove('showHotres');
-        setTimeout(() => {
-          bar.classList.add('showHotres');
-        }, 100);
-      });
-
-      // Czekaj aż HotRes wyrenderuje content
-      let checkCount = 0;
-      interval = setInterval(() => {
-        if (!mounted) {
-          clearInterval(interval);
-          return;
-        }
-
-        checkCount++;
-        const currentBars = Array.from(document.querySelectorAll('.hotresSearchBar'));
-        const hasContent = currentBars.some((bar) => bar.children.length > 0);
-
-        if (hasContent) {
-          setHotresReady(true);
-          clearInterval(interval);
-        }
-
-        // Stop po 15s
-        if (checkCount > 75) {
-          clearInterval(interval);
-          // Pokaż nawet jeśli nie załadowane
-          setHotresReady(true);
-        }
-      }, 200);
-    };
-
-    // Małe opóźnienie aby dać czas na odmontowanie poprzednich komponentów
-    const timeout = setTimeout(() => {
-      if (mounted) {
-        initHotres();
-      }
-    }, 100);
-
-    return () => {
-      mounted = false;
-      clearInterval(interval);
-      clearTimeout(timeout);
-    };
-  }, []); // Pusta tablica - uruchom przy każdym montowaniu komponentu
+  const isHotResInitialized = useRef(false);
 
   // ============================================
   // GSAP ENTRY ANIMATION
@@ -181,13 +112,37 @@ function HeroSection() {
           tl.fromTo(labelRef.current, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, '-=1.2');
           tl.fromTo(titleRef.current, { y: 100, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 1.2 }, '-=0.8');
           tl.fromTo(descRef.current, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, '-=0.6');
-          tl.fromTo(bookingRef.current, { y: 60, opacity: 0, scale: 0.95 }, { y: 0, opacity: 1, scale: 1, duration: 1 }, '-=0.5');
+          tl.fromTo(bookingRef.current, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, '-=0.4');
         } catch (error) {
           console.error('GSAP animation error:', error);
         }
       }
     };
     initAnimations();
+  }, []);
+
+  // ============================================
+  // HOTRES INITIALIZATION
+  // ============================================
+  useEffect(() => {
+    const initHotRes = () => {
+      if (typeof window !== 'undefined' && (window as any).HotRes && !isHotResInitialized.current) {
+        try {
+          (window as any).HotRes.init();
+          isHotResInitialized.current = true;
+        } catch (error) {
+          console.error('HotRes init error:', error);
+        }
+      }
+    };
+
+    // Próba inicjalizacji po krótkim opóźnieniu
+    const timer = setTimeout(initHotRes, 200);
+
+    return () => {
+      clearTimeout(timer);
+      isHotResInitialized.current = false;
+    };
   }, []);
 
   // ============================================
@@ -202,6 +157,18 @@ function HeroSection() {
 
   return (
     <>
+      {/* HotRes Script */}
+      <Script
+        src="https://panel.hotres.pl/public/api/hotres_popup.js"
+        strategy="afterInteractive"
+        onLoad={() => {
+          if ((window as any).HotRes && !isHotResInitialized.current) {
+            (window as any).HotRes.init();
+            isHotResInitialized.current = true;
+          }
+        }}
+      />
+
       <section ref={heroRef} className="relative h-screen overflow-hidden flex items-center justify-center">
 
         {slides.map((src, index) => (
@@ -243,28 +210,19 @@ function HeroSection() {
 
           <p
             ref={descRef}
-            className="text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto mb-16 text-white/85 drop-shadow-lg"
+            className="text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto text-white/85 drop-shadow-lg mb-12"
           >
             {t('description')}
           </p>
 
-          {/* HOTRES DESKTOP */}
-          <div
-            ref={bookingRef}
-            className="hidden lg:block max-w-5xl mx-auto hotres-wrapper"
-            style={{
-              opacity: hotresReady ? 1 : 0,
-              transform: hotresReady ? 'translateY(0)' : 'translateY(20px)',
-              transition: 'opacity 0.8s ease, transform 0.8s ease',
-            }}
-          >
-            <div
-              className="hotresSearchBar showHotres"
-              data-button={t('checkDates')}
-              data-oid="5226"
-              data-lang="pl"
+          {/* HotRes Booking Bar */}
+          <div ref={bookingRef} className="hotres-container">
+            <div 
+              className="hotresSearchBar showHotres" 
+              data-button="Sprawdź dostępność"  
+              data-oid="5226" 
+              data-lang="pl" 
               data-action="bookingbar"
-              suppressHydrationWarning
             />
           </div>
 
@@ -285,290 +243,118 @@ function HeroSection() {
 
       </section>
 
-      {/* HOTRES MOBILE */}
-      <section className="lg:hidden bg-[#f7f6f4] py-6 px-4">
-        <div
-          className="max-w-sm mx-auto"
-          style={{
-            opacity: hotresReady ? 1 : 0,
-            transform: hotresReady ? 'translateY(0)' : 'translateY(20px)',
-            transition: 'opacity 0.8s ease, transform 0.8s ease',
-          }}
-        >
-          <div
-            className="hotresSearchBar showHotres"
-            data-button={t('checkDates')}
-            data-oid="5226"
-            data-lang="pl"
-            data-action="bookingbar"
-            suppressHydrationWarning
-          />
-        </div>
-      </section>
-
       <style jsx global>{`
         @keyframes kenBurns {
           0% { transform: scale(1); }
           100% { transform: scale(1.1); }
         }
 
-        .hotresSearchBar {
-          background: rgba(255, 255, 255, 0.12);
-          backdrop-filter: blur(24px) saturate(180%);
-          -webkit-backdrop-filter: blur(24px) saturate(180%);
-          cursor: pointer;
-          box-shadow:
-            0 8px 32px rgba(0, 0, 0, 0.12),
-            0 2px 8px rgba(0, 0, 0, 0.08),
-            inset 0 1px 0 rgba(255, 255, 255, 0.25);
-          border-radius: 14px;
-          height: 68px;
-          overflow: hidden;
-          min-width: 420px;
-          max-width: 640px;
+        /* HotRes Booking Styling */
+        .hotres-container {
+          width: 100%;
+          max-width: 850px;
           margin: 0 auto;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 0;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-          position: relative;
+          padding: 0 20px;
         }
 
-        .hotresSearchBar::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          border-radius: 14px;
-          padding: 1px;
-          background: linear-gradient(135deg,
-            rgba(255, 255, 255, 0.3) 0%,
-            rgba(255, 255, 255, 0.05) 50%,
-            rgba(255, 255, 255, 0.15) 100%);
-          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-          -webkit-mask-composite: xor;
-          mask-composite: exclude;
-          pointer-events: none;
+        .hotresSearchBar {
+          background: rgba(255, 255, 255, 0.98) !important;
+          backdrop-filter: blur(20px) !important;
+          border-radius: 16px !important;
+          padding: 20px 28px !important;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4) !important;
+          border: 1px solid rgba(255, 255, 255, 0.3) !important;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
         }
 
         .hotresSearchBar:hover {
-          background: rgba(255, 255, 255, 0.18);
-          box-shadow:
-            0 12px 40px rgba(0, 0, 0, 0.15),
-            0 4px 12px rgba(0, 0, 0, 0.1),
-            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+          box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5) !important;
           transform: translateY(-2px);
-          border-color: rgba(255, 255, 255, 0.28);
         }
 
-        .hotresSearchBar > div {
-          flex: 1;
-          padding: 0 24px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 3px;
-          color: #ffffff;
-          transition: background 0.3s ease;
-          height: 100%;
-          position: relative;
-        }
-
-        .hotresSearchBar > div:not(:last-child) {
-          border-right: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .hotresSearchBar > div:not(:last-child):hover {
-          background: rgba(255, 255, 255, 0.06);
-        }
-
-        .hotresSearchBar > div:last-child {
-          flex: 0 0 auto;
-          padding: 0;
-          border-right: none;
-        }
-
-        .hotresSearchBar .arrival {
-          position: relative;
-        }
-
-        .hotresSearchBar .arrival::after,
-        .hotresSearchBar .arrival::before {
-          content: '';
-          position: absolute;
-          right: -11px;
-          width: 6px;
-          height: 6px;
-          border-right: 1.5px solid rgba(255, 255, 255, 0.5);
-          border-bottom: 1.5px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .hotresSearchBar .arrival::after {
-          top: calc(50% - 7px);
-          transform: rotate(-45deg);
-        }
-
-        .hotresSearchBar .arrival::before {
-          top: calc(50% + 1px);
-          transform: rotate(135deg);
-        }
-
-        .hotresSearchBar .day {
-          font-size: 26px;
-          font-weight: 300;
-          color: #ffffff;
-          line-height: 1;
-          letter-spacing: -0.01em;
-          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        .hotresSearchBar .month {
-          font-size: 10px;
-          line-height: 1.2;
-          font-weight: 400;
-          color: rgba(255, 255, 255, 0.8);
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          text-align: center;
-        }
-
-        .hotresSearchBar .month small {
-          font-size: 9px;
-          color: rgba(255, 255, 255, 0.6);
-          display: block;
-          letter-spacing: 0.08em;
-          margin-top: 1px;
-        }
-
+        /* Przyciski i inputy */
+        .hotresSearchBar input,
+        .hotresSearchBar select,
         .hotresSearchBar button {
-          height: 68px;
-          width: 160px;
-          border-radius: 0 13px 13px 0;
-          text-transform: uppercase;
-          font-size: 9px;
-          letter-spacing: 0.12em;
-          font-weight: 500;
-          background: linear-gradient(135deg,
-            rgba(171, 138, 98, 0.92) 0%,
-            rgba(150, 116, 71, 0.92) 100%);
-          color: #ffffff;
-          border: none;
-          cursor: pointer;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          padding: 0;
-          position: relative;
-          overflow: hidden;
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+          font-size: 14px !important;
+          border-radius: 8px !important;
         }
 
-        .hotresSearchBar button::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg,
-            transparent,
-            rgba(255, 255, 255, 0.2),
-            transparent);
-          transition: left 0.6s ease;
+        .hotresSearchBar button[type="submit"],
+        .hotresSearchBar button[data-button] {
+          background: linear-gradient(135deg, #2c3e35 0%, #1a2419 100%) !important;
+          color: white !important;
+          border: none !important;
+          padding: 12px 32px !important;
+          font-weight: 500 !important;
+          letter-spacing: 0.05em !important;
+          text-transform: uppercase !important;
+          transition: all 0.3s ease !important;
+          cursor: pointer !important;
         }
 
-        .hotresSearchBar button:hover {
-          background: linear-gradient(135deg,
-            rgba(150, 116, 71, 0.98) 0%,
-            rgba(171, 138, 98, 0.98) 100%);
-          box-shadow:
-            0 3px 12px rgba(171, 138, 98, 0.35),
-            inset 0 1px 0 rgba(255, 255, 255, 0.2);
-          transform: translateX(1px);
+        .hotresSearchBar button[type="submit"]:hover,
+        .hotresSearchBar button[data-button]:hover {
+          background: linear-gradient(135deg, #3a4f42 0%, #2c3e35 100%) !important;
+          transform: translateY(-1px);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
         }
 
-        .hotresSearchBar button:hover::before {
-          left: 100%;
+        /* Input fields styling */
+        .hotresSearchBar input[type="text"],
+        .hotresSearchBar input[type="date"] {
+          background: white !important;
+          border: 1px solid #e0e0e0 !important;
+          padding: 10px 14px !important;
+          transition: all 0.3s ease !important;
         }
 
-        .hotresSearchBar button:active {
-          transform: translateX(0) scale(0.98);
+        .hotresSearchBar input[type="text"]:focus,
+        .hotresSearchBar input[type="date"]:focus {
+          border-color: #2c3e35 !important;
+          outline: none !important;
+          box-shadow: 0 0 0 3px rgba(44, 62, 53, 0.1) !important;
         }
 
-        @media (max-width: 1024px) {
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+          .hotres-container {
+            padding: 0 16px;
+          }
+
           .hotresSearchBar {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(30px);
-            border-radius: 18px;
-            height: auto;
-            flex-direction: column;
-            padding: 24px;
-            gap: 16px;
-            max-width: 100%;
-            border: 1px solid rgba(212, 214, 206, 0.25);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            padding: 16px 20px !important;
+            border-radius: 12px !important;
           }
 
-          .hotresSearchBar::before {
-            display: none;
+          .hotresSearchBar button[type="submit"],
+          .hotresSearchBar button[data-button] {
+            width: 100% !important;
+            padding: 14px 24px !important;
+            font-size: 13px !important;
           }
+        }
 
-          .hotresSearchBar > div {
-            width: 100%;
-            flex: none;
-            padding: 18px;
-            border-right: none;
-            border-bottom: 1px solid rgba(212, 214, 206, 0.2);
-            color: #0f0e0f;
+        /* Animations */
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
           }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
 
-          .hotresSearchBar > div:not(:last-child):hover {
-            background: rgba(212, 214, 206, 0.12);
-          }
-
-          .hotresSearchBar > div:last-child {
-            border-bottom: none;
-            padding: 0;
-            width: 100%;
-          }
-
-          .hotresSearchBar .arrival::after,
-          .hotresSearchBar .arrival::before {
-            display: none;
-          }
-
-          .hotresSearchBar .day {
-            font-size: 32px;
-            color: #0f0e0f;
-            text-shadow: none;
-          }
-
-          .hotresSearchBar .month {
-            font-size: 11px;
-            color: #6e7a73;
-          }
-
-          .hotresSearchBar .month small {
-            font-size: 10px;
-            color: #AB8A62;
-          }
-
-          .hotresSearchBar button {
-            width: 100%;
-            height: 52px;
-            border-radius: 12px;
-            font-size: 10px;
-            letter-spacing: 0.15em;
-          }
+        .hotres-container {
+          animation: fadeInUp 0.8s ease-out 0.6s both;
         }
       `}</style>
     </>
   );
 }
-
-
-
-
 
 function IntroSection() {
   const t = useTranslations('intro');
