@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import gsap from 'gsap'; // ← KLUCZOWY IMPORT
+import gsap from 'gsap';
 import { useTranslations } from 'next-intl';
 import Navigation from '../../components/layout/Navigation';
 import { 
@@ -69,9 +69,7 @@ function RoomsHero() {
         try {
           const { jarallax } = require('jarallax');
           jarallax(heroRef.current, 'destroy');
-        } catch (e) {
-          // ignore
-        }
+        } catch (e) {}
       }
     };
   }, []);
@@ -84,7 +82,6 @@ function RoomsHero() {
       data-speed="0.6"
     >
       <div className="absolute inset-0 bg-[#0f0e0f]/40 z-10" />
-      
       <div className="relative z-20 text-center text-white px-6 max-w-4xl mx-auto">
         <span className="text-xs tracking-[0.4em] uppercase font-light opacity-80 mb-4 block">
           {t('label')}
@@ -102,7 +99,6 @@ function RoomsHero() {
     </section>
   );
 }
-
 
 function AnimatedButton({ 
   children, 
@@ -127,19 +123,11 @@ function AnimatedButton({
         const { gsap } = await import('gsap');
 
         const handleMouseEnter = () => {
-          gsap.to(fill, {
-            scaleX: 1,
-            duration: 0.6,
-            ease: 'power3.out'
-          });
+          gsap.to(fill, { scaleX: 1, duration: 0.6, ease: 'power3.out' });
         };
 
         const handleMouseLeave = () => {
-          gsap.to(fill, {
-            scaleX: 0,
-            duration: 0.6,
-            ease: 'power3.out'
-          });
+          gsap.to(fill, { scaleX: 0, duration: 0.6, ease: 'power3.out' });
         };
 
         button.addEventListener('mouseenter', handleMouseEnter);
@@ -168,7 +156,6 @@ function AnimatedButton({
         className="absolute inset-0 bg-[#8a968f] origin-left z-0"
         style={{ transform: 'scaleX(0)' }}
       />
-      
       <span className="relative z-10 group-hover:text-white transition-colors duration-300">
         {children}
       </span>
@@ -181,16 +168,18 @@ function RoomsGrid() {
   const roomsRef = useRef<HTMLDivElement>(null);
   const bannerRef = useRef<HTMLDivElement>(null);
 
-  const roomKeys = ['c1', 'c4', 'c7', 'd1', 'd4', 'd7', 'b10'];
+  // ✅ C2 DODANE
+  const roomKeys = ['c1', 'c2', 'c4', 'c7', 'd1', 'd4', 'd7', 'b10'];
 
   const roomMeta: Record<string, { image: string; link: string }> = {
-    c1:  { image: '/images/rooms/t3s-rivazegrze-3107-m.jpg', link: '/apartamenty/apartament-c1' },
-    c4:  { image: '/images/rooms/t3s-rivazegrze-3500-m.jpg', link: '/apartamenty/apartament-c4' },
-    c7:  { image: '/images/rooms/img_3650.jpg',              link: '/apartamenty/apartament-c7' },
-    d1:  { image: '/images/rooms/img_3622.jpg',              link: '/apartamenty/apartament-d1' },
-    d4:  { image: '/images/rooms/img_3620.jpg',              link: '/apartamenty/apartament-d4' },
-    d7:  { image: '/images/rooms/d4.jpg',                    link: '/apartamenty/apartament-d7' },
-    b10: { image: '/images/rooms/img_4647.jpg',              link: '/apartamenty/apartament-deluxe-b10' },
+    c1:  { image: '/images/rooms/t3s-rivazegrze-3107-m.jpg',        link: '/apartamenty/apartament-c1' },
+    c2:  { image: '/images/gallery/apartments/c2/IMG_5993.JPG',     link: '/apartamenty/apartament-c2' }, // ✅ DODANE
+    c4:  { image: '/images/rooms/t3s-rivazegrze-3500-m.jpg',        link: '/apartamenty/apartament-c4' },
+    c7:  { image: '/images/rooms/img_3650.jpg',                     link: '/apartamenty/apartament-c7' },
+    d1:  { image: '/images/rooms/img_3622.jpg',                     link: '/apartamenty/apartament-d1' },
+    d4:  { image: '/images/rooms/img_3620.jpg',                     link: '/apartamenty/apartament-d4' },
+    d7:  { image: '/images/rooms/d4.jpg',                           link: '/apartamenty/apartament-d7' },
+    b10: { image: '/images/rooms/img_4647.jpg',                     link: '/apartamenty/apartament-deluxe-b10' },
   };
 
   const benefitIcons = [
@@ -300,7 +289,7 @@ function RoomsGrid() {
     <section className="py-24 lg:py-32 bg-[#f7f6f4]">
       <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-          
+
           {/* LEFT - Rooms List */}
           <div ref={roomsRef} className="lg:col-span-8 space-y-16">
             {roomKeys.map((key, idx) => (
@@ -377,7 +366,7 @@ function RoomsGrid() {
           <div className="lg:col-span-4">
             <div ref={bannerRef} className="sticky top-32">
               <div className="bg-white border border-[#d4d6ce] shadow-sm">
-                
+
                 {/* Image Header */}
                 <div className="relative h-[240px] overflow-hidden">
                   <img
@@ -386,8 +375,6 @@ function RoomsGrid() {
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0f0e0f]/50 via-[#0f0e0f]/20 to-transparent" />
-                  
-                  {/* Marketing Badge */}
                   <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-5 py-3 shadow-md">
                     <p className="text-xs text-[#6e7a73] font-light tracking-wide leading-tight text-center">
                       {t('banner.badge')}<br/>
@@ -398,8 +385,6 @@ function RoomsGrid() {
 
                 {/* Content */}
                 <div className="p-8">
-                  
-                  {/* Headline */}
                   <h3 
                     className="text-2xl lg:text-3xl font-light text-[#0f0e0f] mb-2 leading-tight"
                     style={{ fontFamily: 'Playfair Display, serif' }}
@@ -458,19 +443,13 @@ function RoomsGrid() {
 
                   {/* Trust Badge */}
                   <div className="mt-6 pt-6 border-t border-[#d4d6ce] text-center">
-                    <div className="flex items-center justify-center gap-1 mb-2">
-                      {[...Array(5)].map((_, i) => (
-                        <svg key={i} className="w-4 h-4 text-[#8a968f]" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                    </div>
-                    <p className="text-xs text-[#6e7a73] font-light">
-                      {t('banner.trustText')}{' '}
-                      <strong className="font-normal text-[#0f0e0f]">{t('banner.trustHighlight')}</strong>
+                    <p className="text-xs text-[#6e7a73] font-light mb-1">
+                      {t('banner.trustText')}
+                    </p>
+                    <p className="text-sm font-normal text-[#0f0e0f]">
+                      {t('banner.trustHighlight')}
                     </p>
                   </div>
-
                 </div>
               </div>
             </div>

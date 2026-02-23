@@ -680,6 +680,7 @@ function IntroSection() {
 
 // ============================================
 // ============================================
+// ============================================
 // Rooms Showcase - Z LOKALNYMI ZDJĘCIAMI
 // ============================================
 function RoomsShowcase() {
@@ -689,11 +690,11 @@ function RoomsShowcase() {
   const horizontalRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const apartmentKeys = ['c1', 'c4', 'c7', 'd1', 'd4', 'd7', 'b10'] as const;
+  const apartmentKeys = ['c1', 'c2', 'c4', 'c7', 'd1', 'd4', 'd7', 'b10'] as const;
 
-  // Mapowanie klucza na URL apartamentu
   const apartmentUrls: Record<string, string> = {
     c1: `/${locale}/apartamenty/apartament-c1`,
+    c2: `/${locale}/apartamenty/apartament-c2`,
     c4: `/${locale}/apartamenty/apartament-c4`,
     c7: `/${locale}/apartamenty/apartament-c7`,
     d1: `/${locale}/apartamenty/apartament-d1`,
@@ -704,6 +705,7 @@ function RoomsShowcase() {
 
   const imageMap: Record<string, string> = {
     c1: '/images/rooms/t3s-rivazegrze-3107-m.jpg',
+    c2: '/images/gallery/apartments/c2/IMG_5993.JPG',
     c4: '/images/rooms/t3s-rivazegrze-3500-m.jpg',
     c7: '/images/rooms/img_3650.jpg',
     d1: '/images/rooms/img_3622.jpg',
@@ -735,7 +737,6 @@ function RoomsShowcase() {
       
       if (!section || !horizontal) return;
 
-      // Czekamy aż DOM się ustabilizuje
       const timer = setTimeout(() => {
         try {
           const cards = horizontal.querySelectorAll('.room-card');
@@ -749,7 +750,6 @@ function RoomsShowcase() {
           const isMobile = window.innerWidth < 1024;
           const scrollMultiplier = isMobile ? 0.8 : 1.2;
 
-          // Kill previous instances
           ScrollTrigger.getAll().forEach((t: any) => {
             if (t.trigger === section) t.kill();
           });
@@ -778,7 +778,6 @@ function RoomsShowcase() {
             anticipatePin: 1,
           });
 
-          // Double refresh for stability
           ScrollTrigger.refresh();
           setTimeout(() => ScrollTrigger.refresh(), 500);
 
@@ -802,7 +801,7 @@ function RoomsShowcase() {
   return (
     <section ref={sectionRef} className="relative bg-[#f7f6f4] overflow-hidden">
       
-      {/* HEADER - Fixed/Pinned */}
+      {/* HEADER */}
       <div className="text-center py-16 px-6">
         <span className="text-xs tracking-[0.4em] uppercase text-[#AB8A62] mb-4 block">
           {t('label')}
@@ -817,7 +816,6 @@ function RoomsShowcase() {
           {t('title')}
         </h2>
         
-        {/* Scroll Hint */}
         <div className="flex items-center justify-center gap-2 text-[#AB8A62] text-xs tracking-[0.2em] uppercase mt-8 animate-bounce">
           <span>{t('scrollHint')}</span>
           <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -883,7 +881,6 @@ function RoomsShowcase() {
               {/* DESKTOP LAYOUT */}
               <div className="hidden lg:grid lg:grid-cols-2 bg-white shadow-2xl overflow-hidden h-[550px] lg:h-[600px]">
                 
-                {/* Image Side - SZTYWNA WYSOKOŚĆ */}
                 <div className="relative h-full overflow-hidden group">
                   <img
                     src={apt.image}
@@ -893,10 +890,8 @@ function RoomsShowcase() {
                   <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent"></div>
                 </div>
 
-                {/* Info Side - FLEX + SPACE-BETWEEN */}
                 <div className="bg-[#6e7a73] text-white flex flex-col justify-between p-6 lg:p-8 xl:p-10 h-full overflow-y-auto">
                   
-                  {/* GÓRNA CZĘŚĆ (Title + Description + Icons) */}
                   <div>
                     <h3
                       className="text-3xl lg:text-4xl xl:text-5xl font-light mb-3 lg:mb-4"
@@ -925,7 +920,6 @@ function RoomsShowcase() {
                     </div>
                   </div>
 
-                  {/* DOLNA CZĘŚĆ (Price + Button) - ZAWSZE NA DOLE */}
                   <div className="flex items-center justify-between pt-5 lg:pt-6 border-t border-white/20 mt-5 lg:mt-6">
                     <span className="text-lg lg:text-xl xl:text-2xl text-white font-light">{apt.price}</span>
                     <Link
@@ -1008,6 +1002,7 @@ function BathroomsIcon() {
     </svg>
   );
 }
+
 
 
 // Additional Hero Section - WITH TRANSLATIONS

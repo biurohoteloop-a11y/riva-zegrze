@@ -36,78 +36,87 @@
     "standardDesc": "Nowe, starannie wykończone apartamenty zapewniają komfortowy pobyt o każdej porze roku."
   },
   "rooms": {
-    "label": "Riva Zegrze",
-    "title": "Nasze Apartamenty",
-    "scrollHint": "Przewiń aby zobaczyć",
-    "book": "Rezerwuj",
-    "size": "Rozmiar",
-    "guests": "Goście",
-    "bedrooms": "Sypialnie",
-    "bathrooms": "Łazienki",
-    "c1": {
-      "title": "Apartament C1",
-      "description": "Nowoczesny apartament z tarasem i prywatnym ogródkiem, położony bezpośrednio nad Jeziorem Zegrzyńskim.",
-      "size": "38 m²",
-      "guests": "4 Osoby",
-      "bedrooms": "1 Sypialnia",
-      "bathrooms": "1 Łazienka",
-      "price": "od 630 zł / noc"
-    },
-    "c4": {
-      "title": "Apartament C4",
-      "description": "Nowoczesny apartament z tarasem i bezpośrednim widokiem na Jezioro Zegrzyńskie.",
-      "size": "38 m²",
-      "guests": "4 Osoby",
-      "bedrooms": "1 Sypialnia",
-      "bathrooms": "1 Łazienka",
-      "price": "od 570 zł / noc"
-    },
-    "c7": {
-      "title": "Apartament C7",
-      "description": "Nowoczesny apartament z tarasem i widokiem na Jezioro Zegrzyńskie.",
-      "size": "38 m²",
-      "guests": "4 Osoby",
-      "bedrooms": "1 Sypialnia",
-      "bathrooms": "1 Łazienka",
-      "price": "od 600 zł / noc"
-    },
-    "d1": {
-      "title": "Apartament D1",
-      "description": "Nowoczesny apartament z tarasem, położony na 1 piętrze.",
-      "size": "38 m²",
-      "guests": "4 Osoby",
-      "bedrooms": "1 Sypialnia",
-      "bathrooms": "1 Łazienka",
-      "price": "od 480 zł / noc"
-    },
-    "d4": {
-      "title": "Apartament D4",
-      "description": "Komfortowy apartament z tarasem, położony na 2 piętrze.",
-      "size": "38 m²",
-      "guests": "4 Osoby",
-      "bedrooms": "1 Sypialnia",
-      "bathrooms": "1 Łazienka",
-      "price": "od 510 zł / noc"
-    },
-    "d7": {
-      "title": "Apartament D7",
-      "description": "Przestronny apartament z tarasem, położony na 3 piętrze.",
-      "size": "38 m²",
-      "guests": "4 Osoby",
-      "bedrooms": "1 Sypialnia",
-      "bathrooms": "1 Łazienka",
-      "price": "od 540 zł / noc"
-    },
-    "b10": {
-      "title": "Apartament Deluxe B10",
-      "description": "Apartament Deluxe z panoramicznym widokiem na Jezioro Zegrzyńskie.",
-      "size": "68 m²",
-      "guests": "4 Osoby",
-      "bedrooms": "1 Sypialnia",
-      "bathrooms": "1 Łazienka",
-      "price": "od 900 zł / noc"
-    }
+  "label": "Riva Zegrze",
+  "title": "Nasze Apartamenty",
+  "scrollHint": "Przewiń aby zobaczyć",
+  "book": "Rezerwuj",
+  "size": "Rozmiar",
+  "guests": "Goście",
+  "bedrooms": "Sypialnie",
+  "bathrooms": "Łazienki",
+  "c1": {
+    "title": "Apartament C1",
+    "description": "Nowoczesny apartament z tarasem i prywatnym ogródkiem, położony bezpośrednio nad Jeziorem Zegrzyńskim.",
+    "size": "38 m²",
+    "guests": "4 Osoby",
+    "bedrooms": "1 Sypialnia",
+    "bathrooms": "1 Łazienka",
+    "price": "od 630 zł / noc"
   },
+  "c2": {
+    "title": "Apartament C2",
+    "description": "Elegancki apartament 68 m² z prywatnym ogrodem i bezpośrednim zejściem nad Jezioro Zegrzyńskie.",
+    "size": "68 m²",
+    "guests": "4 Osoby",
+    "bedrooms": "1 Sypialnia",
+    "bathrooms": "1 Łazienka",
+    "price": "od 900 zł / noc"
+  },
+  "c4": {
+    "title": "Apartament C4",
+    "description": "Nowoczesny apartament z tarasem i bezpośrednim widokiem na Jezioro Zegrzyńskie.",
+    "size": "38 m²",
+    "guests": "4 Osoby",
+    "bedrooms": "1 Sypialnia",
+    "bathrooms": "1 Łazienka",
+    "price": "od 570 zł / noc"
+  },
+  "c7": {
+    "title": "Apartament C7",
+    "description": "Nowoczesny apartament z tarasem i widokiem na Jezioro Zegrzyńskie.",
+    "size": "38 m²",
+    "guests": "4 Osoby",
+    "bedrooms": "1 Sypialnia",
+    "bathrooms": "1 Łazienka",
+    "price": "od 600 zł / noc"
+  },
+  "d1": {
+    "title": "Apartament D1",
+    "description": "Nowoczesny apartament z tarasem, położony na 1 piętrze.",
+    "size": "38 m²",
+    "guests": "4 Osoby",
+    "bedrooms": "1 Sypialnia",
+    "bathrooms": "1 Łazienka",
+    "price": "od 480 zł / noc"
+  },
+  "d4": {
+    "title": "Apartament D4",
+    "description": "Komfortowy apartament z tarasem, położony na 2 piętrze.",
+    "size": "38 m²",
+    "guests": "4 Osoby",
+    "bedrooms": "1 Sypialnia",
+    "bathrooms": "1 Łazienka",
+    "price": "od 510 zł / noc"
+  },
+  "d7": {
+    "title": "Apartament D7",
+    "description": "Przestronny apartament z tarasem, położony na 3 piętrze.",
+    "size": "38 m²",
+    "guests": "4 Osoby",
+    "bedrooms": "1 Sypialnia",
+    "bathrooms": "1 Łazienka",
+    "price": "od 540 zł / noc"
+  },
+  "b10": {
+    "title": "Apartament Deluxe B10",
+    "description": "Apartament Deluxe z panoramicznym widokiem na Jezioro Zegrzyńskie.",
+    "size": "68 m²",
+    "guests": "4 Osoby",
+    "bedrooms": "1 Sypialnia",
+    "bathrooms": "1 Łazienka",
+    "price": "od 900 zł / noc"
+  }
+},
   "additional": {
     "label": "RIVA ZEGRZE",
     "title": "Wiemy, że potrzebujesz",
@@ -496,6 +505,19 @@
         "amenity3": "Prywatny ogródek",
         "amenity4": "WiFi"
       },
+      "c2": {
+        "name": "Apartament C2",
+        "price": "od 900 zł / noc",
+        "size": "68 m²",
+        "guests": "4 Osoby",
+        "beds": "1 Sypialnia",
+        "description": "Elegancki apartament 68 m² z prywatnym ogrodem i bezpośrednim zejściem nad Jezioro Zegrzyńskie.",
+        "amenity1": "Prywatny ogród",
+        "amenity2": "Zejście nad jezioro",
+        "amenity3": "WiFi",
+        "amenity4": "1 piętro"
+},
+
       "c4": {
         "name": "Apartament C4",
         "price": "od 570 zł / noc",
@@ -2267,6 +2289,249 @@
       "companyName": "Open One Sp. z o.o. S.k.",
       "nip": "NIP:",
       "nipNumber": "5242877732"
+    }
+  },
+  "apartmentC2": {
+    "hero": {
+      "breadcrumbs": {
+        "home": "Strona główna",
+        "apartments": "Apartamenty",
+        "current": "Apartament C2"
+      },
+      "badge": "Premium",
+      "name": "Apartament C2",
+      "tagline": "Twoja Prywatna Linia Brzegowa nad Jeziorem Zegrzyńskim",
+      "subtitle": "Położony na 1. piętrze bezpośrednio nad Jeziorem Zegrzyńskim",
+      "specs": {
+        "size": {
+          "label": "Powierzchnia",
+          "value": "68 m²"
+        },
+        "guests": {
+          "label": "Goście",
+          "value": "4 Gości"
+        },
+        "bedrooms": {
+          "label": "Sypialnie",
+          "value": "1 Sypialnia"
+        },
+        "bathrooms": {
+          "label": "Łazienki",
+          "value": "1 Łazienka"
+        }
+      },
+      "price": {
+        "from": "od",
+        "value": "700",
+        "currency": "PLN",
+        "period": "noc"
+      },
+      "gallery": {
+        "imageAlt": "Apartament C2 - zdjęcie",
+        "thumbnailAlt": "Miniatura"
+      }
+    },
+    "details": {
+      "aboutApartment": {
+        "title": "O Apartamencie",
+        "description": "Apartament o powierzchni 68 m² położony bezpośrednio nad Jeziorem Zegrzyńskim – zaprojektowany dla wymagających Gości, którzy cenią prywatność, spokój i najwyższy standard wypoczynku. Oferujemy elegancko wykończone wnętrza, prywatny ogród i bezpośredni dostęp do linii brzegowej – idealne na poranną kawę z widokiem na jezioro i kameralne wieczory o zachodzie słońca."
+      },
+      "highlights": {
+        "title": "Kluczowe Cechy",
+        "items": [
+          "Bezpośredni dostęp do jeziora",
+          "Prywatny ogród z dostępem do linii brzegowej",
+          "W pełni wyposażona kuchnia premium",
+          "Panoramiczne przeszklenia z widokiem na jezioro",
+          "Wewnętrzny ogrzewany basen i siłownia",
+          "Klimatyzacja i szybki internet"
+        ]
+      },
+      "amenities": {
+        "title": "Udogodnienia",
+        "items": {
+          "wifi": {
+            "label": "WiFi",
+            "description": "Szybki internet światłowodowy"
+          },
+          "tv": {
+            "label": "Smart TV",
+            "description": "55\" z Netflix i HBO"
+          },
+          "kitchen": {
+            "label": "Kuchnia",
+            "description": "W pełni wyposażona premium"
+          },
+          "ac": {
+            "label": "Klimatyzacja",
+            "description": "Ogrzewanie i chłodzenie"
+          },
+          "bathroom": {
+            "label": "Łazienka",
+            "description": "Kosmetyki premium"
+          },
+          "utensils": {
+            "label": "Naczynia",
+            "description": "Komplet sztućców i talerzy"
+          },
+          "terrace": {
+            "label": "Taras",
+            "description": "Z widokiem na jezioro"
+          },
+          "garden": {
+            "label": "Ogród",
+            "description": "Prywatny z dostępem do brzegu"
+          }
+        }
+      },
+      "aboutProperty": {
+        "title": "O Obiekcie",
+        "paragraphs": [
+          "Apartamenty znajdują się bezpośrednio nad Jeziorem Zegrzyńskim, w spokojnej części Zegrza Południowego. To miejsce powstało z myślą o wypoczynku blisko natury, z dala od miejskiego zgiełku. Kameralny charakter obiektu sprzyja relaksowi i spokojnemu pobytowi o każdej porze roku.",
+          "Nowoczesne wnętrza, funkcjonalne układy i dostęp do strefy rekreacyjnej sprawiają, że apartamenty nadają się zarówno na krótki wypad, jak i dłuższy pobyt. Dogodna lokalizacja pozwala łatwo połączyć wypoczynek nad wodą z szybkim dojazdem do Warszawy."
+        ],
+        "features": {
+          "location": {
+            "title": "Lokalizacja",
+            "description": "Apartamenty położone bezpośrednio nad Jeziorem Zegrzyńskim, w spokojnej części Zegrza Południowego."
+          },
+          "pool": {
+            "title": "Basen",
+            "description": "Strefa rekreacyjna na miejscu z wewnętrznym ogrzewanym basenem."
+          },
+          "gym": {
+            "title": "Siłownia",
+            "description": "Dostęp do w pełni wyposażonej siłowni dla wszystkich gości."
+          }
+        }
+      },
+      "availability": {
+        "title": "Dostępność",
+        "loadingText": "Ładowanie kalendarza..."
+      }
+    },
+    "importantInfo": {
+      "sectionLabel": "Przed Przyjazdem",
+      "sectionTitle": "Ważne Informacje",
+      "items": {
+        "checkin": {
+          "label": "Zameldowanie",
+          "value": "15:00 - 22:00",
+          "note": "Samodzielne zameldowanie - kody dostępu wysyłane w dniu przyjazdu"
+        },
+        "checkout": {
+          "label": "Wymeldowanie",
+          "value": "do 11:00",
+          "note": ""
+        },
+        "quietHours": {
+          "label": "Cisza Nocna",
+          "value": "22:00 - 7:00",
+          "note": "Obowiązuje w godzinach nocnych"
+        },
+        "noParties": {
+          "label": "Zakaz Imprez",
+          "value": "Imprezy są zabronione",
+          "note": "Zakaz imprez, w tym wieczorów kawalerskich/panieńskich"
+        },
+        "parking": {
+          "label": "Parking",
+          "value": "Bezpłatny parking przed budynkiem",
+          "note": "Miejsce garażowe: 75 PLN/dzień (wymagana wcześniejsza rezerwacja)"
+        }
+      },
+      "fullWidthNote": {
+        "title": "Polityka Zakazu Imprez",
+        "description": "W apartamencie obowiązuje ścisły zakaz organizacji imprez, w tym wieczorów kawalerskich i panieńskich. Prosimy o przestrzeganie ciszy nocnej w godzinach 22:00 - 7:00 dla komfortu pozostałych gości."
+      }
+    },
+    "surroundingsGallery": {
+      "sectionLabel": "Okolica",
+      "sectionTitle": "Odkryj Piękno Jeziora Zegrzyńskiego",
+      "imageAlt": "Okolice Riva Zegrze - zdjęcie",
+      "viewFullImage": "Zobacz pełne zdjęcie",
+      "closeGallery": "Zamknij galerię",
+      "previousPhoto": "Poprzednie zdjęcie",
+      "nextPhoto": "Następne zdjęcie",
+      "modalCaption": "Jezioro Zegrzyńskie - Riva Zegrze"
+    },
+    "reviews": {
+      "sectionLabel": "Opinie Gości",
+      "sectionTitle": "Co Mówią Nasi Goście",
+      "rating": "5.0",
+      "basedOn": "na podstawie",
+      "reviewsCount": "opinii",
+      "items": [
+        {
+          "name": "Anna Kowalska",
+          "date": "Lipiec 2024",
+          "rating": 5,
+          "comment": "Piękne miejsce! Apartament był czysty, przestronny i dobrze wyposażony. Widok na jezioro zapiera dech w piersiach. Gorąco polecam!",
+          "avatar": "AK"
+        },
+        {
+          "name": "Marek Nowak",
+          "date": "Czerwiec 2024",
+          "rating": 5,
+          "comment": "Idealne miejsce na weekendowy wypad. Spokój, cisza i piękna natura. Bardzo pomocni właściciele. Na pewno wrócimy!",
+          "avatar": "MN"
+        },
+        {
+          "name": "Katarzyna Wiśniewska",
+          "date": "Maj 2024",
+          "rating": 5,
+          "comment": "Najlepszy apartament w okolicy! Blisko Warszawy, a czuć się jak na końcu świata. Udogodnienia na najwyższym poziomie.",
+          "avatar": "KW"
+        }
+      ]
+    },
+    "cta": {
+      "badge": "Oferta Specjalna",
+      "title": "Zarezerwuj 3+ noce",
+      "titleHighlight": "i otrzymaj 40% zniżki",
+      "description": "Skorzystaj z naszej limitowanej promocji. Przy rezerwacji minimum 3 nocy otrzymasz",
+      "descriptionHighlight": "do 40% zniżki",
+      "descriptionEnd": "na cały pobyt w Apartamencie C2.",
+      "bookButton": "Zarezerwuj apartament",
+      "phoneButton": "Zadzwoń: +48 510 038 038",
+      "trustBadges": {
+        "payment": "Bezpieczna płatność",
+        "cancellation": "Anulacja do 48h",
+        "bestPrice": "Najlepsza cena",
+        "noCosts": "Bez ukrytych kosztów"
+      }
+    },
+    "footer": {
+      "brand": {
+        "description": "Kameralne apartamenty nad wodą. Spokój, komfort i rezerwacja bezpośrednia w wyjątkowej lokalizacji pod Warszawą.",
+        "rating": "5.0 • Booking.com"
+      },
+      "discover": {
+        "title": "Odkryj",
+        "apartments": "Apartamenty",
+        "specialOffer": "Oferta Specjalna",
+        "activities": "Atrakcje",
+        "gallery": "Galeria",
+        "about": "O Nas"
+      },
+      "contact": {
+        "title": "Kontakt",
+        "address": "Riva Zegrze\nRybaki 11\n05-130 Zegrze Południowe",
+        "phone": "+48 510 038 038",
+        "email": "wynajem@rivazegrze.pl"
+      },
+      "newsletter": {
+        "title": "Newsletter",
+        "description": "Bądź na bieżąco z ofertami specjalnymi",
+        "placeholder": "Twój email",
+        "socialMedia": "Media Społecznościowe"
+      },
+      "bottom": {
+        "copyright": "© {year} Riva Zegrze. Wszelkie prawa zastrzeżone.",
+        "privacy": "Polityka Prywatności",
+        "terms": "Regulamin",
+        "cookies": "Ciasteczka"
+      }
     }
   }
 }
