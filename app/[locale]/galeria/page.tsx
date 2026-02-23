@@ -10,6 +10,7 @@ import Navigation from '../../components/layout/Navigation';
 // 🎯 DANE GALERII - WSZYSTKIE 56 ZDJĘĆ
 // ============================================
 const galleryImages = [
+  // APARTAMENTY
   { id: 1, url: '/images/gallery/apartamenty/D4.jpg', category: 'Apartamenty', title: 'Apartament Deluxe' },
   { id: 2, url: '/images/gallery/apartamenty/IMG_3614.jpg', category: 'Apartamenty', title: 'Luksusowy Salon' },
   { id: 3, url: '/images/gallery/apartamenty/IMG_3615.jpg', category: 'Apartamenty', title: 'Nowoczesna Sypialnia' },
@@ -68,7 +69,26 @@ const galleryImages = [
   { id: 54, url: '/images/gallery/okolica/T3S-RivaZegrze-4175-m.jpg', category: 'Okolica', title: 'Wejście Główne' },
   { id: 55, url: '/images/gallery/okolica/T3S-RivaZegrze-4183-m.jpg', category: 'Okolica', title: 'Otoczenie Zielone' },
   { id: 56, url: '/images/gallery/okolica/T3S-RivaZegrze-RG-3669-m.jpg', category: 'Okolica', title: 'Krajobraz nad Zalewem' },
+  // OKOLICA ZIMA ❄️
+  { id: 57, url: '/images/gallery/okolica/T3S-RivaZegrze-zima-0028-xl.webp', category: 'Okolica', title: 'Zima nad Zalewem' },
+  { id: 58, url: '/images/gallery/okolica/T3S-RivaZegrze-zima-0043-xl.webp', category: 'Okolica', title: 'Zimowy Krajobraz' },
+  { id: 59, url: '/images/gallery/okolica/T3S-RivaZegrze-zima-0067-xl.webp', category: 'Okolica', title: 'Śnieg nad Jeziorem' },
+  { id: 60, url: '/images/gallery/okolica/T3S-RivaZegrze-zima-0091-xl.webp', category: 'Okolica', title: 'Zimowa Przystań' },
+  { id: 61, url: '/images/gallery/okolica/T3S-RivaZegrze-zima-0253-xl.webp', category: 'Okolica', title: 'Biała Okolica' },
+  { id: 62, url: '/images/gallery/okolica/T3S-RivaZegrze-zima-0268-xl.webp', category: 'Okolica', title: 'Zimowy Poranek' },
+  { id: 63, url: '/images/gallery/okolica/T3S-RivaZegrze-zima-0284-xl.webp', category: 'Okolica', title: 'Śnieżna Panorama' },
+  { id: 64, url: '/images/gallery/okolica/T3S-RivaZegrze-zima-0293-xl.webp', category: 'Okolica', title: 'Zimowy Widok' },
+  { id: 65, url: '/images/gallery/okolica/T3S-RivaZegrze-zima-9741-xl.webp', category: 'Okolica', title: 'Mroźny Wieczór' },
+  { id: 66, url: '/images/gallery/okolica/T3S-RivaZegrze-zima-9915-xl.webp', category: 'Okolica', title: 'Zimowa Marina' },
+  { id: 68, url: '/images/gallery/okolica/T3S-RivaZegrze-zima-RG-0242-xl.webp', category: 'Okolica', title: 'Zimowa Cisza' },
+  { id: 69, url: '/images/gallery/okolica/T3S-RivaZegrze-zima-RG-0422-xl.webp', category: 'Okolica', title: 'Biały Krajobraz' },
+  { id: 70, url: '/images/gallery/okolica/T3S-RivaZegrze-zima-RG-9338-xl.webp', category: 'Okolica', title: 'Zimowe Zegrze' },
+  { id: 71, url: '/images/gallery/okolica/T3S-RivaZegrze-zima-RG-9657-xl.webp', category: 'Okolica', title: 'Mroźna Przyroda' },
+  { id: 72, url: '/images/gallery/okolica/T3S-RivaZegrze-zima-RG-9759-xl.webp', category: 'Okolica', title: 'Zima przy Hotelu' },
+  { id: 73, url: '/images/gallery/okolica/T3S-RivaZegrze-zima-RG-9880-xl.webp', category: 'Okolica', title: 'Zimowy Taras' },
+  { id: 74, url: '/images/gallery/okolica/T3S-RivaZegrze-zima-RG-9926-xl.webp', category: 'Okolica', title: 'Śnieżny Wieczór' },
 ];
+
 
 // ============================================
 // 🎯 MAIN PAGE COMPONENT
