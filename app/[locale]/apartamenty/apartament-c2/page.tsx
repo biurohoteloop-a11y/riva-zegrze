@@ -39,7 +39,7 @@ const apartmentData = {
   tagline: 'Twój Prywatny Brzeg nad Jeziorem Zegrzyńskim',
   subtitle: 'Położony na 1 piętrze bezpośrednio nad Jeziorem Zegrzyńskim',
   price: {
-    from: 700, // TODO: Podaj faktyczną cenę
+    from: 900, // TODO: Podaj faktyczną cenę
     currency: 'zł',
     period: 'noc'
   },
@@ -428,7 +428,7 @@ function ApartmentDetails() {
           win.createHotres({
             oid: 5226,
             lang: 'pl',
-            tid: 'apc2',  // ✅ ID z HotRes dla C2
+            tid: '43831',  // ✅ ID z HotRes dla C2
             action: 'room/calendar'
           });
           setCalendarLoaded(true);
@@ -1614,3 +1614,52 @@ function CTAWithFooter() {
     </section>
   );
 }
+
+
+  // ============================================
+  // HOTRES CALENDAR
+  // ============================================
+  function HotresCalendarSection() {
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+      if (!document.getElementById('hotres-jquery')) {
+        const jqScript = document.createElement('script');
+        jqScript.id = 'hotres-jquery';
+        jqScript.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js';
+        document.head.appendChild(jqScript);
+
+        jqScript.onload = () => {
+          const hotresScript = document.createElement('script');
+          hotresScript.id = 'hotres-api';
+          hotresScript.src = 'https://panel.hotres.pl/public/api/hotres_v4.js';
+          document.head.appendChild(hotresScript);
+
+          hotresScript.onload = () => setIsLoaded(true);
+        };
+      } else {
+        setIsLoaded(true);
+      }
+    }, []);
+
+    useEffect(() => {
+      if (isLoaded && (window as any).createHotres) {
+        (window as any).createHotres({"oid":5226,"lang":"pl","tid":"43831","action":"room/calendar"});
+      }
+    }, [isLoaded]);
+
+    return (
+      <section className="py-16 bg-white border-y border-[#d4d6ce]/30">
+        <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-light text-[#4a6b5e] mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
+              Sprawdź dostępność
+            </h2>
+            <p className="text-[#8a968f]">Wybierz termin swojego pobytu</p>
+          </div>
+          <div id="hotresContainer" className="min-h-[400px] w-full"></div>
+        </div>
+      </section>
+    );
+  }
+  
