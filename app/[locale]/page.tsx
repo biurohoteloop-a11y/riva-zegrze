@@ -837,7 +837,7 @@ function RoomsShowcase() {
             >
               
               {/* MOBILE LAYOUT */}
-              <div className="lg:hidden bg-white shadow-2xl overflow-hidden">
+              <div className="lg:hidden flex flex-col bg-white shadow-2xl overflow-hidden min-h-max">
                 <div className="relative h-[280px] overflow-hidden group">
                   <img
                     src={apt.image}
@@ -879,7 +879,7 @@ function RoomsShowcase() {
               </div>
 
               {/* DESKTOP LAYOUT */}
-              <div className="hidden lg:grid lg:grid-cols-2 bg-white shadow-2xl overflow-hidden h-[550px] lg:h-[600px]">
+              <div className="hidden lg:grid lg:grid-cols-2 bg-white shadow-2xl overflow-hidden h-[550px] lg:h-[600px] xl:h-[650px]">
                 
                 <div className="relative h-full overflow-hidden group">
                   <img

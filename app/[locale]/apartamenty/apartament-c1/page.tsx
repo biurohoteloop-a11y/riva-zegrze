@@ -460,49 +460,71 @@ function ApartmentDetails() {
 
   // Load Hotres scripts
   useEffect(() => {
-    const loadHotresScripts = async () => {
-      const win = window as any;
-      
-      if (!win.jQuery) {
-        const jqueryScript = document.createElement('script');
-        jqueryScript.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js';
-        jqueryScript.async = true;
-        document.body.appendChild(jqueryScript);
+      let isMounted = true;
+      const initCalendar = async () => {
+        const win = window as any;
+        const container = document.getElementById('hotresContainer');
+        
+        if (!container) return;
 
-        await new Promise((resolve) => {
-          jqueryScript.onload = resolve;
-        });
-      }
-
-      const hotresScript = document.createElement('script');
-      hotresScript.src = 'https://panel.hotres.pl/public/api/hotres_v4.js';
-      hotresScript.async = true;
-      document.body.appendChild(hotresScript);
-
-      hotresScript.onload = () => {
-        if (win.createHotres) {
-          win.createHotres({
-            oid: 5226,
-            lang: 'pl',
-            tid: '43212',
-            action: 'room/calendar'
-          });
-          setCalendarLoaded(true);
+        if (!win.jQuery) {
+          const jq = document.createElement('script');
+          jq.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js';
+          document.body.appendChild(jq);
+          await new Promise(r => jq.onload = r);
         }
+
+        // Append fresh script
+        const script = document.createElement('script');
+        script.src = 'https://panel.hotres.pl/public/api/hotres_v4.js';
+        script.async = true;
+        script.onload = () => {
+          if (win.createHotres && isMounted) {
+            try {
+              win.createHotres({
+                oid: 5226,
+                lang: 'pl',
+                tid: '43212',
+                action: 'room/calendar'
+              });
+              setCalendarLoaded(true);
+            } catch (e) {
+              console.error("Hotres init error:", e);
+            }
+          }
+        };
+        document.body.appendChild(script);
       };
-    };
 
-    loadHotresScripts();
+      const timer = setTimeout(initCalendar, 300);
 
-    return () => {
-      const scripts = document.querySelectorAll('script[src*="hotres"], script[src*="jquery"]');
-      scripts.forEach(script => {
-        if (script.parentNode) {
-          script.parentNode.removeChild(script);
-        }
-      });
-    };
-  }, []);
+      return () => {
+        isMounted = false;
+        clearTimeout(timer);
+        
+        // Cleanup DOM
+        const scripts = document.querySelectorAll('script[src*="hotres"], script[src*="jquery"]');
+        scripts.forEach(s => { if (s.parentNode) s.parentNode.removeChild(s); });
+        
+        const container = document.getElementById('hotresContainer');
+        if (container) container.innerHTML = '';
+        
+        // Wipe globals
+        const win = window as any;
+        win.hotresData = undefined;
+        win.createHotres = undefined;
+        win.hotres = undefined;
+        win.HotRes = undefined;
+        // Nie usuwamy jQuery bo inne rzeczy moga z niego korzystać, ew. win.jQuery = undefined
+        
+        const elements = document.querySelectorAll('[id*="hotres"], [class*="hotres"], [id*="HotRes"]');
+        elements.forEach(el => {
+          if (el.id !== 'hotresContainer' && el.parentNode) {
+            el.parentNode.removeChild(el);
+          }
+        });
+      };
+    }, []);
 
   // GSAP animations
   useEffect(() => {
@@ -1585,7 +1607,7 @@ function CTAWithFooter() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
               
-              <button className="flex items-center gap-3 px-10 py-5 bg-white text-[#2a3d35] hover:bg-[#AB8A62] hover:text-white transition-all duration-300 text-sm tracking-[0.15em] uppercase group shadow-2xl font-light">
+              <button onClick={() => document.getElementById("hotresContainer")?.scrollIntoView({ behavior: "smooth" })} className="flex items-center gap-3 px-10 py-5 bg-white text-[#2a3d35] hover:bg-[#AB8A62] hover:text-white transition-all duration-300 text-sm tracking-[0.15em] uppercase group shadow-2xl font-light">
                 <Calendar className="w-5 h-5 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
                 <span>{t('cta.bookButton')}</span>
               </button>
