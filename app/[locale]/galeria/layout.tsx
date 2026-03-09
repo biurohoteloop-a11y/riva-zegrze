@@ -1,22 +1,36 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Galeria | Apartamenty Zegrze nad wodą | Nocleg Zegrze | Riva Zegrze",
+  title: "Galeria — zdjęcia apartamentów i okolicy Riva Zegrze",
   description:
-    "Zobacz zdjęcia apartamentów Zegrze nad wodą pod Warszawą. Luksusowe wnętrza, widoki na Zalew Zegrzyński, basen i prywatna plaża. Nocleg blisko Warszawy nad wodą.",
+    "Galeria zdjęć Riva Zegrze — apartamenty nad Jeziorem Zegrzyńskim, basen, siłownia, prywatna plaża, okolica. Zobacz jak wygląda nocleg Zegrze w naszym kompleksie.",
+  openGraph: {
+    title: "Galeria — zdjęcia apartamentów i okolicy | Riva Zegrze",
+    description:
+      "Galeria zdjęć apartamentów nad Jeziorem Zegrzyńskim. Basen, siłownia, prywatna plaża, okolica.",
+    url: "https://rivazegrzeapartamenty.pl/galeria",
+    siteName: "Riva Zegrze",
+    locale: "pl_PL",
+    type: "website",
+    images: [
+      {
+        url: "https://rivazegrzeapartamenty.pl/images/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Galeria Riva Zegrze — apartamenty nad Jeziorem Zegrzyńskim",
+      },
+    ],
+  },
   alternates: {
     canonical: "https://rivazegrzeapartamenty.pl/galeria",
     languages: {
-      pl: "https://rivazegrzeapartamenty.pl/galeria",
-      en: "https://rivazegrzeapartamenty.pl/en/gallery",
+      pl: "https://rivazegrzeapartamenty.pl/pl/galeria",
+      en: "https://rivazegrzeapartamenty.pl/en/galeria",
+      "x-default": "https://rivazegrzeapartamenty.pl/galeria",
     },
   },
 };
 
-export default function GaleriaLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function GaleriaLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }

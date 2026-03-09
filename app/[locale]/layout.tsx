@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { GoogleTagManager } from '@next/third-parties/google';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { GoogleTagManager } from "@next/third-parties/google";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "../globals.css";
 import "aos/dist/aos.css";
 import CookieConsent from "../components/CookieConsent";
@@ -24,7 +24,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Riva Zegrze | Apartamenty nad Jeziorem Zegrzyńskim",
+  metadataBase: new URL("https://rivazegrzeapartamenty.pl"),
+  title: {
+    default: "Riva Zegrze | Apartamenty nad Jeziorem Zegrzyńskim",
+    template: "%s | Riva Zegrze",
+  },
   description:
     "Nocleg Zegrze w luksusowych apartamentach nad wodą pod Warszawą. Apartamenty Zegrze z basenem, siłownią i prywatną plażą. Idealny nocleg nad Zalewem Zegrzyńskim blisko Warszawy.",
   keywords: [
@@ -87,6 +91,7 @@ export const metadata: Metadata = {
     languages: {
       pl: "https://rivazegrzeapartamenty.pl",
       en: "https://rivazegrzeapartamenty.pl/en",
+      "x-default": "https://rivazegrzeapartamenty.pl",
     },
   },
 };
