@@ -9,7 +9,9 @@ import { Menu, X, Waves, MapPin, Phone, Mail, Instagram, Facebook, Twitter, Cale
 import LanguageSwitcher from '../LanguageSwitcher';
 import Navigation from '../layout/Navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useLocale } from 'next-intl';
+
 
 
 
@@ -1486,7 +1488,7 @@ function FeaturesSection() {
               </div>
               <div className="relative w-full h-48 mt-4">
                 <div className="relative bg-white shadow-lg p-2 h-full">
-                  <img src={feature.image} alt={feature.title} className="w-full h-full object-cover" />
+                  <Image src={feature.image} alt={feature.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 400px" />
                   <div className="absolute top-1 left-1 w-6 h-6 border-t border-l border-[#AB8A62]" />
                   <div className="absolute top-1 right-1 w-6 h-6 border-t border-r border-[#AB8A62]" />
                   <div className="absolute bottom-1 left-1 w-6 h-6 border-b border-l border-[#AB8A62]" />
