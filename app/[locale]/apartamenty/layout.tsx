@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Apartamenty Zegrze — nocleg nad Jeziorem Zegrzyńskim",
   description:
-    "Apartamenty Zegrze w Riva Zegrze — 8 luksusowych apartamentów nad Jeziorem Zegrzyńskim od 480 zł/noc. Nocleg pod Warszawą z basenem, siłownią i prywatną plażą.",
+    "Apartamenty Zegrze nad wodą pod Warszawą — 8 luksusowych apartamentów od 480 zł/noc. Basen, siłownia, plaża. Zarezerwuj online — sprawdź wolne terminy!",
   openGraph: {
     title: "Apartamenty Zegrze — nocleg nad Jeziorem Zegrzyńskim | Riva Zegrze",
     description:
-      "8 luksusowych apartamentów nad Jeziorem Zegrzyńskim. Nocleg Zegrze od 480 zł/noc. Basen, siłownia, prywatna plaża.",
+      "Nocleg Zegrze — wynajem apartamentów nad Jeziorem Zegrzyńskim od 480 zł/noc. Basen, siłownia, prywatna plaża pod Warszawą. Rezerwuj bezpośrednio online 24/7!",
     url: "https://rivazegrzeapartamenty.pl/apartamenty",
     siteName: "Riva Zegrze",
     locale: "pl_PL",
@@ -25,13 +25,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Apartamenty Zegrze — nocleg nad Jeziorem Zegrzyńskim | Riva Zegrze",
     description:
-      "8 apartamentów nad Jeziorem Zegrzyńskim od 480 zł/noc. Basen, siłownia, plaża.",
+      "Apartamenty nad wodą pod Warszawą od 480 zł/noc. Basen, siłownia, plaża. Zarezerwuj online już dziś!",
     images: ["https://rivazegrzeapartamenty.pl/images/og-image.jpg"],
   },
   alternates: {
     canonical: "https://rivazegrzeapartamenty.pl/apartamenty",
     languages: {
-      pl: "https://rivazegrzeapartamenty.pl/pl/apartamenty",
+      pl: "https://rivazegrzeapartamenty.pl/apartamenty",
       en: "https://rivazegrzeapartamenty.pl/en/apartamenty",
       "x-default": "https://rivazegrzeapartamenty.pl/apartamenty",
     },

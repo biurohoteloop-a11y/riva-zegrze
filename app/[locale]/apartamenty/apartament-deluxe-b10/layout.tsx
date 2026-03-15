@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Apartament Deluxe B10 — 68 m² panoramiczny widok na jezioro",
   description:
-    "Apartament Deluxe B10 w Riva Zegrze — 68 m², przestronny apartament z panoramicznym widokiem na Jezioro Zegrzyńskie. Nocleg Zegrze dla 4 osób. Kryty basen, siłownia. Od 872 zł/noc.",
+    "Apartament Deluxe B10 — 68 m², przestronny apartament z panoramicznym widokiem na Jezioro Zegrzyńskie pod Warszawą. Nocleg Zegrze dla 4 osób z basenem i plażą. Zarezerwuj online od 872 zł/noc!",
   openGraph: {
     title: "Apartament Deluxe B10 — 68 m² panorama jeziora | Riva Zegrze",
     description:
-      "Przestronny apartament Deluxe 68 m² z panoramicznym widokiem na Jezioro Zegrzyńskie. Kryty basen, siłownia, plaża. Od 872 zł/noc.",
+      "Największy apartament nad wodą pod Warszawą — 68 m², panoramiczny widok na Jezioro Zegrzyńskie. Nocleg Zegrze dla 4 osób. Kryty basen, siłownia, plaża. Rezerwuj online od 872 zł/noc!",
     url: "https://rivazegrzeapartamenty.pl/apartamenty/apartament-deluxe-b10",
     siteName: "Riva Zegrze",
     locale: "pl_PL",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Apartament Deluxe B10 — 68 m² panorama jeziora | Riva Zegrze",
     description:
-      "Apartament Deluxe B10 — 68 m², panoramiczny widok na Jezioro Zegrzyńskie. Nocleg Zegrze od 872 zł/noc.",
+      "Apartament Deluxe B10 — 68 m², panoramiczny widok na Jezioro Zegrzyńskie pod Warszawą. Basen, plaża. Zarezerwuj online od 872 zł/noc!",
     images: ["https://rivazegrzeapartamenty.pl/images/rooms/img_4647.jpg"],
   },
   alternates: {
@@ -69,7 +69,7 @@ const jsonLd = {
       "@id": "https://rivazegrzeapartamenty.pl/apartamenty/apartament-deluxe-b10#room",
       name: "Apartament Deluxe B10 — 68 m² panoramiczny widok na Jezioro Zegrzyńskie",
       description:
-        "Przestronny apartament Deluxe 68 m² z panoramicznym widokiem na Jezioro Zegrzyńskie. Nocleg Zegrze dla 4 osób. Kryty basen, siłownia, prywatna plaża.",
+        "Największy apartament 68 m² z panoramicznym widokiem na Jezioro Zegrzyńskie pod Warszawą. Nocleg Zegrze dla 4 osób. Kryty basen, siłownia, prywatna plaża. Zarezerwuj online od 872 zł/noc!",
       url: "https://rivazegrzeapartamenty.pl/apartamenty/apartament-deluxe-b10",
       image: "https://rivazegrzeapartamenty.pl/images/rooms/img_4647.jpg",
       occupancy: { "@type": "QuantitativeValue", maxValue: 4 },

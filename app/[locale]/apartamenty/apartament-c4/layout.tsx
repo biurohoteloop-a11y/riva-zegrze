@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Apartament C4 — taras z bocznym widokiem na jezioro",
   description:
-    "Apartament C4 w Riva Zegrze — 37 m², taras z bocznym widokiem na Jezioro Zegrzyńskie. Nocleg Zegrze dla 4 osób. Kryty basen, siłownia, prywatna plaża. Od 624 zł/noc.",
+    "Apartament C4 — 37 m², taras z widokiem na Jezioro Zegrzyńskie pod Warszawą. Nocleg Zegrze dla 4 osób z basenem i plażą. Zarezerwuj online od 624 zł/noc!",
   openGraph: {
     title: "Apartament C4 — taras z widokiem na jezioro | Riva Zegrze",
     description:
-      "Przytulny apartament 37 m² z tarasem i bocznym widokiem na Jezioro Zegrzyńskie. Kryty basen, siłownia, plaża. Od 624 zł/noc.",
+      "Apartament nad wodą pod Warszawą — 37 m², taras z bocznym widokiem na Jezioro Zegrzyńskie. Nocleg Zegrze dla 4 osób. Kryty basen, siłownia, plaża. Rezerwuj online od 624 zł/noc!",
     url: "https://rivazegrzeapartamenty.pl/apartamenty/apartament-c4",
     siteName: "Riva Zegrze",
     locale: "pl_PL",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Apartament C4 — taras z widokiem na jezioro | Riva Zegrze",
     description:
-      "Apartament C4 — 37 m², taras z bocznym widokiem na Jezioro Zegrzyńskie. Nocleg Zegrze od 624 zł/noc.",
+      "Apartament C4 — 37 m², taras z widokiem na Jezioro Zegrzyńskie pod Warszawą. Basen, plaża. Zarezerwuj online od 624 zł/noc!",
     images: ["https://rivazegrzeapartamenty.pl/images/rooms/t3s-rivazegrze-3500-m.jpg"],
   },
   alternates: {
@@ -69,7 +69,7 @@ const jsonLd = {
       "@id": "https://rivazegrzeapartamenty.pl/apartamenty/apartament-c4#room",
       name: "Apartament C4 — taras z bocznym widokiem na Jezioro Zegrzyńskie",
       description:
-        "Przytulny apartament 37 m² z tarasem i bocznym widokiem na Jezioro Zegrzyńskie. Nocleg Zegrze dla 4 osób. Kryty basen, siłownia, prywatna plaża.",
+        "Apartament 37 m² z tarasem i bocznym widokiem na Jezioro Zegrzyńskie pod Warszawą. Nocleg Zegrze dla 4 osób. Kryty basen, siłownia, prywatna plaża. Zarezerwuj online od 624 zł/noc!",
       url: "https://rivazegrzeapartamenty.pl/apartamenty/apartament-c4",
       image: "https://rivazegrzeapartamenty.pl/images/rooms/t3s-rivazegrze-3500-m.jpg",
       occupancy: { "@type": "QuantitativeValue", maxValue: 4 },

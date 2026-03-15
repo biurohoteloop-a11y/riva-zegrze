@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Apartament D7 — balkon z panoramicznym widokiem na okolicę",
   description:
-    "Apartament D7 w Riva Zegrze — 38 m², 3 piętro, balkon z panoramicznym widokiem na okolicę nad Jeziorem Zegrzyńskim. Nocleg Zegrze dla 4 osób. Kryty basen, siłownia. Od 544 zł/noc.",
+    "Apartament D7 — 38 m², 3 piętro, balkon z panoramicznym widokiem nad Jeziorem Zegrzyńskim pod Warszawą. Nocleg Zegrze dla 4 osób z basenem i plażą. Zarezerwuj online od 544 zł/noc!",
   openGraph: {
     title: "Apartament D7 — balkon z panoramą na okolicę | Riva Zegrze",
     description:
-      "Apartament 38 m² na 3 piętrze z balkonem i panoramicznym widokiem. Kryty basen, siłownia, plaża. Od 544 zł/noc.",
+      "Apartament nad wodą pod Warszawą — 38 m², 3 piętro, balkon z panoramicznym widokiem nad Jeziorem Zegrzyńskim. Nocleg Zegrze dla 4 osób. Basen, siłownia, plaża. Rezerwuj online od 544 zł/noc!",
     url: "https://rivazegrzeapartamenty.pl/apartamenty/apartament-d7",
     siteName: "Riva Zegrze",
     locale: "pl_PL",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Apartament D7 — balkon z panoramą na okolicę | Riva Zegrze",
     description:
-      "Apartament D7 — 38 m², 3 piętro, balkon z panoramicznym widokiem. Nocleg Zegrze od 544 zł/noc.",
+      "Apartament D7 — 38 m², 3 piętro, balkon z panoramicznym widokiem pod Warszawą. Basen, plaża. Zarezerwuj online od 544 zł/noc!",
     images: ["https://rivazegrzeapartamenty.pl/images/rooms/img_3620.jpg"],
   },
   alternates: {
@@ -69,7 +69,7 @@ const jsonLd = {
       "@id": "https://rivazegrzeapartamenty.pl/apartamenty/apartament-d7#room",
       name: "Apartament D7 — balkon z panoramicznym widokiem na okolicę",
       description:
-        "Apartament 38 m² na 3 piętrze z balkonem i panoramicznym widokiem nad Jeziorem Zegrzyńskim. Nocleg Zegrze dla 4 osób. Kryty basen, siłownia, prywatna plaża.",
+        "Apartament 38 m² na 3 piętrze z balkonem i panoramicznym widokiem nad Jeziorem Zegrzyńskim pod Warszawą. Nocleg Zegrze dla 4 osób. Kryty basen, siłownia, prywatna plaża. Zarezerwuj online od 544 zł/noc!",
       url: "https://rivazegrzeapartamenty.pl/apartamenty/apartament-d7",
       image: "https://rivazegrzeapartamenty.pl/images/rooms/img_3620.jpg",
       occupancy: { "@type": "QuantitativeValue", maxValue: 4 },

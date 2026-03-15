@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Apartament C1 — taras i ogródek nad Jeziorem Zegrzyńskim",
   description:
-    "Apartament C1 w Riva Zegrze — 38 m², prywatny taras 15 m² i ogródek nad Jeziorem Zegrzyńskim. Nocleg Zegrze dla 4 osób. Kryty basen, siłownia, prywatna plaża. Od 640 zł/noc.",
+    "Apartament C1 — 38 m², prywatny taras i ogródek nad Jeziorem Zegrzyńskim pod Warszawą. Nocleg Zegrze dla 4 osób z basenem i plażą. Zarezerwuj online od 640 zł/noc!",
   openGraph: {
     title: "Apartament C1 — taras i ogródek nad Jeziorem Zegrzyńskim | Riva Zegrze",
     description:
-      "Nowoczesny apartament 38 m² z prywatnym tarasem i ogródkiem nad Jeziorem Zegrzyńskim. Kryty basen, siłownia, plaża. Od 640 zł/noc.",
+      "Apartament nad wodą pod Warszawą — 38 m², prywatny taras 15 m² i ogródek. Nocleg Zegrze dla 4 osób. Kryty basen, siłownia, plaża. Rezerwuj bezpośrednio online od 640 zł/noc!",
     url: "https://rivazegrzeapartamenty.pl/apartamenty/apartament-c1",
     siteName: "Riva Zegrze",
     locale: "pl_PL",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Apartament C1 — taras i ogródek nad Jeziorem Zegrzyńskim | Riva Zegrze",
     description:
-      "Apartament C1 — 38 m², prywatny taras i ogródek nad Jeziorem Zegrzyńskim. Nocleg Zegrze od 640 zł/noc.",
+      "Apartament C1 — 38 m², taras i ogródek nad Jeziorem Zegrzyńskim pod Warszawą. Basen, plaża. Zarezerwuj online od 640 zł/noc!",
     images: ["https://rivazegrzeapartamenty.pl/images/rooms/t3s-rivazegrze-3107-m.jpg"],
   },
   alternates: {
@@ -77,7 +77,7 @@ const jsonLd = {
       "@id": "https://rivazegrzeapartamenty.pl/apartamenty/apartament-c1#room",
       name: "Apartament C1 — taras i ogródek nad Jeziorem Zegrzyńskim",
       description:
-        "Nowoczesny apartament 38 m² z prywatnym tarasem 15 m² i ogródkiem, położony bezpośrednio nad Jeziorem Zegrzyńskim. Nocleg Zegrze dla 4 osób. Kryty basen, siłownia, prywatna plaża.",
+        "Apartament 38 m² z prywatnym tarasem 15 m² i ogródkiem nad Jeziorem Zegrzyńskim pod Warszawą. Nocleg Zegrze dla 4 osób. Kryty basen, siłownia, prywatna plaża. Zarezerwuj online od 640 zł/noc!",
       url: "https://rivazegrzeapartamenty.pl/apartamenty/apartament-c1",
       image: "https://rivazegrzeapartamenty.pl/images/rooms/t3s-rivazegrze-3107-m.jpg",
       occupancy: {

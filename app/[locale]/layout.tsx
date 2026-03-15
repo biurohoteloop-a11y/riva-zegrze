@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: "%s | Riva Zegrze",
   },
   description:
-    "Nocleg Zegrze w luksusowych apartamentach nad wodą pod Warszawą. Apartamenty Zegrze z basenem, siłownią i prywatną plażą. Idealny nocleg nad Zalewem Zegrzyńskim blisko Warszawy.",
+    "Apartamenty Zegrze nad wodą pod Warszawą — nocleg nad Zalewem Zegrzyńskim z basenem i plażą. Zarezerwuj online — sprawdź wolne terminy!",
   keywords: [
     "nocleg Zegrze",
     "apartamenty nad wodą pod Warszawą",
@@ -41,11 +41,17 @@ export const metadata: Metadata = {
     "Riva Zegrze",
     "apartamenty nad Jeziorem Zegrzyńskim",
     "wynajem apartamentów Zegrze",
+    "wynajem apartamentów nad Jeziorem Zegrzyńskim",
     "weekend nad wodą Warszawa",
     "noclegi Zegrze Południowe",
     "apartamenty z basenem Zegrze",
     "luksusowe apartamenty pod Warszawą",
     "apartamenty z widokiem na jezioro",
+    "nocleg nad jeziorem pod Warszawą",
+    "apartamenty Zegrze Południowe",
+    "krótkoterminowy wynajem Zegrze",
+    "apartamenty z basenem pod Warszawą",
+    "rezerwacja apartamentów Zegrze",
   ],
   verification: {
     google: "IpC-wMFg0yEZ95SRuxh7pmFPLoZhWTBKG7cRWnrD3l0",
@@ -53,7 +59,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Riva Zegrze | Apartamenty nad Jeziorem Zegrzyńskim",
     description:
-      "Nocleg Zegrze — luksusowe apartamenty nad wodą pod Warszawą. Basen, siłownia, prywatna plaża nad Zalewem Zegrzyńskim.",
+      "Nocleg Zegrze — luksusowe apartamenty blisko Warszawy nad wodą. Wynajem apartamentów nad Jeziorem Zegrzyńskim z basenem, siłownią i prywatną plażą. Rezerwuj bezpośrednio online 24/7!",
     url: "https://rivazegrzeapartamenty.pl",
     siteName: "Riva Zegrze",
     locale: "pl_PL",
@@ -72,7 +78,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Riva Zegrze | Apartamenty nad Jeziorem Zegrzyńskim",
     description:
-      "Nocleg Zegrze — apartamenty nad wodą pod Warszawą. Komfort, natura i wyjątkowa lokalizacja nad Zalewem Zegrzyńskim.",
+      "Apartamenty nad wodą pod Warszawą — nocleg Warszawa i okolice nad Zalewem Zegrzyńskim. Basen, plaża, siłownia. Zarezerwuj online już dziś!",
     images: ["https://rivazegrzeapartamenty.pl/images/og-image.jpg"],
   },
   robots: {

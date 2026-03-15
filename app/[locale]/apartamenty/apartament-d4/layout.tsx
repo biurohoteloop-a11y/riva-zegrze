@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Apartament D4 — nowoczesny apartament z tarasem nad jeziorem",
   description:
-    "Apartament D4 w Riva Zegrze — 38 m², nowoczesny apartament z tarasem nad Jeziorem Zegrzyńskim. Nocleg Zegrze dla 4 osób. Kryty basen, siłownia, prywatna plaża. Od 504 zł/noc.",
+    "Apartament D4 — 38 m², nowoczesny apartament z tarasem nad Jeziorem Zegrzyńskim pod Warszawą. Nocleg Zegrze dla 4 osób z basenem i plażą. Zarezerwuj online od 504 zł/noc!",
   openGraph: {
     title: "Apartament D4 — nowoczesny apartament z tarasem | Riva Zegrze",
     description:
-      "Nowoczesny apartament 38 m² z tarasem nad Jeziorem Zegrzyńskim. Kryty basen, siłownia, plaża. Od 504 zł/noc.",
+      "Apartament nad wodą pod Warszawą — 38 m², taras nad Jeziorem Zegrzyńskim. Nocleg Zegrze dla 4 osób. Kryty basen, siłownia, plaża. Rezerwuj bezpośrednio online od 504 zł/noc!",
     url: "https://rivazegrzeapartamenty.pl/apartamenty/apartament-d4",
     siteName: "Riva Zegrze",
     locale: "pl_PL",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Apartament D4 — nowoczesny apartament z tarasem | Riva Zegrze",
     description:
-      "Apartament D4 — 38 m², taras nad Jeziorem Zegrzyńskim. Nocleg Zegrze od 504 zł/noc.",
+      "Apartament D4 — 38 m², taras nad Jeziorem Zegrzyńskim pod Warszawą. Basen, plaża. Zarezerwuj online od 504 zł/noc!",
     images: ["https://rivazegrzeapartamenty.pl/images/rooms/d4.jpg"],
   },
   alternates: {
@@ -69,7 +69,7 @@ const jsonLd = {
       "@id": "https://rivazegrzeapartamenty.pl/apartamenty/apartament-d4#room",
       name: "Apartament D4 — nowoczesny apartament z tarasem nad Jeziorem Zegrzyńskim",
       description:
-        "Nowoczesny apartament 38 m² z tarasem nad Jeziorem Zegrzyńskim. Nocleg Zegrze dla 4 osób. Kryty basen, siłownia, prywatna plaża.",
+        "Apartament 38 m² z tarasem nad Jeziorem Zegrzyńskim pod Warszawą. Nocleg Zegrze dla 4 osób. Kryty basen, siłownia, prywatna plaża. Zarezerwuj online od 504 zł/noc!",
       url: "https://rivazegrzeapartamenty.pl/apartamenty/apartament-d4",
       image: "https://rivazegrzeapartamenty.pl/images/rooms/d4.jpg",
       occupancy: { "@type": "QuantitativeValue", maxValue: 4 },
