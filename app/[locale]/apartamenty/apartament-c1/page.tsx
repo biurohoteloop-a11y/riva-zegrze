@@ -103,12 +103,13 @@ const apartmentData = {
   ],
 
   gallery: [
-    '/images/rooms/t3s-rivazegrze-3107-m.jpg',
-    '/images/rooms/t3s-rivazegrze-3500-m.jpg',
-    '/images/rooms/img_3650.jpg',
-    '/images/rooms/img_3622.jpg',
-    '/images/rooms/img_3620.jpg',
-    '/images/rooms/d4.jpg',
+    '/images/rooms/IMG_3617.jpg',
+    '/images/rooms/IMG_3648.jpg',
+    '/images/rooms/IMG_3649.jpg',
+    '/images/rooms/IMG_3650.jpg',
+    '/images/rooms/IMG_3651.jpg',
+    '/images/rooms/T3S-RivaZegrze-3107-m — kopia.jpg',
+    '/images/rooms/T3S-RivaZegrze-3296-m — kopia.jpg',
   ],
 
 importantInfo: [
