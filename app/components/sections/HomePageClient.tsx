@@ -678,10 +678,11 @@ function RoomsShowcase() {
     c4:  '/images/gallery/apartments/c4/T3S-RivaZegrze-3334-m.jpg',
     c7:  '/images/gallery/apartments/c7/IMG_3635.jpg',
     d1:  '/images/gallery/apartments/d1/IMG_3626.jpg',
-    d4:  '/images/rooms/IMG_3649.jpg',
+    d4:  '/images/gallery/apartments/d4/IMG_3619.jpg',
     d7:  '/images/gallery/apartments/d7/IMG_3614.jpg',
     b10: '/images/gallery/apartments/b10/IMG_4662.jpg',
 };
+
 
 
   const apartments = apartmentKeys.map((key) => ({
