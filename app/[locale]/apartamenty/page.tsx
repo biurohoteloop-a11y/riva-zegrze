@@ -171,16 +171,20 @@ function RoomsGrid() {
   // ✅ C2 DODANE
   const roomKeys = ['c1', 'c2', 'c4', 'c7', 'd1', 'd4', 'd7', 'b10'];
 
-  const roomMeta: Record<string, { image: string; link: string }> = {
-    c1:  { image: '/images/rooms/t3s-rivazegrze-3107-m.jpg',        link: '/apartamenty/apartament-c1' },
-    c2:  { image: '/images/gallery/apartments/c2/IMG_5993.JPG',     link: '/apartamenty/apartament-c2' }, // ✅ DODANE
-    c4:  { image: '/images/rooms/t3s-rivazegrze-3500-m.jpg',        link: '/apartamenty/apartament-c4' },
-    c7:  { image: '/images/rooms/img_3650.jpg',                     link: '/apartamenty/apartament-c7' },
-    d1:  { image: '/images/rooms/img_3622.jpg',                     link: '/apartamenty/apartament-d1' },
-    d4:  { image: '/images/rooms/img_3620.jpg',                     link: '/apartamenty/apartament-d4' },
-    d7:  { image: '/images/rooms/d4.jpg',                           link: '/apartamenty/apartament-d7' },
-    b10: { image: '/images/rooms/img_4647.jpg',                     link: '/apartamenty/apartament-deluxe-b10' },
-  };
+const roomMeta: Record<string, { image: string; link: string }> = {
+    c1:  { image: '/images/rooms/T3S-RivaZegrze-3107-m — kopia.jpg',        link: '/apartamenty/apartament-c1' },
+    c2:  { image: '/images/gallery/apartments/c2/IMG_5993.JPG',              link: '/apartamenty/apartament-c2' },
+    c4:  { image: '/images/gallery/apartments/c4/T3S-RivaZegrze-3334-m.jpg', link: '/apartamenty/apartament-c4' },
+    c7:  { image: '/images/gallery/apartments/c7/IMG_3635.jpg',              link: '/apartamenty/apartament-c7' },
+    d1:  { image: '/images/gallery/apartments/d1/IMG_3626.jpg',              link: '/apartamenty/apartament-d1' },
+    d4:  { image: '/images/rooms/IMG_3649.jpg',                              link: '/apartamenty/apartament-d4' },
+    d7:  { image: '/images/rooms/IMG_3651.jpg',                              link: '/apartamenty/apartament-d7' },
+    b10: { image: '/images/gallery/apartments/b10/IMG_4662.jpg',             link: '/apartamenty/apartament-deluxe-b10' },
+};
+
+
+
+
 
   const benefitIcons = [
     'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
