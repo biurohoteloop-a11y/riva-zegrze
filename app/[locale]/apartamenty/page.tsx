@@ -178,9 +178,10 @@ const roomMeta: Record<string, { image: string; link: string }> = {
     c7:  { image: '/images/gallery/apartments/c7/IMG_3635.jpg',              link: '/apartamenty/apartament-c7' },
     d1:  { image: '/images/gallery/apartments/d1/IMG_3626.jpg',              link: '/apartamenty/apartament-d1' },
     d4:  { image: '/images/rooms/IMG_3649.jpg',                              link: '/apartamenty/apartament-d4' },
-    d7:  { image: '/images/rooms/IMG_3651.jpg',                              link: '/apartamenty/apartament-d7' },
+    d7:  { image: '/images/gallery/apartments/d7/IMG_3614.jpg',              link: '/apartamenty/apartament-d7' },
     b10: { image: '/images/gallery/apartments/b10/IMG_4662.jpg',             link: '/apartamenty/apartament-deluxe-b10' },
 };
+
 
 
 
