@@ -134,7 +134,11 @@ export default function RegulaminPage() {
                   </li>
                   <li className="flex items-center gap-2 text-sm text-red-800">
                     <span className="w-1.5 h-1.5 bg-red-600 rounded-full"></span>
-                    spotkań o charakterze imprezowym.
+                    spotkań o charakterze imprezowym,
+                  </li>
+                  <li className="flex items-center gap-2 text-sm text-red-800">
+                    <span className="w-1.5 h-1.5 bg-red-600 rounded-full"></span>
+                    wprowadzania na teren apartamentu oraz obiektu osób postronnych.
                   </li>
                 </ul>
               </div>
@@ -150,12 +154,17 @@ export default function RegulaminPage() {
                   title="Charakter obiektu"
                   description="Obiekt przeznaczony jest wyłącznie do spokojnego wypoczynku"
                 />
+                <InfoBox 
+                  icon="👥"
+                  title="Liczba osób w apartamencie"
+                  description="Na terenie wynajętego apartamentu oraz obiektu mogą przebywać wyłącznie osoby zgłoszone w rezerwacji, w liczbie nie większej niż wskazana przy rezerwacji. Pobyt osób niepełnoletnich możliwy jest wyłącznie pod opieką pełnoletniego opiekuna prawnego."
+                />
               </div>
 
               <div className="mt-6 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
                 <p className="text-sm text-yellow-900">
                   <strong>⚠️ Konsekwencje naruszenia regulaminu:</strong><br/>
-                  W przypadku naruszenia zasad regulaminu obiekt zastrzega sobie prawo do <strong>natychmiastowego zakończenia pobytu bez zwrotu kosztów</strong>.
+                  W przypadku naruszenia zasad regulaminu, w tym <strong>przekroczenia zadeklarowanej liczby Gości</strong> lub <strong>wprowadzenia na teren obiektu osób postronnych</strong>, obiekt zastrzega sobie prawo do <strong>natychmiastowego zakończenia pobytu bez zwrotu kosztów</strong>.
                 </p>
               </div>
             </Section>
@@ -204,37 +213,37 @@ export default function RegulaminPage() {
             </Section>
 
             {/* Section 6 - REKLAMACJA - DOKŁADNIE WEDŁUG PRZELEWY24 */}
-<Section 
-  number="6" 
-  title="Reklamacja"
->
-  <div className="bg-[#f1f1ed] p-6 rounded-lg border border-[#d4d6ce]">
-    <p className="text-[#6e7a73] leading-relaxed mb-4">
-      Reklamacje należy zgłaszać drogą mailową na adres <a href="mailto:wynajem@rivazegrze.pl" className="text-[#AB8A62] hover:text-[#967447] font-medium">wynajem@rivazegrze.pl</a>.
-    </p>
-    <p className="text-[#6e7a73] leading-relaxed mb-4">
-      Zgłoszenie powinno zawierać opis problemu oraz dane umożliwiające identyfikację rezerwacji.
-    </p>
-    <p className="text-[#6e7a73] leading-relaxed">
-      Reklamacje są rozpatrywane w terminie do 14 dni od daty otrzymania zgłoszenia. O decyzji klient zostanie poinformowany drogą mailową.
-    </p>
-  </div>
-  
-  {/* Opcjonalnie - box z kontaktem (możesz dodać lub zostawić sam tekst) */}
-  <div className="mt-4 bg-white p-5 rounded-lg border border-[#d4d6ce]">
-    <h4 className="font-medium text-[#1a4d2e] mb-3 flex items-center gap-2">
-      <Mail className="w-5 h-5 text-[#AB8A62]" />
-      Kontakt w sprawie reklamacji
-    </h4>
-    <a 
-      href="mailto:wynajem@rivazegrze.pl"
-      className="inline-flex items-center gap-2 text-[#AB8A62] hover:text-[#967447] transition-colors text-sm"
-    >
-      <Mail className="w-4 h-4" />
-      <span>wynajem@rivazegrze.pl</span>
-    </a>
-  </div>
-</Section>
+            <Section 
+              number="6" 
+              title="Reklamacja"
+            >
+              <div className="bg-[#f1f1ed] p-6 rounded-lg border border-[#d4d6ce]">
+                <p className="text-[#6e7a73] leading-relaxed mb-4">
+                  Reklamacje należy zgłaszać drogą mailową na adres <a href="mailto:wynajem@rivazegrze.pl" className="text-[#AB8A62] hover:text-[#967447] font-medium">wynajem@rivazegrze.pl</a>.
+                </p>
+                <p className="text-[#6e7a73] leading-relaxed mb-4">
+                  Zgłoszenie powinno zawierać opis problemu oraz dane umożliwiające identyfikację rezerwacji.
+                </p>
+                <p className="text-[#6e7a73] leading-relaxed">
+                  Reklamacje są rozpatrywane w terminie do 14 dni od daty otrzymania zgłoszenia. O decyzji klient zostanie poinformowany drogą mailową.
+                </p>
+              </div>
+              
+              {/* Opcjonalnie - box z kontaktem */}
+              <div className="mt-4 bg-white p-5 rounded-lg border border-[#d4d6ce]">
+                <h4 className="font-medium text-[#1a4d2e] mb-3 flex items-center gap-2">
+                  <Mail className="w-5 h-5 text-[#AB8A62]" />
+                  Kontakt w sprawie reklamacji
+                </h4>
+                <a 
+                  href="mailto:wynajem@rivazegrze.pl"
+                  className="inline-flex items-center gap-2 text-[#AB8A62] hover:text-[#967447] transition-colors text-sm"
+                >
+                  <Mail className="w-4 h-4" />
+                  <span>wynajem@rivazegrze.pl</span>
+                </a>
+              </div>
+            </Section>
 
             {/* Section 7 */}
             <Section 
