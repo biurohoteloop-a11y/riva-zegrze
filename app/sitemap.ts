@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { pl: "/apartamenty/apartament-d4", en: "/en/apartamenty/apartament-d4", priority: 0.8, changeFreq: "weekly" },
     { pl: "/apartamenty/apartament-d7", en: "/en/apartamenty/apartament-d7", priority: 0.8, changeFreq: "weekly" },
     { pl: "/apartamenty/apartament-deluxe-b10", en: "/en/apartamenty/apartament-deluxe-b10", priority: 0.8, changeFreq: "weekly" },
+    { pl: "/blog", en: "/en/blog", priority: 0.8, changeFreq: "monthly" },
     { pl: "/galeria", en: "/en/gallery", priority: 0.7, changeFreq: "monthly" },
     { pl: "/o-nas", en: "/en/about", priority: 0.6, changeFreq: "monthly" },
     { pl: "/kontakt", en: "/en/contact", priority: 0.7, changeFreq: "monthly" },

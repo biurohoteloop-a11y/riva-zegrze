@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
+const assetBaseUrl = process.env.NEXT_PUBLIC_ASSET_URL?.replace(/\/$/, "");
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -9,6 +10,7 @@ const nextConfig: NextConfig = {
   turbopack: {},
 
   images: {
+    unoptimized: true,
     formats: ['image/avif', 'image/webp'],
     qualities: [75],
     deviceSizes: [640, 1080, 1920],
@@ -18,6 +20,11 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'panel.hotres.pl',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.rivazegrzeapartamenty.pl',
         pathname: '/**',
       },
     ],
@@ -69,6 +76,12 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
+      ...(assetBaseUrl
+        ? [
+            { source: "/images/:path*", destination: `${assetBaseUrl}/:path*`, permanent: false },
+            { source: "/videos/:path*", destination: `${assetBaseUrl}/videos/:path*`, permanent: false },
+          ]
+        : []),
       { source: "/about", destination: "/o-nas", permanent: true },
       { source: "/rooms", destination: "/apartamenty", permanent: true },
       { source: "/activities", destination: "/aktywnosci", permanent: true },
