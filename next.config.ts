@@ -78,7 +78,24 @@ const nextConfig: NextConfig = {
     return [
       ...(assetBaseUrl
         ? [
-            { source: "/images/:path*", destination: `${assetBaseUrl}/:path*`, permanent: false },
+            // --- GALERIA: w R2 podfoldery leza BEZ prefiksu "gallery/", wiec go obcinamy ---
+            { source: "/images/gallery/aktywnosci/:path*", destination: `${assetBaseUrl}/aktywnosci/:path*`, permanent: false },
+            { source: "/images/gallery/apartamenty/:path*", destination: `${assetBaseUrl}/apartamenty/:path*`, permanent: false },
+            { source: "/images/gallery/apartments/:path*", destination: `${assetBaseUrl}/apartments/:path*`, permanent: false },
+            { source: "/images/gallery/baner-galeria/:path*", destination: `${assetBaseUrl}/baner-galeria/:path*`, permanent: false },
+            { source: "/images/gallery/baner-kontakt/:path*", destination: `${assetBaseUrl}/baner-kontakt/:path*`, permanent: false },
+            { source: "/images/gallery/baner-pokoje/:path*", destination: `${assetBaseUrl}/baner-pokoje/:path*`, permanent: false },
+            { source: "/images/gallery/okolica/:path*", destination: `${assetBaseUrl}/okolica/:path*`, permanent: false },
+            { source: "/images/gallery/silownia/:path*", destination: `${assetBaseUrl}/silownia/:path*`, permanent: false },
+            { source: "/images/gallery/wszystkie/:path*", destination: `${assetBaseUrl}/wszystkie/:path*`, permanent: false },
+            // --- Foldery, ktore w R2 sa 1:1 (zostawiamy nazwe) ---
+            { source: "/images/about/:path*", destination: `${assetBaseUrl}/about/:path*`, permanent: false },
+            { source: "/images/experience/:path*", destination: `${assetBaseUrl}/experience/:path*`, permanent: false },
+            { source: "/images/hero/:path*", destination: `${assetBaseUrl}/hero/:path*`, permanent: false },
+            { source: "/images/instagram/:path*", destination: `${assetBaseUrl}/instagram/:path*`, permanent: false },
+            { source: "/images/rooms/:path*", destination: `${assetBaseUrl}/rooms/:path*`, permanent: false },
+            { source: "/images/wellness/:path*", destination: `${assetBaseUrl}/wellness/:path*`, permanent: false },
+            // --- WIDEO ---
             { source: "/videos/:path*", destination: `${assetBaseUrl}/videos/:path*`, permanent: false },
           ]
         : []),
